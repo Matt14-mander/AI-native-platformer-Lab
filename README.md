@@ -11,6 +11,7 @@
 - 确定性 `BasicPlatformerCore`，不依赖 Pygame、窗口或系统时间；
 - 人类玩家与未来 agent 共用同一套离散 `Action`；
 - Pygame renderer 只消费 `WorldSnapshot`，不维护第二套物理状态；
+- 原创湖畔粉彩主题已接入可玩画面：主角五态动作、湖景、苔土地面、树桩、台阶和橡果；
 - 固定 seed 的 episode、死亡、通关和重新开始；
 - 旧 `level_1.json` 的地形、管道、台阶、出生点、旗杆和金币迁移；
 - 金币动态实体、收集状态、score、reward 与 HUD；

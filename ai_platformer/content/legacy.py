@@ -22,6 +22,26 @@ class LegacyLevelRepository:
             overlay_directory or project_root / "game_content" / "levels"
         )
 
+    def load_solids_by_group(self, level_id: str) -> dict[str, tuple[SolidRect, ...]]:
+        """Return legacy collision rectangles grouped for their visual sprites."""
+        path = self.maps_directory / f"{level_id}.json"
+        if not path.is_file():
+            raise KeyError(f"unknown legacy level: {level_id}")
+        with path.open(encoding="utf-8") as stream:
+            data = json.load(stream)
+        return {
+            group: tuple(
+                SolidRect(
+                    x=float(item["x"]),
+                    y=float(item["y"]),
+                    width=float(item["width"]),
+                    height=float(item["height"]),
+                )
+                for item in data.get(group, ())
+            )
+            for group in ("ground", "pipe", "step")
+        }
+
     def load(self, level_id: str) -> LevelDefinition:
         path = self.maps_directory / f"{level_id}.json"
         if not path.is_file():

@@ -1,91 +1,42 @@
-import os
-from pathlib import Path
+"""Compact HUD for the original lakeside art theme."""
+
+from __future__ import annotations
 
 import pygame
-from .. import constants as C
-from . import coin
-from .. import setup, tools
-pygame.font.init()
+
+from ai_platformer.rendering.art import fit_rect, load_art
+
 
 class Info:
-    def __init__(self, state):
+    def __init__(self, state: str):
         self.state = state
-        self.create_state_labels()
-        self.create_info_labels()
-        self.flash_coin = coin.FlashingCoin()
-        self._dynamic_key = None
-        self._dynamic_labels = None
-
-    def create_state_labels(self):
-        self.state_labels = []
-        if self.state == 'main_menu':
-            self.state_labels.append((self.create_label('1  PLAYER  GAME'), (272, 360)))
-            self.state_labels.append((self.create_label('2  PLAYER  GAME'), (272, 405)))
-            self.state_labels.append((self.create_label('TOP ~ '), (290, 465)))
-            self.state_labels.append((self.create_label('000000'), (400, 465)))
-        elif self.state == 'load_screen':
-            self.state_labels.append((self.create_label('WORLD'), (280, 200)))
-            self.state_labels.append((self.create_label('1 - 1'), (430, 200)))
-            self.state_labels.append((self.create_label('X     3'), (380, 280)))
-            self.player_image = tools.get_image(setup.GRAPHICS['mario_bros'], 178, 32, 12, 16, (0,0,0), C.BG_MULTI)
-        elif self.state == 'game_over':
-            self.state_labels.append((self.create_label('GAME OVER'), (280, 300)))
-        elif self.state == 'level_complete':
-            self.state_labels.append((self.create_label('LEVEL COMPLETE'), (230, 300)))
-
-    def create_info_labels(self):
-        self.info_label = []
-        self.info_label.append((self.create_label('MARIO'), (75, 30)))
-        self.info_label.append((self.create_label('WORLD'), (450, 30)))
-        self.info_label.append((self.create_label('TIME'), (625, 30)))
-        if self.state != 'level':
-            self.info_label.append((self.create_label('000000'), (75, 55)))
-            self.info_label.append((self.create_label('x00'), (300, 55)))
-        self.info_label.append((self.create_label('1 - 1'), (480, 55)))
-
-    def create_label(self, label, size=40, width_scale=1.25, height_scale=1):
-        # Avoid pygame.font.SysFont here. Some Windows/MSYS installations expose
-        # non-path registry values that make Pygame's system-font scan crash.
-        windows_font = Path(os.environ.get('WINDIR', '')) / 'Fonts' / 'times.ttf'
-        configured_font = Path(C.Font)
-        font_path = next(
-            (path for path in (windows_font, configured_font) if path.is_file()),
-            None,
-        )
-        font = pygame.font.Font(str(font_path) if font_path else None, size)
-        label_image = font.render(label, True, (255,255,255))
-        label_image.set_colorkey((0,0,0,0))
-        rect = label_image.get_rect()
-        label_image = pygame.transform.scale(label_image, (int(rect.width * width_scale),
-                                                               int(rect.height * height_scale)))
-        return label_image
+        self.font = pygame.font.Font(None, 29)
+        self.small_font = pygame.font.Font(None, 22)
+        self.acorn = fit_rect(load_art("tilesets/amber-acorn-collectible.png"), 21, 29)
 
     def update(self):
-        self.flash_coin.update()
+        pass
 
-    def draw(self, surface, game_state=None):
-        for label in self.state_labels:
-            surface.blit(label[0], label[1])
-        for label in self.info_label:
-            surface.blit(label[0], label[1])
-        if game_state is not None:
-            self.draw_game_state(surface, game_state)
-        surface.blit(self.flash_coin.image, self.flash_coin.rect)
+    def draw(self, surface: pygame.Surface, game_state=None):
+        if self.state != "level" or game_state is None:
+            return
+        width = surface.get_width()
+        panel = pygame.Surface((width - 32, 70), pygame.SRCALPHA)
+        pygame.draw.rect(panel, (30, 40, 43, 194), panel.get_rect(), border_radius=14)
+        surface.blit(panel, (16, 12))
 
-        if self.state == 'load_screen':
-            surface.blit(self.player_image,(300,270))
-
-    def draw_game_state(self, surface, game_state):
-        score = int(game_state.metadata.get('score', 0))
-        coins = int(game_state.metadata.get('coins_collected', 0))
-        dynamic_key = (score, coins)
-        if dynamic_key != self._dynamic_key:
-            self._dynamic_key = dynamic_key
-            self._dynamic_labels = (
-                self.create_label(f'{score:06d}', size=36, width_scale=1.0),
-                self.create_label(f'x{coins:02d}', size=36, width_scale=1.0),
-            )
-
-        surface.blit(self._dynamic_labels[0], (75, 55))
-        surface.blit(self._dynamic_labels[1], (300, 55))
-
+        cream = (255, 239, 210)
+        soft = (210, 225, 215)
+        score = int(game_state.metadata.get("score", 0))
+        collected = int(game_state.metadata.get("coins_collected", 0))
+        surface.blit(self.font.render("PUPPY TRAIL", True, cream), (34, 24))
+        surface.blit(self.small_font.render(f"SCORE  {score:06d}", True, soft), (35, 53))
+        surface.blit(self.acorn, (276, 30))
+        surface.blit(self.font.render(f"x {collected:02d}", True, cream), (303, 34))
+        surface.blit(self.small_font.render("JOURNEY", True, soft), (width - 181, 25))
+        bar = pygame.Rect(width - 181, 53, 147, 9)
+        pygame.draw.rect(surface, (96, 111, 104), bar, border_radius=5)
+        fill = bar.copy()
+        fill.width = max(0, round(bar.width * game_state.progress))
+        if fill.width:
+            pygame.draw.rect(surface, (238, 205, 148), fill, border_radius=5)
