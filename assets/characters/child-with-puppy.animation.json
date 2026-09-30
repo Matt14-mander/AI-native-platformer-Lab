@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "character": "child-with-puppy",
+  "facing": "right",
+  "mirror_for_left": true,
+  "suggested_visible_height_px": 52,
+  "crop_transparent_padding": true,
+  "anchor": "bottom-center",
+  "states": {
+    "idle": {
+      "when": "grounded and horizontal speed near zero",
+      "frames": ["child-with-puppy-idle.png"]
+    },
+    "run": {
+      "when": "grounded and moving horizontally",
+      "frames": ["child-with-puppy-run-1.png", "child-with-puppy-run-2.png"],
+      "frames_per_second": 7
+    },
+    "jump": {
+      "when": "airborne and rising",
+      "frames": ["child-with-puppy-jump.png"]
+    },
+    "fall": {
+      "when": "airborne and falling",
+      "frames": ["child-with-puppy-fall.png"]
+    }
+  }
+}
