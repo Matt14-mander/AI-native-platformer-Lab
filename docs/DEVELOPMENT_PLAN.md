@@ -131,9 +131,9 @@
 
 ## 下一迭代建议
 
-PPO v0 已完成但只达到 move-right 水平。下一迭代实现平地、单管道和单缺口训练关卡及 curriculum，使 PPO 首次超过 move-right；之后再增加 best-model checkpoint 与多 seed 正式实验。
+PPO v0 已完成但只达到 move-right 水平。下一迭代先恢复本机训练环境、统一评估协议，再实现平地、单障碍和单缺口训练关卡，补齐定期评估、best-model checkpoint 与续训后开展 curriculum 和多 seed 正式实验。具体顺序及验收标准见 [强化学习训练开发计划](RL_TRAINING_PLAN.md)。
 
-在该竖切通过人工游玩验收前，不接入 Gymnasium、PPO、Jev 或 LLM SDK，也不继续扩展 legacy `Player` 的独立物理逻辑。
+Gymnasium 与 PPO 已接入；人工游玩验收仍需补齐。Jev 与 LLM 按后续阶段推进，不继续扩展 legacy `Player` 的独立物理逻辑。
 
 ## 暂不纳入首轮的工作
 

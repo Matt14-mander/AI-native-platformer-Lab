@@ -151,6 +151,7 @@ game_content/
 
 - [架构约束](docs/ARCHITECTURE.md)
 - [开发计划](docs/DEVELOPMENT_PLAN.md)
+- [强化学习训练开发计划](docs/RL_TRAINING_PLAN.md)
 - [游戏内容迁移计划](docs/CONTENT_MIGRATION_PLAN.md)
 - [AI 接入门槛与顺序](docs/AI_INTEGRATION_PLAN.md)
 - [GitHub 项目元数据](docs/GITHUB.md)
