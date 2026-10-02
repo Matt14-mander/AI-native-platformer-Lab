@@ -157,6 +157,30 @@ class CourseProtocolTests(unittest.TestCase):
         self.assertTrue(state.observe(good, 70))
         self.assertEqual(state.data["status"], "completed")
 
+    def test_manual_stage_selection_is_audited_without_claiming_mastery(self):
+        stages = [{"task": task} for task in ("flat", "obstacle", "gap")]
+        state = CurriculumState(stages, required_evaluations=2)
+        state.data["consecutive_passes"] = 1
+        state.select_stage("gap", 8192)
+        self.assertEqual(state.data["stage_index"], 2)
+        self.assertEqual(state.data["stage_start"], 8192)
+        self.assertEqual(state.data["consecutive_passes"], 0)
+        self.assertEqual(
+            state.data["history"],
+            [
+                {
+                    "outcome": "manual_stage_change",
+                    "from": "flat",
+                    "to": "gap",
+                    "timesteps": 8192,
+                    "reason": "explicit_start_stage",
+                }
+            ],
+        )
+        with self.assertRaises(ValueError):
+            state.select_stage("unknown", 9000)
+        self.assertEqual(state.data["stage_index"], 2)
+
     def test_reject_invalid_seed_pools_and_rollout_configuration(self):
         config = json.loads((ROOT / "config/ppo_state_v0.json").read_text())
         for patch in (
@@ -184,6 +208,23 @@ class CheckpointIntegrationTests(unittest.TestCase):
             self.assertEqual(report["trained_timesteps"], 8)
             self.assertEqual(report["curriculum_state"]["status"], "budget_exhausted")
             self.assertEqual(report["curriculum_state"]["stage_index"], 0)
+            with self.assertRaisesRegex(ValueError, "requires"):
+                train_ppo(config, Path(directory) / "no_resume", start_stage="gap")
+            self.assertFalse((Path(directory) / "no_resume").exists())
+            config["total_timesteps"] = 64
+            continued = Path(directory) / "gap"
+            result = train_ppo(
+                config, continued, resume=Path(directory) / "model.zip", start_stage="gap"
+            )
+            self.assertEqual(result["initial_timesteps"], 8)
+            self.assertEqual(result["curriculum_state"]["stage_index"], 2)
+            self.assertEqual(result["curriculum_state"]["stage_start"], 8)
+            self.assertEqual(result["requested_start_stage"], "gap")
+            self.assertNotIn(
+                "mastered", [item["outcome"] for item in result["curriculum_state"]["history"]]
+            )
+            logs = "\n".join(path.read_text() for path in (continued / "monitor").glob("*.csv"))
+            self.assertIn("course_gap_", logs)
 
     def test_real_training_evaluation_reload_resume_and_compatibility(self):
         from stable_baselines3 import PPO

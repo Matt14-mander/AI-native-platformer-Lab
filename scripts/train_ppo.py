@@ -22,6 +22,11 @@ def main() -> None:
     )
     parser.add_argument("--eval-every", type=int, help="evaluation interval in transitions")
     parser.add_argument(
+        "--start-stage",
+        choices=("flat", "obstacle", "gap", "mixed", "full"),
+        help="explicitly select a stage on resume; skipped stages remain unmastered",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=Path("runs/ppo_state_v0"),
@@ -39,7 +44,9 @@ def main() -> None:
             parser.error("--eval-every must be positive")
         config["evaluation"]["every_timesteps"] = args.eval_every
     try:
-        report = train_ppo(config, args.output_dir, resume=args.resume)
+        report = train_ppo(
+            config, args.output_dir, resume=args.resume, start_stage=args.start_stage
+        )
     except (ValueError, FileExistsError, FileNotFoundError) as error:
         parser.error(str(error))
     print(json.dumps(report["evaluation"]["summary"], ensure_ascii=False, indent=2))

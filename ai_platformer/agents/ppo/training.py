@@ -146,8 +146,9 @@ class TrainingCallback(BaseCallback):
     def evaluate(self, *, allow_promotion: bool) -> dict:
         index = self.state.data["stage_index"]
         stage = self.state.stage
-        levels = [
-            level for item in self.state.stages[: index + 1] for level in item["validation_levels"]
+        # Diagnose the active task first while retaining all earlier regression tasks.
+        levels = stage["validation_levels"] + [
+            level for item in self.state.stages[:index] for level in item["validation_levels"]
         ]
         report = evaluate_policy(
             self.model,
@@ -215,11 +216,22 @@ class TrainingCallback(BaseCallback):
         return True
 
 
-def train_ppo(config: dict[str, Any], output_dir: Path, *, resume: Path | None = None) -> dict:
+def train_ppo(
+    config: dict[str, Any],
+    output_dir: Path,
+    *,
+    resume: Path | None = None,
+    start_stage: str | None = None,
+) -> dict:
     """Train additional transitions; refuse output overwrites and incompatible resume."""
     config, factory, stages = resolve_training_config(config)
     signature = training_signature(config, factory, stages)
     saved = None
+    if start_stage is not None:
+        if resume is None:
+            raise ValueError("start_stage requires a compatible resume checkpoint")
+        if start_stage not in {stage["task"] for stage in stages}:
+            raise ValueError(f"stage is not configured: {start_stage}")
     if resume is not None:
         resume = resume.with_suffix(".zip")
         saved = checkpoint_metadata(resume)
@@ -241,6 +253,8 @@ def train_ppo(config: dict[str, Any], output_dir: Path, *, resume: Path | None =
         required_evaluations=config["curriculum"]["required_evaluations"],
         saved=deepcopy(saved["curriculum_state"]) if saved else None,
     )
+    if start_stage is not None:
+        state.select_stage(start_stage, saved["saved_timesteps"])
     torch.set_num_threads(config["torch_threads"])
     set_random_seed(config["seed"])
     samplers = []
@@ -347,6 +361,7 @@ def train_ppo(config: dict[str, Any], output_dir: Path, *, resume: Path | None =
             "trained_timesteps": int(model.num_timesteps),
             "added_timesteps": int(model.num_timesteps) - initial_timesteps,
             "resumed_from": str(resume.resolve()) if resume else None,
+            "requested_start_stage": start_stage,
             "curriculum_state": state.data,
             "evaluation": evaluation,
             "evaluation_history": callback.evaluations,

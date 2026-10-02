@@ -1,0 +1,854 @@
+{
+  "recorded_date": "2026-10-02",
+  "environment_id": "PlatformerState-v1",
+  "training_seed": 20260923,
+  "entry_checkpoint": "runs/ppo_state_v1_resume_smoke/model.zip",
+  "entry_timesteps": 8192,
+  "final_timesteps": 90112,
+  "gap_trained_transitions": 81920,
+  "stage_start": 8192,
+  "stage": "gap",
+  "status": "timesteps_limit",
+  "history": [
+    {
+      "task": "flat",
+      "outcome": "mastered",
+      "start": 0,
+      "end": 3072
+    },
+    {
+      "outcome": "manual_stage_change",
+      "from": "obstacle",
+      "to": "gap",
+      "timesteps": 8192,
+      "reason": "explicit_start_stage"
+    }
+  ],
+  "signature_hash": "8429a1217b2e9d738d4431737e25bc04d4c5a0d0803c6bcf03fc75398cd4b82e",
+  "model_sha256": "ba4687e654d68207597a9ab50b2694adfa66881e511a68d5721fec6677110a80",
+  "model": "runs/ppo_state_v1_gap_learning/model.zip",
+  "runtime": {
+    "python": "3.12.14",
+    "stable_baselines3": "2.4.1",
+    "torch": "2.2.2",
+    "numpy": "1.26.4",
+    "gymnasium": "1.0.0",
+    "git_revision": "7c4d2220f6d7860afd84d6d61d1e375caccbfb4d",
+    "git_dirty": true
+  },
+  "gap_before": {
+    "summary": {
+      "agent": "ppo",
+      "episodes": 16,
+      "success_rate": 0.0,
+      "death_rate": 1.0,
+      "truncation_rate": 0.0,
+      "mean_return": -7.270151260504202,
+      "mean_progress": 0.5493697478991596,
+      "mean_steps": 17.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": null
+    },
+    "episodes": [
+      {
+        "seed": 100,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 100,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 100,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 100,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      }
+    ],
+    "by_level": {
+      "course_gap_08": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.4749831932773105,
+        "mean_progress": 0.5084033613445378,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_09": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.306915966386555,
+        "mean_progress": 0.542016806722689,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_10": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.1493529411764705,
+        "mean_progress": 0.5735294117647058,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_11": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.1493529411764705,
+        "mean_progress": 0.5735294117647058,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      }
+    }
+  },
+  "gap_train_evaluation": {
+    "summary": {
+      "agent": "ppo",
+      "episodes": 8,
+      "success_rate": 0.375,
+      "death_rate": 0.625,
+      "truncation_rate": 0.0,
+      "mean_return": 0.9542647058823538,
+      "mean_progress": 0.6948529411764706,
+      "mean_steps": 20.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 25.0
+    },
+    "episodes": [
+      {
+        "seed": 0,
+        "episode_return": 14.975000000000001,
+        "steps": 25,
+        "core_ticks": 99,
+        "progress": 1.0,
+        "coins_collected": 0,
+        "outcome": "success",
+        "level_id": "course_gap_00"
+      },
+      {
+        "seed": 0,
+        "episode_return": 14.975000000000001,
+        "steps": 25,
+        "core_ticks": 99,
+        "progress": 1.0,
+        "coins_collected": 0,
+        "outcome": "success",
+        "level_id": "course_gap_01"
+      },
+      {
+        "seed": 0,
+        "episode_return": -7.643050420168066,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.47478991596638653,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_02"
+      },
+      {
+        "seed": 0,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_03"
+      },
+      {
+        "seed": 0,
+        "episode_return": 14.975000000000001,
+        "steps": 25,
+        "core_ticks": 99,
+        "progress": 1.0,
+        "coins_collected": 0,
+        "outcome": "success",
+        "level_id": "course_gap_04"
+      },
+      {
+        "seed": 0,
+        "episode_return": -7.559016806722688,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.49159663865546216,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_05"
+      },
+      {
+        "seed": 0,
+        "episode_return": -7.390949579831933,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5252100840336135,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_06"
+      },
+      {
+        "seed": 0,
+        "episode_return": -7.222882352941176,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5588235294117647,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_07"
+      }
+    ],
+    "by_level": {
+      "course_gap_00": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.975000000000001,
+        "mean_progress": 1.0,
+        "mean_steps": 25.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 25.0
+      },
+      "course_gap_01": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.975000000000001,
+        "mean_progress": 1.0,
+        "mean_steps": 25.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 25.0
+      },
+      "course_gap_02": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.643050420168066,
+        "mean_progress": 0.47478991596638653,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_03": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.4749831932773105,
+        "mean_progress": 0.5084033613445378,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_04": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.975000000000001,
+        "mean_progress": 1.0,
+        "mean_steps": 25.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 25.0
+      },
+      "course_gap_05": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.559016806722688,
+        "mean_progress": 0.49159663865546216,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_06": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.390949579831933,
+        "mean_progress": 0.5252100840336135,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_07": {
+        "agent": "ppo",
+        "episodes": 1,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.222882352941176,
+        "mean_progress": 0.5588235294117647,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      }
+    }
+  },
+  "gap_validation": {
+    "summary": {
+      "agent": "ppo",
+      "episodes": 16,
+      "success_rate": 0.0,
+      "death_rate": 1.0,
+      "truncation_rate": 0.0,
+      "mean_return": -7.270151260504202,
+      "mean_progress": 0.5493697478991596,
+      "mean_steps": 17.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": null
+    },
+    "episodes": [
+      {
+        "seed": 100,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.4749831932773105,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5084033613445378,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_08"
+      },
+      {
+        "seed": 100,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.306915966386555,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.542016806722689,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_09"
+      },
+      {
+        "seed": 100,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_10"
+      },
+      {
+        "seed": 100,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      },
+      {
+        "seed": 101,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      },
+      {
+        "seed": 102,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      },
+      {
+        "seed": 103,
+        "episode_return": -7.1493529411764705,
+        "steps": 17,
+        "core_ticks": 65,
+        "progress": 0.5735294117647058,
+        "coins_collected": 0,
+        "outcome": "death",
+        "level_id": "course_gap_11"
+      }
+    ],
+    "by_level": {
+      "course_gap_08": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.4749831932773105,
+        "mean_progress": 0.5084033613445378,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_09": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.306915966386555,
+        "mean_progress": 0.542016806722689,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_10": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.1493529411764705,
+        "mean_progress": 0.5735294117647058,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "course_gap_11": {
+        "agent": "ppo",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.1493529411764705,
+        "mean_progress": 0.5735294117647058,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      }
+    }
+  },
+  "old_task_regression": {
+    "course_flat_08": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.982,
+      "mean_progress": 1.0,
+      "mean_steps": 18.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 18.0
+    },
+    "course_flat_09": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.981,
+      "mean_progress": 1.0,
+      "mean_steps": 19.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 19.0
+    },
+    "course_flat_10": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.981,
+      "mean_progress": 1.0,
+      "mean_steps": 19.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 19.0
+    },
+    "course_flat_11": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.981,
+      "mean_progress": 1.0,
+      "mean_steps": 19.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 19.0
+    },
+    "course_obstacle_08": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.975000000000001,
+      "mean_progress": 1.0,
+      "mean_steps": 25.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 25.0
+    },
+    "course_obstacle_09": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.975000000000001,
+      "mean_progress": 1.0,
+      "mean_steps": 25.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 25.0
+    },
+    "course_obstacle_10": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.975000000000001,
+      "mean_progress": 1.0,
+      "mean_steps": 25.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 25.0
+    },
+    "course_obstacle_11": {
+      "agent": "ppo",
+      "episodes": 4,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.072000000000099,
+      "mean_progress": 1.0,
+      "mean_steps": 928.0,
+      "mean_coins": 0.0,
+      "mean_success_steps": 928.0
+    }
+  },
+  "gap_validation_history": [
+    {
+      "timesteps": 32768,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 40960,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 49152,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 57344,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 65536,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 73728,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 81920,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 90112,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    },
+    {
+      "timesteps": 90112,
+      "selection_score": [
+        0.0,
+        0.5493697478991596
+      ]
+    }
+  ],
+  "checks": {
+    "full_tests_passed": 43,
+    "training_tests_after_trace_order_change": 9,
+    "ruff": "passed"
+  },
+  "interpretation": "Gap stage explicitly selected and trained. Deterministic policy still jumps immediately; 3/8 training layouts pass but 0/4 validation layouts pass. No final-test evaluation or mixed-stage promotion."
+}

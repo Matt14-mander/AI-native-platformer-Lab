@@ -104,6 +104,33 @@ export XDG_CACHE_HOME="$PWD/.venv/cache"
 
 训练入口拒绝覆盖非空输出目录。每个 checkpoint 的 `.zip` 与同名 `.json` 必须一起保留。
 
+## 手动进入缺口实验
+
+可以从已有兼容 checkpoint 明确选择 `gap`，不必等待 obstacle 自动晋级：
+
+```bash
+.venv/bin/python -m scripts.train_ppo \
+  --config runs/ppo_state_v1_resume_smoke/config.json \
+  --resume runs/ppo_state_v1_resume_smoke/model.zip \
+  --start-stage gap --timesteps 16384 --eval-every 4096 \
+  --output-dir runs/gap_experiment_new
+```
+
+`--start-stage` 仅在续训时可用，保留原来的模型、优化器、协议和 seed 池。切换会重置当前阶段预算起点及连续达标计数，并在历史中写入 `manual_stage_change`；不会把未通过的阶段标为 mastered。旧课程混合采样及回归验证仍然生效，后续自动晋级仍要求先前任务达到阈值。
+
+2026-10-02 已从累计 8,192 步的 checkpoint 手动进入 gap。首轮新增 16,384 步、累计 24,576 步；随后追加 65,536 步，累计达到 90,112 步，缺口阶段实际训练 81,920 transitions。当前结果：
+
+| 任务/集合 | 成功布局 | 成功率 |
+| --- | --- | --- |
+| flat validation | 4/4 | 100% |
+| obstacle validation | 4/4 | 100% |
+| gap train（确定性重评） | 3/8 | 37.5% |
+| gap validation | 0/4 | 0% |
+
+模型保持在 gap，状态为 `timesteps_limit`，未晋级 mixed。独立验证的失败轨迹仍连续选择动作 9：起点立即跳跃，在靠后的缺口上落空；训练布局中的 `00/01/04` 可以被这种动作序列通过。模型尚未学会根据地面边缘选择起跳时机，增加步数没有改变验证表现。下一轮应先扩展训练几何覆盖并检查探索/动作分布，而非把训练布局成功率当作泛化成功。
+
+当前模型为 `runs/ppo_state_v1_gap_learning/model.zip`，完整结果及失败轨迹也在该目录；可提交的摘要见 `docs/reports/ppo_gap_stage_v1.json`。缺口成功率按独立几何布局计算，不把重复 seed episode 当作独立样本。最终 test 未使用。
+
 ## 验证记录与范围
 
 - 全量 42 项测试通过，无跳过；包括真实短 PPO 训练、best/周期模型、重载、续训、协议拒绝、阶段预算和 episode 边界切换。

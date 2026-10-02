@@ -50,6 +50,27 @@ class CurriculumState:
     def stage(self) -> dict:
         return self.stages[self.data["stage_index"]]
 
+    def select_stage(self, task: str, timesteps: int) -> None:
+        """Explicit experiment selection; never label skipped stages as mastered."""
+        tasks = [stage["task"] for stage in self.stages]
+        if task not in tasks:
+            raise ValueError(f"stage is not configured: {task}")
+        if task == self.stage["task"]:
+            return
+        self.data["history"].append(
+            {
+                "outcome": "manual_stage_change",
+                "from": self.stage["task"],
+                "to": task,
+                "timesteps": timesteps,
+                "reason": "explicit_start_stage",
+            }
+        )
+        self.data["stage_index"] = tasks.index(task)
+        self.data["stage_start"] = timesteps
+        self.data["consecutive_passes"] = 0
+        self.data["status"] = "training"
+
     def observe(self, report: dict, timesteps: int) -> bool:
         """Return True on promotion. Never consult final-test layouts."""
         threshold = self.stage["success_threshold"]
