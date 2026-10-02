@@ -29,3 +29,12 @@
 ## 主角基础动作
 
 右向角色动作保存在 characters/：idle、run-1、run-2、jump、fall。状态与播放建议见 characters/child-with-puppy.animation.json。向左可水平翻转；渲染时裁切透明边并以底部中心对齐，避免帧切换时位置跳动。动作 PNG 已接入运行时渲染器：根据水平速度和垂直速度切换姿态。
+
+## 新增互动素材
+
+- enemies/shadow-hedgehog.png：地面巡逻刺猬，左右方向运行时翻转；
+- tilesets/cracked-clay-brick.png：可从下方顶破的苔土砖；
+- tilesets/acorn-reward-box.png：一次性奖励箱，使用后在画面中变暗；
+- items/blue-ward-berry.png：可拾取的护盾浆果，抵挡一次敌人碰撞。
+
+以上图片由内置 imagegen 分别生成，以原头像的深棕轮廓、雾蓝与奶油色手绘粉彩为风格参考；均为透明背景单体 PNG。第一关前段的实体与奖励由 game_content/levels/level_1.json 配置，碰撞和状态由无画面核心处理。

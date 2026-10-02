@@ -41,6 +41,66 @@ class CollectibleSpawn:
 
 
 @dataclass(frozen=True, slots=True)
+class BlockSpawn:
+    entity_id: str
+    kind: str
+    x: float
+    y: float
+    width: float = 40.0
+    height: float = 40.0
+    reward: str = "none"
+
+    def __post_init__(self) -> None:
+        if self.kind not in {"brick", "box"}:
+            raise ValueError("block kind must be brick or box")
+        if self.reward not in {"none", "coin", "shield"}:
+            raise ValueError("unsupported block reward")
+        if self.width <= 0 or self.height <= 0:
+            raise ValueError("block dimensions must be positive")
+
+    @property
+    def rect(self) -> SolidRect:
+        return SolidRect(self.x, self.y, self.width, self.height)
+
+
+@dataclass(frozen=True, slots=True)
+class EnemySpawn:
+    entity_id: str
+    x: float
+    y: float
+    patrol_left: float
+    patrol_right: float
+    direction: int = -1
+    width: float = 28.0
+    height: float = 28.0
+    speed: float = 1.0
+
+    def __post_init__(self) -> None:
+        if self.width <= 0 or self.height <= 0 or self.speed <= 0:
+            raise ValueError("enemy dimensions and speed must be positive")
+        if self.patrol_left > self.x or self.patrol_right < self.x:
+            raise ValueError("enemy spawn must be inside patrol range")
+        if self.direction not in (-1, 1):
+            raise ValueError("enemy direction must be -1 or 1")
+
+
+@dataclass(frozen=True, slots=True)
+class PowerupSpawn:
+    entity_id: str
+    kind: str
+    x: float
+    y: float
+    width: float = 24.0
+    height: float = 24.0
+
+    def __post_init__(self) -> None:
+        if self.kind != "shield":
+            raise ValueError("unsupported powerup kind")
+        if self.width <= 0 or self.height <= 0:
+            raise ValueError("powerup dimensions must be positive")
+
+
+@dataclass(frozen=True, slots=True)
 class LevelDefinition:
     level_id: str
     width: float
@@ -50,6 +110,9 @@ class LevelDefinition:
     goal_x: float
     solids: tuple[SolidRect, ...]
     collectibles: tuple[CollectibleSpawn, ...] = ()
+    blocks: tuple[BlockSpawn, ...] = ()
+    enemies: tuple[EnemySpawn, ...] = ()
+    powerups: tuple[PowerupSpawn, ...] = ()
 
     def __post_init__(self) -> None:
         if self.width <= 0 or self.height <= 0:

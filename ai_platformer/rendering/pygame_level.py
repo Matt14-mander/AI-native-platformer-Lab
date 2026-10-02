@@ -42,6 +42,13 @@ class PygameLevelRenderer:
         self.stump = load_art("tilesets/mossy-stump-obstacle.png")
         self.step = load_art("tilesets/mossy-step-block.png")
         self.acorn = fit_rect(load_art("tilesets/amber-acorn-collectible.png"), 18, 26)
+        self.brick = fit_rect(load_art("tilesets/cracked-clay-brick.png"), 40, 40)
+        self.box = fit_rect(load_art("tilesets/acorn-reward-box.png"), 40, 40)
+        self.used_box = self.box.copy()
+        self.used_box.fill((145, 145, 145, 255), special_flags=pygame.BLEND_RGBA_MULT)
+        self.enemy = fit_rect(load_art("enemies/shadow-hedgehog.png"), 28, 28)
+        self.enemy_right = pygame.transform.flip(self.enemy, True, False)
+        self.shield_berry = fit_rect(load_art("items/blue-ward-berry.png"), 24, 24)
         self.player_frames = {
             "idle": (self._player_frame("child-with-puppy-idle.png"),),
             "run": (
@@ -68,10 +75,25 @@ class PygameLevelRenderer:
         self._draw_solids(surface)
         self._draw_goal(surface)
         for entity in state.entities:
-            if entity.active and entity.kind == "coin":
-                x = round(entity.x - self.camera_x)
-                y = round(entity.y)
-                surface.blit(self.acorn, (x, y))
+            if not entity.active:
+                continue
+            x = round(entity.x - self.camera_x)
+            if x < -50 or x > self.screen_width + 50:
+                continue
+            y = round(entity.y)
+            if entity.kind == "coin":
+                sprite = self.acorn
+            elif entity.kind == "brick":
+                sprite = self.brick
+            elif entity.kind == "box":
+                sprite = self.used_box if entity.state == "used" else self.box
+            elif entity.kind == "enemy":
+                sprite = self.enemy if entity.facing < 0 else self.enemy_right
+            elif entity.kind == "powerup-shield":
+                sprite = self.shield_berry
+            else:
+                continue
+            surface.blit(sprite, (x, y))
         self._draw_player(surface, state)
 
     def _draw_background(self, surface: pygame.Surface) -> None:
@@ -141,6 +163,8 @@ class PygameLevelRenderer:
         )
 
     def _draw_player(self, surface: pygame.Surface, state: WorldSnapshot) -> None:
+        if state.metadata.get("invulnerable_ticks", 0) and state.tick % 6 < 3:
+            return
         player = state.player
         if not player.grounded:
             pose = "jump" if player.velocity_y < 0 else "fall"

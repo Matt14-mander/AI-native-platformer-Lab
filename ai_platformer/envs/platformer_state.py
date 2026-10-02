@@ -10,7 +10,7 @@ import numpy as np
 from gymnasium import spaces
 
 from ai_platformer.content.legacy import LegacyLevelRepository
-from ai_platformer.core import Action, BasicPlatformerCore, WorldSnapshot
+from ai_platformer.core import Action, BasicPlatformerCore, SolidRect, WorldSnapshot
 from ai_platformer.settings import GameplaySettings, load_gameplay_settings
 
 from .reward import RewardConfig, compose_reward
@@ -191,9 +191,14 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         player = state.player
         feet = player.y + self.settings.physics.player_height
         cursor = player.x + self.settings.physics.player_width
+        active_blocks = [
+            SolidRect(entity.x, entity.y, entity.width, entity.height)
+            for entity in state.entities
+            if entity.active and entity.kind in {"brick", "box"}
+        ]
         intervals = sorted(
             (solid.x, solid.right)
-            for solid in self.level.solids
+            for solid in (*self.level.solids, *active_blocks)
             if abs(solid.y - feet) <= 1e-5 and solid.right >= cursor
         )
         limit = cursor
@@ -208,9 +213,18 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         player = state.player
         player_right = player.x + self.settings.physics.player_width
         player_bottom = player.y + self.settings.physics.player_height
+        active_entities = [
+            entity
+            for entity in state.entities
+            if entity.active and entity.kind in {"brick", "box", "enemy"}
+        ]
+        candidates = list(self.level.solids) + [
+            SolidRect(entity.x, entity.y, entity.width, entity.height)
+            for entity in active_entities
+        ]
         candidates = [
             solid
-            for solid in self.level.solids
+            for solid in candidates
             if solid.right >= player_right
             and solid.x >= player_right - 1e-5
             and solid.y < player_bottom - 1e-5
@@ -243,6 +257,9 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
             "score": int(state.metadata.get("score", 0)),
             "coins_collected": int(state.metadata.get("coins_collected", 0)),
             "coins_total": int(state.metadata.get("coins_total", 0)),
+            "shield_charges": int(state.metadata.get("shield_charges", 0)),
+            "enemies_defeated": int(state.metadata.get("enemies_defeated", 0)),
+            "blocks_broken": int(state.metadata.get("blocks_broken", 0)),
         }
 
     def _remaining_time(self, state: WorldSnapshot) -> float:

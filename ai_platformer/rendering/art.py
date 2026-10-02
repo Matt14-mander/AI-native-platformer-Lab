@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from functools import lru_cache
 from pathlib import Path
 
 import pygame
@@ -10,9 +11,18 @@ import pygame
 ASSET_ROOT = Path(__file__).resolve().parents[2] / "assets"
 
 
+@lru_cache(maxsize=32)
 def load_art(relative_path: str, *, crop: bool = True) -> pygame.Surface:
     path = ASSET_ROOT / relative_path
-    image = pygame.image.load(str(path)).convert_alpha()
+    # The Windows workspace may briefly return an incomplete PNG read while
+    # files are being synchronized. Keep one decoded copy for each asset.
+    for attempt in range(3):
+        try:
+            image = pygame.image.load(str(path)).convert_alpha()
+            break
+        except pygame.error:
+            if attempt == 2:
+                raise
     if crop:
         bounds = image.get_bounding_rect(min_alpha=8)
         if bounds.width == 0 or bounds.height == 0:

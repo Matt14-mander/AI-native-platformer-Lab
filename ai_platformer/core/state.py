@@ -26,6 +26,10 @@ class EntitySnapshot:
     x: float
     y: float
     active: bool = True
+    width: float = 0.0
+    height: float = 0.0
+    facing: int = 1
+    state: str = ""
 
 
 @dataclass(frozen=True, slots=True)

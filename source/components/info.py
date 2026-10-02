@@ -13,6 +13,7 @@ class Info:
         self.font = pygame.font.Font(None, 29)
         self.small_font = pygame.font.Font(None, 22)
         self.acorn = fit_rect(load_art("tilesets/amber-acorn-collectible.png"), 21, 29)
+        self.ward_berry = fit_rect(load_art("items/blue-ward-berry.png"), 25, 29)
 
     def update(self):
         pass
@@ -33,6 +34,9 @@ class Info:
         surface.blit(self.small_font.render(f"SCORE  {score:06d}", True, soft), (35, 53))
         surface.blit(self.acorn, (276, 30))
         surface.blit(self.font.render(f"x {collected:02d}", True, cream), (303, 34))
+        shield = int(game_state.metadata.get("shield_charges", 0))
+        surface.blit(self.ward_berry, (410, 30))
+        surface.blit(self.font.render(f"x {shield}", True, cream), (441, 34))
         surface.blit(self.small_font.render("JOURNEY", True, soft), (width - 181, 25))
         bar = pygame.Rect(width - 181, 53, 147, 9)
         pygame.draw.rect(surface, (96, 111, 104), bar, border_radius=5)
