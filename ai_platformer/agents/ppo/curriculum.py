@@ -86,6 +86,21 @@ class CurriculumState:
                 report["by_level"][level]["success_rate"] >= stage["success_threshold"]
                 for level in stage["validation_levels"]
             )
+        for stage in self.stages[: self.data["stage_index"] + 1]:
+            limit = stage.get("max_success_steps")
+            if limit is not None:
+                # Gate each layout: averaging would hide a stalled successful episode.
+                for level in stage["validation_levels"]:
+                    successful = [
+                        episode
+                        for episode in report.get("episodes", [])
+                        if episode["level_id"] == level and episode["outcome"] == "success"
+                    ]
+                    passed = (
+                        passed
+                        and bool(successful)
+                        and all(episode["steps"] <= limit for episode in successful)
+                    )
         self.data["consecutive_passes"] = self.data["consecutive_passes"] + 1 if passed else 0
         if self.data["consecutive_passes"] < self.required:
             return False

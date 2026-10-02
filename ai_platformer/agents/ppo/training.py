@@ -108,7 +108,9 @@ def checkpoint_metadata(path: Path) -> dict:
 
 
 class TrainingCallback(BaseCallback):
-    def __init__(self, config, factory, samplers, output_dir, state, signature):
+    def __init__(
+        self, config, factory, samplers, output_dir, state, signature, initialization=None
+    ):
         super().__init__()
         self.config = config
         self.factory = factory
@@ -116,6 +118,7 @@ class TrainingCallback(BaseCallback):
         self.output_dir = output_dir
         self.state = state
         self.signature = signature
+        self.initialization = initialization
         self.last_eval = -1
         self.next_eval = 0
         self.next_checkpoint = 0
@@ -139,6 +142,7 @@ class TrainingCallback(BaseCallback):
                 "signature_hash": protocol_hash(self.signature),
                 "config": self.config,
                 "curriculum_state": deepcopy(self.state.data),
+                "initialization": self.initialization,
                 "resume_semantics": "optimizer and timestep continuation; environment/RNG reset",
             },
         )
@@ -164,6 +168,9 @@ class TrainingCallback(BaseCallback):
             sum(item["outcome"] == "success" for item in current) / len(current),
             sum(item["progress"] for item in current) / len(current),
         ]
+        if "max_success_steps" in stage:
+            successful_steps = [item["steps"] for item in current if item["outcome"] == "success"]
+            score.append(-sum(successful_steps) / len(successful_steps) if successful_steps else 0)
         entry = {
             "timesteps": self.num_timesteps,
             "stage": stage["task"],
@@ -221,17 +228,19 @@ def train_ppo(
     output_dir: Path,
     *,
     resume: Path | None = None,
+    init_from: Path | None = None,
     start_stage: str | None = None,
 ) -> dict:
     """Train additional transitions; refuse output overwrites and incompatible resume."""
     config, factory, stages = resolve_training_config(config)
     signature = training_signature(config, factory, stages)
     saved = None
-    if start_stage is not None:
-        if resume is None:
-            raise ValueError("start_stage requires a compatible resume checkpoint")
-        if start_stage not in {stage["task"] for stage in stages}:
-            raise ValueError(f"stage is not configured: {start_stage}")
+    initial_weights = None
+    initialization = None
+    if resume is not None and init_from is not None:
+        raise ValueError("resume and init_from are mutually exclusive")
+    if start_stage is not None and start_stage not in {stage["task"] for stage in stages}:
+        raise ValueError(f"stage is not configured: {start_stage}")
     if resume is not None:
         resume = resume.with_suffix(".zip")
         saved = checkpoint_metadata(resume)
@@ -241,6 +250,38 @@ def train_ppo(
             )
         if saved["curriculum_state"]["status"] == "completed":
             raise ValueError("curriculum already completed; evaluate its checkpoints instead")
+        initialization = saved.get("initialization")
+    if init_from is not None:
+        init_from = init_from.with_suffix(".zip")
+        source = checkpoint_metadata(init_from)
+        source_signature = source["signature"]
+        content_keys = {"levels", "curriculum_generator_version", "curriculum_manifest_hash"}
+        source_protocol = {
+            key: value
+            for key, value in source_signature["protocol"].items()
+            if key not in content_keys
+        }
+        target_protocol = {
+            key: value for key, value in signature["protocol"].items() if key not in content_keys
+        }
+        if (
+            source_protocol != target_protocol
+            or source_signature["network"] != signature["network"]
+            or source_signature["action_ids"] != signature["action_ids"]
+        ):
+            raise ValueError("init_from is incompatible with observation/action/network protocol")
+        source_model = PPO.load(init_from, device="cpu")
+        if source_model.num_timesteps != source["saved_timesteps"]:
+            raise ValueError("checkpoint timestep differs from its sidecar")
+        initial_weights = deepcopy(source_model.policy.state_dict())
+        del source_model
+        initialization = {
+            "source": str(init_from.resolve()),
+            "source_sha256": hashlib.sha256(init_from.read_bytes()).hexdigest(),
+            "source_timesteps": source["saved_timesteps"],
+            "source_signature_hash": source["signature_hash"],
+            "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum",
+        }
     if output_dir.exists() and any(output_dir.iterdir()):
         raise FileExistsError("output directory is not empty; choose a new run directory")
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -254,7 +295,7 @@ def train_ppo(
         saved=deepcopy(saved["curriculum_state"]) if saved else None,
     )
     if start_stage is not None:
-        state.select_stage(start_stage, saved["saved_timesteps"])
+        state.select_stage(start_stage, saved["saved_timesteps"] if saved else 0)
     torch.set_num_threads(config["torch_threads"])
     set_random_seed(config["seed"])
     samplers = []
@@ -301,10 +342,14 @@ def train_ppo(
                 device=config.get("device", "cpu"),
                 verbose=config.get("verbose", 1),
             )
+            if initial_weights is not None:
+                model.policy.load_state_dict(initial_weights, strict=True)
         initial_timesteps = int(model.num_timesteps)
         if state.stage["success_threshold"] is None:
             state.data["stage_start"] = initial_timesteps
-        callback = TrainingCallback(config, factory, samplers, output_dir, state, signature)
+        callback = TrainingCallback(
+            config, factory, samplers, output_dir, state, signature, initialization
+        )
         interrupted = False
         try:
             model.learn(
@@ -361,6 +406,7 @@ def train_ppo(
             "trained_timesteps": int(model.num_timesteps),
             "added_timesteps": int(model.num_timesteps) - initial_timesteps,
             "resumed_from": str(resume.resolve()) if resume else None,
+            "initialization": initialization,
             "requested_start_stage": start_stage,
             "curriculum_state": state.data,
             "evaluation": evaluation,

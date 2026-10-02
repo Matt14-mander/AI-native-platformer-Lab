@@ -115,6 +115,11 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
                 "max_timesteps": budget,
             }
         )
+        if "max_success_steps" in spec:
+            limit = spec["max_success_steps"]
+            if not isinstance(limit, int) or isinstance(limit, bool) or limit <= 0:
+                raise ValueError("max_success_steps must be a positive integer")
+            stages[-1]["max_success_steps"] = limit
     if not stages:
         stages = [
             {

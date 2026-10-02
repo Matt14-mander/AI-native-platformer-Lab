@@ -208,9 +208,10 @@ class CheckpointIntegrationTests(unittest.TestCase):
             self.assertEqual(report["trained_timesteps"], 8)
             self.assertEqual(report["curriculum_state"]["status"], "budget_exhausted")
             self.assertEqual(report["curriculum_state"]["stage_index"], 0)
-            with self.assertRaisesRegex(ValueError, "requires"):
-                train_ppo(config, Path(directory) / "no_resume", start_stage="gap")
-            self.assertFalse((Path(directory) / "no_resume").exists())
+            cold = train_ppo(config, Path(directory) / "cold", start_stage="gap")
+            self.assertEqual(cold["initial_timesteps"], 0)
+            self.assertEqual(cold["curriculum_state"]["stage_start"], 0)
+            self.assertEqual(cold["curriculum_state"]["history"][0]["to"], "gap")
             config["total_timesteps"] = 64
             continued = Path(directory) / "gap"
             result = train_ppo(

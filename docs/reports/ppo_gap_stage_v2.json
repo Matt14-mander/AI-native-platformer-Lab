@@ -1,0 +1,2323 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-02",
+  "scope": "policy diagnostics, curriculum v2, fresh PPO weight initialization, speed-aware stage gates",
+  "unchanged": "PlatformerState-v1 observation/action/physics/reward; v1 manifest and checkpoints",
+  "verification": {
+    "unit_and_integration_tests": 49,
+    "test_failures": 0,
+    "skipped_tests": 0,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "readiness": {
+      "passed": true,
+      "sb3_checker": {
+        "passed": true,
+        "version": "2.4.1"
+      },
+      "stability": {
+        "episodes": 1000,
+        "transitions": 235478,
+        "max_steps_per_episode": 256,
+        "base_seed": 20260923,
+        "outcomes": {
+          "death": 155,
+          "success": 24,
+          "time_limit": 821
+        },
+        "min_reward": -10.040409862570735,
+        "max_reward": 10.107158682634731
+      },
+      "course_audit_layouts": 168,
+      "all_course_audits_passed": true,
+      "protocol_hash": "a20826e3f62898b0fd01155bf2a7ae39dea28f95e694d5edd0ddbd38aa8133ee",
+      "raw_report": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/readiness_curriculum_v2.json"
+    },
+    "geometry_calibration": {
+      "unique_layouts": 272,
+      "all_rule_reachable": true,
+      "includes_scripted_final_test_calibration": true
+    }
+  },
+  "curriculum": {
+    "manifest": "config/curriculum_v2.json",
+    "manifest_hash": "e591b17accb8b2f9b98b19c00e2bed6c85de55c8fc05664aebbb1220d1e9abce",
+    "splits": {
+      "flat": {
+        "train": 8,
+        "validation": 4,
+        "test": 4
+      },
+      "obstacle": {
+        "train": 8,
+        "validation": 4,
+        "test": 4
+      },
+      "gap": {
+        "train": 36,
+        "validation": 36,
+        "test": 36,
+        "ood": 12
+      },
+      "mixed": {
+        "train": 36,
+        "validation": 36,
+        "test": 36,
+        "ood": 12
+      }
+    },
+    "distribution": {
+      "in_distribution": "matched strata; split-specific offsets prevent duplicate geometry",
+      "gap_distance_strata": [
+        280,
+        380,
+        500,
+        620
+      ],
+      "mixed_distance_strata": [
+        1000,
+        1120,
+        1240,
+        1360
+      ],
+      "spawn_strata": [
+        32,
+        96,
+        160
+      ],
+      "gap_width_strata": [
+        100,
+        130,
+        160
+      ],
+      "split_offsets": {
+        "train": [
+          0,
+          0,
+          0
+        ],
+        "validation": [
+          3,
+          7,
+          4
+        ],
+        "test": [
+          5,
+          -7,
+          8
+        ]
+      },
+      "ood": "longer approach distances and gap widths of 170; diagnostic only",
+      "legacy_replay": "flat/obstacle splits preserve v1 geometry and reserved final tests"
+    }
+  },
+  "experiment_contract": {
+    "added_transitions_per_run": 65536,
+    "training_seed": 20260923,
+    "train_environment_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "validation_environment_seeds": [
+      100,
+      101,
+      102,
+      103
+    ],
+    "diagnostic_sampling_seeds": [
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209
+    ],
+    "start_stage": "gap",
+    "replay_fraction": 0.2,
+    "comparison_checkpoint": "final model at fixed added budget; best checkpoints reported separately",
+    "equal_total_compute": false,
+    "initialized_source_transitions": 90112,
+    "learned_policy_final_test_used": false,
+    "formal_multi_training_seed_acceptance_completed": false
+  },
+  "old_v1_policy_diagnostics": {
+    "report": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/diagnostics_old_gap_v1.json",
+    "seeds": [
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209
+    ],
+    "protocol_hash": "a63171b38fe024a539998bc91c7c8a216fad23eb4746bcffd8f2aa1226f3dc47",
+    "modes": {
+      "deterministic": {
+        "summary": {
+          "agent": "deterministic",
+          "episodes": 40,
+          "success_rate": 0.0,
+          "death_rate": 1.0,
+          "truncation_rate": 0.0,
+          "mean_return": -7.270151260504202,
+          "mean_progress": 0.5493697478991597,
+          "mean_steps": 17.0,
+          "mean_coins": 0.0,
+          "mean_success_steps": null
+        },
+        "layouts": 4,
+        "mean_effective_jumps": 1.0,
+        "mean_landings": 0.0,
+        "landed_after_gap_rate": 0.0,
+        "first_jump_edge_distance_range": [
+          384.0,
+          420.0
+        ],
+        "mean_policy_tv_from_initial": 0.09632240904166418,
+        "action_distribution_by_context": null
+      },
+      "stochastic": {
+        "summary": {
+          "agent": "stochastic",
+          "episodes": 40,
+          "success_rate": 0.725,
+          "death_rate": 0.275,
+          "truncation_rate": 0.0,
+          "mean_return": 8.879926890756304,
+          "mean_progress": 0.8815703781512605,
+          "mean_steps": 27.925,
+          "mean_coins": 0.0,
+          "mean_success_steps": 30.06896551724138
+        },
+        "layouts": 4,
+        "mean_effective_jumps": 2.325,
+        "mean_landings": 1.725,
+        "landed_after_gap_rate": 0.675,
+        "first_jump_edge_distance_range": [
+          377.1,
+          420.0
+        ],
+        "mean_policy_tv_from_initial": 0.13921383905072324,
+        "action_distribution_by_context": null
+      },
+      "fixed_observation": {
+        "summary": {
+          "agent": "fixed_observation",
+          "episodes": 40,
+          "success_rate": 0.775,
+          "death_rate": 0.225,
+          "truncation_rate": 0.0,
+          "mean_return": 9.998010714285716,
+          "mean_progress": 0.9053571428571429,
+          "mean_steps": 28.775,
+          "mean_coins": 0.0,
+          "mean_success_steps": 30.70967741935484
+        },
+        "layouts": 4,
+        "mean_effective_jumps": 2.475,
+        "mean_landings": 1.9,
+        "landed_after_gap_rate": 0.75,
+        "first_jump_edge_distance_range": [
+          377.1,
+          420.0
+        ],
+        "mean_policy_tv_from_initial": 0.0,
+        "action_distribution_by_context": null
+      }
+    }
+  },
+  "experiments": {
+    "cold": {
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_cold/model.zip",
+      "model_sha256": "afe0ff7dc2275d430614ddf31e04d6675ce2bce13126d4a10deadf774e6e0851",
+      "signature_hash": "62db54c8d5cba2dee349095b331b7e75e8748340e96fa4258091ca82ab63461c",
+      "initial_timesteps": 0,
+      "added_timesteps": 65536,
+      "trained_timesteps": 65536,
+      "initialization": null,
+      "curriculum_state": {
+        "stage_index": 2,
+        "stage_start": 0,
+        "consecutive_passes": 0,
+        "status": "timesteps_limit",
+        "history": [
+          {
+            "outcome": "manual_stage_change",
+            "from": "flat",
+            "to": "gap",
+            "timesteps": 0,
+            "reason": "explicit_start_stage"
+          }
+        ],
+        "best": {
+          "gap": {
+            "score": [
+              0.25,
+              0.6062631543345651,
+              -32.333333333333336
+            ],
+            "timesteps": 16384,
+            "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_cold/checkpoints/best_gap.zip"
+          }
+        }
+      },
+      "final_validation": {
+        "flat": {
+          "layouts": 4,
+          "successful_layouts": 4,
+          "success_rate": 1.0,
+          "mean_success_steps": 18.75,
+          "max_success_steps": 19,
+          "failed_layouts": []
+        },
+        "obstacle": {
+          "layouts": 4,
+          "successful_layouts": 3,
+          "success_rate": 0.75,
+          "mean_success_steps": 25.0,
+          "max_success_steps": 25,
+          "failed_layouts": [
+            "course_obstacle_11"
+          ]
+        },
+        "gap": {
+          "layouts": 36,
+          "successful_layouts": 9,
+          "success_rate": 0.25,
+          "mean_success_steps": 32.333333333333336,
+          "max_success_steps": 34,
+          "failed_layouts": [
+            "v2_gap_validation_03",
+            "v2_gap_validation_04",
+            "v2_gap_validation_05",
+            "v2_gap_validation_06",
+            "v2_gap_validation_07",
+            "v2_gap_validation_08",
+            "v2_gap_validation_09",
+            "v2_gap_validation_10",
+            "v2_gap_validation_11",
+            "v2_gap_validation_15",
+            "v2_gap_validation_16",
+            "v2_gap_validation_17",
+            "v2_gap_validation_18",
+            "v2_gap_validation_19",
+            "v2_gap_validation_20",
+            "v2_gap_validation_21",
+            "v2_gap_validation_22",
+            "v2_gap_validation_23",
+            "v2_gap_validation_27",
+            "v2_gap_validation_28",
+            "v2_gap_validation_29",
+            "v2_gap_validation_30",
+            "v2_gap_validation_31",
+            "v2_gap_validation_32",
+            "v2_gap_validation_33",
+            "v2_gap_validation_34",
+            "v2_gap_validation_35"
+          ]
+        }
+      },
+      "best_validation": {
+        "checkpoint": {
+          "score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ],
+          "timesteps": 16384,
+          "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_cold/checkpoints/best_gap.zip"
+        },
+        "tasks": {
+          "flat": {
+            "layouts": 4,
+            "successful_layouts": 4,
+            "success_rate": 1.0,
+            "mean_success_steps": 18.75,
+            "max_success_steps": 19,
+            "failed_layouts": []
+          },
+          "obstacle": {
+            "layouts": 4,
+            "successful_layouts": 3,
+            "success_rate": 0.75,
+            "mean_success_steps": 25.0,
+            "max_success_steps": 25,
+            "failed_layouts": [
+              "course_obstacle_11"
+            ]
+          },
+          "gap": {
+            "layouts": 36,
+            "successful_layouts": 9,
+            "success_rate": 0.25,
+            "mean_success_steps": 32.333333333333336,
+            "max_success_steps": 34,
+            "failed_layouts": [
+              "v2_gap_validation_03",
+              "v2_gap_validation_04",
+              "v2_gap_validation_05",
+              "v2_gap_validation_06",
+              "v2_gap_validation_07",
+              "v2_gap_validation_08",
+              "v2_gap_validation_09",
+              "v2_gap_validation_10",
+              "v2_gap_validation_11",
+              "v2_gap_validation_15",
+              "v2_gap_validation_16",
+              "v2_gap_validation_17",
+              "v2_gap_validation_18",
+              "v2_gap_validation_19",
+              "v2_gap_validation_20",
+              "v2_gap_validation_21",
+              "v2_gap_validation_22",
+              "v2_gap_validation_23",
+              "v2_gap_validation_27",
+              "v2_gap_validation_28",
+              "v2_gap_validation_29",
+              "v2_gap_validation_30",
+              "v2_gap_validation_31",
+              "v2_gap_validation_32",
+              "v2_gap_validation_33",
+              "v2_gap_validation_34",
+              "v2_gap_validation_35"
+            ]
+          }
+        }
+      },
+      "learning_curve": [
+        {
+          "timesteps": 16384,
+          "stage": "gap",
+          "selection_score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ]
+        },
+        {
+          "timesteps": 32768,
+          "stage": "gap",
+          "selection_score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ]
+        },
+        {
+          "timesteps": 49152,
+          "stage": "gap",
+          "selection_score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ]
+        },
+        {
+          "timesteps": 65536,
+          "stage": "gap",
+          "selection_score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ]
+        },
+        {
+          "timesteps": 65536,
+          "stage": "gap",
+          "selection_score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ]
+        }
+      ],
+      "gap_validation_diagnostics": {
+        "report": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_cold/gap_validation_diagnostics_final.json",
+        "seeds": [
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209
+        ],
+        "protocol_hash": "9888403bfec454d85cb5d5b9d145b19a785b29c0273ffe72685d9b9f90251ffa",
+        "modes": {
+          "deterministic": {
+            "summary": {
+              "agent": "deterministic",
+              "episodes": 360,
+              "success_rate": 0.25,
+              "death_rate": 0.75,
+              "truncation_rate": 0.0,
+              "mean_return": -1.9912675616605073,
+              "mean_progress": 0.6062631543345651,
+              "mean_steps": 22.583333333333332,
+              "mean_coins": 0.0,
+              "mean_success_steps": 32.333333333333336
+            },
+            "layouts": 36,
+            "mean_effective_jumps": 1.0,
+            "mean_landings": 0.75,
+            "landed_after_gap_rate": 0.25,
+            "first_jump_edge_distance_range": [
+              263.0,
+              603.0
+            ],
+            "mean_policy_tv_from_initial": 0.07901958215036048,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 5850,
+                "action_counts": {
+                  "9": 5850
+                },
+                "mean_action_probabilities": [
+                  0.03545810427421178,
+                  0.015556244289454742,
+                  0.04251467332116559,
+                  0.12399598376618491,
+                  0.015719397894592365,
+                  0.042608177999400684,
+                  0.2192552033907328,
+                  0.03917278374234835,
+                  0.02440414180676652,
+                  0.4413152903573126
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 1650,
+                "action_counts": {
+                  "9": 1650
+                },
+                "mean_action_probabilities": [
+                  0.01950720240446654,
+                  0.00617470516061241,
+                  0.025243077799677847,
+                  0.10391213324936953,
+                  0.006207781225781549,
+                  0.026234874705022032,
+                  0.22812092195857656,
+                  0.02250038500536572,
+                  0.011424179290505973,
+                  0.5506747278300199
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 360,
+                "action_counts": {
+                  "9": 360
+                },
+                "mean_action_probabilities": [
+                  0.0253670575718085,
+                  0.009447436469296614,
+                  0.031331537291407585,
+                  0.11637785285711288,
+                  0.009214262788494429,
+                  0.033911907424529396,
+                  0.2176471253236135,
+                  0.02956620727976163,
+                  0.01549781175951163,
+                  0.5116388003031412
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 270,
+                "action_counts": {
+                  "9": 270
+                },
+                "mean_action_probabilities": [
+                  0.02514747406045596,
+                  0.008900281766222583,
+                  0.0324933384027746,
+                  0.11480029755168492,
+                  0.008919592325886091,
+                  0.032925420337253146,
+                  0.22999481856822968,
+                  0.028752536823352177,
+                  0.015516052746938335,
+                  0.5025501847267151
+                ]
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 360,
+              "success_rate": 0.5333333333333333,
+              "death_rate": 0.4666666666666667,
+              "truncation_rate": 0.0,
+              "mean_return": 4.352665129235627,
+              "mean_progress": 0.7438413591804587,
+              "mean_steps": 33.208333333333336,
+              "mean_coins": 0.0,
+              "mean_success_steps": 41.65625
+            },
+            "layouts": 36,
+            "mean_effective_jumps": 2.4472222222222224,
+            "mean_landings": 1.9916666666666667,
+            "landed_after_gap_rate": 0.5333333333333333,
+            "first_jump_edge_distance_range": [
+              260.0,
+              607.3
+            ],
+            "mean_policy_tv_from_initial": 0.07496551475467184,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 8933,
+                "action_counts": {
+                  "0": 282,
+                  "1": 129,
+                  "2": 231,
+                  "3": 1051,
+                  "4": 140,
+                  "5": 429,
+                  "6": 1764,
+                  "7": 246,
+                  "8": 276,
+                  "9": 4385
+                },
+                "mean_action_probabilities": [
+                  0.03236718858731603,
+                  0.013967025364253602,
+                  0.03852485818731068,
+                  0.11995936161351073,
+                  0.01398108389529258,
+                  0.040078004944323495,
+                  0.2100346606238537,
+                  0.03543119433121296,
+                  0.021785673159241868,
+                  0.47387094924314604
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 1375,
+                "action_counts": {
+                  "0": 62,
+                  "1": 14,
+                  "3": 127,
+                  "5": 66,
+                  "6": 258,
+                  "7": 39,
+                  "9": 809
+                },
+                "mean_action_probabilities": [
+                  0.019238123546947133,
+                  0.006173811826177619,
+                  0.024855115004561164,
+                  0.10303521419655193,
+                  0.00612364731288769,
+                  0.02648114891079339,
+                  0.21935947937315162,
+                  0.021922330631451173,
+                  0.011068340806121176,
+                  0.5617427905256098
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 936,
+                "action_counts": {
+                  "0": 9,
+                  "3": 117,
+                  "5": 27,
+                  "6": 207,
+                  "7": 36,
+                  "9": 540
+                },
+                "mean_action_probabilities": [
+                  0.024807636530544512,
+                  0.008978875080804126,
+                  0.031118735235232193,
+                  0.11473156487903534,
+                  0.00880265143365623,
+                  0.033282167540910915,
+                  0.22064421311593974,
+                  0.028536432607768055,
+                  0.015036147308703035,
+                  0.5140615793374869
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 369,
+                "action_counts": {
+                  "0": 18,
+                  "3": 27,
+                  "4": 9,
+                  "5": 27,
+                  "6": 90,
+                  "7": 18,
+                  "9": 180
+                },
+                "mean_action_probabilities": [
+                  0.027611628901667712,
+                  0.010416266576545994,
+                  0.035328577658752115,
+                  0.11847726685729454,
+                  0.010272363836808903,
+                  0.03679633079990139,
+                  0.21946192878048595,
+                  0.031010037242639357,
+                  0.017125164135927108,
+                  0.49350043259015897
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 342,
+                "action_counts": {
+                  "0": 9,
+                  "3": 18,
+                  "5": 27,
+                  "6": 90,
+                  "9": 198
+                },
+                "mean_action_probabilities": [
+                  0.02531996951030012,
+                  0.009104366855401742,
+                  0.03218227110214924,
+                  0.11528004294163302,
+                  0.009035561282775904,
+                  0.03362337802128311,
+                  0.22520337188453005,
+                  0.028973085462654893,
+                  0.015540240602077622,
+                  0.5057377070188522
+                ]
+              }
+            }
+          },
+          "fixed_observation": {
+            "summary": {
+              "agent": "fixed_observation",
+              "episodes": 360,
+              "success_rate": 0.5666666666666667,
+              "death_rate": 0.43333333333333335,
+              "truncation_rate": 0.0,
+              "mean_return": 5.1044082577281955,
+              "mean_progress": 0.7607972071011946,
+              "mean_steps": 32.91111111111111,
+              "mean_coins": 0.0,
+              "mean_success_steps": 40.47549019607843
+            },
+            "layouts": 36,
+            "mean_effective_jumps": 2.5944444444444446,
+            "mean_landings": 1.9722222222222223,
+            "landed_after_gap_rate": 0.5666666666666667,
+            "first_jump_edge_distance_range": [
+              260.0,
+              607.3
+            ],
+            "mean_policy_tv_from_initial": 0.0,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 8953,
+                "action_counts": {
+                  "0": 267,
+                  "1": 159,
+                  "2": 216,
+                  "3": 999,
+                  "4": 60,
+                  "5": 232,
+                  "6": 1795,
+                  "7": 265,
+                  "8": 231,
+                  "9": 4729
+                },
+                "mean_action_probabilities": [
+                  0.02537428290750359,
+                  0.009451368508248187,
+                  0.03134049520921763,
+                  0.1163895301213747,
+                  0.009218072385868286,
+                  0.033919776523647846,
+                  0.21766112541088536,
+                  0.029575238723129345,
+                  0.015503410059169366,
+                  0.5115666977456198
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 1197,
+                "action_counts": {
+                  "0": 52,
+                  "3": 102,
+                  "5": 138,
+                  "6": 258,
+                  "7": 54,
+                  "8": 57,
+                  "9": 536
+                },
+                "mean_action_probabilities": [
+                  0.025385072699116985,
+                  0.009457240822595064,
+                  0.03135387231607485,
+                  0.11640696484617323,
+                  0.00922376183137833,
+                  0.03393152721207542,
+                  0.2176820261959444,
+                  0.029588725813100413,
+                  0.01551177057786942,
+                  0.5114590330928589
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 969,
+                "action_counts": {
+                  "3": 108,
+                  "5": 45,
+                  "6": 180,
+                  "7": 36,
+                  "9": 600
+                },
+                "mean_action_probabilities": [
+                  0.02536911382440812,
+                  0.009448556468790345,
+                  0.03133408662404623,
+                  0.1163811695880196,
+                  0.009215347895589037,
+                  0.033914145981841046,
+                  0.21765109776712424,
+                  0.029568777906913136,
+                  0.015499405822379301,
+                  0.5116182967974305
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 360,
+                "action_counts": {
+                  "0": 18,
+                  "3": 18,
+                  "5": 27,
+                  "6": 99,
+                  "7": 9,
+                  "9": 189
+                },
+                "mean_action_probabilities": [
+                  0.0253670575718085,
+                  0.009447436469296614,
+                  0.031331537291407585,
+                  0.11637785285711288,
+                  0.009214262788494429,
+                  0.033911907424529396,
+                  0.2176471253236135,
+                  0.02956620727976163,
+                  0.01549781175951163,
+                  0.5116388003031412
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 369,
+                "action_counts": {
+                  "0": 18,
+                  "3": 27,
+                  "5": 27,
+                  "6": 81,
+                  "9": 216
+                },
+                "mean_action_probabilities": [
+                  0.0253670575718085,
+                  0.009447436469296614,
+                  0.031331537291407585,
+                  0.11637785285711288,
+                  0.009214262788494429,
+                  0.033911907424529396,
+                  0.2176471253236135,
+                  0.02956620727976163,
+                  0.01549781175951163,
+                  0.5116388003031412
+                ]
+              }
+            }
+          }
+        }
+      },
+      "gap_ood_diagnostics": {
+        "report": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_cold/gap_ood_diagnostics.json",
+        "seeds": [
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209
+        ],
+        "protocol_hash": "308a7556a3aa4997ec659b8492409df183c3207dc1ed6604a92b88496f145042",
+        "modes": {
+          "deterministic": {
+            "summary": {
+              "agent": "deterministic",
+              "episodes": 120,
+              "success_rate": 0.0,
+              "death_rate": 1.0,
+              "truncation_rate": 0.0,
+              "mean_return": -6.807099776214213,
+              "mean_progress": 0.6439300447571574,
+              "mean_steps": 26.75,
+              "mean_coins": 0.0,
+              "mean_success_steps": null
+            },
+            "layouts": 12,
+            "mean_effective_jumps": 1.0,
+            "mean_landings": 1.0,
+            "landed_after_gap_rate": 0.0,
+            "first_jump_edge_distance_range": [
+              756.0,
+              936.0
+            ],
+            "mean_policy_tv_from_initial": 0.06532455608762651,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 2070,
+                "action_counts": {
+                  "9": 2070
+                },
+                "mean_action_probabilities": [
+                  0.03548630140721798,
+                  0.015490989794657715,
+                  0.04258613295601186,
+                  0.12424414273765352,
+                  0.015648068873670654,
+                  0.0426385355528426,
+                  0.2201252876992387,
+                  0.03926128966076938,
+                  0.024427271533559485,
+                  0.440091986299137
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 60,
+                "action_counts": {
+                  "9": 60
+                },
+                "mean_action_probabilities": [
+                  0.025504625402390957,
+                  0.009151019466420015,
+                  0.033091308549046516,
+                  0.11518707623084386,
+                  0.009136042247215906,
+                  0.03368949517607689,
+                  0.2255145808060964,
+                  0.028803948933879536,
+                  0.01566583135475715,
+                  0.5042560597260793
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 480,
+                "action_counts": {
+                  "9": 480
+                },
+                "mean_action_probabilities": [
+                  0.02282431403485437,
+                  0.007792938326019794,
+                  0.028934145928360522,
+                  0.11114545244102676,
+                  0.00776667712489143,
+                  0.030002293176949024,
+                  0.23184331227093935,
+                  0.02667946907846878,
+                  0.013858625180243203,
+                  0.5191527406374613
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 300,
+                "action_counts": {
+                  "9": 300
+                },
+                "mean_action_probabilities": [
+                  0.024245168082416058,
+                  0.008469014537210266,
+                  0.03141508574287097,
+                  0.1131829301516215,
+                  0.008484233760585387,
+                  0.03206774070858955,
+                  0.22755391597747804,
+                  0.027603809535503388,
+                  0.014795883931219578,
+                  0.5121822237968445
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 300,
+                "action_counts": {
+                  "9": 300
+                },
+                "mean_action_probabilities": [
+                  0.022732393629848958,
+                  0.007638869403551022,
+                  0.0292332432543238,
+                  0.1107271542151769,
+                  0.00768509873499473,
+                  0.02980595293144385,
+                  0.23370724618434907,
+                  0.026356132328510286,
+                  0.01381348647798101,
+                  0.5183004279931386
+                ]
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 120,
+              "success_rate": 0.525,
+              "death_rate": 0.475,
+              "truncation_rate": 0.0,
+              "mean_return": 4.559620268306029,
+              "mean_progress": 0.8202940536612057,
+              "mean_steps": 41.85,
+              "mean_coins": 0.0,
+              "mean_success_steps": 49.23809523809524
+            },
+            "layouts": 12,
+            "mean_effective_jumps": 3.2583333333333333,
+            "mean_landings": 2.5083333333333333,
+            "landed_after_gap_rate": 0.525,
+            "first_jump_edge_distance_range": [
+              753.0,
+              940.3
+            ],
+            "mean_policy_tv_from_initial": 0.07150709751731027,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 3776,
+                "action_counts": {
+                  "0": 113,
+                  "1": 53,
+                  "2": 116,
+                  "3": 468,
+                  "4": 57,
+                  "5": 175,
+                  "6": 736,
+                  "7": 112,
+                  "8": 135,
+                  "9": 1811
+                },
+                "mean_action_probabilities": [
+                  0.031359649866116945,
+                  0.01331111491206191,
+                  0.03738528962362502,
+                  0.11877828994095009,
+                  0.01333198979280157,
+                  0.03904214991361171,
+                  0.20945960600955127,
+                  0.03428374542198657,
+                  0.020947848040693422,
+                  0.4821003152104884
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 321,
+                "action_counts": {
+                  "0": 21,
+                  "1": 9,
+                  "3": 25,
+                  "5": 21,
+                  "6": 82,
+                  "7": 10,
+                  "9": 153
+                },
+                "mean_action_probabilities": [
+                  0.018439325976919534,
+                  0.005827443965789035,
+                  0.023977914099752716,
+                  0.10081473009144405,
+                  0.005729033903297142,
+                  0.02589529538033907,
+                  0.2135304279416521,
+                  0.02067855202427534,
+                  0.01035470534348135,
+                  0.5747525727266092
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 697,
+                "action_counts": {
+                  "0": 20,
+                  "3": 57,
+                  "5": 24,
+                  "6": 176,
+                  "7": 28,
+                  "9": 392
+                },
+                "mean_action_probabilities": [
+                  0.0241087910370471,
+                  0.008532304350831887,
+                  0.03041774180144542,
+                  0.11329159857852215,
+                  0.008409315553177121,
+                  0.0321572053872872,
+                  0.22453112590261648,
+                  0.02780636044558528,
+                  0.014621400289034399,
+                  0.5161241536674062
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 115,
+                "action_counts": {
+                  "0": 6,
+                  "3": 14,
+                  "5": 24,
+                  "6": 14,
+                  "7": 6,
+                  "8": 6,
+                  "9": 45
+                },
+                "mean_action_probabilities": [
+                  0.02473742597452972,
+                  0.008924820476576037,
+                  0.03170145983281343,
+                  0.11378013018680655,
+                  0.00882762326332538,
+                  0.0333916695545549,
+                  0.21823412413182466,
+                  0.027885138146255328,
+                  0.014991667826214562,
+                  0.5175259450207585
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 113,
+                "action_counts": {
+                  "0": 4,
+                  "3": 6,
+                  "5": 3,
+                  "6": 38,
+                  "8": 3,
+                  "9": 59
+                },
+                "mean_action_probabilities": [
+                  0.02329320889131158,
+                  0.008184732848662982,
+                  0.029507294049964543,
+                  0.11169607983490007,
+                  0.00807788206132508,
+                  0.031062160643328608,
+                  0.22412297788974458,
+                  0.026987444559952854,
+                  0.01416593703515498,
+                  0.5229022866856735
+                ]
+              }
+            }
+          },
+          "fixed_observation": {
+            "summary": {
+              "agent": "fixed_observation",
+              "episodes": 120,
+              "success_rate": 0.48333333333333334,
+              "death_rate": 0.5166666666666667,
+              "truncation_rate": 0.0,
+              "mean_return": 3.6711333219424245,
+              "mean_progress": 0.8088649977218182,
+              "mean_steps": 39.858333333333334,
+              "mean_coins": 0.0,
+              "mean_success_steps": 47.89655172413793
+            },
+            "layouts": 12,
+            "mean_effective_jumps": 3.2666666666666666,
+            "mean_landings": 2.575,
+            "landed_after_gap_rate": 0.48333333333333334,
+            "first_jump_edge_distance_range": [
+              753.0,
+              940.3
+            ],
+            "mean_policy_tv_from_initial": 0.0,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 3558,
+                "action_counts": {
+                  "0": 111,
+                  "1": 72,
+                  "2": 84,
+                  "3": 429,
+                  "4": 18,
+                  "5": 99,
+                  "6": 727,
+                  "7": 114,
+                  "8": 90,
+                  "9": 1814
+                },
+                "mean_action_probabilities": [
+                  0.02536700331114396,
+                  0.009447354171582156,
+                  0.03133146503459643,
+                  0.11637810057321246,
+                  0.009214183554354848,
+                  0.03391189755114898,
+                  0.21764765727580299,
+                  0.029566117271806098,
+                  0.015497721175696155,
+                  0.5116384629455425
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 308,
+                "action_counts": {
+                  "0": 12,
+                  "2": 6,
+                  "3": 35,
+                  "5": 27,
+                  "6": 85,
+                  "7": 6,
+                  "8": 17,
+                  "9": 120
+                },
+                "mean_action_probabilities": [
+                  0.025392046996525357,
+                  0.009460980943464613,
+                  0.031362514211130996,
+                  0.11641858796310889,
+                  0.009227385974259346,
+                  0.03393917466671049,
+                  0.21769620976471282,
+                  0.029597420215171266,
+                  0.015517123802504564,
+                  0.5113885176259202
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 714,
+                "action_counts": {
+                  "0": 24,
+                  "3": 57,
+                  "5": 36,
+                  "6": 165,
+                  "7": 24,
+                  "8": 3,
+                  "9": 405
+                },
+                "mean_action_probabilities": [
+                  0.025361760209004085,
+                  0.009444501561423143,
+                  0.03132496463755766,
+                  0.11636962244908015,
+                  0.009211419771114985,
+                  0.033906186620394387,
+                  0.2176374892393748,
+                  0.029559563845396042,
+                  0.015493659302592278,
+                  0.5116907954216003
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 103,
+                "action_counts": {
+                  "0": 6,
+                  "3": 12,
+                  "5": 12,
+                  "6": 19,
+                  "7": 6,
+                  "8": 3,
+                  "9": 45
+                },
+                "mean_action_probabilities": [
+                  0.025364782118681563,
+                  0.009446147214440466,
+                  0.0313287112247018,
+                  0.1163744988661368,
+                  0.009213014144124915,
+                  0.03390947678714123,
+                  0.21764333155548687,
+                  0.029563341561017684,
+                  0.015496001696413002,
+                  0.511660658040093
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 100,
+                "action_counts": {
+                  "3": 6,
+                  "5": 6,
+                  "6": 30,
+                  "8": 6,
+                  "9": 52
+                },
+                "mean_action_probabilities": [
+                  0.02536487277597189,
+                  0.009446196584030985,
+                  0.03132882362231612,
+                  0.1163746451586485,
+                  0.009213061975315214,
+                  0.03390957549214363,
+                  0.21764350682497025,
+                  0.029563454892486334,
+                  0.015496071968227625,
+                  0.5116597539186478
+                ]
+              }
+            }
+          }
+        }
+      },
+      "legacy_gap_validation": {
+        "agent": "deterministic",
+        "episodes": 4,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -7.270151260504202,
+        "mean_progress": 0.5493697478991596,
+        "mean_steps": 17.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      }
+    },
+    "initialized": {
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_initialized/model.zip",
+      "model_sha256": "c190f53fcd87dfe09591a4e646de2257741fe171b6ccd359cc6d88247c19d8db",
+      "signature_hash": "62db54c8d5cba2dee349095b331b7e75e8748340e96fa4258091ca82ab63461c",
+      "initial_timesteps": 0,
+      "added_timesteps": 65536,
+      "trained_timesteps": 65536,
+      "initialization": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_state_v1_gap_learning/model.zip",
+        "source_sha256": "ba4687e654d68207597a9ab50b2694adfa66881e511a68d5721fec6677110a80",
+        "source_timesteps": 90112,
+        "source_signature_hash": "8429a1217b2e9d738d4431737e25bc04d4c5a0d0803c6bcf03fc75398cd4b82e",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      },
+      "curriculum_state": {
+        "stage_index": 2,
+        "stage_start": 0,
+        "consecutive_passes": 0,
+        "status": "timesteps_limit",
+        "history": [
+          {
+            "outcome": "manual_stage_change",
+            "from": "flat",
+            "to": "gap",
+            "timesteps": 0,
+            "reason": "explicit_start_stage"
+          }
+        ],
+        "best": {
+          "gap": {
+            "score": [
+              1.0,
+              1.0,
+              -32.333333333333336
+            ],
+            "timesteps": 65536,
+            "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_initialized/checkpoints/best_gap.zip"
+          }
+        }
+      },
+      "final_validation": {
+        "flat": {
+          "layouts": 4,
+          "successful_layouts": 4,
+          "success_rate": 1.0,
+          "mean_success_steps": 18.75,
+          "max_success_steps": 19,
+          "failed_layouts": []
+        },
+        "obstacle": {
+          "layouts": 4,
+          "successful_layouts": 3,
+          "success_rate": 0.75,
+          "mean_success_steps": 31.0,
+          "max_success_steps": 31,
+          "failed_layouts": [
+            "course_obstacle_09"
+          ]
+        },
+        "gap": {
+          "layouts": 36,
+          "successful_layouts": 36,
+          "success_rate": 1.0,
+          "mean_success_steps": 32.333333333333336,
+          "max_success_steps": 34,
+          "failed_layouts": []
+        }
+      },
+      "best_validation": {
+        "checkpoint": {
+          "score": [
+            1.0,
+            1.0,
+            -32.333333333333336
+          ],
+          "timesteps": 65536,
+          "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_initialized/checkpoints/best_gap.zip"
+        },
+        "tasks": {
+          "flat": {
+            "layouts": 4,
+            "successful_layouts": 4,
+            "success_rate": 1.0,
+            "mean_success_steps": 18.75,
+            "max_success_steps": 19,
+            "failed_layouts": []
+          },
+          "obstacle": {
+            "layouts": 4,
+            "successful_layouts": 2,
+            "success_rate": 0.5,
+            "mean_success_steps": 31.0,
+            "max_success_steps": 31,
+            "failed_layouts": [
+              "course_obstacle_08",
+              "course_obstacle_09"
+            ]
+          },
+          "gap": {
+            "layouts": 36,
+            "successful_layouts": 36,
+            "success_rate": 1.0,
+            "mean_success_steps": 32.333333333333336,
+            "max_success_steps": 34,
+            "failed_layouts": []
+          }
+        }
+      },
+      "learning_curve": [
+        {
+          "timesteps": 16384,
+          "stage": "gap",
+          "selection_score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ]
+        },
+        {
+          "timesteps": 32768,
+          "stage": "gap",
+          "selection_score": [
+            0.25,
+            0.6062631543345651,
+            -32.333333333333336
+          ]
+        },
+        {
+          "timesteps": 49152,
+          "stage": "gap",
+          "selection_score": [
+            0.5833333333333334,
+            0.7561800103725133,
+            -32.142857142857146
+          ]
+        },
+        {
+          "timesteps": 65536,
+          "stage": "gap",
+          "selection_score": [
+            1.0,
+            1.0,
+            -32.333333333333336
+          ]
+        },
+        {
+          "timesteps": 65536,
+          "stage": "gap",
+          "selection_score": [
+            1.0,
+            1.0,
+            -32.333333333333336
+          ]
+        }
+      ],
+      "gap_validation_diagnostics": {
+        "report": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_initialized/gap_validation_diagnostics.json",
+        "seeds": [
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209
+        ],
+        "protocol_hash": "9888403bfec454d85cb5d5b9d145b19a785b29c0273ffe72685d9b9f90251ffa",
+        "modes": {
+          "deterministic": {
+            "summary": {
+              "agent": "deterministic",
+              "episodes": 360,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.967666666666666,
+              "mean_progress": 1.0,
+              "mean_steps": 32.333333333333336,
+              "mean_coins": 0.0,
+              "mean_success_steps": 32.333333333333336
+            },
+            "layouts": 36,
+            "mean_effective_jumps": 2.0,
+            "mean_landings": 1.0,
+            "landed_after_gap_rate": 1.0,
+            "first_jump_edge_distance_range": [
+              104.59999999999997,
+              213.00000000000006
+            ],
+            "mean_policy_tv_from_initial": 0.34409936873727204,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 6990,
+                "action_counts": {
+                  "6": 870,
+                  "9": 6120
+                },
+                "mean_action_probabilities": [
+                  0.06607937838586422,
+                  0.007378600583493693,
+                  0.01977001010543215,
+                  0.012961698444700069,
+                  0.018193564997774112,
+                  0.009696974904329391,
+                  0.1336062293451743,
+                  0.01901188973525275,
+                  0.003828887145003492,
+                  0.7094727611337097
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 570,
+                "action_counts": {
+                  "6": 210,
+                  "9": 360
+                },
+                "mean_action_probabilities": [
+                  0.11534160904978451,
+                  0.007201362548297958,
+                  0.02538005642494873,
+                  0.012738975573723254,
+                  0.0206175301910231,
+                  0.00991299663866429,
+                  0.3198738709876412,
+                  0.02134636358210915,
+                  0.0029243478723066417,
+                  0.4646628812739724
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 3060,
+                "action_counts": {
+                  "6": 3060
+                },
+                "mean_action_probabilities": [
+                  0.16071783108454124,
+                  0.01733355240567642,
+                  0.050701859279298316,
+                  0.025239613345440698,
+                  0.03959652912967345,
+                  0.0234531453792371,
+                  0.4154588022068435,
+                  0.03844197613059306,
+                  0.00777403695289703,
+                  0.22128264868960662
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 120,
+                "action_counts": {
+                  "9": 120
+                },
+                "mean_action_probabilities": [
+                  0.12400439940392971,
+                  0.013125222409144044,
+                  0.0373725350946188,
+                  0.022312918677926064,
+                  0.032011188101023436,
+                  0.017721470911055803,
+                  0.27373911440372467,
+                  0.033221433870494366,
+                  0.006499817012809217,
+                  0.43999190628528595
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 900,
+                "action_counts": {
+                  "6": 660,
+                  "9": 240
+                },
+                "mean_action_probabilities": [
+                  0.15031386663516363,
+                  0.015607858790705602,
+                  0.04560577472050985,
+                  0.023758109472692013,
+                  0.036662882566452025,
+                  0.021005460806190968,
+                  0.3728433271249135,
+                  0.036515558262666066,
+                  0.007145056361332535,
+                  0.29054211328427
+                ]
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 360,
+              "success_rate": 0.775,
+              "death_rate": 0.225,
+              "truncation_rate": 0.0,
+              "mean_return": 9.813062003151845,
+              "mean_progress": 0.8698090672970358,
+              "mean_steps": 35.983333333333334,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.634408602150536
+            },
+            "layouts": 36,
+            "mean_effective_jumps": 2.8944444444444444,
+            "mean_landings": 2.075,
+            "landed_after_gap_rate": 0.7666666666666667,
+            "first_jump_edge_distance_range": [
+              210.7,
+              607.3
+            ],
+            "mean_policy_tv_from_initial": 0.35170637844369146,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 9988,
+                "action_counts": {
+                  "0": 1200,
+                  "1": 168,
+                  "2": 270,
+                  "3": 66,
+                  "4": 111,
+                  "5": 303,
+                  "6": 1714,
+                  "7": 224,
+                  "8": 88,
+                  "9": 5844
+                },
+                "mean_action_probabilities": [
+                  0.08522259618486115,
+                  0.012391765783295788,
+                  0.031146065937802732,
+                  0.01974692914444515,
+                  0.02750543747015199,
+                  0.016268049718381295,
+                  0.17970008550043576,
+                  0.027476324043660003,
+                  0.006747595769645258,
+                  0.5937951505661584
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 794,
+                "action_counts": {
+                  "0": 54,
+                  "2": 45,
+                  "6": 317,
+                  "7": 24,
+                  "9": 354
+                },
+                "mean_action_probabilities": [
+                  0.10916614053672372,
+                  0.0077474197076330955,
+                  0.026562091557811054,
+                  0.014239346149309494,
+                  0.021687781937908317,
+                  0.010889417373971727,
+                  0.2962561307442128,
+                  0.0225838584577904,
+                  0.003376173015677438,
+                  0.4874916442620664
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 1491,
+                "action_counts": {
+                  "0": 228,
+                  "1": 60,
+                  "2": 18,
+                  "3": 45,
+                  "4": 36,
+                  "5": 42,
+                  "6": 564,
+                  "7": 81,
+                  "9": 417
+                },
+                "mean_action_probabilities": [
+                  0.15518305344241007,
+                  0.017575100337865367,
+                  0.05244377427087943,
+                  0.026273470986597016,
+                  0.040166296597038,
+                  0.024170613643419096,
+                  0.41847494328525703,
+                  0.03823498473830626,
+                  0.00798829153303799,
+                  0.2194894785192651
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 276,
+                "action_counts": {
+                  "0": 24,
+                  "2": 9,
+                  "5": 3,
+                  "6": 117,
+                  "9": 123
+                },
+                "mean_action_probabilities": [
+                  0.11729138449806234,
+                  0.013108852215657902,
+                  0.037998451405893204,
+                  0.021477874520275254,
+                  0.031254837076868054,
+                  0.017624835726683555,
+                  0.2776942676662103,
+                  0.031077778452764385,
+                  0.0062988254851560396,
+                  0.4461728894840116
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 405,
+                "action_counts": {
+                  "0": 39,
+                  "2": 9,
+                  "3": 6,
+                  "5": 3,
+                  "6": 186,
+                  "7": 9,
+                  "9": 153
+                },
+                "mean_action_probabilities": [
+                  0.14652388438030525,
+                  0.015754263889458445,
+                  0.04692828027462518,
+                  0.024274308675969088,
+                  0.03701998808041767,
+                  0.021398824287785424,
+                  0.37869756409415495,
+                  0.036018475117506804,
+                  0.007213539230050864,
+                  0.28617086857557295
+                ]
+              }
+            }
+          },
+          "fixed_observation": {
+            "summary": {
+              "agent": "fixed_observation",
+              "episodes": 360,
+              "success_rate": 0.29444444444444445,
+              "death_rate": 0.7055555555555556,
+              "truncation_rate": 0.0,
+              "mean_return": -1.1563592907360893,
+              "mean_progress": 0.5974275862972266,
+              "mean_steps": 32.38611111111111,
+              "mean_coins": 0.0,
+              "mean_success_steps": 47.424528301886795
+            },
+            "layouts": 36,
+            "mean_effective_jumps": 2.922222222222222,
+            "mean_landings": 2.466666666666667,
+            "landed_after_gap_rate": 0.29444444444444445,
+            "first_jump_edge_distance_range": [
+              178.7,
+              607.3
+            ],
+            "mean_policy_tv_from_initial": 0.0,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 7678,
+                "action_counts": {
+                  "0": 1427,
+                  "1": 162,
+                  "2": 273,
+                  "3": 153,
+                  "4": 172,
+                  "5": 325,
+                  "6": 3419,
+                  "7": 327,
+                  "8": 31,
+                  "9": 1389
+                },
+                "mean_action_probabilities": [
+                  0.16007880704279956,
+                  0.018668383893860864,
+                  0.054594594067752,
+                  0.026994983175360435,
+                  0.04190248848084874,
+                  0.025708821547581803,
+                  0.42380732274608207,
+                  0.039922747662517515,
+                  0.00850782820440132,
+                  0.19981404290856966
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 1059,
+                "action_counts": {
+                  "0": 207,
+                  "1": 30,
+                  "2": 74,
+                  "3": 6,
+                  "4": 54,
+                  "5": 13,
+                  "6": 408,
+                  "7": 48,
+                  "8": 27,
+                  "9": 192
+                },
+                "mean_action_probabilities": [
+                  0.16016301484576254,
+                  0.01869897667505023,
+                  0.05465978273912575,
+                  0.027020504986612272,
+                  0.0419484865451557,
+                  0.025743932683967102,
+                  0.42387205486144514,
+                  0.03996002730386678,
+                  0.008522318352481685,
+                  0.19941092430982418
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 1902,
+                "action_counts": {
+                  "0": 324,
+                  "1": 60,
+                  "2": 63,
+                  "3": 36,
+                  "4": 81,
+                  "5": 63,
+                  "6": 735,
+                  "7": 108,
+                  "8": 9,
+                  "9": 423
+                },
+                "mean_action_probabilities": [
+                  0.16009322645536356,
+                  0.018673532909775383,
+                  0.054605616861807434,
+                  0.026999305622293746,
+                  0.04191027692157764,
+                  0.025714741796490147,
+                  0.4238187757200247,
+                  0.03992905902561705,
+                  0.008510264741368474,
+                  0.1997452204817853
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 432,
+                "action_counts": {
+                  "0": 90,
+                  "2": 9,
+                  "4": 27,
+                  "5": 18,
+                  "6": 183,
+                  "7": 18,
+                  "8": 9,
+                  "9": 78
+                },
+                "mean_action_probabilities": [
+                  0.16008285267485511,
+                  0.0186698332351322,
+                  0.05459769403872391,
+                  0.026996198420723278,
+                  0.0419046782836732,
+                  0.025710487401940756,
+                  0.4238105167945226,
+                  0.03992452221508655,
+                  0.00850851416018688,
+                  0.19979472272098064
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 588,
+                "action_counts": {
+                  "0": 87,
+                  "2": 21,
+                  "4": 36,
+                  "5": 18,
+                  "6": 267,
+                  "7": 36,
+                  "8": 9,
+                  "9": 114
+                },
+                "mean_action_probabilities": [
+                  0.16007837485902163,
+                  0.018668166323736007,
+                  0.054594164942296186,
+                  0.02699481986691149,
+                  0.04190219284928575,
+                  0.025708579116177802,
+                  0.4238072396541128,
+                  0.03992250747978687,
+                  0.008507723615941952,
+                  0.19981625113560228
+                ]
+              }
+            }
+          }
+        }
+      },
+      "gap_ood_diagnostics": {
+        "report": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_initialized/gap_ood_diagnostics.json",
+        "seeds": [
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209
+        ],
+        "protocol_hash": "308a7556a3aa4997ec659b8492409df183c3207dc1ed6604a92b88496f145042",
+        "modes": {
+          "deterministic": {
+            "summary": {
+              "agent": "deterministic",
+              "episodes": 120,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.961666666666668,
+              "mean_progress": 1.0,
+              "mean_steps": 38.333333333333336,
+              "mean_coins": 0.0,
+              "mean_success_steps": 38.333333333333336
+            },
+            "layouts": 12,
+            "mean_effective_jumps": 2.0,
+            "mean_landings": 1.0,
+            "landed_after_gap_rate": 1.0,
+            "first_jump_edge_distance_range": [
+              222.0,
+              450.0
+            ],
+            "mean_policy_tv_from_initial": 0.31627980693576957,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 2330,
+                "action_counts": {
+                  "6": 240,
+                  "9": 2090
+                },
+                "mean_action_probabilities": [
+                  0.05984422732584274,
+                  0.0065099706867926595,
+                  0.01760137328965981,
+                  0.011538537460741039,
+                  0.016240933405129488,
+                  0.00857716052275343,
+                  0.12153352938128771,
+                  0.017022837179736933,
+                  0.003361877214734127,
+                  0.7377695569152996
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 240,
+                "action_counts": {
+                  "6": 120,
+                  "9": 120
+                },
+                "mean_action_probabilities": [
+                  0.1254445600012938,
+                  0.007841252139769495,
+                  0.027855148694167536,
+                  0.013273699635950228,
+                  0.022141419428711135,
+                  0.010699376910148809,
+                  0.3594361711293459,
+                  0.022380151397859056,
+                  0.0030733335782618574,
+                  0.4078548929343621
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 2000,
+                "action_counts": {
+                  "6": 1910,
+                  "9": 90
+                },
+                "mean_action_probabilities": [
+                  0.1573340743780136,
+                  0.015945312292315064,
+                  0.04706230770796537,
+                  0.023655421175062655,
+                  0.03725144105963409,
+                  0.021443357383832337,
+                  0.4007368215918541,
+                  0.036759701082482936,
+                  0.007114105855580419,
+                  0.25269745871424676
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 30,
+                "action_counts": {
+                  "9": 30
+                },
+                "mean_action_probabilities": [
+                  0.137919083237648,
+                  0.011594209199150404,
+                  0.03582846745848656,
+                  0.01920235777894656,
+                  0.02972857467830181,
+                  0.015639351680874825,
+                  0.3383241097132365,
+                  0.03095314900080363,
+                  0.0052120510178307695,
+                  0.37559863924980164
+                ]
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 120,
+              "success_rate": 0.8,
+              "death_rate": 0.2,
+              "truncation_rate": 0.0,
+              "mean_return": 10.581652942597678,
+              "mean_progress": 0.9250389218528686,
+              "mean_steps": 43.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 46.291666666666664
+            },
+            "layouts": 12,
+            "mean_effective_jumps": 3.5083333333333333,
+            "mean_landings": 2.691666666666667,
+            "landed_after_gap_rate": 0.8,
+            "first_jump_edge_distance_range": [
+              688.2,
+              940.3
+            ],
+            "mean_policy_tv_from_initial": 0.36320972652739164,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 4048,
+                "action_counts": {
+                  "0": 478,
+                  "1": 58,
+                  "2": 95,
+                  "3": 41,
+                  "4": 47,
+                  "5": 100,
+                  "6": 695,
+                  "7": 94,
+                  "8": 32,
+                  "9": 2408
+                },
+                "mean_action_probabilities": [
+                  0.08330482799402694,
+                  0.011886887947058913,
+                  0.030022829064555015,
+                  0.01903524861307578,
+                  0.026562698983570415,
+                  0.015595004899289137,
+                  0.17509106051150558,
+                  0.026605499643345156,
+                  0.006436568335610228,
+                  0.605459375594091
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 216,
+                "action_counts": {
+                  "0": 10,
+                  "1": 1,
+                  "2": 11,
+                  "6": 79,
+                  "7": 1,
+                  "9": 114
+                },
+                "mean_action_probabilities": [
+                  0.10522744803758408,
+                  0.006696073075915963,
+                  0.02356501324188516,
+                  0.012594231393584912,
+                  0.019478596363182145,
+                  0.009402138297446072,
+                  0.28499205955476675,
+                  0.020555076719675627,
+                  0.002849796391577305,
+                  0.5146395695154313
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 840,
+                "action_counts": {
+                  "0": 108,
+                  "1": 22,
+                  "2": 22,
+                  "3": 24,
+                  "4": 16,
+                  "5": 16,
+                  "6": 356,
+                  "7": 33,
+                  "9": 243
+                },
+                "mean_action_probabilities": [
+                  0.15480434577912092,
+                  0.016735078079537266,
+                  0.05017608499065751,
+                  0.02507670122597899,
+                  0.038741521027293946,
+                  0.02283504183426322,
+                  0.4133598642335052,
+                  0.03716139912250496,
+                  0.007522804494060221,
+                  0.23358715600555852
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 47,
+                "action_counts": {
+                  "0": 1,
+                  "2": 2,
+                  "6": 12,
+                  "9": 32
+                },
+                "mean_action_probabilities": [
+                  0.07542333648876941,
+                  0.006634756883091115,
+                  0.020991574576560486,
+                  0.013295663144201674,
+                  0.017961441499597216,
+                  0.009298349339316817,
+                  0.18109209391664952,
+                  0.01899759923206999,
+                  0.0032396183740545778,
+                  0.6530655533709424
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 74,
+                "action_counts": {
+                  "0": 6,
+                  "1": 2,
+                  "2": 9,
+                  "4": 1,
+                  "6": 16,
+                  "9": 40
+                },
+                "mean_action_probabilities": [
+                  0.11267745615662755,
+                  0.0099190566059504,
+                  0.032044453621917476,
+                  0.017940806174600445,
+                  0.02607781913232159,
+                  0.0138830001201682,
+                  0.2959344878390029,
+                  0.026630070261858606,
+                  0.0045867783860681025,
+                  0.460306060072538
+                ]
+              }
+            }
+          },
+          "fixed_observation": {
+            "summary": {
+              "agent": "fixed_observation",
+              "episodes": 120,
+              "success_rate": 0.25833333333333336,
+              "death_rate": 0.7416666666666667,
+              "truncation_rate": 0.0,
+              "mean_return": -1.278446462136451,
+              "mean_progress": 0.7196007075727098,
+              "mean_steps": 43.11666666666667,
+              "mean_coins": 0.0,
+              "mean_success_steps": 55.29032258064516
+            },
+            "layouts": 12,
+            "mean_effective_jumps": 3.975,
+            "mean_landings": 3.375,
+            "landed_after_gap_rate": 0.25833333333333336,
+            "first_jump_edge_distance_range": [
+              671.7,
+              940.3
+            ],
+            "mean_policy_tv_from_initial": 0.0,
+            "action_distribution_by_context": {
+              "airborne": {
+                "decisions": 3402,
+                "action_counts": {
+                  "0": 639,
+                  "1": 64,
+                  "2": 133,
+                  "3": 48,
+                  "4": 125,
+                  "5": 138,
+                  "6": 1520,
+                  "7": 143,
+                  "8": 26,
+                  "9": 566
+                },
+                "mean_action_probabilities": [
+                  0.16005943631036082,
+                  0.018660419086199132,
+                  0.05457814408905327,
+                  0.02698858909808244,
+                  0.04189099606098076,
+                  0.025699765900525536,
+                  0.42379603669406524,
+                  0.039913366549264535,
+                  0.00850402685659754,
+                  0.19990919772174204
+                ]
+              },
+              "grounded_beyond_edge": {
+                "decisions": 277,
+                "action_counts": {
+                  "0": 33,
+                  "1": 2,
+                  "2": 35,
+                  "4": 14,
+                  "5": 1,
+                  "6": 139,
+                  "7": 4,
+                  "8": 2,
+                  "9": 47
+                },
+                "mean_action_probabilities": [
+                  0.16020901458142897,
+                  0.018714711641630542,
+                  0.054693860926460273,
+                  0.027033886559549653,
+                  0.041972655224671,
+                  0.025762075517958682,
+                  0.42391115190320067,
+                  0.039979527667433776,
+                  0.00852973978724398,
+                  0.1991933530418451
+                ]
+              },
+              "grounded_far_edge": {
+                "decisions": 1201,
+                "action_counts": {
+                  "0": 214,
+                  "1": 20,
+                  "2": 40,
+                  "3": 15,
+                  "4": 60,
+                  "5": 45,
+                  "6": 492,
+                  "7": 61,
+                  "8": 12,
+                  "9": 242
+                },
+                "mean_action_probabilities": [
+                  0.16006839373377738,
+                  0.018663611872545092,
+                  0.0545849824645289,
+                  0.026991270865615362,
+                  0.04189582861382995,
+                  0.025703437451108806,
+                  0.42380317373140763,
+                  0.03991728213047306,
+                  0.008505537528249991,
+                  0.19986646052304155
+                ]
+              },
+              "grounded_near_edge": {
+                "decisions": 157,
+                "action_counts": {
+                  "0": 12,
+                  "1": 6,
+                  "2": 2,
+                  "3": 3,
+                  "4": 3,
+                  "5": 8,
+                  "6": 63,
+                  "7": 17,
+                  "8": 6,
+                  "9": 37
+                },
+                "mean_action_probabilities": [
+                  0.16001959894872775,
+                  0.018645741436986406,
+                  0.05454698518203322,
+                  0.026976410085987893,
+                  0.041869033294118896,
+                  0.02568294809075298,
+                  0.4237662844217507,
+                  0.03989557281231425,
+                  0.008497070200788747,
+                  0.20010033667467203
+                ]
+              },
+              "grounded_visible_edge": {
+                "decisions": 137,
+                "action_counts": {
+                  "0": 30,
+                  "3": 6,
+                  "5": 10,
+                  "6": 45,
+                  "7": 18,
+                  "8": 2,
+                  "9": 26
+                },
+                "mean_action_probabilities": [
+                  0.16006579212028615,
+                  0.018662746139142636,
+                  0.05458309240367291,
+                  0.02699052444557204,
+                  0.04189448564374534,
+                  0.02570243406850491,
+                  0.42380084456318484,
+                  0.03991619377893253,
+                  0.00850512943889973,
+                  0.19987873548138752
+                ]
+              }
+            }
+          }
+        }
+      },
+      "legacy_gap_validation": {
+        "agent": "deterministic",
+        "episodes": 4,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.975000000000001,
+        "mean_progress": 1.0,
+        "mean_steps": 25.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 25.0
+      }
+    }
+  },
+  "conclusions": [
+    "Initialized final model succeeds on all 36 matched-distribution gap validation layouts and all 12 OOD layouts; cold final model succeeds on 9/36 and 0/12 respectively.",
+    "Initialized stochastic validation success is 77.5%, fixed-initial-observation control 29.44%; this supports a benefit from changing state input, but does not isolate which observation feature is responsible.",
+    "Both final models preserve flat 4/4 but only obstacle 3/4. Initialized best-gap checkpoint preserves obstacle 2/4; task-specific best selection is not a deployment readiness guarantee.",
+    "No mixed promotion: obstacle retention fails. Next round should restore obstacle performance with gap retention and successful-episode speed limits, before multi-seed acceptance.",
+    "These are single-training-seed development results. Initialization has 90,112 prior transitions; the two runs have equal new budgets, not equal total historical compute."
+  ]
+}

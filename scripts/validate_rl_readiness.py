@@ -15,6 +15,7 @@ def main() -> None:
     parser.add_argument("--episodes", type=int, help="override configured episode count")
     parser.add_argument("--max-steps", type=int, help="override per-episode step limit")
     parser.add_argument("--output", type=Path, help="optional JSON report path")
+    parser.add_argument("--manifest", help="course manifest used by all readiness checks")
     parser.add_argument(
         "--courses", action="store_true", help="also check all train/validation courses"
     )
@@ -34,7 +35,7 @@ def main() -> None:
         config = json.load(stream)
     levels = None
     if args.courses:
-        repo = TrainingLevelRepository()
+        repo = TrainingLevelRepository(args.manifest)
         levels = [
             level
             for splits in repo.manifest["splits"].values()
@@ -46,7 +47,10 @@ def main() -> None:
         max_steps_per_episode=args.max_steps or int(config["max_steps_per_episode"]),
         base_seed=int(config["base_seed"]),
         level_ids=levels,
-        environment={"environment_id": args.environment_id},
+        environment={
+            "environment_id": args.environment_id,
+            **({"curriculum_manifest": args.manifest} if args.manifest else {}),
+        },
     )
     rendered = json.dumps(report, ensure_ascii=False, indent=2)
     print(rendered)

@@ -144,3 +144,7 @@ export XDG_CACHE_HOME="$PWD/.venv/cache"
 固定课程的不同环境 seed 不改变几何，也不改变确定性策略轨迹；重复 seed episode 不能算作独立泛化样本。应按布局汇总成功率，并用多个独立训练 seed 检查学习稳定性。
 
 最终 test 仅在方案冻结后使用 `evaluate_ppo --suite test`。本次没有对学习型策略运行最终 test，也没有完成多 seed 正式实验、完整关卡迁移验收或 ONNX 导出。下一步先做受预算限制的 v1 学习实验，分析是否学会释放跳跃，再进行正式对照。
+
+## 第二轮接口更新
+
+诊断、curriculum v2 与独立权重初始化已实现，见 [训练 v2](RL_TRAINING_V2.md)。`--start-stage` 现可用于冷启动、`--init-from` 和严格续训；上文“仅在续训时可用”描述的是上一轮接口。v1 的完整 `--resume` 兼容性检查保持生效。

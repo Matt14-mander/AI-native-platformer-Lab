@@ -18,7 +18,7 @@ def main() -> None:
     parser.add_argument(
         "--task", choices=("flat", "obstacle", "gap", "mixed", "full"), required=True
     )
-    parser.add_argument("--suite", choices=("validation", "test"), default="validation")
+    parser.add_argument("--suite", choices=("validation", "test", "ood"), default="validation")
     parser.add_argument("--seeds", type=int, nargs="+", help="explicit evaluation seeds")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()

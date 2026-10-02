@@ -20,11 +20,16 @@ def main() -> None:
     parser.add_argument(
         "--resume", type=Path, help="v2 checkpoint to continue in a new run directory"
     )
+    parser.add_argument(
+        "--init-from",
+        type=Path,
+        help="initialize actor/critic weights; reset optimizer, timesteps and curriculum",
+    )
     parser.add_argument("--eval-every", type=int, help="evaluation interval in transitions")
     parser.add_argument(
         "--start-stage",
         choices=("flat", "obstacle", "gap", "mixed", "full"),
-        help="explicitly select a stage on resume; skipped stages remain unmastered",
+        help="explicitly select a stage for any run; skipped stages remain unmastered",
     )
     parser.add_argument(
         "--output-dir",
@@ -45,7 +50,11 @@ def main() -> None:
         config["evaluation"]["every_timesteps"] = args.eval_every
     try:
         report = train_ppo(
-            config, args.output_dir, resume=args.resume, start_stage=args.start_stage
+            config,
+            args.output_dir,
+            resume=args.resume,
+            init_from=args.init_from,
+            start_stage=args.start_stage,
         )
     except (ValueError, FileExistsError, FileNotFoundError) as error:
         parser.error(str(error))
