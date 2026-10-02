@@ -8,11 +8,18 @@ from pathlib import Path
 
 from ai_platformer.agents.scripted import SCRIPTED_AGENTS
 from ai_platformer.benchmark import evaluate_scripted_agent
+from ai_platformer.envs.factory import EnvironmentFactory
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--suite", choices=("train", "validation", "unseen"), default="validation")
+    parser.add_argument(
+        "--suite", choices=("train", "validation", "unseen", "test"), default="validation"
+    )
+    parser.add_argument("--config", type=Path, default=Path("config/benchmark_v0.json"))
+    parser.add_argument(
+        "--task", choices=("flat", "obstacle", "gap", "mixed", "full"), default="full"
+    )
     parser.add_argument(
         "--agents",
         nargs="+",
@@ -29,16 +36,31 @@ def main() -> None:
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[1]
-    with (root / "config" / "benchmark_v0.json").open(encoding="utf-8") as stream:
+    path = args.config if args.config.is_absolute() else root / args.config
+    with path.open(encoding="utf-8") as stream:
         config = json.load(stream)
-    seeds = config["suites"][args.suite]
+    suite = "unseen" if args.suite == "test" else args.suite
+    seeds = config["suites"][suite]
+    environment = dict(config.get("environment", {}))
+    environment["environment_id"] = config["environment_id"]
+    environment.setdefault("action_repeat", int(config["action_repeat"]))
+    environment.setdefault("episode_step_limit", 1024)
+    if args.max_steps is not None:
+        environment["episode_step_limit"] = args.max_steps
+    factory = EnvironmentFactory(environment)
+    levels = (
+        [factory.level_id]
+        if args.task == "full"
+        else factory.repository.split(args.task, "test" if suite == "unseen" else suite)
+    )
     results = [
         evaluate_scripted_agent(
             name,
             SCRIPTED_AGENTS[name],
             seeds,
             action_repeat=int(config["action_repeat"]),
-            max_steps=args.max_steps,
+            environment=environment,
+            level_ids=levels,
         ).to_dict()
         for name in args.agents
     ]
@@ -47,6 +69,8 @@ def main() -> None:
         "environment_id": config["environment_id"],
         "suite": args.suite,
         "seeds": seeds,
+        "level_ids": levels,
+        "protocol": factory.protocol(levels),
         "results": results,
     }
     rendered = json.dumps(report, ensure_ascii=False, indent=2)

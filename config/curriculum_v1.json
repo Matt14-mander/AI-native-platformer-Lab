@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "generator_version": 1,
+  "levels": {
+    "course_flat_00": {
+      "task": "flat",
+      "width": 640
+    },
+    "course_flat_01": {
+      "task": "flat",
+      "width": 656
+    },
+    "course_flat_02": {
+      "task": "flat",
+      "width": 672
+    },
+    "course_flat_03": {
+      "task": "flat",
+      "width": 688
+    },
+    "course_flat_04": {
+      "task": "flat",
+      "width": 704
+    },
+    "course_flat_05": {
+      "task": "flat",
+      "width": 720
+    },
+    "course_flat_06": {
+      "task": "flat",
+      "width": 736
+    },
+    "course_flat_07": {
+      "task": "flat",
+      "width": 752
+    },
+    "course_flat_08": {
+      "task": "flat",
+      "width": 768
+    },
+    "course_flat_09": {
+      "task": "flat",
+      "width": 784
+    },
+    "course_flat_10": {
+      "task": "flat",
+      "width": 800
+    },
+    "course_flat_11": {
+      "task": "flat",
+      "width": 816
+    },
+    "course_flat_12": {
+      "task": "flat",
+      "width": 832
+    },
+    "course_flat_13": {
+      "task": "flat",
+      "width": 848
+    },
+    "course_flat_14": {
+      "task": "flat",
+      "width": 864
+    },
+    "course_flat_15": {
+      "task": "flat",
+      "width": 880
+    },
+    "course_obstacle_00": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 310,
+      "obstacle_height": 48
+    },
+    "course_obstacle_01": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 322,
+      "obstacle_height": 64
+    },
+    "course_obstacle_02": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 334,
+      "obstacle_height": 80
+    },
+    "course_obstacle_03": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 346,
+      "obstacle_height": 48
+    },
+    "course_obstacle_04": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 358,
+      "obstacle_height": 64
+    },
+    "course_obstacle_05": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 370,
+      "obstacle_height": 80
+    },
+    "course_obstacle_06": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 382,
+      "obstacle_height": 48
+    },
+    "course_obstacle_07": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 394,
+      "obstacle_height": 64
+    },
+    "course_obstacle_08": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 406,
+      "obstacle_height": 80
+    },
+    "course_obstacle_09": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 418,
+      "obstacle_height": 48
+    },
+    "course_obstacle_10": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 430,
+      "obstacle_height": 64
+    },
+    "course_obstacle_11": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 442,
+      "obstacle_height": 80
+    },
+    "course_obstacle_12": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 454,
+      "obstacle_height": 48
+    },
+    "course_obstacle_13": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 466,
+      "obstacle_height": 64
+    },
+    "course_obstacle_14": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 478,
+      "obstacle_height": 80
+    },
+    "course_obstacle_15": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 490,
+      "obstacle_height": 48
+    },
+    "course_gap_00": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 360,
+      "gap_width": 100
+    },
+    "course_gap_01": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 372,
+      "gap_width": 120
+    },
+    "course_gap_02": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 384,
+      "gap_width": 140
+    },
+    "course_gap_03": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 396,
+      "gap_width": 160
+    },
+    "course_gap_04": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 408,
+      "gap_width": 100
+    },
+    "course_gap_05": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 420,
+      "gap_width": 120
+    },
+    "course_gap_06": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 432,
+      "gap_width": 140
+    },
+    "course_gap_07": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 444,
+      "gap_width": 160
+    },
+    "course_gap_08": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 456,
+      "gap_width": 100
+    },
+    "course_gap_09": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 468,
+      "gap_width": 120
+    },
+    "course_gap_10": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 480,
+      "gap_width": 140
+    },
+    "course_gap_11": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 492,
+      "gap_width": 160
+    },
+    "course_gap_12": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 504,
+      "gap_width": 100
+    },
+    "course_gap_13": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 516,
+      "gap_width": 120
+    },
+    "course_gap_14": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 528,
+      "gap_width": 140
+    },
+    "course_gap_15": {
+      "task": "gap",
+      "width": 1100,
+      "gap_x": 540,
+      "gap_width": 160
+    },
+    "course_mixed_00": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 310,
+      "obstacle_height": 48,
+      "gap_x": 1000,
+      "gap_width": 100
+    },
+    "course_mixed_01": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 322,
+      "obstacle_height": 64,
+      "gap_x": 1012,
+      "gap_width": 120
+    },
+    "course_mixed_02": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 334,
+      "obstacle_height": 80,
+      "gap_x": 1024,
+      "gap_width": 140
+    },
+    "course_mixed_03": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 346,
+      "obstacle_height": 48,
+      "gap_x": 1036,
+      "gap_width": 160
+    },
+    "course_mixed_04": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 358,
+      "obstacle_height": 64,
+      "gap_x": 1048,
+      "gap_width": 100
+    },
+    "course_mixed_05": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 370,
+      "obstacle_height": 80,
+      "gap_x": 1060,
+      "gap_width": 120
+    },
+    "course_mixed_06": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 382,
+      "obstacle_height": 48,
+      "gap_x": 1072,
+      "gap_width": 140
+    },
+    "course_mixed_07": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 394,
+      "obstacle_height": 64,
+      "gap_x": 1084,
+      "gap_width": 160
+    },
+    "course_mixed_08": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 406,
+      "obstacle_height": 80,
+      "gap_x": 1096,
+      "gap_width": 100
+    },
+    "course_mixed_09": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 418,
+      "obstacle_height": 48,
+      "gap_x": 1108,
+      "gap_width": 120
+    },
+    "course_mixed_10": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 430,
+      "obstacle_height": 64,
+      "gap_x": 1120,
+      "gap_width": 140
+    },
+    "course_mixed_11": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 442,
+      "obstacle_height": 80,
+      "gap_x": 1132,
+      "gap_width": 160
+    },
+    "course_mixed_12": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 454,
+      "obstacle_height": 48,
+      "gap_x": 1144,
+      "gap_width": 100
+    },
+    "course_mixed_13": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 466,
+      "obstacle_height": 64,
+      "gap_x": 1156,
+      "gap_width": 120
+    },
+    "course_mixed_14": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 478,
+      "obstacle_height": 80,
+      "gap_x": 1168,
+      "gap_width": 140
+    },
+    "course_mixed_15": {
+      "task": "mixed",
+      "width": 1700,
+      "obstacle_x": 490,
+      "obstacle_height": 48,
+      "gap_x": 1180,
+      "gap_width": 160
+    }
+  },
+  "splits": {
+    "flat": {
+      "train": [
+        "course_flat_00",
+        "course_flat_01",
+        "course_flat_02",
+        "course_flat_03",
+        "course_flat_04",
+        "course_flat_05",
+        "course_flat_06",
+        "course_flat_07"
+      ],
+      "validation": [
+        "course_flat_08",
+        "course_flat_09",
+        "course_flat_10",
+        "course_flat_11"
+      ],
+      "test": [
+        "course_flat_12",
+        "course_flat_13",
+        "course_flat_14",
+        "course_flat_15"
+      ]
+    },
+    "obstacle": {
+      "train": [
+        "course_obstacle_00",
+        "course_obstacle_01",
+        "course_obstacle_02",
+        "course_obstacle_03",
+        "course_obstacle_04",
+        "course_obstacle_05",
+        "course_obstacle_06",
+        "course_obstacle_07"
+      ],
+      "validation": [
+        "course_obstacle_08",
+        "course_obstacle_09",
+        "course_obstacle_10",
+        "course_obstacle_11"
+      ],
+      "test": [
+        "course_obstacle_12",
+        "course_obstacle_13",
+        "course_obstacle_14",
+        "course_obstacle_15"
+      ]
+    },
+    "gap": {
+      "train": [
+        "course_gap_00",
+        "course_gap_01",
+        "course_gap_02",
+        "course_gap_03",
+        "course_gap_04",
+        "course_gap_05",
+        "course_gap_06",
+        "course_gap_07"
+      ],
+      "validation": [
+        "course_gap_08",
+        "course_gap_09",
+        "course_gap_10",
+        "course_gap_11"
+      ],
+      "test": [
+        "course_gap_12",
+        "course_gap_13",
+        "course_gap_14",
+        "course_gap_15"
+      ]
+    },
+    "mixed": {
+      "train": [
+        "course_mixed_00",
+        "course_mixed_01",
+        "course_mixed_02",
+        "course_mixed_03",
+        "course_mixed_04",
+        "course_mixed_05",
+        "course_mixed_06",
+        "course_mixed_07"
+      ],
+      "validation": [
+        "course_mixed_08",
+        "course_mixed_09",
+        "course_mixed_10",
+        "course_mixed_11"
+      ],
+      "test": [
+        "course_mixed_12",
+        "course_mixed_13",
+        "course_mixed_14",
+        "course_mixed_15"
+      ]
+    }
+  }
+}

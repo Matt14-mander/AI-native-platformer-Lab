@@ -1,171 +1,364 @@
-"""Reproducible Stable-Baselines3 PPO training for PlatformerState-v0."""
+"""Reproducible PPO with evaluation, curriculum, checkpoints, and resume."""
 
 from __future__ import annotations
 
+import hashlib
 import json
 import platform
-from dataclasses import asdict, dataclass
+import subprocess
+from copy import deepcopy
 from pathlib import Path
-from statistics import mean
 from typing import Any
 
+import gymnasium
 import numpy as np
 import torch
-from stable_baselines3 import PPO, __version__ as sb3_version
+from stable_baselines3 import PPO
+from stable_baselines3 import __version__ as sb3_version
+from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.common.vec_env import DummyVecEnv
 
+from ai_platformer.benchmark.scripted import evaluate_agent
 from ai_platformer.core import Action
-from ai_platformer.envs import OBSERVATION_SIZE, PlatformerStateEnv
+from ai_platformer.envs.factory import EnvironmentFactory, protocol_hash
+
+from .configuration import resolve_training_config
+from .curriculum import CourseSampler, CurriculumState
 
 
-@dataclass(frozen=True, slots=True)
-class PolicyEpisode:
-    seed: int
-    episode_return: float
-    steps: int
-    progress: float
-    coins_collected: int
-    outcome: str
+class PolicyAgent:
+    def __init__(self, model: PPO):
+        self.model = model
 
+    def reset(self, *, seed: int) -> None:
+        pass
 
-def train_ppo(config: dict[str, Any], output_dir: Path) -> dict[str, Any]:
-    """Train, evaluate, save, and describe one PPO baseline run."""
-
-    seed = int(config["seed"])
-    torch.set_num_threads(int(config.get("torch_threads", 1)))
-    set_random_seed(seed)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    monitor_dir = output_dir / "monitor"
-    monitor_dir.mkdir(exist_ok=True)
-
-    env = _training_env(config, monitor_dir)
-    policy_kwargs = {
-        "activation_fn": torch.nn.ReLU,
-        "net_arch": {
-            "pi": list(config["network"]["policy_layers"]),
-            "vf": list(config["network"]["value_layers"]),
-        },
-    }
-    algorithm = config["algorithm"]
-    model = PPO(
-        "MlpPolicy",
-        env,
-        learning_rate=float(algorithm["learning_rate"]),
-        n_steps=int(algorithm["n_steps"]),
-        batch_size=int(algorithm["batch_size"]),
-        n_epochs=int(algorithm["n_epochs"]),
-        gamma=float(algorithm["gamma"]),
-        gae_lambda=float(algorithm["gae_lambda"]),
-        clip_range=float(algorithm["clip_range"]),
-        ent_coef=float(algorithm["ent_coef"]),
-        vf_coef=float(algorithm["vf_coef"]),
-        policy_kwargs=policy_kwargs,
-        seed=seed,
-        device=str(config.get("device", "cpu")),
-        verbose=int(config.get("verbose", 1)),
-    )
-    try:
-        model.learn(total_timesteps=int(config["total_timesteps"]), progress_bar=False)
-        model_path = output_dir / "model"
-        model.save(model_path)
-        evaluation = evaluate_policy(
-            model,
-            seeds=[int(item) for item in config["evaluation"]["seeds"]],
-            action_repeat=int(config["environment"]["action_repeat"]),
-            episode_step_limit=int(config["environment"]["episode_step_limit"]),
-        )
-    finally:
-        env.close()
-
-    report = {
-        "schema_version": 1,
-        "environment_id": "PlatformerState-v0",
-        "observation_size": OBSERVATION_SIZE,
-        "action_ids": {action.name: int(action) for action in Action},
-        "config": config,
-        "runtime": {
-            "python": platform.python_version(),
-            "stable_baselines3": sb3_version,
-            "torch": torch.__version__,
-            "numpy": np.__version__,
-        },
-        "trained_timesteps": int(model.num_timesteps),
-        "evaluation": evaluation,
-        "artifacts": {
-            "model": str((output_dir / "model.zip").resolve()),
-            "monitor": str(monitor_dir.resolve()),
-        },
-    }
-    (output_dir / "run.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    return report
+    def act(self, observation: np.ndarray) -> int:
+        action, _ = self.model.predict(observation, deterministic=True)
+        return int(action)
 
 
 def evaluate_policy(
     model: PPO,
     *,
     seeds: list[int],
-    action_repeat: int,
-    episode_step_limit: int,
+    action_repeat: int = 4,
+    episode_step_limit: int | None = 1024,
+    environment: dict | None = None,
+    level_ids: list[str] | None = None,
+    trace_path: Path | None = None,
 ) -> dict[str, Any]:
-    episodes: list[PolicyEpisode] = []
-    env = PlatformerStateEnv(
-        action_repeat=action_repeat,
-        episode_step_limit=episode_step_limit,
+    config = dict(environment or {})
+    config.setdefault("action_repeat", action_repeat)
+    config.setdefault("episode_step_limit", episode_step_limit)
+    return evaluate_agent(
+        "ppo",
+        lambda: PolicyAgent(model),
+        seeds,
+        factory=EnvironmentFactory(config),
+        level_ids=level_ids,
+        trace_path=trace_path,
+    ).to_dict()
+
+
+def write_json(path: Path, data: dict) -> None:
+    """Keep reports readable even when a later evaluation/rollout fails."""
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def training_signature(config: dict, factory: EnvironmentFactory, stages: list[dict]) -> dict:
+    levels = sorted(
+        {level for stage in stages for level in stage["train_levels"] + stage["validation_levels"]}
     )
-    try:
-        for seed in seeds:
-            observation, info = env.reset(seed=seed)
-            total_reward = 0.0
-            terminated = truncated = False
-            steps = 0
-            while not (terminated or truncated):
-                action, _ = model.predict(observation, deterministic=True)
-                observation, reward, terminated, truncated, info = env.step(int(action))
-                total_reward += reward
-                steps += 1
-            episodes.append(
-                PolicyEpisode(
-                    seed=seed,
-                    episode_return=total_reward,
-                    steps=steps,
-                    progress=float(info["progress"]),
-                    coins_collected=int(info["coins_collected"]),
-                    outcome=str(info.get("outcome", "unknown")),
-                )
-            )
-    finally:
-        env.close()
+    # Runtime budgets/intervals may change on resume; protocols and selection rules may not.
+    stage_contracts = [
+        {key: value for key, value in stage.items() if key != "max_timesteps"} for stage in stages
+    ]
     return {
-        "summary": {
-            "episodes": len(episodes),
-            "success_rate": sum(item.outcome == "success" for item in episodes)
-            / len(episodes),
-            "mean_return": mean(item.episode_return for item in episodes),
-            "mean_progress": mean(item.progress for item in episodes),
-            "mean_steps": mean(item.steps for item in episodes),
-        },
-        "episodes": [asdict(episode) for episode in episodes],
+        "protocol": factory.protocol(levels),
+        "seed": config["seed"],
+        "train_seeds": config["train_seeds"],
+        "validation_seeds": config["evaluation"]["seeds"],
+        "network": config["network"],
+        "algorithm": config["algorithm"],
+        "n_envs": config["n_envs"],
+        "stages": stage_contracts,
+        "replay_fraction": config["curriculum"]["replay_fraction"],
+        "required_evaluations": config["curriculum"]["required_evaluations"],
+        "action_ids": {action.name: int(action) for action in Action},
     }
 
 
-def _training_env(config: dict[str, Any], monitor_dir: Path) -> DummyVecEnv:
-    seed = int(config["seed"])
-    environment = config["environment"]
+def checkpoint_metadata(path: Path) -> dict:
+    data = json.loads(path.with_suffix(".json").read_text(encoding="utf-8"))
+    if data.get("schema_version") != 2:
+        raise ValueError("resume requires a v2 checkpoint sidecar, not an unversioned legacy model")
+    if data["signature_hash"] != protocol_hash(data["signature"]):
+        raise ValueError("checkpoint protocol metadata is inconsistent")
+    if (
+        "model_sha256" in data
+        and data["model_sha256"] != hashlib.sha256(path.read_bytes()).hexdigest()
+    ):
+        raise ValueError("checkpoint model does not match its sidecar")
+    return data
 
-    def factory(rank: int):
-        def make():
-            env = PlatformerStateEnv(
-                seed=seed + rank,
-                action_repeat=int(environment["action_repeat"]),
-                episode_step_limit=int(environment["episode_step_limit"]),
+
+class TrainingCallback(BaseCallback):
+    def __init__(self, config, factory, samplers, output_dir, state, signature):
+        super().__init__()
+        self.config = config
+        self.factory = factory
+        self.samplers = samplers
+        self.output_dir = output_dir
+        self.state = state
+        self.signature = signature
+        self.last_eval = -1
+        self.next_eval = 0
+        self.next_checkpoint = 0
+        self.evaluations = []
+
+    def _on_training_start(self) -> None:
+        self.next_eval = self.num_timesteps + self.config["evaluation"]["every_timesteps"]
+        self.next_checkpoint = self.num_timesteps + self.config["checkpoint_every_timesteps"]
+        for sampler in self.samplers:
+            sampler.stage_index = self.state.data["stage_index"]
+
+    def save(self, stem: Path) -> None:
+        self.model.save(stem)
+        write_json(
+            stem.with_suffix(".json"),
+            {
+                "schema_version": 2,
+                "saved_timesteps": int(self.model.num_timesteps),
+                "model_sha256": hashlib.sha256(stem.with_suffix(".zip").read_bytes()).hexdigest(),
+                "signature": self.signature,
+                "signature_hash": protocol_hash(self.signature),
+                "config": self.config,
+                "curriculum_state": deepcopy(self.state.data),
+                "resume_semantics": "optimizer and timestep continuation; environment/RNG reset",
+            },
+        )
+
+    def evaluate(self, *, allow_promotion: bool) -> dict:
+        index = self.state.data["stage_index"]
+        stage = self.state.stage
+        levels = [
+            level for item in self.state.stages[: index + 1] for level in item["validation_levels"]
+        ]
+        report = evaluate_policy(
+            self.model,
+            seeds=self.config["evaluation"]["seeds"],
+            environment=self.config["environment"],
+            level_ids=levels,
+            trace_path=self.output_dir / "evaluation" / f"failure_{self.num_timesteps}.json",
+        )
+        current = [
+            item for item in report["episodes"] if item["level_id"] in stage["validation_levels"]
+        ]
+        score = [
+            sum(item["outcome"] == "success" for item in current) / len(current),
+            sum(item["progress"] for item in current) / len(current),
+        ]
+        entry = {
+            "timesteps": self.num_timesteps,
+            "stage": stage["task"],
+            "selection_score": score,
+            "evaluation": report,
+        }
+        self.evaluations.append(entry)
+        write_json(self.output_dir / "evaluation" / f"step_{self.num_timesteps}.json", entry)
+        best = self.state.data["best"].get(stage["task"])
+        if best is None or tuple(score) > tuple(best["score"]):
+            stem = self.output_dir / "checkpoints" / f"best_{stage['task']}"
+            self.state.data["best"][stage["task"]] = {
+                "score": score,
+                "timesteps": self.num_timesteps,
+                "model": str(stem.with_suffix(".zip").resolve()),
+            }
+            self.save(stem)
+        self.logger.record("validation/success_rate", score[0])
+        self.logger.record("validation/mean_progress", score[1])
+        self.logger.dump(self.num_timesteps)
+        self.last_eval = self.num_timesteps
+        if allow_promotion and self.state.observe(report, self.num_timesteps):
+            for sampler in self.samplers:
+                sampler.stage_index = self.state.data["stage_index"]
+            self.save(self.output_dir / "checkpoints" / f"stage_{self.num_timesteps}")
+        return report
+
+    def _on_step(self) -> bool:
+        stage = self.state.stage
+        budget_expired = stage["success_threshold"] is not None and (
+            self.num_timesteps - self.state.data["stage_start"] >= stage["max_timesteps"]
+        )
+        if self.num_timesteps >= self.next_eval or budget_expired:
+            self.evaluate(allow_promotion=True)
+            self.next_eval = self.num_timesteps + self.config["evaluation"]["every_timesteps"]
+            if self.state.data["status"] == "completed":
+                return False
+            # Promotion starts a new budget, so recheck after the evaluation decision.
+            stage = self.state.stage
+            if (
+                stage["success_threshold"] is not None
+                and self.num_timesteps - self.state.data["stage_start"] >= stage["max_timesteps"]
+            ):
+                self.state.data["status"] = "budget_exhausted"
+                self.save(self.output_dir / "checkpoints" / f"budget_{self.num_timesteps}")
+                return False
+        if self.num_timesteps >= self.next_checkpoint:
+            self.save(self.output_dir / "checkpoints" / f"step_{self.num_timesteps}")
+            self.next_checkpoint = self.num_timesteps + self.config["checkpoint_every_timesteps"]
+        return True
+
+
+def train_ppo(config: dict[str, Any], output_dir: Path, *, resume: Path | None = None) -> dict:
+    """Train additional transitions; refuse output overwrites and incompatible resume."""
+    config, factory, stages = resolve_training_config(config)
+    signature = training_signature(config, factory, stages)
+    saved = None
+    if resume is not None:
+        resume = resume.with_suffix(".zip")
+        saved = checkpoint_metadata(resume)
+        if saved["signature_hash"] != protocol_hash(signature):
+            raise ValueError(
+                "checkpoint is incompatible with environment, content, seed pools or PPO config"
             )
-            return Monitor(env, filename=str(monitor_dir / f"env_{rank}"))
+        if saved["curriculum_state"]["status"] == "completed":
+            raise ValueError("curriculum already completed; evaluate its checkpoints instead")
+    if output_dir.exists() and any(output_dir.iterdir()):
+        raise FileExistsError("output directory is not empty; choose a new run directory")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for name in ("monitor", "checkpoints", "evaluation"):
+        (output_dir / name).mkdir()
+    write_json(output_dir / "config.json", config)
+    write_json(output_dir / "protocol.json", signature["protocol"])
+    state = CurriculumState(
+        stages,
+        required_evaluations=config["curriculum"]["required_evaluations"],
+        saved=deepcopy(saved["curriculum_state"]) if saved else None,
+    )
+    torch.set_num_threads(config["torch_threads"])
+    set_random_seed(config["seed"])
+    samplers = []
+
+    def make_worker(rank):
+        def make():
+            stage = stages[state.data["stage_index"]]
+            sampler = CourseSampler(
+                factory.make(level_id=stage["train_levels"][0]),
+                stages=stages,
+                seeds=config["train_seeds"],
+                rng_seed=config["seed"] + rank,
+                replay_fraction=config["curriculum"]["replay_fraction"],
+            )
+            sampler.stage_index = state.data["stage_index"]
+            samplers.append(sampler)
+            return Monitor(
+                sampler,
+                filename=str(output_dir / "monitor" / f"env_{rank}"),
+                info_keywords=("level_id", "seed", "progress", "outcome"),
+            )
 
         return make
 
-    return DummyVecEnv([factory(rank) for rank in range(int(config["n_envs"]))])
+    env = DummyVecEnv([make_worker(rank) for rank in range(config["n_envs"])])
+    try:
+        if resume is not None:
+            model = PPO.load(resume, env=env, device=config.get("device", "cpu"))
+            if model.num_timesteps != saved["saved_timesteps"]:
+                raise ValueError("checkpoint timestep differs from its sidecar")
+        else:
+            model = PPO(
+                "MlpPolicy",
+                env,
+                **config["algorithm"],
+                policy_kwargs={
+                    "activation_fn": torch.nn.ReLU,
+                    "net_arch": {
+                        "pi": config["network"]["policy_layers"],
+                        "vf": config["network"]["value_layers"],
+                    },
+                },
+                seed=config["seed"],
+                device=config.get("device", "cpu"),
+                verbose=config.get("verbose", 1),
+            )
+        initial_timesteps = int(model.num_timesteps)
+        if state.stage["success_threshold"] is None:
+            state.data["stage_start"] = initial_timesteps
+        callback = TrainingCallback(config, factory, samplers, output_dir, state, signature)
+        interrupted = False
+        try:
+            model.learn(
+                total_timesteps=config["total_timesteps"],
+                callback=callback,
+                reset_num_timesteps=resume is None,
+                progress_bar=False,
+            )
+        except KeyboardInterrupt:
+            interrupted = True
+            state.data["status"] = "interrupted"
+        if state.data["status"] == "training":
+            state.data["status"] = (
+                "timesteps_limit" if state.stage["success_threshold"] else "finished"
+            )
+        # Evaluate latest parameters after the final optimization (callbacks run during collection).
+        evaluation = callback.evaluate(allow_promotion=False)
+        callback.save(output_dir / "model")
+        try:
+            revision = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"],
+                cwd=Path(__file__).resolve().parents[3],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            ).strip()
+            dirty = bool(
+                subprocess.check_output(
+                    ["git", "status", "--porcelain"],
+                    cwd=Path(__file__).resolve().parents[3],
+                    text=True,
+                    stderr=subprocess.DEVNULL,
+                ).strip()
+            )
+        except (OSError, subprocess.CalledProcessError):
+            revision, dirty = None, None
+        report = {
+            "schema_version": 2,
+            "environment_id": factory.environment_id,
+            "config": config,
+            "signature_hash": protocol_hash(signature),
+            "protocol": signature["protocol"],
+            "action_ids": signature["action_ids"],
+            "observation_size": signature["protocol"]["observation_size"],
+            "runtime": {
+                "python": platform.python_version(),
+                "stable_baselines3": sb3_version,
+                "torch": torch.__version__,
+                "numpy": np.__version__,
+                "gymnasium": gymnasium.__version__,
+                "git_revision": revision,
+                "git_dirty": dirty,
+            },
+            "initial_timesteps": initial_timesteps,
+            "trained_timesteps": int(model.num_timesteps),
+            "added_timesteps": int(model.num_timesteps) - initial_timesteps,
+            "resumed_from": str(resume.resolve()) if resume else None,
+            "curriculum_state": state.data,
+            "evaluation": evaluation,
+            "evaluation_history": callback.evaluations,
+            "artifacts": {
+                "model": str((output_dir / "model.zip").resolve()),
+                "monitor": str((output_dir / "monitor").resolve()),
+                "checkpoints": str((output_dir / "checkpoints").resolve()),
+            },
+        }
+        write_json(output_dir / "run.json", report)
+        if interrupted:
+            print("Training interrupted; final checkpoint and report saved.")
+        return report
+    finally:
+        env.close()

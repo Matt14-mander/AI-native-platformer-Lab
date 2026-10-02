@@ -81,7 +81,8 @@
 
 - [x] 固定训练、验证和未见关卡 seed；
 - [x] 训练首个 100k-step MLP PPO 状态基线；
-- [ ] 建立 curriculum：平地 → 缺口 → 障碍 → 敌人；
+- [x] 实现平地 → 单障碍 → 单缺口 → 组合 → 完整关卡课程训练设施；
+- [ ] 完成 curriculum 的多训练 seed 性能验收与完整关卡迁移；
 - [x] 保存配置、随机种子、checkpoint、Monitor 日志和评估结果；
 - [x] 首版指标包含成功率、进度、episode return、步数和金币；
 - [ ] 建立回归阈值，防止引擎改动悄悄破坏策略。
@@ -131,7 +132,7 @@
 
 ## 下一迭代建议
 
-PPO v0 已完成但只达到 move-right 水平。下一迭代先恢复本机训练环境、统一评估协议，再实现平地、单障碍和单缺口训练关卡，补齐定期评估、best-model checkpoint 与续训后开展 curriculum 和多 seed 正式实验。具体顺序及验收标准见 [强化学习训练开发计划](RL_TRAINING_PLAN.md)。
+2026-10-02 更新：本机环境、统一评估、课程内容、checkpoint/续训与晋级状态机已实现，并新增暴露 jump-held 的 `PlatformerState-v1`。下一迭代先稳定通过单障碍，再开展 gap/mixed/full 迁移和正式多 seed 验收；具体门槛见 [开发计划](RL_TRAINING_PLAN.md)，当前实现与实验记录见 [实现与使用](RL_TRAINING_V1.md)。
 
 Gymnasium 与 PPO 已接入；人工游玩验收仍需补齐。Jev 与 LLM 按后续阶段推进，不继续扩展 legacy `Player` 的独立物理逻辑。
 

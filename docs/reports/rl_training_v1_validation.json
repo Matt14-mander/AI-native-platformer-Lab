@@ -1,0 +1,491 @@
+{
+  "recorded_date": "2026-10-02",
+  "tests": {
+    "executed": 42,
+    "passed": 42,
+    "skipped": 0
+  },
+  "scope": "Development checks with one PPO training seed; no learned-policy final test or formal multi-seed acceptance.",
+  "full_readiness": {
+    "passed": true,
+    "sb3_checker": {
+      "passed": true,
+      "version": "2.4.1"
+    },
+    "stability": {
+      "episodes": 1000,
+      "transitions": 255418,
+      "max_steps_per_episode": 256,
+      "base_seed": 20260923,
+      "outcomes": {
+        "death": 11,
+        "time_limit": 989
+      },
+      "min_reward": -10.001627990430622,
+      "max_reward": 1.018019138755981
+    },
+    "reward_audit": {
+      "passed": true,
+      "noop_return": -0.25600000000000017,
+      "jump_in_place_return": -0.25600000000000017,
+      "loop_return": 0.6399999999999995,
+      "loop_progress_reward": 3.122502256758253e-17,
+      "expected_loop_progress_reward": 0.0,
+      "duplicate_collectibles": [],
+      "death_return": -5.277665071770342,
+      "success_return": 15.757999999999987,
+      "checks": {
+        "noop_cannot_profit": true,
+        "jump_in_place_cannot_profit": true,
+        "progress_is_path_independent": true,
+        "coins_are_one_shot": true,
+        "death_is_penalized": true,
+        "success_is_rewarded": true
+      }
+    }
+  },
+  "v1_course_readiness": {
+    "passed": true,
+    "sb3_checker": {
+      "passed": true,
+      "version": "2.4.1"
+    },
+    "stability": {
+      "episodes": 1000,
+      "transitions": 233282,
+      "max_steps_per_episode": 256,
+      "base_seed": 20260923,
+      "outcomes": {
+        "death": 122,
+        "success": 90,
+        "time_limit": 788
+      },
+      "min_reward": -10.02647268907563,
+      "max_reward": 10.180654676258996
+    },
+    "audited_layouts": 48,
+    "all_course_checks_passed": true,
+    "protocol": {
+      "environment_id": "PlatformerState-v1",
+      "action_version": 1,
+      "observation_version": 1,
+      "reward_version": 1,
+      "observation_size": 15,
+      "observation_indices": {
+        "PLAYER_X": 0,
+        "PLAYER_Y": 1,
+        "VELOCITY_X": 2,
+        "VELOCITY_Y": 3,
+        "GROUNDED": 4,
+        "FACING": 5,
+        "PROGRESS": 6,
+        "GROUND_EDGE_DISTANCE": 7,
+        "OBSTACLE_DISTANCE": 8,
+        "OBSTACLE_HEIGHT": 9,
+        "COIN_DELTA_X": 10,
+        "COIN_DELTA_Y": 11,
+        "COIN_RATIO": 12,
+        "REMAINING_TIME": 13,
+        "JUMP_HELD": 14
+      },
+      "action_repeat": 4,
+      "episode_step_limit": 256,
+      "sensor_range": 240.0,
+      "physics": {
+        "player_width": 24.0,
+        "player_height": 32.0,
+        "walk_acceleration": 0.15,
+        "run_acceleration": 0.3,
+        "turn_acceleration": 0.35,
+        "max_walk_speed": 6.0,
+        "max_run_speed": 12.0,
+        "jump_velocity": -10.5,
+        "rising_gravity": 0.3,
+        "falling_gravity": 1.0,
+        "max_fall_speed": 11.0,
+        "max_episode_steps": 36000
+      },
+      "reward": {
+        "progress_scale": 5.0,
+        "coin_reward": 0.5,
+        "success_reward": 10.0,
+        "death_penalty": -10.0,
+        "time_penalty": -0.001
+      },
+      "levels": {
+        "course_flat_00": "ba33b44357bc74b9942066f5e220b938799dba2ed92df05a57bd81780cb29594",
+        "course_flat_01": "c363b70da49f9f5388b28c564f603d69f4c5e79508cca11cfcdf44aaf9b40148",
+        "course_flat_02": "a0a75b38137b5357eb7d38cee1c4ceaebc190a3b40797676dbe28b800fbd087d",
+        "course_flat_03": "b2f0c2aa7c6f5f8100960d0f412dbc1556148b404fa3337cda78d89c6d2cba5f",
+        "course_flat_04": "6d47b2d22ad5503139e923d0a0108f7c101691602e728e3aba25f1d6bb889c78",
+        "course_flat_05": "8ce6e1b7ea40238faa30713e133f29059d5605c407c74ee51488c026b07ede21",
+        "course_flat_06": "9fe04aba1647b32204bfc39a0e76ede621e60ca095e968a88b598db863805381",
+        "course_flat_07": "301489fce80cb1b30384a39b09ae1f3081d6d3a5d182caa07ac151492713d6e5",
+        "course_flat_08": "96d1d64a1daecb182848482197d210097778cbcc6b26fc19cd6f884f58b47709",
+        "course_flat_09": "cea2ce9f9bc099832b65ceaeba72ad3c97e58d96c7b3b83a79d7db69a0e0d949",
+        "course_flat_10": "65ad03e106b050a6e01c53398cc32845d57b1001d15e141718bdca9b269abbda",
+        "course_flat_11": "888a7c28bc792a53343fa355f7d591f2f4a2a6227f24cb26cb1b5de75566c3d5",
+        "course_gap_00": "c546fb6211e41f1fa766085b7f71c2dc51504c1161ceea973022c542ed1a705d",
+        "course_gap_01": "5ca3375243b0734ac98c7ffe2435364fb5fad05e0e87fed1838a994980e0047a",
+        "course_gap_02": "e634268bf792cc688cf2b76852e108da91fe0f736aacba12e2a0b342225b770e",
+        "course_gap_03": "be1bf907ab1a7ba7776f082f6b53ced3c96e80455c4d72d836a09e96e0c40de1",
+        "course_gap_04": "2029ea1b7ad071b8cf73eeb524d4f157ef4732475255ee7fd82e351b95554b25",
+        "course_gap_05": "445417d47e4f31537b1affdfd6cb4b8d47624dc2b14af389bc8eac630e78920e",
+        "course_gap_06": "51738b5405ca20b1b589afbf359b13dccfddbe6c18867ecf29e9e8655722418a",
+        "course_gap_07": "7217339dc99f6ec5c136ff694cfe61ffaa4272290674cf1de5c90d38400e8657",
+        "course_gap_08": "0d0be2a70e4b0da3140e347654c6057c75c0f45ace0fea16c155983807899ad8",
+        "course_gap_09": "b6326817b383defdcbee0bc3e2a230ee38b144e9df71408eefeffc929cd294ac",
+        "course_gap_10": "c40d841a5ad077b6f11e1a63eef9f4e78ead890856e96ebf06ae5382497c0861",
+        "course_gap_11": "ff02e91069d3ad26071545b4280444ccbde80c769554b4730fce03660caf0264",
+        "course_mixed_00": "bf1903871bbb45cffee27194a85db1bf37f09f356e9c32b2bbb349a7d63c1031",
+        "course_mixed_01": "1035d2066aedf6811f9b9a6bb5263d5b73203f89812e5d9a5ef7f3b9022dec6f",
+        "course_mixed_02": "f75acb07ba9e34688a24efe6370a1ba0ef06d00d953cadf42dec7bba7d8f7213",
+        "course_mixed_03": "2614560abf87ecb19a17e4c4522ecacc75a28190521602d3d923c6e91c7bb9b6",
+        "course_mixed_04": "ed03c103fce0c3204c1cf9a3f0525ca03504579b8a3d5dda8760b9ca9683d774",
+        "course_mixed_05": "a5766d986ee68b8470e2cd8aa211af136c07909ee12038f4527aadb353fef304",
+        "course_mixed_06": "e9f42e2338342a688375ea4152354c55f859779d05b9c32aeb992b43300ee397",
+        "course_mixed_07": "fdd0fd5e48368857fb174c8e25c40a71c1c524d904207c96469b071641ec8045",
+        "course_mixed_08": "56534c5d3dc8eb394f985d7fcedc5693d84e30869aa6800e8fcf4f05edb66f3b",
+        "course_mixed_09": "56b58b45f2d0e96707c852aac337ef4c0a961ca39c674194afc0c46f2a7be67d",
+        "course_mixed_10": "556847cee4be2e6937a1562a604626302c6f09897058b40f6b67af3ac4a8e29d",
+        "course_mixed_11": "ad937415360e16d8f102998eae865cdab701a5f73a9b9fd234bf3f0504632973",
+        "course_obstacle_00": "79eb6a99e1a53773f8ae63e8cd91246d369961991a9fd9c8e5f391305eabf370",
+        "course_obstacle_01": "7721935706ca8e682687cfe0bf783dd4a1b9548fe78bef9a8b4d3b2825eb8a5a",
+        "course_obstacle_02": "fb161bba53d1006c8448b503a15277af30cb926ec1825637963201bb63baba01",
+        "course_obstacle_03": "26faab0f6931aaf4d9a2d3e4f715b12a3914ac373d18f36917d632ea458ae40d",
+        "course_obstacle_04": "193e262c26963019ce030f29c550e2ec44d6c5d4e2e3ba0b39796fbd9d2a1f43",
+        "course_obstacle_05": "a19bc358930425eeac2efc787870034a3a092043fa8cc9cb10b6c8237076d1fe",
+        "course_obstacle_06": "11779593ac71cc99dccae5ccd2bd5c43f56a72cea48303ef33c549baa9dc706e",
+        "course_obstacle_07": "a2f5d647cd89cd7e1b6e15c7d2dba607309726d3d13eda4baee2971c80befbaa",
+        "course_obstacle_08": "68fa92ad8a440ea6ecff98c3d65783f8b3179ff74240e9b3c72baf3fb507428d",
+        "course_obstacle_09": "bad567230c2c37f4f5c773565ea331e65f5c0ac3c93f71759656117928a53a08",
+        "course_obstacle_10": "9d0913c6d970ae1cd18abceb2c6a9de75c1f75305f277122fa13257cfd4df617",
+        "course_obstacle_11": "a6f73cf5e0e989ab6bd3630e5e3f625d4b307afce89d8ee12db71fe96dd62b16"
+      },
+      "curriculum_generator_version": 1,
+      "curriculum_manifest_hash": "457ff0d381258bb5f525ef24359b5c023760a8d2d003bb6dba1d8580d44576c5"
+    }
+  },
+  "v1_runs": [
+    {
+      "environment_id": "PlatformerState-v1",
+      "initial_timesteps": 0,
+      "trained_timesteps": 4096,
+      "added_timesteps": 4096,
+      "runtime": {
+        "python": "3.12.14",
+        "stable_baselines3": "2.4.1",
+        "torch": "2.2.2",
+        "numpy": "1.26.4",
+        "gymnasium": "1.0.0",
+        "git_revision": "4f8e1c6f216179ac2a39f6cc3925f1739edb72ae",
+        "git_dirty": true
+      },
+      "signature_hash": "8429a1217b2e9d738d4431737e25bc04d4c5a0d0803c6bcf03fc75398cd4b82e",
+      "curriculum_state": {
+        "stage_index": 1,
+        "stage_start": 3072,
+        "consecutive_passes": 0,
+        "status": "timesteps_limit",
+        "history": [
+          {
+            "task": "flat",
+            "outcome": "mastered",
+            "start": 0,
+            "end": 3072
+          }
+        ],
+        "best": {
+          "flat": {
+            "score": [
+              1.0,
+              1.0
+            ],
+            "timesteps": 2048,
+            "model": "runs/ppo_state_v1_smoke/checkpoints/best_flat.zip"
+          },
+          "obstacle": {
+            "score": [
+              0.75,
+              0.8471638655462185
+            ],
+            "timesteps": 4096,
+            "model": "runs/ppo_state_v1_smoke/checkpoints/best_obstacle.zip"
+          }
+        }
+      },
+      "evaluation": {
+        "summary": {
+          "agent": "ppo",
+          "episodes": 32,
+          "success_rate": 0.5,
+          "death_rate": 0.0,
+          "truncation_rate": 0.5,
+          "mean_return": 7.898369747899206,
+          "mean_progress": 0.6848739495798319,
+          "mean_steps": 526.0,
+          "mean_coins": 0.0,
+          "mean_success_steps": 28.0
+        },
+        "by_level": {
+          "course_flat_08": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.973,
+            "mean_progress": 1.0,
+            "mean_steps": 27.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 27.0
+          },
+          "course_flat_09": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.972000000000001,
+            "mean_progress": 1.0,
+            "mean_steps": 28.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 28.0
+          },
+          "course_flat_10": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.972000000000001,
+            "mean_progress": 1.0,
+            "mean_steps": 28.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 28.0
+          },
+          "course_flat_11": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.971,
+            "mean_progress": 1.0,
+            "mean_steps": 29.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 29.0
+          },
+          "course_obstacle_08": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 0.0,
+            "death_rate": 0.0,
+            "truncation_rate": 1.0,
+            "mean_return": 0.7302016806723501,
+            "mean_progress": 0.35084033613445376,
+            "mean_steps": 1024.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": null
+          },
+          "course_obstacle_09": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 0.0,
+            "death_rate": 0.0,
+            "truncation_rate": 1.0,
+            "mean_return": 0.7932268907563907,
+            "mean_progress": 0.3634453781512605,
+            "mean_steps": 1024.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": null
+          },
+          "course_obstacle_10": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 0.0,
+            "death_rate": 0.0,
+            "truncation_rate": 1.0,
+            "mean_return": 0.8562521008404314,
+            "mean_progress": 0.3760504201680672,
+            "mean_steps": 1024.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": null
+          },
+          "course_obstacle_11": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 0.0,
+            "death_rate": 0.0,
+            "truncation_rate": 1.0,
+            "mean_return": 0.919277310924472,
+            "mean_progress": 0.38865546218487396,
+            "mean_steps": 1024.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": null
+          }
+        }
+      }
+    },
+    {
+      "environment_id": "PlatformerState-v1",
+      "initial_timesteps": 4096,
+      "trained_timesteps": 8192,
+      "added_timesteps": 4096,
+      "runtime": {
+        "python": "3.12.14",
+        "stable_baselines3": "2.4.1",
+        "torch": "2.2.2",
+        "numpy": "1.26.4",
+        "gymnasium": "1.0.0",
+        "git_revision": "4f8e1c6f216179ac2a39f6cc3925f1739edb72ae",
+        "git_dirty": true
+      },
+      "signature_hash": "8429a1217b2e9d738d4431737e25bc04d4c5a0d0803c6bcf03fc75398cd4b82e",
+      "curriculum_state": {
+        "stage_index": 1,
+        "stage_start": 3072,
+        "consecutive_passes": 0,
+        "status": "timesteps_limit",
+        "history": [
+          {
+            "task": "flat",
+            "outcome": "mastered",
+            "start": 0,
+            "end": 3072
+          }
+        ],
+        "best": {
+          "flat": {
+            "score": [
+              1.0,
+              1.0
+            ],
+            "timesteps": 2048,
+            "model": "runs/ppo_state_v1_smoke/checkpoints/best_flat.zip"
+          },
+          "obstacle": {
+            "score": [
+              0.75,
+              0.8471638655462185
+            ],
+            "timesteps": 4096,
+            "model": "runs/ppo_state_v1_smoke/checkpoints/best_obstacle.zip"
+          }
+        }
+      },
+      "evaluation": {
+        "summary": {
+          "agent": "ppo",
+          "episodes": 32,
+          "success_rate": 0.875,
+          "death_rate": 0.0,
+          "truncation_rate": 0.125,
+          "mean_return": 13.22115966386556,
+          "mean_progress": 0.9235819327731093,
+          "mean_steps": 146.75,
+          "mean_coins": 0.0,
+          "mean_success_steps": 21.428571428571427
+        },
+        "by_level": {
+          "course_flat_08": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.982,
+            "mean_progress": 1.0,
+            "mean_steps": 18.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 18.0
+          },
+          "course_flat_09": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.981,
+            "mean_progress": 1.0,
+            "mean_steps": 19.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 19.0
+          },
+          "course_flat_10": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.981,
+            "mean_progress": 1.0,
+            "mean_steps": 19.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 19.0
+          },
+          "course_flat_11": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.981,
+            "mean_progress": 1.0,
+            "mean_steps": 19.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 19.0
+          },
+          "course_obstacle_08": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.975000000000001,
+            "mean_progress": 1.0,
+            "mean_steps": 25.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 25.0
+          },
+          "course_obstacle_09": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.975000000000001,
+            "mean_progress": 1.0,
+            "mean_steps": 25.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 25.0
+          },
+          "course_obstacle_10": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.975000000000001,
+            "mean_progress": 1.0,
+            "mean_steps": 25.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": 25.0
+          },
+          "course_obstacle_11": {
+            "agent": "ppo",
+            "episodes": 4,
+            "success_rate": 0.0,
+            "death_rate": 0.0,
+            "truncation_rate": 1.0,
+            "mean_return": 0.919277310924472,
+            "mean_progress": 0.38865546218487396,
+            "mean_steps": 1024.0,
+            "mean_coins": 0.0,
+            "mean_success_steps": null
+          }
+        }
+      }
+    }
+  ]
+}

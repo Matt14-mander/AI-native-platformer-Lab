@@ -9,9 +9,11 @@ from typing import Any
 
 import numpy as np
 
-from ai_platformer.agents.scripted import RuleJumpAgent
+from ai_platformer.agents.scripted import MoveRightAgent, RuleJumpAgent
+from ai_platformer.benchmark.scripted import evaluate_scripted_agent
 from ai_platformer.core import Action
 from ai_platformer.envs import PlatformerStateEnv
+from ai_platformer.envs.factory import EnvironmentFactory
 
 
 @dataclass(frozen=True, slots=True)
@@ -39,15 +41,17 @@ class RewardAuditReport:
     checks: dict[str, bool]
 
 
-def run_sb3_checker() -> str:
+def run_sb3_checker(*, environment: dict | None = None, level_ids: list[str] | None = None) -> str:
     from stable_baselines3 import __version__ as sb3_version
     from stable_baselines3.common.env_checker import check_env
 
-    env = PlatformerStateEnv(episode_step_limit=256)
-    try:
-        check_env(env, warn=True)
-    finally:
-        env.close()
+    factory = EnvironmentFactory(environment or {"episode_step_limit": 256})
+    for level in level_ids or [factory.level_id]:
+        env = factory.make(level_id=level)
+        try:
+            check_env(env, warn=True)
+        finally:
+            env.close()
     return sb3_version
 
 
@@ -56,10 +60,16 @@ def run_random_stability_gate(
     episodes: int = 1_000,
     max_steps_per_episode: int = 256,
     base_seed: int = 20_260_923,
+    environment: dict | None = None,
+    level_ids: list[str] | None = None,
 ) -> StabilityReport:
     if episodes <= 0 or max_steps_per_episode <= 0:
         raise ValueError("episodes and max_steps_per_episode must be positive")
-    env = PlatformerStateEnv(episode_step_limit=max_steps_per_episode)
+    protocol = dict(environment or {})
+    protocol["episode_step_limit"] = max_steps_per_episode
+    factory = EnvironmentFactory(protocol)
+    levels = level_ids or [factory.level_id]
+    env = factory.make(level_id=levels[0])
     outcomes: Counter[str] = Counter()
     transitions = 0
     min_reward = float("inf")
@@ -68,7 +78,9 @@ def run_random_stability_gate(
         for episode in range(episodes):
             seed = base_seed + episode
             rng = np.random.default_rng(seed)
-            observation, _ = env.reset(seed=seed)
+            observation, _ = env.reset(
+                seed=seed, options={"level_id": levels[episode % len(levels)]}
+            )
             _assert_observation(env, observation)
             terminated = truncated = False
             info: dict[str, Any] = {}
@@ -101,15 +113,17 @@ def run_random_stability_gate(
     )
 
 
-def run_reward_exploit_audit() -> RewardAuditReport:
-    noop = _rollout_fixed([Action.NOOP], 256)
-    jump = _rollout_fixed([Action.JUMP, Action.NOOP], 256)
+def run_reward_exploit_audit(*, environment: dict | None = None) -> RewardAuditReport:
+    noop = _rollout_fixed([Action.NOOP], 256, environment=environment)
+    jump = _rollout_fixed([Action.JUMP, Action.NOOP], 256, environment=environment)
     loop_actions = [Action.RIGHT_RUN] * 12 + [Action.LEFT_RUN] * 24
-    loop = _rollout_fixed(loop_actions, 360)
-    expected_progress = loop["final_progress"] * 5.0
+    loop = _rollout_fixed(loop_actions, 360, environment=environment)
+    expected_progress = (
+        loop["final_progress"] * EnvironmentFactory(environment or {}).reward.progress_scale
+    )
 
-    death = _rollout_agent(RuleJumpAgent(trigger_distance=0.34), 1_000)
-    success = _rollout_agent(RuleJumpAgent(), 1_000)
+    death = _rollout_agent(RuleJumpAgent(trigger_distance=0.34), 1_000, environment=environment)
+    success = _rollout_agent(RuleJumpAgent(), 1_000, environment=environment)
     duplicates = tuple(sorted(loop["duplicate_collectibles"]))
     checks = {
         "noop_cannot_profit": noop["return"] < 0.0,
@@ -142,25 +156,95 @@ def readiness_report(
     episodes: int = 1_000,
     max_steps_per_episode: int = 256,
     base_seed: int = 20_260_923,
+    environment: dict | None = None,
+    level_ids: list[str] | None = None,
 ) -> dict[str, Any]:
-    sb3_version = run_sb3_checker()
+    gate_environment = dict(environment or {})
+    gate_environment["episode_step_limit"] = max_steps_per_episode
+    sb3_version = run_sb3_checker(environment=gate_environment, level_ids=level_ids)
     stability = run_random_stability_gate(
         episodes=episodes,
         max_steps_per_episode=max_steps_per_episode,
         base_seed=base_seed,
+        environment=gate_environment,
+        level_ids=level_ids,
     )
-    reward = run_reward_exploit_audit()
+    reward = run_reward_exploit_audit(environment=environment)
+    courses = {}
+    if level_ids:
+        courses = run_course_audit(level_ids, environment=gate_environment)
+    factory = EnvironmentFactory(gate_environment)
     return {
         "schema_version": 1,
-        "passed": reward.passed and stability.episodes == episodes,
+        "passed": reward.passed
+        and stability.episodes == episodes
+        and all(item["passed"] for item in courses.values()),
         "sb3_checker": {"passed": True, "version": sb3_version},
         "stability": asdict(stability),
         "reward_audit": asdict(reward),
+        "course_audit": courses,
+        "protocol": factory.protocol(level_ids or [factory.level_id]),
     }
 
 
-def _rollout_fixed(actions: list[Action], steps: int) -> dict[str, Any]:
-    env = PlatformerStateEnv(episode_step_limit=steps)
+def run_course_audit(level_ids: list[str], *, environment: dict | None = None) -> dict:
+    """Validate reachability and potential rewards on every requested course.
+
+    Gap courses must kill move-right; obstacles must stop it. Flat is a control.
+    """
+    protocol = dict(environment or {})
+    protocol.setdefault("episode_step_limit", 1024)
+    factory = EnvironmentFactory(protocol)
+    report = {}
+    for level_id in level_ids:
+        spec = factory.repository.manifest["levels"].get(level_id)
+        if spec is None:
+            continue
+        right = evaluate_scripted_agent(
+            "move-right", MoveRightAgent, [100], environment=protocol, level_ids=[level_id]
+        )
+        rule = evaluate_scripted_agent(
+            "rule-jump", RuleJumpAgent, [100], environment=protocol, level_ids=[level_id]
+        )
+        env = factory.make(level_id=level_id)
+        try:
+            env.reset(seed=100)
+            initial_progress = env.core.state.progress
+            parts = Counter()
+            for action in [Action.RIGHT_RUN] * 12 + [Action.LEFT_RUN] * 24:
+                _, _, terminated, truncated, info = env.step(int(action))
+                parts.update(info["reward_components"])
+                if terminated or truncated:
+                    break
+            conserved = isclose(
+                parts["progress"],
+                (env.core.state.progress - initial_progress) * factory.reward.progress_scale,
+                abs_tol=1e-9,
+            )
+            env.reset(seed=100)
+            _, noop_reward, _, _, _ = env.step(int(Action.NOOP))
+        finally:
+            env.close()
+        flat = spec["task"] == "flat"
+        checks = {
+            "rule_reachable": rule.summary()["success_rate"] == 1.0,
+            "move_right_calibrated": right.summary()["success_rate"] == float(flat),
+            "potential_conserved": conserved,
+            "noop_cannot_profit": noop_reward < 0,
+        }
+        report[level_id] = {
+            "passed": all(checks.values()),
+            "checks": checks,
+            "rule_jump": rule.summary(),
+            "move_right": right.summary(),
+        }
+    return report
+
+
+def _rollout_fixed(
+    actions: list[Action], steps: int, *, environment: dict | None = None
+) -> dict[str, Any]:
+    env = EnvironmentFactory({**(environment or {}), "episode_step_limit": steps}).make()
     observation, _ = env.reset(seed=123)
     return _rollout(
         env,
@@ -170,8 +254,10 @@ def _rollout_fixed(actions: list[Action], steps: int) -> dict[str, Any]:
     )
 
 
-def _rollout_agent(agent: RuleJumpAgent, steps: int) -> dict[str, Any]:
-    env = PlatformerStateEnv(episode_step_limit=steps)
+def _rollout_agent(
+    agent: RuleJumpAgent, steps: int, *, environment: dict | None = None
+) -> dict[str, Any]:
+    env = EnvironmentFactory({**(environment or {}), "episode_step_limit": steps}).make()
     observation, _ = env.reset(seed=123)
     agent.reset(seed=123)
     return _rollout(env, lambda _, obs: agent.act(obs), steps, observation)
@@ -188,9 +274,7 @@ def _rollout(env, policy, steps: int, observation=None) -> dict[str, Any]:
     terminal_components: dict[str, float] = {}
     try:
         for index in range(steps):
-            observation, reward, terminated, truncated, info = env.step(
-                policy(index, observation)
-            )
+            observation, reward, terminated, truncated, info = env.step(policy(index, observation))
             total += reward
             components.update(info["reward_components"])
             for entity_id in info.get("collected", ()):

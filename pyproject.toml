@@ -16,6 +16,7 @@ dependencies = [
 platformer-benchmark = "scripts.benchmark_scripted:main"
 platformer-rl-check = "scripts.validate_rl_readiness:main"
 platformer-train-ppo = "scripts.train_ppo:main"
+platformer-evaluate-ppo = "scripts.evaluate_ppo:main"
 
 [project.optional-dependencies]
 benchmark = [

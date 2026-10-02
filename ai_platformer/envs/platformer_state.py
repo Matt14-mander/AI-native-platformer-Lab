@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from enum import IntEnum
-from typing import Any
+from typing import Any, ClassVar
 
 import gymnasium as gym
 import numpy as np
@@ -11,6 +12,7 @@ from gymnasium import spaces
 
 from ai_platformer.content.legacy import LegacyLevelRepository
 from ai_platformer.core import Action, BasicPlatformerCore, SolidRect, WorldSnapshot
+from ai_platformer.core.level import LevelDefinition
 from ai_platformer.settings import GameplaySettings, load_gameplay_settings
 
 from .reward import RewardConfig, compose_reward
@@ -41,7 +43,7 @@ OBSERVATION_SIZE = len(ObservationIndex)
 class PlatformerStateEnv(gym.Env[np.ndarray, int]):
     """Deterministic state observation environment for training and evaluation."""
 
-    metadata = {"render_modes": []}
+    metadata: ClassVar[dict] = {"render_modes": []}
 
     def __init__(
         self,
@@ -53,6 +55,7 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         episode_step_limit: int | None = None,
         settings: GameplaySettings | None = None,
         reward_config: RewardConfig | None = None,
+        level_loader: Callable[[str], LevelDefinition] | None = None,
     ) -> None:
         super().__init__()
         if action_repeat <= 0:
@@ -70,8 +73,9 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         self.episode_step_limit = episode_step_limit
         self.reward_config = reward_config or RewardConfig()
         self.repository = LegacyLevelRepository()
-        self.level = self.repository.load(self.level_id)
-        self.core = BasicPlatformerCore(self.repository.load, config=self.settings.physics)
+        self._level_loader = level_loader or self.repository.load
+        self.level = self._level_loader(self.level_id)
+        self.core = BasicPlatformerCore(self._level_loader, config=self.settings.physics)
         self.action_space = spaces.Discrete(len(Action))
         self.observation_space = spaces.Box(
             low=-1.0,
@@ -95,7 +99,7 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
             self.level_id if options is None else options.get("level_id", self.level_id)
         )
         self.level_id = str(requested_level)
-        self.level = self.repository.load(self.level_id)
+        self.level = self._level_loader(self.level_id)
         state = self.core.reset(seed=actual_seed, level_id=self.level_id)
         self._episode_done = False
         self._episode_return = 0.0
@@ -205,8 +209,7 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         for start, end in intervals:
             if start > limit + 1e-5:
                 break
-            if end > limit:
-                limit = end
+            limit = max(limit, end)
         return min(self.sensor_range, max(0.0, limit - cursor))
 
     def _obstacle(self, state: WorldSnapshot) -> tuple[float, float]:

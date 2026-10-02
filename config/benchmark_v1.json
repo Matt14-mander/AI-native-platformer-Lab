@@ -1,0 +1,35 @@
+{
+  "schema_version": 2,
+  "environment_id": "PlatformerState-v1",
+  "action_repeat": 4,
+  "suites": {
+    "train": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "validation": [
+      100,
+      101,
+      102,
+      103
+    ],
+    "unseen": [
+      1000,
+      1001,
+      1002,
+      1003
+    ]
+  },
+  "environment": {
+    "action_repeat": 4,
+    "episode_step_limit": 1024,
+    "sensor_range": 240,
+    "curriculum_manifest": "config/curriculum_v1.json"
+  }
+}

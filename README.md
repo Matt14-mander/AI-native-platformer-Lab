@@ -178,3 +178,5 @@ LLM/PCG、DDA 和 Jev 会在 LevelSpec、telemetry 与 benchmark 稳定后接入
 当前阶段：**RL readiness gates 完成 + 首个 MLP PPO baseline 已运行**。
 
 下一阶段：**建立平地 → 单管道 → 单缺口 curriculum，让 PPO 明显超过 move-right baseline**。
+
+课程训练设施现已实现：64 个独立布局、统一评估、定期验证、best/周期 checkpoint、续训与自动晋级。新 `PlatformerState-v1` 增加 jump-held observation；v0 保持兼容。使用方式和本机验证结果见 [强化学习训练 v1](docs/RL_TRAINING_V1.md)。正式多 seed 性能验收尚未完成。

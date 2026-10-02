@@ -1,4 +1,4 @@
-"""Train the first reproducible MLP PPO baseline."""
+"""Train or resume a reproducible PPO baseline/curriculum."""
 
 from __future__ import annotations
 
@@ -18,6 +18,10 @@ def main() -> None:
     )
     parser.add_argument("--timesteps", type=int, help="override total training timesteps")
     parser.add_argument(
+        "--resume", type=Path, help="v2 checkpoint to continue in a new run directory"
+    )
+    parser.add_argument("--eval-every", type=int, help="evaluation interval in transitions")
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=Path("runs/ppo_state_v0"),
@@ -30,10 +34,18 @@ def main() -> None:
         if args.timesteps <= 0:
             parser.error("--timesteps must be positive")
         config["total_timesteps"] = args.timesteps
-    report = train_ppo(config, args.output_dir)
-    print(json.dumps(report["evaluation"], ensure_ascii=False, indent=2))
+    if args.eval_every is not None:
+        if args.eval_every <= 0:
+            parser.error("--eval-every must be positive")
+        config["evaluation"]["every_timesteps"] = args.eval_every
+    try:
+        report = train_ppo(config, args.output_dir, resume=args.resume)
+    except (ValueError, FileExistsError, FileNotFoundError) as error:
+        parser.error(str(error))
+    print(json.dumps(report["evaluation"]["summary"], ensure_ascii=False, indent=2))
     print(f"model: {report['artifacts']['model']}")
     print(f"metadata: {(args.output_dir / 'run.json').resolve()}")
+    print(f"status: {report['curriculum_state']['status']}")
 
 
 if __name__ == "__main__":
