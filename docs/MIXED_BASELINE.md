@@ -6,7 +6,7 @@
 
 当前模型在现有 mixed 分布上已达到成功率上限：36 个验证布局全部通关，随机动作采样 5 个种子共 180 局也全部通关。它没有接受 mixed 专项训练，也没有使用 mixed 示范；这是 flat/obstacle/gap 规则示范预热与 16,384 PPO transition 后的组合迁移基线，不是纯 PPO 从零探索结果。
 
-本次从 checkpoint 恢复完整 `PlatformerState-v1` 协议并验证模型 hash 和内容 hash。跳跃仍使用旧版可变高度物理。刚开发的 `PlatformerState-v2` 固定高度跳跃没有被本次结果验证。
+本次从 checkpoint 恢复完整 `PlatformerState-v1` 协议并验证模型 hash 和内容 hash。跳跃仍使用旧版可变高度物理。新 `PlatformerState-v2` 候选没有被本次结果验证；其初版固定跳跃已在 2026-10-04 改为新的可变高度跳跃。
 
 ## 实测结果
 

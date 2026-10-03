@@ -53,7 +53,7 @@ $env:PYTHONPATH = (Resolve-Path ".deps").Path
 | 重开当前关卡 | `R` |
 | 菜单确认 | `Enter` |
 
-手动游戏默认使用 [`config/gameplay_ai_v2.json`](config/gameplay_ai_v2.json)：固定高度跳跃、较快的移动响应。长按只起跳一次，落地后需松开再按。旧设置保留在 [`config/gameplay.json`](config/gameplay.json)，可用 `python -m source.main --settings config/gameplay.json` 试玩对照。评估结果与训练版本说明见 [游戏设置评估](docs/GAMEPLAY_V2.md)。
+手动游戏默认使用 [`config/gameplay_ai_v2.json`](config/gameplay_ai_v2.json)：短按低跳、长按高跳，移动响应更快。长按高度有上限且只起跳一次，落地后需松开再按。旧设置保留在 [`config/gameplay.json`](config/gameplay.json)，可用 `python -m source.main --settings config/gameplay.json` 试玩对照。当前参数、收集奖励和验证结果见 [可变高度跳跃](docs/VARIABLE_JUMP_V2.md)。
 
 ## 测试
 

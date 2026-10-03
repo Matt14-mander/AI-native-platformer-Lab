@@ -12,9 +12,9 @@
     "turn_acceleration": 0.7,
     "max_walk_speed": 6.0,
     "max_run_speed": 10.0,
-    "jump_velocity": -17.5,
-    "rising_gravity": 0.8,
-    "falling_gravity": 0.8,
+    "jump_velocity": -13.8,
+    "rising_gravity": 0.5,
+    "falling_gravity": 1.8,
     "max_fall_speed": 11.0,
     "max_episode_steps": 36000
   }

@@ -1,4 +1,4 @@
-"""State v2 uses fixed-height jumps and faster movement response; 15 features."""
+"""State v2 uses bounded variable-height jumps and faster movement; 15 features."""
 
 from ai_platformer.settings import AI_GAMEPLAY_PATH, load_gameplay_settings
 

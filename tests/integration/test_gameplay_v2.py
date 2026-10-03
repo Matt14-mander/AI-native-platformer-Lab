@@ -1,4 +1,4 @@
-"""Fixed jump semantics, shared human/agent physics and legacy compatibility."""
+"""Variable jump semantics, collectible rewards and legacy compatibility."""
 
 import unittest
 
@@ -7,8 +7,10 @@ import numpy as np
 
 from ai_platformer.benchmark.gameplay import audit_settings, measure_jump
 from ai_platformer.benchmark.readiness import run_reward_exploit_audit
+from ai_platformer.content.legacy import LegacyLevelRepository
 from ai_platformer.core import Action, BasicPlatformerCore, LevelDefinition, SolidRect
 from ai_platformer.envs.factory import EnvironmentFactory, protocol_hash
+from ai_platformer.envs.platformer_state_v2 import PlatformerStateEnvV2
 from ai_platformer.settings import AI_GAMEPLAY_PATH, load_gameplay_settings
 
 
@@ -24,22 +26,58 @@ class GameplayV2Tests(unittest.TestCase):
         core.reset(seed=123, level_id="flat")
         return core
 
-    def test_release_and_repress_in_air_do_not_change_trajectory(self):
-        held, tapping = self.core(), self.core()
-        for tick in range(45):
-            expected = held.step(Action.JUMP).state
-            action = Action.JUMP if tick in (0, 3, 7, 12, 25) else Action.NOOP
-            actual = tapping.step(action).state
-            self.assertEqual(actual.player, expected.player)
-        self.assertTrue(held.state.player.grounded)
+    def test_release_reduces_height_and_repress_does_not_start_air_jump(self):
+        held, released = self.core(), self.core()
+        held.step(Action.JUMP)
+        released.step(Action.JUMP)
+        held.step(Action.JUMP)
+        released.step(Action.NOOP)
+        self.assertGreater(released.state.player.velocity_y, held.state.player.velocity_y)
+        before = released.state.player.velocity_y
+        released.step(Action.JUMP)
+        self.assertGreater(released.state.player.velocity_y, before)
+        self.assertFalse(released.state.player.grounded)
 
     def test_hold_cannot_retrigger_and_release_enables_next_jump(self):
         report = audit_settings(self.settings)
         self.assertEqual(report["continuous_hold"]["launches"], 1)
         self.assertTrue(all(report["checks"].values()))
-        self.assertTrue(report["fixed_height"])
+        self.assertFalse(report["fixed_height"])
         heights = [measure_jump(self.settings, count)["height_px"] for count in (1, 4, 8, 300)]
-        np.testing.assert_allclose(heights, 182.7)
+        np.testing.assert_allclose(heights, [56.0, 83.2, 114.4, 183.6])
+        self.assertEqual(measure_jump(self.settings, 600)["height_px"], heights[-1])
+
+    def test_short_jump_can_collect_intro_acorns_with_one_shot_reward(self):
+        coins = tuple(
+            coin
+            for coin in LegacyLevelRepository().load("level_1").collectibles
+            if coin.entity_id.startswith("intro-coin")
+        )
+        level = LevelDefinition(
+            "acorn_probe",
+            2000,
+            600,
+            460,
+            538,
+            1900,
+            (SolidRect(0, 538, 2000, 62),),
+            collectibles=coins,
+        )
+        env = PlatformerStateEnvV2(level_id=level.level_id, level_loader=lambda _: level)
+        try:
+            env.reset(seed=0)
+            collection_reward = 0.0
+            for action in [Action.RIGHT] * 5 + [Action.RIGHT_JUMP] + [Action.RIGHT] * 23:
+                _, _, _, _, info = env.step(int(action))
+                collection_reward += info["reward_components"]["coin"]
+            self.assertEqual(env.core.state.metadata["coins_collected"], 5)
+            self.assertEqual(env.core.state.metadata["score"], 500)
+            self.assertEqual(collection_reward, 5 * env.reward_config.coin_reward)
+            for _ in range(10):
+                _, _, _, _, info = env.step(int(Action.LEFT))
+                self.assertEqual(info["reward_components"]["coin"], 0.0)
+        finally:
+            env.close()
 
     def test_gym_v2_and_factory_share_profile_and_observation_contract(self):
         env = gym.make("PlatformerState-v2", episode_step_limit=1024)

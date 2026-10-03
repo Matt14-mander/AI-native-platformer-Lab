@@ -17,7 +17,7 @@ def main():
         "--settings",
         type=Path,
         default=AI_GAMEPLAY_PATH,
-        help="gameplay JSON; default: fixed-height AI-friendly v2 candidate",
+        help="gameplay JSON; default: variable-height AI-friendly v2 candidate",
     )
     args = parser.parse_args()
     settings = load_gameplay_settings(args.settings)
