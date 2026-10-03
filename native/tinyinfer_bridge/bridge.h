@@ -20,6 +20,14 @@ PTI_API void* pti_create(const char* path, const char* input_name,
 /* Input/output are contiguous FP32 buffers; counts must match creation. */
 PTI_API int pti_infer(void* handle, const float* input, size_t inputs,
                      float* output, size_t outputs);
+/* Benchmark extension to ABI 1. Flat observations are [samples, model_inputs].
+ * Returns per-iteration microseconds for run() and the complete native path
+ * (input allocation/copy/bind, run, output extraction/copy), excluding ctypes.
+ * Timing buffers each hold iterations entries; warmup entries are not returned.
+ */
+PTI_API int pti_benchmark(void* handle, const float* observations, size_t elements,
+                         size_t samples, size_t warmup, size_t iterations,
+                         double* run_us, double* native_us);
 /* Serialize destruction with inference; each live handle is destroyed once. */
 PTI_API void pti_destroy(void* handle);
 #ifdef __cplusplus

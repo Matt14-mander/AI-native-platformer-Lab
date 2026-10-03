@@ -1,6 +1,7 @@
 #include "bridge.h"
 
 #include <algorithm>
+#include <chrono>
 #include <cstdio>
 #include <exception>
 #include <memory>
@@ -33,6 +34,25 @@ struct Session {
     size_t inputs;
     size_t outputs;
     std::mutex mutex;
+
+    void infer(const float* input, float* output, double* run_us = nullptr) {
+        tinyinfer::Tensor tensor({1, static_cast<int64_t>(inputs)});
+        std::copy(input, input + inputs, tensor.data_f32());
+        context.bind_input(input_name, std::move(tensor));
+        if (run_us) {
+            const auto begin = std::chrono::steady_clock::now();
+            context.run();
+            *run_us = std::chrono::duration<double, std::micro>(
+                std::chrono::steady_clock::now() - begin).count();
+        } else {
+            context.run();
+        }
+        auto result = context.output(output_name);
+        if (result.dtype() != tinyinfer::DataType::Float32 ||
+            result.numel() != outputs || !result.is_contiguous())
+            throw std::runtime_error("unexpected TinyInfer output layout");
+        std::copy(result.data_f32(), result.data_f32() + outputs, output);
+    }
 
     Session(const char* path, const char* input, const char* output,
             size_t input_count, size_t output_count, bool fuse_relu)
@@ -83,18 +103,37 @@ int pti_infer(void* handle, const float* input, size_t inputs, float* output, si
         std::lock_guard<std::mutex> guard(session.mutex);
         if (inputs != session.inputs || outputs != session.outputs)
             throw std::invalid_argument("inference buffer counts do not match model");
-        tinyinfer::Tensor tensor({1, static_cast<int64_t>(inputs)});
-        std::copy(input, input + inputs, tensor.data_f32());
-        session.context.bind_input(session.input_name, std::move(tensor));
-        session.context.run();
-        auto result = session.context.output(session.output_name);
-        if (result.dtype() != tinyinfer::DataType::Float32 ||
-            result.numel() != outputs || !result.is_contiguous())
-            throw std::runtime_error("unexpected TinyInfer output layout");
-        std::copy(result.data_f32(), result.data_f32() + outputs, output);
+        session.infer(input, output);
         return 0;
     } catch (const std::exception& e) { error(e.what()); }
       catch (...) { error("unknown TinyInfer inference error"); }
+    return -1;
+}
+
+int pti_benchmark(void* handle, const float* observations, size_t elements,
+                  size_t samples, size_t warmup, size_t iterations,
+                  double* run_us, double* native_us) {
+    error("");
+    try {
+        if (!handle || !observations || !run_us || !native_us)
+            throw std::invalid_argument("null benchmark argument");
+        auto& session = *static_cast<Session*>(handle);
+        std::lock_guard<std::mutex> guard(session.mutex);
+        if (!samples || samples > 100000 || elements != samples * session.inputs ||
+            !iterations || iterations > 1000000 || warmup > 1000000)
+            throw std::invalid_argument("invalid benchmark shapes or iteration counts");
+        std::vector<float> output(session.outputs);
+        for (size_t i = 0; i < warmup; ++i)
+            session.infer(observations + (i % samples) * session.inputs, output.data());
+        for (size_t i = 0; i < iterations; ++i) {
+            const auto begin = std::chrono::steady_clock::now();
+            session.infer(observations + (i % samples) * session.inputs, output.data(), run_us + i);
+            native_us[i] = std::chrono::duration<double, std::micro>(
+                std::chrono::steady_clock::now() - begin).count();
+        }
+        return 0;
+    } catch (const std::exception& e) { error(e.what()); }
+      catch (...) { error("unknown TinyInfer benchmark error"); }
     return -1;
 }
 

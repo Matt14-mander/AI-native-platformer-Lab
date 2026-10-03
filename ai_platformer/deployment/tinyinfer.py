@@ -93,6 +93,57 @@ class TinyInferPolicy:
             raise ValueError("TinyInfer deployment currently supports deterministic actions only")
         return np.asarray(self.logits(observation).argmax(), dtype=np.int64), None
 
+    def benchmark_native(self, observations: np.ndarray, *, warmup: int, iterations: int) -> dict:
+        values = np.asarray(observations)
+        if (
+            values.dtype != np.float32
+            or values.ndim != 2
+            or values.shape[1] != self.input_size
+            or not 1 <= len(values) <= 100000
+            or not np.isfinite(values).all()
+            or not 0 <= warmup <= 1000000
+            or not 1 <= iterations <= 1000000
+        ):
+            raise ValueError("invalid benchmark observations or iteration counts")
+        values = np.ascontiguousarray(values)
+        run_us = np.empty(iterations, dtype=np.float64)
+        native_us = np.empty(iterations, dtype=np.float64)
+        with self._lock:
+            if not self._handle:
+                raise RuntimeError("TinyInfer policy is closed")
+            try:
+                benchmark = self._library.pti_benchmark
+            except AttributeError as error:
+                raise RuntimeError("bridge lacks benchmarking API; rebuild it") from error
+            float_pointer = ctypes.POINTER(ctypes.c_float)
+            double_pointer = ctypes.POINTER(ctypes.c_double)
+            benchmark.argtypes = [
+                ctypes.c_void_p,
+                float_pointer,
+                ctypes.c_size_t,
+                ctypes.c_size_t,
+                ctypes.c_size_t,
+                ctypes.c_size_t,
+                double_pointer,
+                double_pointer,
+            ]
+            benchmark.restype = ctypes.c_int
+            if (
+                benchmark(
+                    self._handle,
+                    values.ctypes.data_as(float_pointer),
+                    values.size,
+                    len(values),
+                    warmup,
+                    iterations,
+                    run_us.ctypes.data_as(double_pointer),
+                    native_us.ctypes.data_as(double_pointer),
+                )
+                != 0
+            ):
+                raise RuntimeError(self._error())
+        return {"run_us": run_us, "native_us": native_us}
+
     def close(self) -> None:
         with self._lock:
             if self._handle:

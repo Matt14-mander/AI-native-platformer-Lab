@@ -21,6 +21,7 @@ platformer-play-ppo = "scripts.play_ppo:main"
 platformer-export-ppo = "scripts.export_ppo:main"
 platformer-build-tinyinfer = "scripts.build_tinyinfer_bridge:main"
 platformer-validate-tinyinfer = "scripts.validate_tinyinfer:main"
+platformer-benchmark-deployment = "scripts.benchmark_deployment:main"
 platformer-diagnose-ppo = "scripts.diagnose_ppo:main"
 platformer-verify-stage-entry = "scripts.verify_stage_entry:main"
 
@@ -39,6 +40,10 @@ deployment = [
     "numpy>=1.26,<3",
     "onnx>=1.16",
     "onnxruntime>=1.18",
+]
+inference = [
+    "gymnasium>=1.0,<2",
+    "numpy>=1.26,<3",
 ]
 dev = [
     "pytest>=8",

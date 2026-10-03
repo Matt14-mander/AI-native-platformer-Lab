@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import platform
 import subprocess
@@ -72,6 +73,7 @@ def main() -> None:
             raise ValueError(f"expected one bridge library, found {libraries}")
         report = {
             "library": str(libraries[0]),
+            "library_sha256": hashlib.sha256(libraries[0].read_bytes()).hexdigest(),
             "tinyinfer_source": str(source),
             "tinyinfer_revision": revision,
             "tinyinfer_source_dirty": source_dirty,

@@ -8,28 +8,13 @@ from pathlib import Path
 
 import numpy as np
 
-from ai_platformer.deployment.package import file_hash, load_actor_metadata
+from ai_platformer.deployment.package import file_hash, load_actor_metadata, load_validation_data
 from ai_platformer.deployment.tinyinfer import TinyInferPolicy
 
 
 def validate(model: Path, library: Path) -> dict:
     metadata = load_actor_metadata(model)
-    reference_path = model.parent / "validation.npz"
-    if file_hash(reference_path) != metadata["validation"]["sha256"]:
-        raise ValueError("validation references do not match deployment metadata")
-    with np.load(reference_path, allow_pickle=False) as reference:
-        observations = reference["observations"]
-        logits = reference["logits"]
-        actions = reference["actions"]
-    if (
-        observations.dtype != np.float32
-        or observations.shape != (metadata["validation"]["samples"], metadata["input"]["shape"][1])
-        or logits.shape != (len(observations), metadata["output"]["shape"][1])
-        or actions.shape != (len(observations),)
-        or not np.isfinite(observations).all()
-        or not np.isfinite(logits).all()
-    ):
-        raise ValueError("invalid validation tensor shapes/types/values")
+    observations, logits, actions = load_validation_data(model, metadata)
     sorted_logits = np.sort(logits, axis=1)
     margins = sorted_logits[:, -1] - sorted_logits[:, -2]
     report = {

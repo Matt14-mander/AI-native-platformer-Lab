@@ -96,11 +96,12 @@ MPLCONFIGDIR="$PWD/.venv/matplotlib" XDG_CACHE_HOME="$PWD/.venv/cache" \
 测试使用临时生成的 PPO checkpoint，覆盖真实导出、两种执行路径、上下文复用、错误输入、模型哈希、命名绑定、释放与训练依赖隔离。
 可用 `PLATFORMER_TINYINFER_LIBRARY` 指定测试库路径；未构建动态库时，原生桥接测试会跳过。
 
-本阶段完成导出与可调用桥接。`scripts.play_ppo` 仍使用 SB3；下一阶段再加入 `--backend tinyinfer`、部署环境校验和完整轨迹对照。
-性能 benchmark 尚未实现，数值报告不宣称加速。后续性能测量必须分别包含输入绑定、输出提取、ctypes 调用和纯执行耗时。
+导出与桥接已接入 `scripts.play_ppo --backend tinyinfer`，支持部署环境校验及原始图/融合图选择，见 [播放说明](PPO_PLAYBACK.md)。
+独立 [部署性能 benchmark](DEPLOYMENT_PERFORMANCE.md) 已提供，分别统计纯执行、输入输出处理、ctypes 调用和无窗口完整帧，并校验各后端回合轨迹。
 
 本机已用 `runs/mixed_prerequisites_imitation/model.zip` 生成 `runs/tinyinfer_actor_v2/` 部署包：
 1,024 个观测包含 251 个真实课程观测和 773 个随机输入。原始图与融合图均通过容差检查，动作匹配率均为 100%，最大绝对误差约 `1.53e-5`。
 另对九个代表布局、seed 100 进行了两种路径共 18 回合的轨迹冒烟检查，均与 SB3 的动作、状态和回报完全一致并通关。
 报告位于该部署目录的 `tinyinfer_validation.json` 和 `trajectory_smoke.json`；这不替代多 seed 泛化验收。
-全量测试为 65 passed，Ruff 与 diff 检查通过。构建产物与模型在忽略目录中，跨机器运行需重新构建与导出。
+导出与桥接阶段测试为 65 passed；加入后端播放与性能测量后，全量测试为 69 passed，Ruff 与 diff 检查通过。
+构建产物与模型在忽略目录中，跨机器运行需重新构建与导出。

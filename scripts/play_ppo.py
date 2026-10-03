@@ -1,4 +1,4 @@
-"""Play a versioned SB3 PPO checkpoint in the shared Pygame renderer."""
+"""Play SB3 checkpoints or TinyInfer deployment actors in the shared renderer."""
 
 from __future__ import annotations
 
@@ -12,7 +12,15 @@ from pathlib import Path
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--model", type=Path, required=True, help="model.zip with model.json sidecar"
+        "--model",
+        type=Path,
+        required=True,
+        help="model.zip (SB3) or actor.onnx (TinyInfer), with sidecar",
+    )
+    parser.add_argument("--backend", choices=("sb3", "tinyinfer"), default="sb3")
+    parser.add_argument("--library", type=Path, help="TinyInfer bridge dynamic library")
+    parser.add_argument(
+        "--fuse-relu", action="store_true", help="enable TinyInfer Gemm/ReLU fusion"
     )
     parser.add_argument(
         "--task", choices=("flat", "obstacle", "gap", "mixed", "full"), default="gap"
@@ -36,6 +44,8 @@ def main() -> None:
         parser.error("episodes must be nonnegative; headless playback requires --episodes > 0")
     if args.seed is not None and args.seed < 0:
         parser.error("seed must be nonnegative")
+    if args.backend == "tinyinfer" and args.sampled:
+        parser.error("TinyInfer playback supports deterministic actions; remove --sampled")
     if args.screenshot and args.screenshot.suffix.lower() != ".png":
         parser.error("screenshot must have a .png suffix")
     if args.headless:
@@ -43,20 +53,18 @@ def main() -> None:
         os.environ["SDL_AUDIODRIVER"] = "dummy"
 
     import pygame
-    from stable_baselines3 import PPO
 
-    from ai_platformer.agents.ppo.training import checkpoint_metadata
-    from ai_platformer.envs.factory import EnvironmentFactory, protocol_hash
+    from ai_platformer.deployment.backends import load_backend
     from ai_platformer.rendering.ppo_playback import PlaybackSession, create_renderer
 
-    path = args.model.with_suffix(".zip")
+    loaded = None
     try:
-        metadata = checkpoint_metadata(path)
-        config = metadata["config"]
-        factory = EnvironmentFactory(config["environment"])
-        previous = metadata["signature"]["protocol"]
-        if protocol_hash(factory.protocol(list(previous["levels"]))) != protocol_hash(previous):
-            raise ValueError("checkpoint content/protocol has changed; restore its manifest/levels")
+        loaded = load_backend(
+            args.backend, args.model, library=args.library, fuse_relu=args.fuse_relu
+        )
+        factory = loaded.factory
+        policy = loaded.policy
+        path = loaded.model_path
         levels = (
             [args.level_id]
             if args.level_id
@@ -66,28 +74,23 @@ def main() -> None:
         )
         for level in levels:
             factory.repository.load(level)
-        seed = args.seed if args.seed is not None else config["evaluation"]["seeds"][0]
-        policy = PPO.load(path, device="cpu")
-        if policy.num_timesteps != metadata["saved_timesteps"]:
-            raise ValueError("checkpoint timestep differs from its sidecar")
-        probe = factory.make(level_id=levels[0], seed=seed)
-        try:
-            if (
-                policy.observation_space != probe.observation_space
-                or policy.action_space != probe.action_space
-            ):
-                raise ValueError("checkpoint observation/action spaces differ from environment")
-        finally:
-            probe.close()
-    except (ValueError, KeyError, FileNotFoundError) as error:
+        seed = args.seed if args.seed is not None else loaded.default_seed
+    except (ValueError, KeyError, OSError, RuntimeError, ImportError) as error:
+        if loaded is not None:
+            loaded.close()
         parser.error(str(error))
 
-    pygame.display.init()
-    pygame.font.init()
-    screen = pygame.display.set_mode((1000, 600))
-    pygame.display.set_caption(f"PPO playback | {path.name}")
-    font = pygame.font.Font(None, 24)
-    clock = pygame.time.Clock()
+    try:
+        pygame.display.init()
+        pygame.font.init()
+        screen = pygame.display.set_mode((1000, 600))
+        pygame.display.set_caption(f"{loaded.label} playback | {path.name}")
+        font = pygame.font.Font(None, 24)
+        clock = pygame.time.Clock()
+    except BaseException:
+        loaded.close()
+        pygame.quit()
+        raise
     session = None
     index = completed = 0
     speed = args.speed
@@ -146,12 +149,21 @@ def main() -> None:
                     accumulator -= interval
                     if session.done:
                         completed += 1
-                        print(json.dumps(session.summary()), flush=True)
+                        print(
+                            json.dumps(
+                                {
+                                    "backend": args.backend,
+                                    "fuse_relu": args.fuse_relu,
+                                    **session.summary(),
+                                }
+                            ),
+                            flush=True,
+                        )
                         terminal_elapsed = 0.0
             renderer.draw(screen, session.env.core.state)
             lines = [
                 (
-                    f"SB3 PPO | {session.env.level_id} | seed={seed} | "
+                    f"{loaded.label} | {session.env.level_id} | seed={seed} | "
                     f"{'sampled' if args.sampled else 'deterministic'} | {speed:g}x"
                 ),
                 (
@@ -186,6 +198,7 @@ def main() -> None:
     finally:
         if session is not None:
             session.env.close()
+        loaded.close()
         pygame.quit()
 
 

@@ -60,7 +60,7 @@ def exported(tmp_path_factory):
         "signature_hash": protocol_hash(signature),
         "model_sha256": file_hash(checkpoint),
         "saved_timesteps": 0,
-        "config": {"environment": environment},
+        "config": {"environment": environment, "evaluation": {"seeds": [123]}},
     }
     checkpoint.with_suffix(".json").write_text(json.dumps(sidecar))
     output = root / "deployment"
@@ -184,3 +184,80 @@ with TinyInferPolicy(Path(sys.argv[1]), Path(sys.argv[2])) as policy:
 assert not any(name in sys.modules for name in ('torch', 'stable_baselines3', 'onnx', 'onnxruntime'))
 """
     subprocess.run([sys.executable, "-c", code, str(path), str(library)], check=True)
+
+
+def test_native_benchmark_measures_run_and_io_and_preserves_context(exported, library):
+    _, path = exported
+    with np.load(path.parent / "validation.npz") as data:
+        observations = data["observations"][:5].copy()
+        expected = data["logits"][0].copy()
+    with TinyInferPolicy(path, library) as policy:
+        metrics = policy.benchmark_native(observations, warmup=4, iterations=16)
+        assert metrics["run_us"].shape == (16,)
+        assert np.isfinite(metrics["native_us"]).all()
+        assert (metrics["run_us"] >= 0).all()
+        assert (metrics["native_us"] >= metrics["run_us"]).all()
+        np.testing.assert_allclose(policy.logits(observations[0]), expected, atol=1e-5, rtol=1e-5)
+        with pytest.raises(ValueError):
+            policy.benchmark_native(observations, warmup=0, iterations=0)
+    with pytest.raises(RuntimeError, match="closed"):
+        policy.benchmark_native(observations, warmup=0, iterations=1)
+
+
+def test_tinyinfer_playback_runs_without_training_imports(exported, library, tmp_path):
+    _, path = exported
+    code = """
+import sys, runpy
+model, library, screenshot = sys.argv[1:]
+sys.argv = ['play_ppo', '--backend', 'tinyinfer', '--model', model, '--library', library,
+            '--fuse-relu', '--task', 'gap', '--headless', '--episodes', '1', '--screenshot', screenshot]
+runpy.run_module('scripts.play_ppo', run_name='__main__')
+assert not any(name in sys.modules for name in ('torch', 'stable_baselines3', 'onnx', 'onnxruntime'))
+"""
+    screenshot = tmp_path / "playback.png"
+    subprocess.run(
+        [sys.executable, "-c", code, str(path), str(library), str(screenshot)], check=True
+    )
+    assert screenshot.stat().st_size > 1000
+
+
+def test_playback_rejects_changed_environment_and_missing_library(exported, library, tmp_path):
+    from ai_platformer.deployment.backends import load_backend
+
+    _, path = exported
+    with pytest.raises(ValueError, match="requires --library"):
+        load_backend("tinyinfer", path)
+    clone = tmp_path / "actor.onnx"
+    clone.write_bytes(path.read_bytes())
+    metadata = load_actor_metadata(path)
+    metadata["environment"]["action_repeat"] = 3
+    metadata["metadata_sha256"] = metadata_hash(
+        {key: value for key, value in metadata.items() if key != "metadata_sha256"}
+    )
+    clone.with_suffix(".json").write_text(json.dumps(metadata))
+    with pytest.raises(ValueError, match="content/protocol"):
+        load_backend("tinyinfer", clone, library=library)
+
+
+def test_benchmark_validates_actions_traces_and_counts(exported, library):
+    from ai_platformer.deployment.performance import benchmark_deployment
+
+    checkpoint, path = exported
+    report, samples = benchmark_deployment(
+        path,
+        library,
+        checkpoint=checkpoint,
+        warmup=2,
+        iterations=8,
+        rounds=2,
+        startup_repeats=2,
+        episodes=1,
+    )
+    assert report["passed"] and report["trajectory_match"]
+    assert set(report["correctness"]) == {"tinyinfer_original", "tinyinfer_fused", "sb3"}
+    for name in ("tinyinfer_original", "tinyinfer_fused", "sb3"):
+        assert report["timings"][name]["predict_us"]["count"] == 16
+        assert len(report["frames"][name]["episodes"]) == 1
+        assert samples[f"{name}_predict_us"].shape == (16,)
+    assert report["timings"]["pytorch_actor"]["tensor_forward_us"]["count"] == 16
+    assert report["round_order"][0] == list(reversed(report["round_order"][1]))

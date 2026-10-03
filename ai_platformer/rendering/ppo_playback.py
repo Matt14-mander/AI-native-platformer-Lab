@@ -32,10 +32,12 @@ class PlaybackSession:
         self.reset()
 
     def reset(self) -> None:
-        # Seed policy sampling too: replaying the same level/seed is reproducible.
-        from stable_baselines3.common.utils import set_random_seed
+        # Only sampled SB3 playback needs the training framework's RNGs.
+        # Deterministic TinyInfer playback remains independent of Torch/SB3.
+        if not self.deterministic:
+            from stable_baselines3.common.utils import set_random_seed
 
-        set_random_seed(self.seed)
+            set_random_seed(self.seed)
         self.observation, self.info = self.env.reset(seed=self.seed)
         self.done = False
         self.action = Action.NOOP

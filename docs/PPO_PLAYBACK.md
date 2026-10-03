@@ -1,7 +1,8 @@
 # PPO 模型可视化播放
 
-播放入口 `scripts/play_ppo.py` 直接加载 SB3 `model.zip`，不需要导出 `.pt` 或 ONNX。
-必须保留同名 `model.json`：脚本检查模型哈希、checkpoint 协议和关卡内容，随后恢复训练时的环境配置。
+播放入口 `scripts/play_ppo.py` 支持 `--backend sb3`（默认）和 `--backend tinyinfer`。
+SB3 加载 `model.zip` 与同名 `model.json`；TinyInfer 加载导出的 `actor.onnx`、同名 `actor.json` 与桥接动态库。
+两种路径都检查模型哈希、环境协议和关卡内容，随后恢复训练时的环境配置。
 
 从项目根目录运行（先安装 `pip install -e '.[training]'`；本机已有 `.venv` 可直接使用）：
 
@@ -25,8 +26,9 @@
 | [ / ] | 减速 / 加速（0.1–8 倍） |
 | Esc / 关闭窗口 | 退出 |
 
-HUD 显示策略模式、速度、动作、进度、回报和单次 `predict()` 耗时。
-默认 deterministic；`--sampled` 启用动作采样。`--seed` 同时控制环境与策略随机数，默认取 checkpoint 的第一个 validation seed。
+HUD 显示后端、策略模式、速度、动作、进度、回报和单次 `predict()` 耗时。
+默认 deterministic；SB3 可用 `--sampled` 启用动作采样。TinyInfer 暂只支持 deterministic，指定 `--sampled` 会报错。
+`--seed` 控制环境与采样随机数；SB3 默认取 checkpoint 的第一个 validation seed，TinyInfer 默认取部署验证 seed。
 `--level-id LEVEL_ID` 指定单个布局，覆盖 task/suite 选择；`--suite train` 或 `ood` 可查看对应课程分组。
 播放列表不提供 final test 分组，避免日常观察影响最终验收。
 
@@ -45,4 +47,22 @@ HUD 显示策略模式、速度、动作、进度、回报和单次 `predict()` 
 环境仍按 checkpoint 的 `action_repeat` 一次推进多个物理 tick。1 倍速以 gameplay 的 `render_fps` 为物理 tick 播放基准；
 渲染展示每次环境决策后的快照，不插入额外物理步。暂停和速度只改变墙钟调度，不修改观测、物理或动作重复次数。
 无窗口模式忽略播放速度与终局等待，按回合快速运行；必须指定正数 `--episodes`。
-TinyInfer 后端尚未接入，目前推理使用 CPU 上的 SB3/PyTorch。
+
+## TinyInfer 播放
+
+先按 [导出与桥接说明](TINYINFER_DEPLOYMENT.md) 准备部署包和动态库，再运行：
+
+```bash
+.venv/bin/python -m scripts.play_ppo \
+  --backend tinyinfer --model runs/tinyinfer_actor_v2/actor.onnx \
+  --library build/tinyinfer_bridge/libplatformer_tinyinfer.dylib \
+  --fuse-relu --task gap
+```
+
+省略 `--fuse-relu` 使用原始图；两者均采用已准备的 CPU 执行计划。
+模型和执行上下文在整个播放过程中复用，重播与切换关卡不会重新加载模型，退出时释放会话。
+TinyInfer 播放不导入 Torch、SB3、ONNX 或 ONNX Runtime；运行依赖可用 `pip install -e '.[inference]'` 安装。
+它仍需要本项目的课程 manifest、内容文件和 Pygame 资源，不能只复制 ONNX 后独立显示游戏。
+`.dylib` 是 Mac 产物；Linux/Windows 使用相应 `.so`/`.dll`。
+
+部署性能测量使用 [独立 benchmark](DEPLOYMENT_PERFORMANCE.md)，HUD 的单次耗时用于观察，不能替代预热、多轮测量和完整调用比较。

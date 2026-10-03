@@ -39,3 +39,26 @@ def load_actor_metadata(model_path: Path) -> dict:
     ):
         raise ValueError("unsupported actor tensor/action contract")
     return data
+
+
+def load_validation_data(model_path: Path, metadata: dict):
+    import numpy as np
+
+    path = Path(model_path).parent / "validation.npz"
+    if file_hash(path) != metadata["validation"]["sha256"]:
+        raise ValueError("validation references do not match deployment metadata")
+    with np.load(path, allow_pickle=False) as data:
+        observations, logits, actions = data["observations"], data["logits"], data["actions"]
+    if (
+        observations.dtype != np.float32
+        or logits.dtype != np.float32
+        or observations.shape != (metadata["validation"]["samples"], metadata["input"]["shape"][1])
+        or logits.shape != (len(observations), metadata["output"]["shape"][1])
+        or actions.shape != (len(observations),)
+        or actions.dtype.kind not in "iu"
+        or not np.isfinite(observations).all()
+        or not np.isfinite(logits).all()
+        or not np.array_equal(logits.argmax(axis=1), actions)
+    ):
+        raise ValueError("invalid validation tensor shapes/types/values/actions")
+    return observations, logits, actions
