@@ -18,6 +18,9 @@ platformer-rl-check = "scripts.validate_rl_readiness:main"
 platformer-train-ppo = "scripts.train_ppo:main"
 platformer-evaluate-ppo = "scripts.evaluate_ppo:main"
 platformer-play-ppo = "scripts.play_ppo:main"
+platformer-export-ppo = "scripts.export_ppo:main"
+platformer-build-tinyinfer = "scripts.build_tinyinfer_bridge:main"
+platformer-validate-tinyinfer = "scripts.validate_tinyinfer:main"
 platformer-diagnose-ppo = "scripts.diagnose_ppo:main"
 platformer-verify-stage-entry = "scripts.verify_stage_entry:main"
 
@@ -33,6 +36,7 @@ training = [
     "torch>=2.2,<3",
 ]
 deployment = [
+    "numpy>=1.26,<3",
     "onnx>=1.16",
     "onnxruntime>=1.18",
 ]
