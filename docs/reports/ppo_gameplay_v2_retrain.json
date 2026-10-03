@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "training_run": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_retrain/run.json",
+  "best_model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_retrain/checkpoints/best_gap.zip",
+  "model_sha256": "0cf78b004c31e213ec5e4abd8381614d52824beb56f4a0fdc977af316fe1a833",
+  "saved_timesteps": 229376,
+  "trained_timesteps": 240112,
+  "training_status": "budget_exhausted",
+  "environment": {
+    "action_repeat": 4,
+    "episode_step_limit": 1024,
+    "curriculum_manifest": "config/curriculum_v4.json",
+    "sensor_range": 240.0,
+    "environment_id": "PlatformerState-v2",
+    "physics": {
+      "player_width": 24.0,
+      "player_height": 32.0,
+      "walk_acceleration": 0.3,
+      "run_acceleration": 0.5,
+      "turn_acceleration": 0.7,
+      "max_walk_speed": 6.0,
+      "max_run_speed": 10.0,
+      "jump_velocity": -13.8,
+      "rising_gravity": 0.5,
+      "falling_gravity": 1.8,
+      "max_fall_speed": 11.0,
+      "max_episode_steps": 36000
+    },
+    "reward": {
+      "progress_scale": 5.0,
+      "coin_reward": 0.5,
+      "success_reward": 10.0,
+      "death_penalty": -10.0,
+      "time_penalty": -0.001
+    },
+    "level_id": "level_1"
+  },
+  "method": "Random initialization; pure PPO; no old weights or imitation; single training seed. No held-out test/OOD used.",
+  "prerequisite_gate": {
+    "passed": false,
+    "tasks": {
+      "flat": {
+        "passed": true,
+        "layouts": 4,
+        "qualified_layouts": 4,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.95,
+        "max_success_steps": 128
+      },
+      "obstacle": {
+        "passed": true,
+        "layouts": 40,
+        "qualified_layouts": 40,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 160
+      },
+      "gap": {
+        "passed": false,
+        "layouts": 54,
+        "qualified_layouts": 45,
+        "qualified_fraction": 0.8333333333333334,
+        "failures": {
+          "v2_gap_validation_01": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v2_gap_validation_02": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v2_gap_validation_13": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v2_gap_validation_14": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v2_gap_validation_25": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v2_gap_validation_26": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v4_gap_validation_05": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v4_gap_validation_11": [
+            "success_rate",
+            "success_steps"
+          ],
+          "v4_gap_validation_17": [
+            "success_rate",
+            "success_steps"
+          ]
+        },
+        "success_threshold": 0.8,
+        "max_success_steps": 192
+      }
+    }
+  },
+  "mixed_transfer_note": "Validation-only transfer probe; mixed not trained or mastered; this does not replace prerequisite gates.",
+  "mixed_transfer_baseline": {
+    "agent": "ppo",
+    "episodes": 36,
+    "success_rate": 0.8333333333333334,
+    "death_rate": 0.16666666666666666,
+    "truncation_rate": 0.0,
+    "mean_return": 11.38694837049089,
+    "mean_progress": 0.9537118963204002,
+    "mean_steps": 48.27777777777778,
+    "mean_coins": 0.0,
+    "mean_success_steps": 50.333333333333336
+  },
+  "per_task": {
+    "flat": {
+      "layouts": 4,
+      "successes": 4,
+      "mean_success_steps": 19.0
+    },
+    "obstacle": {
+      "layouts": 40,
+      "successes": 40,
+      "mean_success_steps": 35.9
+    },
+    "gap": {
+      "layouts": 54,
+      "successes": 45,
+      "mean_success_steps": 37.77777777777778
+    }
+  },
+  "full_verification_report": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_retrain/best_gap_verified.json"
+}
