@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_imitation/model.zip",
+  "model_sha256": "7c847b19c44da6a2012ef82cded57f8580d915d5ca85ab47c303f6f582892b55",
+  "signature_hash": "678b25fd13ccf6b42a4f00d05c0f73e167cff8cc49866fc4148533dd757dde15",
+  "saved_timesteps": 16384,
+  "environment": {
+    "action_repeat": 4,
+    "episode_step_limit": 1024,
+    "curriculum_manifest": "config/curriculum_v4.json",
+    "sensor_range": 240.0,
+    "environment_id": "PlatformerState-v1",
+    "physics": {
+      "player_width": 24.0,
+      "player_height": 32.0,
+      "walk_acceleration": 0.15,
+      "run_acceleration": 0.3,
+      "turn_acceleration": 0.35,
+      "max_walk_speed": 6.0,
+      "max_run_speed": 12.0,
+      "jump_velocity": -10.5,
+      "rising_gravity": 0.3,
+      "falling_gravity": 1.0,
+      "max_fall_speed": 11.0,
+      "max_episode_steps": 36000
+    },
+    "reward": {
+      "progress_scale": 5.0,
+      "coin_reward": 0.5,
+      "success_reward": 10.0,
+      "death_penalty": -10.0,
+      "time_penalty": -0.001
+    },
+    "level_id": "level_1"
+  },
+  "note": "Pre-mixed transfer baseline on saved v1 physics; no test/OOD, training or checkpoint selection. Deterministic geometry does not vary with environment seed. Stochastic seeds measure action sampling, not independent training runs.",
+  "mixed_baseline_gate": {
+    "passed": true,
+    "tasks": {
+      "mixed": {
+        "passed": true,
+        "layouts": 36,
+        "qualified_layouts": 36,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 256
+      }
+    }
+  },
+  "mixed_stochastic_gate": {
+    "passed": true,
+    "tasks": {
+      "mixed": {
+        "passed": true,
+        "layouts": 36,
+        "qualified_layouts": 36,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 256
+      }
+    }
+  },
+  "date": "2026-10-03",
+  "model_status": "ready_for_stage mixed; no mixed training in checkpoint history",
+  "training_method": "rule demonstrations on flat/obstacle/gap plus 16384 PPO transitions; not pure PPO",
+  "validation_seeds": [
+    100
+  ],
+  "stochastic_action_seeds": [
+    200,
+    201,
+    202,
+    203,
+    204
+  ],
+  "diagnostic_seeds": [
+    200
+  ],
+  "results": {
+    "validation": {
+      "summary": {
+        "agent": "ppo",
+        "episodes": 36,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.955,
+        "mean_progress": 1.0,
+        "mean_steps": 45.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 45.0
+      },
+      "unique_layouts": 36,
+      "min_steps": 44,
+      "max_steps": 46
+    },
+    "train": {
+      "summary": {
+        "agent": "ppo",
+        "episodes": 36,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.955,
+        "mean_progress": 1.0,
+        "mean_steps": 45.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 45.0
+      },
+      "unique_layouts": 36,
+      "min_steps": 44,
+      "max_steps": 46
+    },
+    "rule-jump": {
+      "summary": {
+        "agent": "rule-jump",
+        "episodes": 36,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.955,
+        "mean_progress": 1.0,
+        "mean_steps": 45.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 45.0
+      },
+      "unique_layouts": 36,
+      "min_steps": 44,
+      "max_steps": 46
+    },
+    "move-right": {
+      "summary": {
+        "agent": "move-right",
+        "episodes": 36,
+        "success_rate": 0.0,
+        "death_rate": 0.0,
+        "truncation_rate": 1.0,
+        "mean_return": -0.5080918729125715,
+        "mean_progress": 0.10318162541748586,
+        "mean_steps": 1024.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "unique_layouts": 36,
+      "min_steps": 1024,
+      "max_steps": 1024
+    },
+    "stochastic_validation": {
+      "summary": {
+        "agent": "stochastic",
+        "episodes": 180,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.955,
+        "mean_progress": 1.0,
+        "mean_steps": 45.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 45.0
+      },
+      "unique_layouts": 36,
+      "min_steps": 44,
+      "max_steps": 46,
+      "behavior": {
+        "mean_effective_jumps": 2.566666666666667,
+        "mean_landings": 1.8333333333333333,
+        "landed_after_gap_rate": 0.8333333333333334
+      }
+    },
+    "deterministic": {
+      "summary": {
+        "agent": "deterministic",
+        "episodes": 36,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.955,
+        "mean_progress": 1.0,
+        "mean_steps": 45.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": 45.0
+      },
+      "unique_layouts": 36,
+      "min_steps": 44,
+      "max_steps": 46,
+      "behavior": {
+        "mean_effective_jumps": 2.75,
+        "mean_landings": 1.8333333333333333,
+        "landed_after_gap_rate": 0.8333333333333334
+      }
+    },
+    "fixed_observation": {
+      "summary": {
+        "agent": "fixed_observation",
+        "episodes": 36,
+        "success_rate": 0.0,
+        "death_rate": 0.0,
+        "truncation_rate": 1.0,
+        "mean_return": -0.5080918729125715,
+        "mean_progress": 0.10318162541748586,
+        "mean_steps": 1024.0,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "unique_layouts": 36,
+      "min_steps": 1024,
+      "max_steps": 1024,
+      "behavior": {
+        "mean_effective_jumps": 0.0,
+        "mean_landings": 0.0,
+        "landed_after_gap_rate": 0.0
+      }
+    }
+  },
+  "mixed_validation_protocol": {
+    "environment_id": "PlatformerState-v1",
+    "action_version": 1,
+    "observation_version": 1,
+    "reward_version": 1,
+    "observation_size": 15,
+    "observation_indices": {
+      "PLAYER_X": 0,
+      "PLAYER_Y": 1,
+      "VELOCITY_X": 2,
+      "VELOCITY_Y": 3,
+      "GROUNDED": 4,
+      "FACING": 5,
+      "PROGRESS": 6,
+      "GROUND_EDGE_DISTANCE": 7,
+      "OBSTACLE_DISTANCE": 8,
+      "OBSTACLE_HEIGHT": 9,
+      "COIN_DELTA_X": 10,
+      "COIN_DELTA_Y": 11,
+      "COIN_RATIO": 12,
+      "REMAINING_TIME": 13,
+      "JUMP_HELD": 14
+    },
+    "action_repeat": 4,
+    "episode_step_limit": 1024,
+    "sensor_range": 240.0,
+    "physics": {
+      "player_width": 24.0,
+      "player_height": 32.0,
+      "walk_acceleration": 0.15,
+      "run_acceleration": 0.3,
+      "turn_acceleration": 0.35,
+      "max_walk_speed": 6.0,
+      "max_run_speed": 12.0,
+      "jump_velocity": -10.5,
+      "rising_gravity": 0.3,
+      "falling_gravity": 1.0,
+      "max_fall_speed": 11.0,
+      "max_episode_steps": 36000
+    },
+    "reward": {
+      "progress_scale": 5.0,
+      "coin_reward": 0.5,
+      "success_reward": 10.0,
+      "death_penalty": -10.0,
+      "time_penalty": -0.001
+    },
+    "levels": {
+      "v2_mixed_validation_00": "b0af4bc3a2f04bd6ca210f0eb47117f666737d2147c1956a8856d45f03cbc8fb",
+      "v2_mixed_validation_01": "da67d45cd107fa6802c96eb8c6899acc2c1cd17cfaf5397bcfdb3400ec401616",
+      "v2_mixed_validation_02": "7646d64817e0ef985882818c060a614d79979665bb8fe532186a47a18f82d0b0",
+      "v2_mixed_validation_03": "bcc254a24ad92d75d75fbcb4336991a3bda36d4e0d49511fef89dfa22d5c2bfb",
+      "v2_mixed_validation_04": "d33f0062af757230b475eb874daf0fc4a27defe73896943a60d9c9b46bc489aa",
+      "v2_mixed_validation_05": "e7771bb846eac841082d0297e6f3babd16c664378a9026f654085da05a98c17c",
+      "v2_mixed_validation_06": "def37f34cd24ea68b7502b50caeff4c9e72a7e5fe54b03a4b3364af0490daf6b",
+      "v2_mixed_validation_07": "023ea046a47c1315c25e947a6cc8fb7cb05de9987172219280aa525949e24479",
+      "v2_mixed_validation_08": "83718bffa4f11871160061b7ccf0c120276f902b7da1a89e552e0dff75a877d6",
+      "v2_mixed_validation_09": "e6b535541df831fe9a4563101238531022ed98e35e5d832c6058c3060e8b4cdc",
+      "v2_mixed_validation_10": "594161212726e399f437d9c9f6e41d71476ea97ad8f3567481603d30064c5232",
+      "v2_mixed_validation_11": "b72ac4c4014a3b69ecb4519fda16adcdd4bac483ee64b8033eefb3e425bbbb2a",
+      "v2_mixed_validation_12": "66ef8ac316a2d2b6d036f2da251cf8d6e1b36005a79f7cc750ce0c37ec44268c",
+      "v2_mixed_validation_13": "36ef59f9f5b01fd0bf0e0eb181d6d4ea2c0a1478bd05f5dc2ea588b49b3da2d0",
+      "v2_mixed_validation_14": "00c74cdef06a894befd4806f87009d04862d8f3cec64f55c2199f0474675c7f1",
+      "v2_mixed_validation_15": "45a2c05278ab19b137eaece778f5a34bdb94260db63496873fa9e192fae8699d",
+      "v2_mixed_validation_16": "301a68d55d5540bce16752d11dc261440d5e3e17138705bf1e7a2974b087c2e0",
+      "v2_mixed_validation_17": "7aed9a65c7ef5ba4251e50b4f31f70ee7b97ed7ed565cdc10868576dc16c15a3",
+      "v2_mixed_validation_18": "b980d6e40cb07e3c0628448f7e0f3aa908683af1a803e5ec330f8e7775679675",
+      "v2_mixed_validation_19": "2c4dc21f8b88c7d7825853e056395d730a4b76478a30424ec9ba58a60bb35c95",
+      "v2_mixed_validation_20": "8cf3e57326e92fc2ec3bca7add917b2a52bfccb85658575fc4a3af3ecea9661d",
+      "v2_mixed_validation_21": "da8a60ec1b0756dcbb1379ea42ff400864d677d5141903a7c321b9ee423734ac",
+      "v2_mixed_validation_22": "2f57187789c6e338b63c43b0badba11da0bb5fcf7ea595a5a4bba62a8b2265e1",
+      "v2_mixed_validation_23": "912d6024ce3814b078da2065b4418705a9ae1b22831fde6961ceb076788963f4",
+      "v2_mixed_validation_24": "7a78f4d345d7eedf6fd7b56a0102a3a39b973b250f44bd6135d846c366df0d31",
+      "v2_mixed_validation_25": "6c2c16d1d8a024044d627118367575af14f7c0ee37fe0b235c3c55948fd52647",
+      "v2_mixed_validation_26": "4c6890082a031e37583a98e8a9874daf4aea2775d2efb11fc339d0c57c4fca47",
+      "v2_mixed_validation_27": "f2350cf40bf31b63ddb9182bb30df2533770ea5966b03e9fe48537f489957b5e",
+      "v2_mixed_validation_28": "381a57f7237bafcfaf481c9a038316a81b65b35001de60014fd2be9bb67d059c",
+      "v2_mixed_validation_29": "aaa5d0921bc69d9fa27f859e89c4de95abd95a7456c151ab7a6504a1a782368d",
+      "v2_mixed_validation_30": "a8e37f1038fc923bcb85a49ac367cb9d42397fa14139dd183dee177acdf4ec87",
+      "v2_mixed_validation_31": "5df1ad1d7de9a1f1b12fe9c2fa49595cd0b2536c5e8ad99c632eb94a4f7e114f",
+      "v2_mixed_validation_32": "8273899e4d483daccaf019adae45f13d6746b01a64a7935e28fd33ee266440f4",
+      "v2_mixed_validation_33": "4598ce095167d7227f1e5b8331c6df8048d9ee7b21184497f9b4b8751e25d12d",
+      "v2_mixed_validation_34": "443bddf20b10ac44673784f8d4a424cf12f3598e31f3ff0bc6f5367dd1c03963",
+      "v2_mixed_validation_35": "28da501bdc322f6803da99517a2f4b2f793dd8968efa33a63ac23d7aaad41071"
+    },
+    "curriculum_generator_version": 4,
+    "curriculum_manifest_hash": "a01dc0af6f43200aad11850c385927f3ee2be9afcee66dfff1314754269f1a98"
+  },
+  "artifacts": {
+    "full_report": "runs/mixed_baseline_v1/report.json",
+    "sampling_diagnostics": "runs/mixed_baseline_v1/stochastic_diagnostics.json",
+    "observation_diagnostics": "runs/mixed_baseline_v1/observation_diagnostics.json",
+    "runner": "runs/mixed_baseline_v1/evaluate.py"
+  }
+}
