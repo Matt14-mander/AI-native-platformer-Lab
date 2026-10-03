@@ -1,0 +1,815 @@
+{
+  "schema_version": 1,
+  "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_retrain/checkpoints/best_gap.zip",
+  "model_sha256": "0cf78b004c31e213ec5e4abd8381614d52824beb56f4a0fdc977af316fe1a833",
+  "saved_timesteps": 229376,
+  "source_signature_hash": "ec046dc5a228621e90916c0ce9cae11f0aba23ada83da28b8f11ad55984dc223",
+  "source_protocol_verified": true,
+  "target_environment": {
+    "action_repeat": 4,
+    "episode_step_limit": 1024,
+    "curriculum_manifest": "config/curriculum_v5.json",
+    "sensor_range": 240.0,
+    "environment_id": "PlatformerState-v2",
+    "physics": {
+      "player_width": 24.0,
+      "player_height": 32.0,
+      "walk_acceleration": 0.3,
+      "run_acceleration": 0.5,
+      "turn_acceleration": 0.7,
+      "max_walk_speed": 6.0,
+      "max_run_speed": 10.0,
+      "jump_velocity": -13.8,
+      "rising_gravity": 0.5,
+      "falling_gravity": 1.8,
+      "max_fall_speed": 11.0,
+      "max_episode_steps": 36000
+    },
+    "reward": {
+      "progress_scale": 5.0,
+      "coin_reward": 0.5,
+      "success_reward": 10.0,
+      "death_penalty": -10.0,
+      "time_penalty": -0.001
+    },
+    "level_id": "level_1"
+  },
+  "interpretation": "Frozen policy; no training, tuning or checkpoint selection. For a v4-trained model this is zero-shot transfer from isolated skills, not post-v5-training generalization. Sampling seeds are not independent training runs. Test/OOD are excluded. A source trained on these cells requires a new holdout design.",
+  "deterministic_seed": 100,
+  "sampling_seeds": [
+    200,
+    201,
+    202
+  ],
+  "date": "2026-10-04",
+  "coverage": {
+    "train": {
+      "new_layouts": 64,
+      "new_cells": 16
+    },
+    "validation": {
+      "new_layouts": 24,
+      "new_cells": 6
+    },
+    "test": {
+      "new_layouts": 20,
+      "new_cells": 5
+    },
+    "ood": {
+      "new_layouts": 12,
+      "new_cells": 3
+    }
+  },
+  "total_layouts": 554,
+  "cohorts": {
+    "legacy_validation": {
+      "summary": {
+        "agent": "ppo",
+        "episodes": 36,
+        "success_rate": 0.8333333333333334,
+        "death_rate": 0.16666666666666666,
+        "truncation_rate": 0.0,
+        "mean_return": 11.38694837049089,
+        "mean_progress": 0.9537118963204002,
+        "mean_steps": 48.27777777777778,
+        "mean_coins": 0.0,
+        "mean_success_steps": 50.333333333333336
+      },
+      "strata": {
+        "cell/48/104/1083": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/104/723": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/104/843": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/104/963": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/134/1083": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/134/723": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/134/843": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/134/963": {
+          "episodes": 3,
+          "successes": 0,
+          "deaths": 3,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 0.0
+        },
+        "cell/48/164/1083": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/164/723": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/164/843": {
+          "episodes": 3,
+          "successes": 3,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 1.0
+        },
+        "cell/48/164/963": {
+          "episodes": 3,
+          "successes": 0,
+          "deaths": 3,
+          "timeouts": 0,
+          "unique_layouts": 3,
+          "success_rate": 0.0
+        },
+        "gap_width/104": {
+          "episodes": 12,
+          "successes": 12,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 12,
+          "success_rate": 1.0
+        },
+        "gap_width/134": {
+          "episodes": 12,
+          "successes": 9,
+          "deaths": 3,
+          "timeouts": 0,
+          "unique_layouts": 12,
+          "success_rate": 0.75
+        },
+        "gap_width/164": {
+          "episodes": 12,
+          "successes": 9,
+          "deaths": 3,
+          "timeouts": 0,
+          "unique_layouts": 12,
+          "success_rate": 0.75
+        },
+        "height/48": {
+          "episodes": 36,
+          "successes": 30,
+          "deaths": 6,
+          "timeouts": 0,
+          "unique_layouts": 36,
+          "success_rate": 0.8333333333333334
+        },
+        "recovery/1083": {
+          "episodes": 9,
+          "successes": 9,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 9,
+          "success_rate": 1.0
+        },
+        "recovery/723": {
+          "episodes": 9,
+          "successes": 9,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 9,
+          "success_rate": 1.0
+        },
+        "recovery/843": {
+          "episodes": 9,
+          "successes": 9,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 9,
+          "success_rate": 1.0
+        },
+        "recovery/963": {
+          "episodes": 9,
+          "successes": 3,
+          "deaths": 6,
+          "timeouts": 0,
+          "unique_layouts": 9,
+          "success_rate": 0.3333333333333333
+        }
+      },
+      "controls": {
+        "rule-jump": {
+          "agent": "rule-jump",
+          "episodes": 36,
+          "success_rate": 1.0,
+          "death_rate": 0.0,
+          "truncation_rate": 0.0,
+          "mean_return": 14.949666666666666,
+          "mean_progress": 1.0,
+          "mean_steps": 50.333333333333336,
+          "mean_coins": 0.0,
+          "mean_success_steps": 50.333333333333336
+        },
+        "move-right": {
+          "agent": "move-right",
+          "episodes": 36,
+          "success_rate": 0.0,
+          "death_rate": 0.0,
+          "truncation_rate": 1.0,
+          "mean_return": -0.5080918729125714,
+          "mean_progress": 0.10318162541748586,
+          "mean_steps": 1024.0,
+          "mean_coins": 0.0,
+          "mean_success_steps": null
+        }
+      }
+    },
+    "new_train_probe": {
+      "summary": {
+        "agent": "ppo",
+        "episodes": 64,
+        "success_rate": 0.8125,
+        "death_rate": 0.1875,
+        "truncation_rate": 0.0,
+        "mean_return": 10.905011752377547,
+        "mean_progress": 0.9389711004755096,
+        "mean_steps": 39.84375,
+        "mean_coins": 0.0,
+        "mean_success_steps": 43.03846153846154
+      },
+      "strata": {
+        "cell/48/100/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/48/130/400": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/48/130/760": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/48/160/400": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/48/160/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/64/100/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/64/100/760": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/64/130/400": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/64/130/760": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/64/160/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/80/100/400": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/80/100/760": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/80/130/400": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/80/130/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/80/160/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/80/160/760": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "gap_width/100": {
+          "episodes": 20,
+          "successes": 16,
+          "deaths": 4,
+          "timeouts": 0,
+          "unique_layouts": 20,
+          "success_rate": 0.8
+        },
+        "gap_width/130": {
+          "episodes": 24,
+          "successes": 22,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 24,
+          "success_rate": 0.9166666666666666
+        },
+        "gap_width/160": {
+          "episodes": 20,
+          "successes": 14,
+          "deaths": 6,
+          "timeouts": 0,
+          "unique_layouts": 20,
+          "success_rate": 0.7
+        },
+        "height/48": {
+          "episodes": 20,
+          "successes": 16,
+          "deaths": 4,
+          "timeouts": 0,
+          "unique_layouts": 20,
+          "success_rate": 0.8
+        },
+        "height/64": {
+          "episodes": 20,
+          "successes": 16,
+          "deaths": 4,
+          "timeouts": 0,
+          "unique_layouts": 20,
+          "success_rate": 0.8
+        },
+        "height/80": {
+          "episodes": 24,
+          "successes": 20,
+          "deaths": 4,
+          "timeouts": 0,
+          "unique_layouts": 24,
+          "success_rate": 0.8333333333333334
+        },
+        "recovery/400": {
+          "episodes": 20,
+          "successes": 20,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 20,
+          "success_rate": 1.0
+        },
+        "recovery/560": {
+          "episodes": 24,
+          "successes": 12,
+          "deaths": 12,
+          "timeouts": 0,
+          "unique_layouts": 24,
+          "success_rate": 0.5
+        },
+        "recovery/760": {
+          "episodes": 20,
+          "successes": 20,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 20,
+          "success_rate": 1.0
+        }
+      },
+      "controls": {
+        "rule-jump": {
+          "agent": "rule-jump",
+          "episodes": 64,
+          "success_rate": 1.0,
+          "death_rate": 0.0,
+          "truncation_rate": 0.0,
+          "mean_return": 14.95984375,
+          "mean_progress": 1.0,
+          "mean_steps": 40.15625,
+          "mean_coins": 0.0,
+          "mean_success_steps": 40.15625
+        },
+        "move-right": {
+          "agent": "move-right",
+          "episodes": 64,
+          "success_rate": 0.0,
+          "death_rate": 0.0,
+          "truncation_rate": 1.0,
+          "mean_return": -0.0070966054171200145,
+          "mean_progress": 0.20338067891657347,
+          "mean_steps": 1024.0,
+          "mean_coins": 0.0,
+          "mean_success_steps": null
+        }
+      }
+    },
+    "new_composition_validation": {
+      "summary": {
+        "agent": "ppo",
+        "episodes": 24,
+        "success_rate": 0.8333333333333334,
+        "death_rate": 0.16666666666666666,
+        "truncation_rate": 0.0,
+        "mean_return": 11.362856195242564,
+        "mean_progress": 0.947254572381846,
+        "mean_steps": 40.083333333333336,
+        "mean_coins": 0.0,
+        "mean_success_steps": 42.9
+      },
+      "strata": {
+        "cell/48/100/400": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/48/130/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/48/160/760": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/64/160/400": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "cell/80/100/560": {
+          "episodes": 4,
+          "successes": 2,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 0.5
+        },
+        "cell/80/130/760": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "gap_width/100": {
+          "episodes": 8,
+          "successes": 6,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 8,
+          "success_rate": 0.75
+        },
+        "gap_width/130": {
+          "episodes": 8,
+          "successes": 6,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 8,
+          "success_rate": 0.75
+        },
+        "gap_width/160": {
+          "episodes": 8,
+          "successes": 8,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 8,
+          "success_rate": 1.0
+        },
+        "height/48": {
+          "episodes": 12,
+          "successes": 10,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 12,
+          "success_rate": 0.8333333333333334
+        },
+        "height/64": {
+          "episodes": 4,
+          "successes": 4,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 4,
+          "success_rate": 1.0
+        },
+        "height/80": {
+          "episodes": 8,
+          "successes": 6,
+          "deaths": 2,
+          "timeouts": 0,
+          "unique_layouts": 8,
+          "success_rate": 0.75
+        },
+        "recovery/400": {
+          "episodes": 8,
+          "successes": 8,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 8,
+          "success_rate": 1.0
+        },
+        "recovery/560": {
+          "episodes": 8,
+          "successes": 4,
+          "deaths": 4,
+          "timeouts": 0,
+          "unique_layouts": 8,
+          "success_rate": 0.5
+        },
+        "recovery/760": {
+          "episodes": 8,
+          "successes": 8,
+          "deaths": 0,
+          "timeouts": 0,
+          "unique_layouts": 8,
+          "success_rate": 1.0
+        }
+      },
+      "controls": {
+        "rule-jump": {
+          "agent": "rule-jump",
+          "episodes": 24,
+          "success_rate": 1.0,
+          "death_rate": 0.0,
+          "truncation_rate": 0.0,
+          "mean_return": 14.959833333333334,
+          "mean_progress": 1.0,
+          "mean_steps": 40.166666666666664,
+          "mean_coins": 0.0,
+          "mean_success_steps": 40.166666666666664
+        },
+        "move-right": {
+          "agent": "move-right",
+          "episodes": 24,
+          "success_rate": 0.0,
+          "death_rate": 0.0,
+          "truncation_rate": 1.0,
+          "mean_return": -0.0059684822200481435,
+          "mean_progress": 0.20360630355598783,
+          "mean_steps": 1024.0,
+          "mean_coins": 0.0,
+          "mean_success_steps": null
+        }
+      }
+    }
+  },
+  "sampling": {
+    "summary": {
+      "agent": "stochastic",
+      "episodes": 72,
+      "success_rate": 0.6666666666666666,
+      "death_rate": 0.3333333333333333,
+      "truncation_rate": 0.0,
+      "mean_return": 7.8166048277840945,
+      "mean_progress": 0.9047987433345968,
+      "mean_steps": 40.72222222222222,
+      "mean_coins": 0.0,
+      "mean_success_steps": 43.166666666666664
+    },
+    "strata": {
+      "cell/48/100/400": {
+        "episodes": 12,
+        "successes": 11,
+        "deaths": 1,
+        "timeouts": 0,
+        "unique_layouts": 4,
+        "success_rate": 0.9166666666666666
+      },
+      "cell/48/130/560": {
+        "episodes": 12,
+        "successes": 5,
+        "deaths": 7,
+        "timeouts": 0,
+        "unique_layouts": 4,
+        "success_rate": 0.4166666666666667
+      },
+      "cell/48/160/760": {
+        "episodes": 12,
+        "successes": 8,
+        "deaths": 4,
+        "timeouts": 0,
+        "unique_layouts": 4,
+        "success_rate": 0.6666666666666666
+      },
+      "cell/64/160/400": {
+        "episodes": 12,
+        "successes": 10,
+        "deaths": 2,
+        "timeouts": 0,
+        "unique_layouts": 4,
+        "success_rate": 0.8333333333333334
+      },
+      "cell/80/100/560": {
+        "episodes": 12,
+        "successes": 6,
+        "deaths": 6,
+        "timeouts": 0,
+        "unique_layouts": 4,
+        "success_rate": 0.5
+      },
+      "cell/80/130/760": {
+        "episodes": 12,
+        "successes": 8,
+        "deaths": 4,
+        "timeouts": 0,
+        "unique_layouts": 4,
+        "success_rate": 0.6666666666666666
+      },
+      "gap_width/100": {
+        "episodes": 24,
+        "successes": 17,
+        "deaths": 7,
+        "timeouts": 0,
+        "unique_layouts": 8,
+        "success_rate": 0.7083333333333334
+      },
+      "gap_width/130": {
+        "episodes": 24,
+        "successes": 13,
+        "deaths": 11,
+        "timeouts": 0,
+        "unique_layouts": 8,
+        "success_rate": 0.5416666666666666
+      },
+      "gap_width/160": {
+        "episodes": 24,
+        "successes": 18,
+        "deaths": 6,
+        "timeouts": 0,
+        "unique_layouts": 8,
+        "success_rate": 0.75
+      },
+      "height/48": {
+        "episodes": 36,
+        "successes": 24,
+        "deaths": 12,
+        "timeouts": 0,
+        "unique_layouts": 12,
+        "success_rate": 0.6666666666666666
+      },
+      "height/64": {
+        "episodes": 12,
+        "successes": 10,
+        "deaths": 2,
+        "timeouts": 0,
+        "unique_layouts": 4,
+        "success_rate": 0.8333333333333334
+      },
+      "height/80": {
+        "episodes": 24,
+        "successes": 14,
+        "deaths": 10,
+        "timeouts": 0,
+        "unique_layouts": 8,
+        "success_rate": 0.5833333333333334
+      },
+      "recovery/400": {
+        "episodes": 24,
+        "successes": 21,
+        "deaths": 3,
+        "timeouts": 0,
+        "unique_layouts": 8,
+        "success_rate": 0.875
+      },
+      "recovery/560": {
+        "episodes": 24,
+        "successes": 11,
+        "deaths": 13,
+        "timeouts": 0,
+        "unique_layouts": 8,
+        "success_rate": 0.4583333333333333
+      },
+      "recovery/760": {
+        "episodes": 24,
+        "successes": 16,
+        "deaths": 8,
+        "timeouts": 0,
+        "unique_layouts": 8,
+        "success_rate": 0.6666666666666666
+      }
+    }
+  },
+  "failures": {
+    "deterministic_new_train": 12,
+    "deterministic_new_validation": 4,
+    "pattern": "All deterministic failures are recovery=560 and obstacle approach=240. In four validation failures the second jump starts 455px before the gap edge immediately after first landing.",
+    "events_report": "runs/mixed_generalization_v5_events.json"
+  },
+  "full_report": "runs/mixed_generalization_v5_v2.json"
+}
