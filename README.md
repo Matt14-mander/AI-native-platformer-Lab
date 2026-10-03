@@ -121,6 +121,14 @@ python -m scripts.train_ppo --timesteps 4096 --output-dir runs/ppo_smoke
 
 ## 架构
 
+PPO checkpoint 可直接用 Pygame 播放，支持暂停、重播、关卡切换和速度调节：
+
+```bash
+python -m scripts.play_ppo --model runs/mixed_prerequisites_imitation/model.zip --task gap
+```
+
+参数和无窗口验证方式见 [PPO 模型播放](docs/PPO_PLAYBACK.md)。
+
 ```text
 Keyboard / Scripted / PPO / Jev
               │
