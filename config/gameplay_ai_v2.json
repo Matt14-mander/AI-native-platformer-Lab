@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "level_id": "level_1",
+  "seed": 0,
+  "render_fps": 60,
+  "terminal_display_ms": 1000,
+  "physics": {
+    "player_width": 24.0,
+    "player_height": 32.0,
+    "walk_acceleration": 0.3,
+    "run_acceleration": 0.5,
+    "turn_acceleration": 0.7,
+    "max_walk_speed": 6.0,
+    "max_run_speed": 10.0,
+    "jump_velocity": -17.5,
+    "rising_gravity": 0.8,
+    "falling_gravity": 0.8,
+    "max_fall_speed": 11.0,
+    "max_episode_steps": 36000
+  }
+}

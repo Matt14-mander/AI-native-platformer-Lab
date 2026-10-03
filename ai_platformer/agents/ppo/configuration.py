@@ -13,7 +13,11 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
     config = deepcopy(config)
     if config.get("schema_version") not in (1, 2):
         raise ValueError("unsupported PPO config version")
-    if config.get("environment_id") not in {"PlatformerState-v0", "PlatformerState-v1"}:
+    if config.get("environment_id") not in {
+        "PlatformerState-v0",
+        "PlatformerState-v1",
+        "PlatformerState-v2",
+    }:
         raise ValueError("unsupported environment_id")
     for key in ("seed", "total_timesteps", "n_envs", "torch_threads"):
         value = config.get(key, 1 if key == "torch_threads" else None)

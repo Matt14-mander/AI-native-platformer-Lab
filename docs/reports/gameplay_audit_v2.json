@@ -1,0 +1,175 @@
+{
+  "profiles": {
+    "gameplay": {
+      "physics": {
+        "player_width": 24.0,
+        "player_height": 32.0,
+        "walk_acceleration": 0.15,
+        "run_acceleration": 0.3,
+        "turn_acceleration": 0.35,
+        "max_walk_speed": 6.0,
+        "max_run_speed": 12.0,
+        "jump_velocity": -10.5,
+        "rising_gravity": 0.3,
+        "falling_gravity": 1.0,
+        "max_fall_speed": 11.0,
+        "max_episode_steps": 36000
+      },
+      "jumps": [
+        {
+          "hold_ticks": 1,
+          "height_px": 57.199999999999875,
+          "apex_ticks": 11,
+          "airtime_ticks": 22,
+          "airtime_seconds": 0.36666666666666664,
+          "distance_px": 0.0
+        },
+        {
+          "hold_ticks": 4,
+          "height_px": 77.7000000000001,
+          "apex_ticks": 13,
+          "airtime_ticks": 26,
+          "airtime_seconds": 0.43333333333333335,
+          "distance_px": 0.0
+        },
+        {
+          "hold_ticks": 8,
+          "height_px": 102.00000000000011,
+          "apex_ticks": 16,
+          "airtime_ticks": 31,
+          "airtime_seconds": 0.5166666666666667,
+          "distance_px": 0.0
+        },
+        {
+          "hold_ticks": 300,
+          "height_px": 178.49999999999994,
+          "apex_ticks": 34,
+          "airtime_ticks": 57,
+          "airtime_seconds": 0.95,
+          "distance_px": 0.0
+        }
+      ],
+      "full_speed_run_jump": {
+        "hold_ticks": 300,
+        "height_px": 178.49999999999994,
+        "apex_ticks": 34,
+        "airtime_ticks": 57,
+        "airtime_seconds": 0.95,
+        "distance_px": 684.0
+      },
+      "continuous_hold": {
+        "ticks": 600,
+        "launches": 1,
+        "final_grounded": true
+      },
+      "movement": {
+        "walk": {
+          "acceleration_ticks": 40,
+          "acceleration_seconds": 0.6666666666666666,
+          "full_speed": 6.0,
+          "speed_after_walk_action": 6.0,
+          "stop_ticks_after_walk_switch": 40
+        },
+        "run": {
+          "acceleration_ticks": 40,
+          "acceleration_seconds": 0.6666666666666666,
+          "full_speed": 12.0,
+          "speed_after_walk_action": 6.0,
+          "stop_ticks_after_walk_switch": 40
+        }
+      },
+      "checks": {
+        "hold_does_not_retrigger": true,
+        "release_and_press_retriggers": true,
+        "jumps_bounded": true
+      },
+      "fixed_height": false
+    },
+    "gameplay_ai_v2": {
+      "physics": {
+        "player_width": 24.0,
+        "player_height": 32.0,
+        "walk_acceleration": 0.3,
+        "run_acceleration": 0.5,
+        "turn_acceleration": 0.7,
+        "max_walk_speed": 6.0,
+        "max_run_speed": 10.0,
+        "jump_velocity": -17.5,
+        "rising_gravity": 0.8,
+        "falling_gravity": 0.8,
+        "max_fall_speed": 11.0,
+        "max_episode_steps": 36000
+      },
+      "jumps": [
+        {
+          "hold_ticks": 1,
+          "height_px": 182.69999999999982,
+          "apex_ticks": 21,
+          "airtime_ticks": 45,
+          "airtime_seconds": 0.75,
+          "distance_px": 0.0
+        },
+        {
+          "hold_ticks": 4,
+          "height_px": 182.69999999999982,
+          "apex_ticks": 21,
+          "airtime_ticks": 45,
+          "airtime_seconds": 0.75,
+          "distance_px": 0.0
+        },
+        {
+          "hold_ticks": 8,
+          "height_px": 182.69999999999982,
+          "apex_ticks": 21,
+          "airtime_ticks": 45,
+          "airtime_seconds": 0.75,
+          "distance_px": 0.0
+        },
+        {
+          "hold_ticks": 300,
+          "height_px": 182.69999999999982,
+          "apex_ticks": 21,
+          "airtime_ticks": 45,
+          "airtime_seconds": 0.75,
+          "distance_px": 0.0
+        }
+      ],
+      "full_speed_run_jump": {
+        "hold_ticks": 300,
+        "height_px": 182.69999999999982,
+        "apex_ticks": 21,
+        "airtime_ticks": 45,
+        "airtime_seconds": 0.75,
+        "distance_px": 450.0
+      },
+      "continuous_hold": {
+        "ticks": 600,
+        "launches": 1,
+        "final_grounded": true
+      },
+      "movement": {
+        "walk": {
+          "acceleration_ticks": 20,
+          "acceleration_seconds": 0.3333333333333333,
+          "full_speed": 5.999999999999998,
+          "speed_after_walk_action": 6.0,
+          "stop_ticks_after_walk_switch": 21
+        },
+        "run": {
+          "acceleration_ticks": 20,
+          "acceleration_seconds": 0.3333333333333333,
+          "full_speed": 10.0,
+          "speed_after_walk_action": 6.0,
+          "stop_ticks_after_walk_switch": 21
+        }
+      },
+      "checks": {
+        "hold_does_not_retrigger": true,
+        "release_and_press_retriggers": true,
+        "jumps_bounded": true
+      },
+      "fixed_height": true
+    }
+  },
+  "passed": true
+}

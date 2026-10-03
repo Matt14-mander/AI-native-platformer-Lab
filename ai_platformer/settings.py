@@ -8,6 +8,8 @@ from pathlib import Path
 
 from ai_platformer.core import PhysicsConfig
 
+AI_GAMEPLAY_PATH = Path(__file__).resolve().parents[1] / "config/gameplay_ai_v2.json"
+
 
 @dataclass(frozen=True, slots=True)
 class GameplaySettings:

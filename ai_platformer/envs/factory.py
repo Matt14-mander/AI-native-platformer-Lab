@@ -10,10 +10,11 @@ from typing import Any
 
 from ai_platformer.content.curriculum import TrainingLevelRepository, content_hash
 from ai_platformer.core import PhysicsConfig
-from ai_platformer.settings import load_gameplay_settings
+from ai_platformer.settings import AI_GAMEPLAY_PATH, load_gameplay_settings
 
 from .platformer_state import OBSERVATION_SIZE, ObservationIndex, PlatformerStateEnv
 from .platformer_state_v1 import JUMP_HELD_INDEX, PlatformerStateEnvV1
+from .platformer_state_v2 import PlatformerStateEnvV2
 from .reward import RewardConfig
 
 
@@ -33,9 +34,15 @@ class EnvironmentFactory:
         if unknown:
             raise ValueError(f"unknown environment options: {sorted(unknown)}")
         self.environment_id = config.get("environment_id", "PlatformerState-v0")
-        if self.environment_id not in {"PlatformerState-v0", "PlatformerState-v1"}:
+        if self.environment_id not in {
+            "PlatformerState-v0",
+            "PlatformerState-v1",
+            "PlatformerState-v2",
+        }:
             raise ValueError("unsupported environment_id")
-        self.settings = load_gameplay_settings()
+        self.settings = load_gameplay_settings(
+            AI_GAMEPLAY_PATH if self.environment_id == "PlatformerState-v2" else None
+        )
         physics = asdict(self.settings.physics)
         physics.update(config.get("physics", {}))
         for key, value in physics.items():
@@ -66,11 +73,11 @@ class EnvironmentFactory:
             raise ValueError("episode_step_limit must be positive")
 
     def make(self, *, level_id: str | None = None, seed: int | None = None) -> PlatformerStateEnv:
-        env_type = (
-            PlatformerStateEnvV1
-            if self.environment_id == "PlatformerState-v1"
-            else PlatformerStateEnv
-        )
+        env_type = {
+            "PlatformerState-v0": PlatformerStateEnv,
+            "PlatformerState-v1": PlatformerStateEnvV1,
+            "PlatformerState-v2": PlatformerStateEnvV2,
+        }[self.environment_id]
         return env_type(
             level_id=level_id or self.level_id,
             seed=seed,
@@ -86,14 +93,14 @@ class EnvironmentFactory:
         return {
             "environment_id": self.environment_id,
             "action_version": 1,
-            "observation_version": int(self.environment_id == "PlatformerState-v1"),
+            "observation_version": int(self.environment_id != "PlatformerState-v0"),
             "reward_version": 1,
-            "observation_size": OBSERVATION_SIZE + int(self.environment_id == "PlatformerState-v1"),
+            "observation_size": OBSERVATION_SIZE + int(self.environment_id != "PlatformerState-v0"),
             "observation_indices": {
                 **{item.name: int(item) for item in ObservationIndex},
                 **(
                     {"JUMP_HELD": JUMP_HELD_INDEX}
-                    if self.environment_id == "PlatformerState-v1"
+                    if self.environment_id != "PlatformerState-v0"
                     else {}
                 ),
             },

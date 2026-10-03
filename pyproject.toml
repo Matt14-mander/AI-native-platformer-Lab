@@ -22,6 +22,7 @@ platformer-export-ppo = "scripts.export_ppo:main"
 platformer-build-tinyinfer = "scripts.build_tinyinfer_bridge:main"
 platformer-validate-tinyinfer = "scripts.validate_tinyinfer:main"
 platformer-benchmark-deployment = "scripts.benchmark_deployment:main"
+platformer-audit-gameplay = "scripts.audit_gameplay:main"
 platformer-diagnose-ppo = "scripts.diagnose_ppo:main"
 platformer-verify-stage-entry = "scripts.verify_stage_entry:main"
 

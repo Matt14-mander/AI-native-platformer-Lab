@@ -11,7 +11,7 @@ import numpy as np
 
 from ai_platformer.agents.scripted import MoveRightAgent, RuleJumpAgent
 from ai_platformer.benchmark.scripted import evaluate_scripted_agent
-from ai_platformer.core import Action
+from ai_platformer.core import Action, LevelDefinition, SolidRect
 from ai_platformer.envs import PlatformerStateEnv
 from ai_platformer.envs.factory import EnvironmentFactory
 
@@ -39,6 +39,7 @@ class RewardAuditReport:
     death_return: float
     success_return: float
     checks: dict[str, bool]
+    terminal_probe: str = "controlled_flat_and_pit"
 
 
 def run_sb3_checker(*, environment: dict | None = None, level_ids: list[str] | None = None) -> str:
@@ -122,8 +123,11 @@ def run_reward_exploit_audit(*, environment: dict | None = None) -> RewardAuditR
         loop["final_progress"] * EnvironmentFactory(environment or {}).reward.progress_scale
     )
 
-    death = _rollout_agent(RuleJumpAgent(trigger_distance=0.34), 1_000, environment=environment)
-    success = _rollout_agent(RuleJumpAgent(), 1_000, environment=environment)
+    # Terminal reward signs must not depend on an old rule policy's jump timing.
+    # Keep movement/collectible exploit checks on real content, and force terminal
+    # events on small geometry fixtures using the selected physics and rewards.
+    death = _terminal_reward_probe("death", environment=environment)
+    success = _terminal_reward_probe("success", environment=environment)
     duplicates = tuple(sorted(loop["duplicate_collectibles"]))
     checks = {
         "noop_cannot_profit": noop["return"] < 0.0,
@@ -252,6 +256,32 @@ def _rollout_fixed(
         steps,
         observation,
     )
+
+
+def _terminal_reward_probe(outcome: str, *, environment: dict | None = None) -> dict:
+    factory = EnvironmentFactory(environment or {})
+    pit = outcome == "death"
+    level = LevelDefinition(
+        "reward_terminal_probe",
+        500,
+        200,
+        10,
+        100,
+        80,
+        () if pit else (SolidRect(0, 100, 500, 60),),
+    )
+    env = PlatformerStateEnv(
+        level_id=level.level_id,
+        level_loader=lambda _: level,
+        settings=factory.settings,
+        reward_config=factory.reward,
+        action_repeat=factory.action_repeat,
+        episode_step_limit=256,
+        sensor_range=factory.sensor_range,
+    )
+    observation, _ = env.reset(seed=123)
+    action = Action.NOOP if pit else Action.RIGHT_RUN
+    return _rollout(env, lambda _, obs: int(action), 256, observation)
 
 
 def _rollout_agent(

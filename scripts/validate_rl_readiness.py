@@ -21,7 +21,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--environment-id",
-        choices=("PlatformerState-v0", "PlatformerState-v1"),
+        choices=("PlatformerState-v0", "PlatformerState-v1", "PlatformerState-v2"),
         default="PlatformerState-v0",
     )
     args = parser.parse_args()

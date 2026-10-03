@@ -41,6 +41,29 @@ class SharedCorePygameTests(unittest.TestCase):
         self.assertGreater(level.state.player.x, start.player.x)
         self.assertEqual(level.state.tick, 60)
 
+    def test_v2_keyboard_and_gym_follow_same_trajectory(self) -> None:
+        from ai_platformer.core import Action
+        from ai_platformer.envs.factory import EnvironmentFactory
+
+        factory = EnvironmentFactory({"environment_id": "PlatformerState-v2"})
+        level = self.level_type(factory.settings)
+        env = factory.make()
+        try:
+            env.reset(seed=factory.settings.seed)
+            sequence = [
+                (Action.RIGHT_RUN_JUMP, (pygame.K_RIGHT, pygame.K_SPACE, pygame.K_LSHIFT)),
+                (Action.RIGHT_RUN, (pygame.K_RIGHT, pygame.K_LSHIFT)),
+                (Action.RIGHT_RUN_JUMP, (pygame.K_RIGHT, pygame.K_SPACE, pygame.K_LSHIFT)),
+                (Action.NOOP, ()),
+            ] * 8
+            for action, pressed in sequence:
+                env.step(int(action))
+                for _ in range(factory.action_repeat):
+                    level.update(self.surface, self.keys(*pressed))
+                self.assertEqual(level.state, env.core.state)
+        finally:
+            env.close()
+
     def test_jump_and_run_are_mapped_to_core_action(self) -> None:
         level = self.level_type()
         start_y = level.state.player.y
