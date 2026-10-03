@@ -27,6 +27,11 @@ def main() -> None:
     )
     parser.add_argument("--eval-every", type=int, help="evaluation interval in transitions")
     parser.add_argument(
+        "--stop-before-stage",
+        choices=("obstacle", "gap", "mixed", "full"),
+        help="stop with the accepted checkpoint when automatically promoted to this stage",
+    )
+    parser.add_argument(
         "--start-stage",
         choices=("flat", "obstacle", "gap", "mixed", "full"),
         help="explicitly select a stage for any run; skipped stages remain unmastered",
@@ -55,6 +60,7 @@ def main() -> None:
             resume=args.resume,
             init_from=args.init_from,
             start_stage=args.start_stage,
+            stop_before_stage=args.stop_before_stage,
         )
     except (ValueError, FileExistsError, FileNotFoundError) as error:
         parser.error(str(error))

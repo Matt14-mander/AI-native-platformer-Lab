@@ -1,0 +1,3337 @@
+{
+  "schema_version": 1,
+  "generator_version": 3,
+  "distribution": {
+    "in_distribution": "matched strata; split-specific offsets prevent duplicate geometry",
+    "gap_distance_strata": [
+      280,
+      380,
+      500,
+      620
+    ],
+    "mixed_distance_strata": [
+      1000,
+      1120,
+      1240,
+      1360
+    ],
+    "spawn_strata": [
+      32,
+      96,
+      160
+    ],
+    "gap_width_strata": [
+      100,
+      130,
+      160
+    ],
+    "split_offsets": {
+      "train": [
+        0,
+        0,
+        0
+      ],
+      "validation": [
+        3,
+        7,
+        4
+      ],
+      "test": [
+        5,
+        -7,
+        8
+      ]
+    },
+    "ood": "longer approach distances and gap widths of 170; diagnostic only",
+    "legacy_replay": "flat/obstacle splits preserve v1 geometry and reserved final tests",
+    "obstacle_v3": {
+      "spawn_strata": [
+        32,
+        96,
+        160
+      ],
+      "approach_strata": [
+        260,
+        380,
+        500,
+        620
+      ],
+      "heights": [
+        48,
+        64,
+        80
+      ],
+      "split_offsets_spawn_distance": {
+        "train": [
+          0,
+          0
+        ],
+        "validation": [
+          3,
+          7
+        ],
+        "test": [
+          5,
+          -7
+        ]
+      },
+      "legacy": "all v1 obstacle split assignments retained; validation never added to training"
+    }
+  },
+  "levels": {
+    "course_flat_00": {
+      "task": "flat",
+      "width": 640
+    },
+    "course_flat_01": {
+      "task": "flat",
+      "width": 656
+    },
+    "course_flat_02": {
+      "task": "flat",
+      "width": 672
+    },
+    "course_flat_03": {
+      "task": "flat",
+      "width": 688
+    },
+    "course_flat_04": {
+      "task": "flat",
+      "width": 704
+    },
+    "course_flat_05": {
+      "task": "flat",
+      "width": 720
+    },
+    "course_flat_06": {
+      "task": "flat",
+      "width": 736
+    },
+    "course_flat_07": {
+      "task": "flat",
+      "width": 752
+    },
+    "course_flat_08": {
+      "task": "flat",
+      "width": 768
+    },
+    "course_flat_09": {
+      "task": "flat",
+      "width": 784
+    },
+    "course_flat_10": {
+      "task": "flat",
+      "width": 800
+    },
+    "course_flat_11": {
+      "task": "flat",
+      "width": 816
+    },
+    "course_flat_12": {
+      "task": "flat",
+      "width": 832
+    },
+    "course_flat_13": {
+      "task": "flat",
+      "width": 848
+    },
+    "course_flat_14": {
+      "task": "flat",
+      "width": 864
+    },
+    "course_flat_15": {
+      "task": "flat",
+      "width": 880
+    },
+    "course_obstacle_00": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 310,
+      "obstacle_height": 48
+    },
+    "course_obstacle_01": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 322,
+      "obstacle_height": 64
+    },
+    "course_obstacle_02": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 334,
+      "obstacle_height": 80
+    },
+    "course_obstacle_03": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 346,
+      "obstacle_height": 48
+    },
+    "course_obstacle_04": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 358,
+      "obstacle_height": 64
+    },
+    "course_obstacle_05": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 370,
+      "obstacle_height": 80
+    },
+    "course_obstacle_06": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 382,
+      "obstacle_height": 48
+    },
+    "course_obstacle_07": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 394,
+      "obstacle_height": 64
+    },
+    "course_obstacle_08": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 406,
+      "obstacle_height": 80
+    },
+    "course_obstacle_09": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 418,
+      "obstacle_height": 48
+    },
+    "course_obstacle_10": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 430,
+      "obstacle_height": 64
+    },
+    "course_obstacle_11": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 442,
+      "obstacle_height": 80
+    },
+    "course_obstacle_12": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 454,
+      "obstacle_height": 48
+    },
+    "course_obstacle_13": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 466,
+      "obstacle_height": 64
+    },
+    "course_obstacle_14": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 478,
+      "obstacle_height": 80
+    },
+    "course_obstacle_15": {
+      "task": "obstacle",
+      "width": 1100,
+      "obstacle_x": 490,
+      "obstacle_height": 48
+    },
+    "v2_gap_train_00": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 312,
+      "gap_width": 100
+    },
+    "v2_gap_train_01": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 312,
+      "gap_width": 130
+    },
+    "v2_gap_train_02": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 312,
+      "gap_width": 160
+    },
+    "v2_gap_train_03": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 412,
+      "gap_width": 100
+    },
+    "v2_gap_train_04": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 412,
+      "gap_width": 130
+    },
+    "v2_gap_train_05": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 412,
+      "gap_width": 160
+    },
+    "v2_gap_train_06": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 532,
+      "gap_width": 100
+    },
+    "v2_gap_train_07": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 532,
+      "gap_width": 130
+    },
+    "v2_gap_train_08": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 532,
+      "gap_width": 160
+    },
+    "v2_gap_train_09": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 652,
+      "gap_width": 100
+    },
+    "v2_gap_train_10": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 652,
+      "gap_width": 130
+    },
+    "v2_gap_train_11": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 32,
+      "gap_x": 652,
+      "gap_width": 160
+    },
+    "v2_gap_train_12": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 376,
+      "gap_width": 100
+    },
+    "v2_gap_train_13": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 376,
+      "gap_width": 130
+    },
+    "v2_gap_train_14": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 376,
+      "gap_width": 160
+    },
+    "v2_gap_train_15": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 476,
+      "gap_width": 100
+    },
+    "v2_gap_train_16": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 476,
+      "gap_width": 130
+    },
+    "v2_gap_train_17": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 476,
+      "gap_width": 160
+    },
+    "v2_gap_train_18": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 596,
+      "gap_width": 100
+    },
+    "v2_gap_train_19": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 596,
+      "gap_width": 130
+    },
+    "v2_gap_train_20": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 596,
+      "gap_width": 160
+    },
+    "v2_gap_train_21": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 716,
+      "gap_width": 100
+    },
+    "v2_gap_train_22": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 716,
+      "gap_width": 130
+    },
+    "v2_gap_train_23": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 96,
+      "gap_x": 716,
+      "gap_width": 160
+    },
+    "v2_gap_train_24": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 440,
+      "gap_width": 100
+    },
+    "v2_gap_train_25": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 440,
+      "gap_width": 130
+    },
+    "v2_gap_train_26": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 440,
+      "gap_width": 160
+    },
+    "v2_gap_train_27": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 540,
+      "gap_width": 100
+    },
+    "v2_gap_train_28": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 540,
+      "gap_width": 130
+    },
+    "v2_gap_train_29": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 540,
+      "gap_width": 160
+    },
+    "v2_gap_train_30": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 660,
+      "gap_width": 100
+    },
+    "v2_gap_train_31": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 660,
+      "gap_width": 130
+    },
+    "v2_gap_train_32": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 660,
+      "gap_width": 160
+    },
+    "v2_gap_train_33": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 780,
+      "gap_width": 100
+    },
+    "v2_gap_train_34": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 780,
+      "gap_width": 130
+    },
+    "v2_gap_train_35": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 160,
+      "gap_x": 780,
+      "gap_width": 160
+    },
+    "v2_gap_validation_00": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 322,
+      "gap_width": 104
+    },
+    "v2_gap_validation_01": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 322,
+      "gap_width": 134
+    },
+    "v2_gap_validation_02": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 322,
+      "gap_width": 164
+    },
+    "v2_gap_validation_03": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 422,
+      "gap_width": 104
+    },
+    "v2_gap_validation_04": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 422,
+      "gap_width": 134
+    },
+    "v2_gap_validation_05": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 422,
+      "gap_width": 164
+    },
+    "v2_gap_validation_06": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 542,
+      "gap_width": 104
+    },
+    "v2_gap_validation_07": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 542,
+      "gap_width": 134
+    },
+    "v2_gap_validation_08": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 542,
+      "gap_width": 164
+    },
+    "v2_gap_validation_09": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 662,
+      "gap_width": 104
+    },
+    "v2_gap_validation_10": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 662,
+      "gap_width": 134
+    },
+    "v2_gap_validation_11": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 35,
+      "gap_x": 662,
+      "gap_width": 164
+    },
+    "v2_gap_validation_12": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 386,
+      "gap_width": 104
+    },
+    "v2_gap_validation_13": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 386,
+      "gap_width": 134
+    },
+    "v2_gap_validation_14": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 386,
+      "gap_width": 164
+    },
+    "v2_gap_validation_15": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 486,
+      "gap_width": 104
+    },
+    "v2_gap_validation_16": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 486,
+      "gap_width": 134
+    },
+    "v2_gap_validation_17": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 486,
+      "gap_width": 164
+    },
+    "v2_gap_validation_18": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 606,
+      "gap_width": 104
+    },
+    "v2_gap_validation_19": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 606,
+      "gap_width": 134
+    },
+    "v2_gap_validation_20": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 606,
+      "gap_width": 164
+    },
+    "v2_gap_validation_21": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 726,
+      "gap_width": 104
+    },
+    "v2_gap_validation_22": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 726,
+      "gap_width": 134
+    },
+    "v2_gap_validation_23": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 99,
+      "gap_x": 726,
+      "gap_width": 164
+    },
+    "v2_gap_validation_24": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 450,
+      "gap_width": 104
+    },
+    "v2_gap_validation_25": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 450,
+      "gap_width": 134
+    },
+    "v2_gap_validation_26": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 450,
+      "gap_width": 164
+    },
+    "v2_gap_validation_27": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 550,
+      "gap_width": 104
+    },
+    "v2_gap_validation_28": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 550,
+      "gap_width": 134
+    },
+    "v2_gap_validation_29": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 550,
+      "gap_width": 164
+    },
+    "v2_gap_validation_30": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 670,
+      "gap_width": 104
+    },
+    "v2_gap_validation_31": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 670,
+      "gap_width": 134
+    },
+    "v2_gap_validation_32": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 670,
+      "gap_width": 164
+    },
+    "v2_gap_validation_33": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 790,
+      "gap_width": 104
+    },
+    "v2_gap_validation_34": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 790,
+      "gap_width": 134
+    },
+    "v2_gap_validation_35": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 163,
+      "gap_x": 790,
+      "gap_width": 164
+    },
+    "v2_gap_test_00": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 310,
+      "gap_width": 108
+    },
+    "v2_gap_test_01": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 310,
+      "gap_width": 138
+    },
+    "v2_gap_test_02": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 310,
+      "gap_width": 168
+    },
+    "v2_gap_test_03": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 410,
+      "gap_width": 108
+    },
+    "v2_gap_test_04": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 410,
+      "gap_width": 138
+    },
+    "v2_gap_test_05": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 410,
+      "gap_width": 168
+    },
+    "v2_gap_test_06": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 530,
+      "gap_width": 108
+    },
+    "v2_gap_test_07": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 530,
+      "gap_width": 138
+    },
+    "v2_gap_test_08": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 530,
+      "gap_width": 168
+    },
+    "v2_gap_test_09": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 650,
+      "gap_width": 108
+    },
+    "v2_gap_test_10": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 650,
+      "gap_width": 138
+    },
+    "v2_gap_test_11": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 37,
+      "gap_x": 650,
+      "gap_width": 168
+    },
+    "v2_gap_test_12": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 374,
+      "gap_width": 108
+    },
+    "v2_gap_test_13": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 374,
+      "gap_width": 138
+    },
+    "v2_gap_test_14": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 374,
+      "gap_width": 168
+    },
+    "v2_gap_test_15": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 474,
+      "gap_width": 108
+    },
+    "v2_gap_test_16": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 474,
+      "gap_width": 138
+    },
+    "v2_gap_test_17": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 474,
+      "gap_width": 168
+    },
+    "v2_gap_test_18": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 594,
+      "gap_width": 108
+    },
+    "v2_gap_test_19": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 594,
+      "gap_width": 138
+    },
+    "v2_gap_test_20": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 594,
+      "gap_width": 168
+    },
+    "v2_gap_test_21": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 714,
+      "gap_width": 108
+    },
+    "v2_gap_test_22": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 714,
+      "gap_width": 138
+    },
+    "v2_gap_test_23": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 101,
+      "gap_x": 714,
+      "gap_width": 168
+    },
+    "v2_gap_test_24": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 438,
+      "gap_width": 108
+    },
+    "v2_gap_test_25": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 438,
+      "gap_width": 138
+    },
+    "v2_gap_test_26": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 438,
+      "gap_width": 168
+    },
+    "v2_gap_test_27": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 538,
+      "gap_width": 108
+    },
+    "v2_gap_test_28": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 538,
+      "gap_width": 138
+    },
+    "v2_gap_test_29": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 538,
+      "gap_width": 168
+    },
+    "v2_gap_test_30": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 658,
+      "gap_width": 108
+    },
+    "v2_gap_test_31": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 658,
+      "gap_width": 138
+    },
+    "v2_gap_test_32": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 658,
+      "gap_width": 168
+    },
+    "v2_gap_test_33": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 778,
+      "gap_width": 108
+    },
+    "v2_gap_test_34": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 778,
+      "gap_width": 138
+    },
+    "v2_gap_test_35": {
+      "task": "gap",
+      "width": 1500,
+      "spawn_x": 165,
+      "gap_x": 778,
+      "gap_width": 168
+    },
+    "v2_gap_ood_00": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 48,
+      "gap_x": 828,
+      "gap_width": 170
+    },
+    "v2_gap_ood_01": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 48,
+      "gap_x": 888,
+      "gap_width": 170
+    },
+    "v2_gap_ood_02": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 48,
+      "gap_x": 948,
+      "gap_width": 170
+    },
+    "v2_gap_ood_03": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 48,
+      "gap_x": 1008,
+      "gap_width": 170
+    },
+    "v2_gap_ood_04": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 120,
+      "gap_x": 900,
+      "gap_width": 170
+    },
+    "v2_gap_ood_05": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 120,
+      "gap_x": 960,
+      "gap_width": 170
+    },
+    "v2_gap_ood_06": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 120,
+      "gap_x": 1020,
+      "gap_width": 170
+    },
+    "v2_gap_ood_07": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 120,
+      "gap_x": 1080,
+      "gap_width": 170
+    },
+    "v2_gap_ood_08": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 192,
+      "gap_x": 972,
+      "gap_width": 170
+    },
+    "v2_gap_ood_09": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 192,
+      "gap_x": 1032,
+      "gap_width": 170
+    },
+    "v2_gap_ood_10": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 192,
+      "gap_x": 1092,
+      "gap_width": 170
+    },
+    "v2_gap_ood_11": {
+      "task": "gap",
+      "width": 1800,
+      "spawn_x": 192,
+      "gap_x": 1152,
+      "gap_width": 170
+    },
+    "v2_mixed_train_00": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1032,
+      "gap_width": 100,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_01": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1032,
+      "gap_width": 130,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_02": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1032,
+      "gap_width": 160,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_03": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1152,
+      "gap_width": 100,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_04": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1152,
+      "gap_width": 130,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_05": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1152,
+      "gap_width": 160,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_06": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1272,
+      "gap_width": 100,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_07": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1272,
+      "gap_width": 130,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_08": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1272,
+      "gap_width": 160,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_09": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1392,
+      "gap_width": 100,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_10": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1392,
+      "gap_width": 130,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_11": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 32,
+      "gap_x": 1392,
+      "gap_width": 160,
+      "obstacle_x": 252,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_12": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1096,
+      "gap_width": 100,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_13": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1096,
+      "gap_width": 130,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_14": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1096,
+      "gap_width": 160,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_15": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1216,
+      "gap_width": 100,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_16": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1216,
+      "gap_width": 130,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_17": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1216,
+      "gap_width": 160,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_18": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1336,
+      "gap_width": 100,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_19": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1336,
+      "gap_width": 130,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_20": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1336,
+      "gap_width": 160,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_21": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1456,
+      "gap_width": 100,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_22": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1456,
+      "gap_width": 130,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_23": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 96,
+      "gap_x": 1456,
+      "gap_width": 160,
+      "obstacle_x": 316,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_24": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1160,
+      "gap_width": 100,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_25": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1160,
+      "gap_width": 130,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_26": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1160,
+      "gap_width": 160,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_27": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1280,
+      "gap_width": 100,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_28": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1280,
+      "gap_width": 130,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_29": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1280,
+      "gap_width": 160,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_30": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1400,
+      "gap_width": 100,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_31": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1400,
+      "gap_width": 130,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_32": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1400,
+      "gap_width": 160,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_33": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1520,
+      "gap_width": 100,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_34": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1520,
+      "gap_width": 130,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_train_35": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 160,
+      "gap_x": 1520,
+      "gap_width": 160,
+      "obstacle_x": 380,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_00": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1042,
+      "gap_width": 104,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_01": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1042,
+      "gap_width": 134,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_02": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1042,
+      "gap_width": 164,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_03": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1162,
+      "gap_width": 104,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_04": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1162,
+      "gap_width": 134,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_05": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1162,
+      "gap_width": 164,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_06": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1282,
+      "gap_width": 104,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_07": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1282,
+      "gap_width": 134,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_08": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1282,
+      "gap_width": 164,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_09": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1402,
+      "gap_width": 104,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_10": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1402,
+      "gap_width": 134,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_11": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 35,
+      "gap_x": 1402,
+      "gap_width": 164,
+      "obstacle_x": 255,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_12": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1106,
+      "gap_width": 104,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_13": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1106,
+      "gap_width": 134,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_14": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1106,
+      "gap_width": 164,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_15": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1226,
+      "gap_width": 104,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_16": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1226,
+      "gap_width": 134,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_17": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1226,
+      "gap_width": 164,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_18": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1346,
+      "gap_width": 104,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_19": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1346,
+      "gap_width": 134,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_20": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1346,
+      "gap_width": 164,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_21": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1466,
+      "gap_width": 104,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_22": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1466,
+      "gap_width": 134,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_23": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 99,
+      "gap_x": 1466,
+      "gap_width": 164,
+      "obstacle_x": 319,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_24": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1170,
+      "gap_width": 104,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_25": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1170,
+      "gap_width": 134,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_26": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1170,
+      "gap_width": 164,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_27": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1290,
+      "gap_width": 104,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_28": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1290,
+      "gap_width": 134,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_29": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1290,
+      "gap_width": 164,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_30": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1410,
+      "gap_width": 104,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_31": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1410,
+      "gap_width": 134,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_32": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1410,
+      "gap_width": 164,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_33": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1530,
+      "gap_width": 104,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_34": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1530,
+      "gap_width": 134,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_validation_35": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 163,
+      "gap_x": 1530,
+      "gap_width": 164,
+      "obstacle_x": 383,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_00": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1030,
+      "gap_width": 108,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_01": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1030,
+      "gap_width": 138,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_02": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1030,
+      "gap_width": 168,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_03": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1150,
+      "gap_width": 108,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_04": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1150,
+      "gap_width": 138,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_05": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1150,
+      "gap_width": 168,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_06": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1270,
+      "gap_width": 108,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_07": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1270,
+      "gap_width": 138,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_08": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1270,
+      "gap_width": 168,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_09": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1390,
+      "gap_width": 108,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_10": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1390,
+      "gap_width": 138,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_11": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 37,
+      "gap_x": 1390,
+      "gap_width": 168,
+      "obstacle_x": 257,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_12": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1094,
+      "gap_width": 108,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_13": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1094,
+      "gap_width": 138,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_14": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1094,
+      "gap_width": 168,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_15": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1214,
+      "gap_width": 108,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_16": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1214,
+      "gap_width": 138,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_17": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1214,
+      "gap_width": 168,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_18": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1334,
+      "gap_width": 108,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_19": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1334,
+      "gap_width": 138,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_20": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1334,
+      "gap_width": 168,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_21": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1454,
+      "gap_width": 108,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_22": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1454,
+      "gap_width": 138,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_23": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 101,
+      "gap_x": 1454,
+      "gap_width": 168,
+      "obstacle_x": 321,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_24": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1158,
+      "gap_width": 108,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_25": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1158,
+      "gap_width": 138,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_26": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1158,
+      "gap_width": 168,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_27": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1278,
+      "gap_width": 108,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_28": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1278,
+      "gap_width": 138,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_29": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1278,
+      "gap_width": 168,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_30": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1398,
+      "gap_width": 108,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_31": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1398,
+      "gap_width": 138,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_32": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1398,
+      "gap_width": 168,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_33": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1518,
+      "gap_width": 108,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_34": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1518,
+      "gap_width": 138,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_test_35": {
+      "task": "mixed",
+      "width": 2100,
+      "spawn_x": 165,
+      "gap_x": 1518,
+      "gap_width": 168,
+      "obstacle_x": 385,
+      "obstacle_height": 48
+    },
+    "v2_mixed_ood_00": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 48,
+      "gap_x": 1548,
+      "gap_width": 170,
+      "obstacle_x": 268,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_01": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 48,
+      "gap_x": 1608,
+      "gap_width": 170,
+      "obstacle_x": 268,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_02": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 48,
+      "gap_x": 1668,
+      "gap_width": 170,
+      "obstacle_x": 268,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_03": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 48,
+      "gap_x": 1728,
+      "gap_width": 170,
+      "obstacle_x": 268,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_04": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 120,
+      "gap_x": 1620,
+      "gap_width": 170,
+      "obstacle_x": 340,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_05": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 120,
+      "gap_x": 1680,
+      "gap_width": 170,
+      "obstacle_x": 340,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_06": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 120,
+      "gap_x": 1740,
+      "gap_width": 170,
+      "obstacle_x": 340,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_07": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 120,
+      "gap_x": 1800,
+      "gap_width": 170,
+      "obstacle_x": 340,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_08": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 192,
+      "gap_x": 1692,
+      "gap_width": 170,
+      "obstacle_x": 412,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_09": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 192,
+      "gap_x": 1752,
+      "gap_width": 170,
+      "obstacle_x": 412,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_10": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 192,
+      "gap_x": 1812,
+      "gap_width": 170,
+      "obstacle_x": 412,
+      "obstacle_height": 64
+    },
+    "v2_mixed_ood_11": {
+      "task": "mixed",
+      "width": 2800,
+      "spawn_x": 192,
+      "gap_x": 1872,
+      "gap_width": 170,
+      "obstacle_x": 412,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_00": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 292,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_01": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 292,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_02": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 292,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_03": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 412,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_04": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 412,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_05": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 412,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_06": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 532,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_07": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 532,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_08": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 532,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_09": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 652,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_10": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 652,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_11": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 32,
+      "obstacle_x": 652,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_12": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 356,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_13": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 356,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_14": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 356,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_15": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 476,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_16": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 476,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_17": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 476,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_18": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 596,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_19": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 596,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_20": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 596,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_21": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 716,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_22": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 716,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_23": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 96,
+      "obstacle_x": 716,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_24": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 420,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_25": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 420,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_26": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 420,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_27": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 540,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_28": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 540,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_29": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 540,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_30": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 660,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_31": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 660,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_32": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 660,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_train_33": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 780,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_train_34": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 780,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_train_35": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 160,
+      "obstacle_x": 780,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_00": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 302,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_01": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 302,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_02": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 302,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_03": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 422,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_04": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 422,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_05": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 422,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_06": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 542,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_07": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 542,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_08": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 542,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_09": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 662,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_10": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 662,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_11": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 35,
+      "obstacle_x": 662,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_12": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 366,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_13": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 366,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_14": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 366,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_15": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 486,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_16": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 486,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_17": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 486,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_18": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 606,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_19": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 606,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_20": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 606,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_21": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 726,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_22": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 726,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_23": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 99,
+      "obstacle_x": 726,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_24": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 430,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_25": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 430,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_26": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 430,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_27": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 550,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_28": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 550,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_29": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 550,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_30": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 670,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_31": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 670,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_32": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 670,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_validation_33": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 790,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_validation_34": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 790,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_validation_35": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 163,
+      "obstacle_x": 790,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_00": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 290,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_01": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 290,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_02": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 290,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_03": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 410,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_04": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 410,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_05": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 410,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_06": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 530,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_07": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 530,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_08": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 530,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_09": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 650,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_10": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 650,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_11": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 37,
+      "obstacle_x": 650,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_12": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 354,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_13": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 354,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_14": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 354,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_15": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 474,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_16": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 474,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_17": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 474,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_18": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 594,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_19": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 594,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_20": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 594,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_21": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 714,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_22": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 714,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_23": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 101,
+      "obstacle_x": 714,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_24": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 418,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_25": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 418,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_26": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 418,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_27": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 538,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_28": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 538,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_29": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 538,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_30": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 658,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_31": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 658,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_32": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 658,
+      "obstacle_height": 80
+    },
+    "v3_obstacle_test_33": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 778,
+      "obstacle_height": 48
+    },
+    "v3_obstacle_test_34": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 778,
+      "obstacle_height": 64
+    },
+    "v3_obstacle_test_35": {
+      "task": "obstacle",
+      "width": 1500,
+      "spawn_x": 165,
+      "obstacle_x": 778,
+      "obstacle_height": 80
+    }
+  },
+  "splits": {
+    "flat": {
+      "train": [
+        "course_flat_00",
+        "course_flat_01",
+        "course_flat_02",
+        "course_flat_03",
+        "course_flat_04",
+        "course_flat_05",
+        "course_flat_06",
+        "course_flat_07"
+      ],
+      "validation": [
+        "course_flat_08",
+        "course_flat_09",
+        "course_flat_10",
+        "course_flat_11"
+      ],
+      "test": [
+        "course_flat_12",
+        "course_flat_13",
+        "course_flat_14",
+        "course_flat_15"
+      ]
+    },
+    "obstacle": {
+      "train": [
+        "course_obstacle_00",
+        "course_obstacle_01",
+        "course_obstacle_02",
+        "course_obstacle_03",
+        "course_obstacle_04",
+        "course_obstacle_05",
+        "course_obstacle_06",
+        "course_obstacle_07",
+        "v3_obstacle_train_00",
+        "v3_obstacle_train_01",
+        "v3_obstacle_train_02",
+        "v3_obstacle_train_03",
+        "v3_obstacle_train_04",
+        "v3_obstacle_train_05",
+        "v3_obstacle_train_06",
+        "v3_obstacle_train_07",
+        "v3_obstacle_train_08",
+        "v3_obstacle_train_09",
+        "v3_obstacle_train_10",
+        "v3_obstacle_train_11",
+        "v3_obstacle_train_12",
+        "v3_obstacle_train_13",
+        "v3_obstacle_train_14",
+        "v3_obstacle_train_15",
+        "v3_obstacle_train_16",
+        "v3_obstacle_train_17",
+        "v3_obstacle_train_18",
+        "v3_obstacle_train_19",
+        "v3_obstacle_train_20",
+        "v3_obstacle_train_21",
+        "v3_obstacle_train_22",
+        "v3_obstacle_train_23",
+        "v3_obstacle_train_24",
+        "v3_obstacle_train_25",
+        "v3_obstacle_train_26",
+        "v3_obstacle_train_27",
+        "v3_obstacle_train_28",
+        "v3_obstacle_train_29",
+        "v3_obstacle_train_30",
+        "v3_obstacle_train_31",
+        "v3_obstacle_train_32",
+        "v3_obstacle_train_33",
+        "v3_obstacle_train_34",
+        "v3_obstacle_train_35"
+      ],
+      "validation": [
+        "course_obstacle_08",
+        "course_obstacle_09",
+        "course_obstacle_10",
+        "course_obstacle_11",
+        "v3_obstacle_validation_00",
+        "v3_obstacle_validation_01",
+        "v3_obstacle_validation_02",
+        "v3_obstacle_validation_03",
+        "v3_obstacle_validation_04",
+        "v3_obstacle_validation_05",
+        "v3_obstacle_validation_06",
+        "v3_obstacle_validation_07",
+        "v3_obstacle_validation_08",
+        "v3_obstacle_validation_09",
+        "v3_obstacle_validation_10",
+        "v3_obstacle_validation_11",
+        "v3_obstacle_validation_12",
+        "v3_obstacle_validation_13",
+        "v3_obstacle_validation_14",
+        "v3_obstacle_validation_15",
+        "v3_obstacle_validation_16",
+        "v3_obstacle_validation_17",
+        "v3_obstacle_validation_18",
+        "v3_obstacle_validation_19",
+        "v3_obstacle_validation_20",
+        "v3_obstacle_validation_21",
+        "v3_obstacle_validation_22",
+        "v3_obstacle_validation_23",
+        "v3_obstacle_validation_24",
+        "v3_obstacle_validation_25",
+        "v3_obstacle_validation_26",
+        "v3_obstacle_validation_27",
+        "v3_obstacle_validation_28",
+        "v3_obstacle_validation_29",
+        "v3_obstacle_validation_30",
+        "v3_obstacle_validation_31",
+        "v3_obstacle_validation_32",
+        "v3_obstacle_validation_33",
+        "v3_obstacle_validation_34",
+        "v3_obstacle_validation_35"
+      ],
+      "test": [
+        "course_obstacle_12",
+        "course_obstacle_13",
+        "course_obstacle_14",
+        "course_obstacle_15",
+        "v3_obstacle_test_00",
+        "v3_obstacle_test_01",
+        "v3_obstacle_test_02",
+        "v3_obstacle_test_03",
+        "v3_obstacle_test_04",
+        "v3_obstacle_test_05",
+        "v3_obstacle_test_06",
+        "v3_obstacle_test_07",
+        "v3_obstacle_test_08",
+        "v3_obstacle_test_09",
+        "v3_obstacle_test_10",
+        "v3_obstacle_test_11",
+        "v3_obstacle_test_12",
+        "v3_obstacle_test_13",
+        "v3_obstacle_test_14",
+        "v3_obstacle_test_15",
+        "v3_obstacle_test_16",
+        "v3_obstacle_test_17",
+        "v3_obstacle_test_18",
+        "v3_obstacle_test_19",
+        "v3_obstacle_test_20",
+        "v3_obstacle_test_21",
+        "v3_obstacle_test_22",
+        "v3_obstacle_test_23",
+        "v3_obstacle_test_24",
+        "v3_obstacle_test_25",
+        "v3_obstacle_test_26",
+        "v3_obstacle_test_27",
+        "v3_obstacle_test_28",
+        "v3_obstacle_test_29",
+        "v3_obstacle_test_30",
+        "v3_obstacle_test_31",
+        "v3_obstacle_test_32",
+        "v3_obstacle_test_33",
+        "v3_obstacle_test_34",
+        "v3_obstacle_test_35"
+      ]
+    },
+    "gap": {
+      "train": [
+        "v2_gap_train_00",
+        "v2_gap_train_01",
+        "v2_gap_train_02",
+        "v2_gap_train_03",
+        "v2_gap_train_04",
+        "v2_gap_train_05",
+        "v2_gap_train_06",
+        "v2_gap_train_07",
+        "v2_gap_train_08",
+        "v2_gap_train_09",
+        "v2_gap_train_10",
+        "v2_gap_train_11",
+        "v2_gap_train_12",
+        "v2_gap_train_13",
+        "v2_gap_train_14",
+        "v2_gap_train_15",
+        "v2_gap_train_16",
+        "v2_gap_train_17",
+        "v2_gap_train_18",
+        "v2_gap_train_19",
+        "v2_gap_train_20",
+        "v2_gap_train_21",
+        "v2_gap_train_22",
+        "v2_gap_train_23",
+        "v2_gap_train_24",
+        "v2_gap_train_25",
+        "v2_gap_train_26",
+        "v2_gap_train_27",
+        "v2_gap_train_28",
+        "v2_gap_train_29",
+        "v2_gap_train_30",
+        "v2_gap_train_31",
+        "v2_gap_train_32",
+        "v2_gap_train_33",
+        "v2_gap_train_34",
+        "v2_gap_train_35"
+      ],
+      "validation": [
+        "v2_gap_validation_00",
+        "v2_gap_validation_01",
+        "v2_gap_validation_02",
+        "v2_gap_validation_03",
+        "v2_gap_validation_04",
+        "v2_gap_validation_05",
+        "v2_gap_validation_06",
+        "v2_gap_validation_07",
+        "v2_gap_validation_08",
+        "v2_gap_validation_09",
+        "v2_gap_validation_10",
+        "v2_gap_validation_11",
+        "v2_gap_validation_12",
+        "v2_gap_validation_13",
+        "v2_gap_validation_14",
+        "v2_gap_validation_15",
+        "v2_gap_validation_16",
+        "v2_gap_validation_17",
+        "v2_gap_validation_18",
+        "v2_gap_validation_19",
+        "v2_gap_validation_20",
+        "v2_gap_validation_21",
+        "v2_gap_validation_22",
+        "v2_gap_validation_23",
+        "v2_gap_validation_24",
+        "v2_gap_validation_25",
+        "v2_gap_validation_26",
+        "v2_gap_validation_27",
+        "v2_gap_validation_28",
+        "v2_gap_validation_29",
+        "v2_gap_validation_30",
+        "v2_gap_validation_31",
+        "v2_gap_validation_32",
+        "v2_gap_validation_33",
+        "v2_gap_validation_34",
+        "v2_gap_validation_35"
+      ],
+      "test": [
+        "v2_gap_test_00",
+        "v2_gap_test_01",
+        "v2_gap_test_02",
+        "v2_gap_test_03",
+        "v2_gap_test_04",
+        "v2_gap_test_05",
+        "v2_gap_test_06",
+        "v2_gap_test_07",
+        "v2_gap_test_08",
+        "v2_gap_test_09",
+        "v2_gap_test_10",
+        "v2_gap_test_11",
+        "v2_gap_test_12",
+        "v2_gap_test_13",
+        "v2_gap_test_14",
+        "v2_gap_test_15",
+        "v2_gap_test_16",
+        "v2_gap_test_17",
+        "v2_gap_test_18",
+        "v2_gap_test_19",
+        "v2_gap_test_20",
+        "v2_gap_test_21",
+        "v2_gap_test_22",
+        "v2_gap_test_23",
+        "v2_gap_test_24",
+        "v2_gap_test_25",
+        "v2_gap_test_26",
+        "v2_gap_test_27",
+        "v2_gap_test_28",
+        "v2_gap_test_29",
+        "v2_gap_test_30",
+        "v2_gap_test_31",
+        "v2_gap_test_32",
+        "v2_gap_test_33",
+        "v2_gap_test_34",
+        "v2_gap_test_35"
+      ],
+      "ood": [
+        "v2_gap_ood_00",
+        "v2_gap_ood_01",
+        "v2_gap_ood_02",
+        "v2_gap_ood_03",
+        "v2_gap_ood_04",
+        "v2_gap_ood_05",
+        "v2_gap_ood_06",
+        "v2_gap_ood_07",
+        "v2_gap_ood_08",
+        "v2_gap_ood_09",
+        "v2_gap_ood_10",
+        "v2_gap_ood_11"
+      ]
+    },
+    "mixed": {
+      "train": [
+        "v2_mixed_train_00",
+        "v2_mixed_train_01",
+        "v2_mixed_train_02",
+        "v2_mixed_train_03",
+        "v2_mixed_train_04",
+        "v2_mixed_train_05",
+        "v2_mixed_train_06",
+        "v2_mixed_train_07",
+        "v2_mixed_train_08",
+        "v2_mixed_train_09",
+        "v2_mixed_train_10",
+        "v2_mixed_train_11",
+        "v2_mixed_train_12",
+        "v2_mixed_train_13",
+        "v2_mixed_train_14",
+        "v2_mixed_train_15",
+        "v2_mixed_train_16",
+        "v2_mixed_train_17",
+        "v2_mixed_train_18",
+        "v2_mixed_train_19",
+        "v2_mixed_train_20",
+        "v2_mixed_train_21",
+        "v2_mixed_train_22",
+        "v2_mixed_train_23",
+        "v2_mixed_train_24",
+        "v2_mixed_train_25",
+        "v2_mixed_train_26",
+        "v2_mixed_train_27",
+        "v2_mixed_train_28",
+        "v2_mixed_train_29",
+        "v2_mixed_train_30",
+        "v2_mixed_train_31",
+        "v2_mixed_train_32",
+        "v2_mixed_train_33",
+        "v2_mixed_train_34",
+        "v2_mixed_train_35"
+      ],
+      "validation": [
+        "v2_mixed_validation_00",
+        "v2_mixed_validation_01",
+        "v2_mixed_validation_02",
+        "v2_mixed_validation_03",
+        "v2_mixed_validation_04",
+        "v2_mixed_validation_05",
+        "v2_mixed_validation_06",
+        "v2_mixed_validation_07",
+        "v2_mixed_validation_08",
+        "v2_mixed_validation_09",
+        "v2_mixed_validation_10",
+        "v2_mixed_validation_11",
+        "v2_mixed_validation_12",
+        "v2_mixed_validation_13",
+        "v2_mixed_validation_14",
+        "v2_mixed_validation_15",
+        "v2_mixed_validation_16",
+        "v2_mixed_validation_17",
+        "v2_mixed_validation_18",
+        "v2_mixed_validation_19",
+        "v2_mixed_validation_20",
+        "v2_mixed_validation_21",
+        "v2_mixed_validation_22",
+        "v2_mixed_validation_23",
+        "v2_mixed_validation_24",
+        "v2_mixed_validation_25",
+        "v2_mixed_validation_26",
+        "v2_mixed_validation_27",
+        "v2_mixed_validation_28",
+        "v2_mixed_validation_29",
+        "v2_mixed_validation_30",
+        "v2_mixed_validation_31",
+        "v2_mixed_validation_32",
+        "v2_mixed_validation_33",
+        "v2_mixed_validation_34",
+        "v2_mixed_validation_35"
+      ],
+      "test": [
+        "v2_mixed_test_00",
+        "v2_mixed_test_01",
+        "v2_mixed_test_02",
+        "v2_mixed_test_03",
+        "v2_mixed_test_04",
+        "v2_mixed_test_05",
+        "v2_mixed_test_06",
+        "v2_mixed_test_07",
+        "v2_mixed_test_08",
+        "v2_mixed_test_09",
+        "v2_mixed_test_10",
+        "v2_mixed_test_11",
+        "v2_mixed_test_12",
+        "v2_mixed_test_13",
+        "v2_mixed_test_14",
+        "v2_mixed_test_15",
+        "v2_mixed_test_16",
+        "v2_mixed_test_17",
+        "v2_mixed_test_18",
+        "v2_mixed_test_19",
+        "v2_mixed_test_20",
+        "v2_mixed_test_21",
+        "v2_mixed_test_22",
+        "v2_mixed_test_23",
+        "v2_mixed_test_24",
+        "v2_mixed_test_25",
+        "v2_mixed_test_26",
+        "v2_mixed_test_27",
+        "v2_mixed_test_28",
+        "v2_mixed_test_29",
+        "v2_mixed_test_30",
+        "v2_mixed_test_31",
+        "v2_mixed_test_32",
+        "v2_mixed_test_33",
+        "v2_mixed_test_34",
+        "v2_mixed_test_35"
+      ],
+      "ood": [
+        "v2_mixed_ood_00",
+        "v2_mixed_ood_01",
+        "v2_mixed_ood_02",
+        "v2_mixed_ood_03",
+        "v2_mixed_ood_04",
+        "v2_mixed_ood_05",
+        "v2_mixed_ood_06",
+        "v2_mixed_ood_07",
+        "v2_mixed_ood_08",
+        "v2_mixed_ood_09",
+        "v2_mixed_ood_10",
+        "v2_mixed_ood_11"
+      ]
+    }
+  }
+}

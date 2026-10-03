@@ -1,0 +1,5927 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-03",
+  "accepted_for_mixed": true,
+  "selected_attempt": "imitation",
+  "selected_model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_imitation/model.zip",
+  "model_sha256": "7c847b19c44da6a2012ef82cded57f8580d915d5ca85ab47c303f6f582892b55",
+  "signature_hash": "678b25fd13ccf6b42a4f00d05c0f73e167cff8cc49866fc4148533dd757dde15",
+  "method": "training-only rule demonstration warm start followed by PPO; not pure PPO",
+  "automatic_promotion_evidence": {
+    "target": "mixed",
+    "timesteps": 16384,
+    "prerequisites": {
+      "passed": true,
+      "tasks": {
+        "flat": {
+          "passed": true,
+          "layouts": 4,
+          "qualified_layouts": 4,
+          "qualified_fraction": 1.0,
+          "failures": {},
+          "success_threshold": 0.95,
+          "max_success_steps": 128
+        },
+        "obstacle": {
+          "passed": true,
+          "layouts": 40,
+          "qualified_layouts": 40,
+          "qualified_fraction": 1.0,
+          "failures": {},
+          "success_threshold": 0.8,
+          "max_success_steps": 160
+        },
+        "gap": {
+          "passed": true,
+          "layouts": 54,
+          "qualified_layouts": 54,
+          "qualified_fraction": 1.0,
+          "failures": {},
+          "success_threshold": 0.8,
+          "max_success_steps": 192
+        }
+      }
+    },
+    "required_evaluations": 2,
+    "evaluation_timesteps": [
+      8192,
+      16384
+    ]
+  },
+  "independent_reload_gate": {
+    "passed": true,
+    "tasks": {
+      "flat": {
+        "passed": true,
+        "layouts": 4,
+        "qualified_layouts": 4,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.95,
+        "max_success_steps": 128
+      },
+      "obstacle": {
+        "passed": true,
+        "layouts": 40,
+        "qualified_layouts": 40,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 160
+      },
+      "gap": {
+        "passed": true,
+        "layouts": 54,
+        "qualified_layouts": 54,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 192
+      }
+    }
+  },
+  "final_validation": {
+    "flat": {
+      "layouts": 4,
+      "successful_layouts": 4,
+      "success_rate": 1.0,
+      "max_success_steps": 19
+    },
+    "obstacle": {
+      "layouts": 40,
+      "successful_layouts": 40,
+      "success_rate": 1.0,
+      "max_success_steps": 39
+    },
+    "gap": {
+      "layouts": 54,
+      "successful_layouts": 54,
+      "success_rate": 1.0,
+      "max_success_steps": 40
+    }
+  },
+  "ood": {
+    "deterministic": {
+      "summary": {
+        "agent": "deterministic",
+        "episodes": 120,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.961666666666668,
+        "mean_progress": 1.0,
+        "mean_steps": 38.333333333333336,
+        "mean_coins": 0.0,
+        "mean_success_steps": 38.333333333333336
+      },
+      "layouts": 12,
+      "landed_after_gap_rate": 1.0
+    },
+    "stochastic": {
+      "summary": {
+        "agent": "stochastic",
+        "episodes": 120,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.961666666666668,
+        "mean_progress": 1.0,
+        "mean_steps": 38.333333333333336,
+        "mean_coins": 0.0,
+        "mean_success_steps": 38.333333333333336
+      },
+      "layouts": 12,
+      "landed_after_gap_rate": 0.975
+    },
+    "fixed_observation": {
+      "summary": {
+        "agent": "fixed_observation",
+        "episodes": 120,
+        "success_rate": 0.0,
+        "death_rate": 1.0,
+        "truncation_rate": 0.0,
+        "mean_return": -6.807099776214213,
+        "mean_progress": 0.6439300447571574,
+        "mean_steps": 26.75,
+        "mean_coins": 0.0,
+        "mean_success_steps": null
+      },
+      "layouts": 12,
+      "landed_after_gap_rate": 0.0
+    }
+  },
+  "verification": {
+    "tests": 57,
+    "failures": 0,
+    "skipped": 0,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "readiness": {
+      "passed": true,
+      "sb3_checker": {
+        "passed": true,
+        "version": "2.4.1"
+      },
+      "stability": {
+        "episodes": 1000,
+        "transitions": 241037,
+        "max_steps_per_episode": 256,
+        "base_seed": 20260923,
+        "outcomes": {
+          "death": 124,
+          "success": 21,
+          "time_limit": 855
+        },
+        "min_reward": -10.03663596491228,
+        "max_reward": 10.14525850340136
+      },
+      "audited_train_validation_layouts": 276,
+      "all_course_audits_passed": true,
+      "protocol_hash": "8812089f938ed6e761a76475fb2aef7e2097e94cfa6938bb9f845cc897aafb9b"
+    }
+  },
+  "attempts": {
+    "v3": {
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_v3/model.zip",
+      "model_sha256": "cc0364dfc626f13b25e9b17b60d35f800c89eb7c45ce21df7d1e6d53347ea898",
+      "signature_hash": "540760ca19e7786d1b54ba7980c6183369f9625303954b056792de4b12439073",
+      "added_timesteps": 106496,
+      "status": "ready_for_stage",
+      "initialization": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gap_v2_initialized/model.zip",
+        "source_sha256": "c190f53fcd87dfe09591a4e646de2257741fe171b6ccd359cc6d88247c19d8db",
+        "source_timesteps": 65536,
+        "source_signature_hash": "62db54c8d5cba2dee349095b331b7e75e8748340e96fa4258091ca82ab63461c",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      },
+      "final_validation": {
+        "flat": {
+          "layouts": 4,
+          "successful_layouts": 4,
+          "success_rate": 1.0,
+          "max_success_steps": 19
+        },
+        "obstacle": {
+          "layouts": 40,
+          "successful_layouts": 40,
+          "success_rate": 1.0,
+          "max_success_steps": 42
+        },
+        "gap": {
+          "layouts": 36,
+          "successful_layouts": 36,
+          "success_rate": 1.0,
+          "max_success_steps": 34
+        }
+      },
+      "best": {
+        "gap": {
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -31.6
+          ],
+          "timesteps": 106496,
+          "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_v3/checkpoints/best_gap.zip"
+        }
+      },
+      "learning_curve": [
+        {
+          "timesteps": 8192,
+          "score": [
+            0.0,
+            0.225,
+            0.7416666666666667,
+            0.7259488501281066,
+            -31.367346938775512
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 9,
+                "qualified_fraction": 0.225,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 16384,
+          "score": [
+            0.0,
+            0.8,
+            0.9333333333333332,
+            0.9185911268750102,
+            -31.305555555555557
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 32,
+                "qualified_fraction": 0.8,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 24576,
+          "score": [
+            0.0,
+            0.675,
+            0.8916666666666666,
+            0.8720068937063544,
+            -31.28358208955224
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 27,
+                "qualified_fraction": 0.675,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 32768,
+          "score": [
+            0.0,
+            0.725,
+            0.9083333333333333,
+            0.8901950161143077,
+            -31.318840579710145
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 29,
+                "qualified_fraction": 0.725,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 40960,
+          "score": [
+            0.0,
+            0.75,
+            0.9166666666666666,
+            0.8993708402901319,
+            -31.185714285714287
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 30,
+                "qualified_fraction": 0.75,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 49152,
+          "score": [
+            0.0,
+            0.975,
+            0.9916666666666667,
+            0.9897252747252747,
+            -31.582278481012658
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 39,
+                "qualified_fraction": 0.975,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 57344,
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -31.75
+          ],
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 65536,
+          "score": [
+            0.0,
+            0.25,
+            0.75,
+            0.8228184194505543,
+            -33.509433962264154
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 36,
+                "qualified_layouts": 9,
+                "qualified_fraction": 0.25,
+                "failures": {
+                  "v2_gap_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 73728,
+          "score": [
+            0.0,
+            0.25,
+            0.75,
+            0.8228184194505543,
+            -33.490566037735846
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 36,
+                "qualified_layouts": 9,
+                "qualified_fraction": 0.25,
+                "failures": {
+                  "v2_gap_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v2_gap_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 81920,
+          "score": [
+            0.0,
+            0.975,
+            0.9916666666666667,
+            0.9897252747252747,
+            -31.810126582278482
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 39,
+                "qualified_fraction": 0.975,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 90112,
+          "score": [
+            0.0,
+            0.775,
+            0.9249999999999999,
+            0.9085466644659561,
+            -31.295774647887324
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 31,
+                "qualified_fraction": 0.775,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 98304,
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -31.6875
+          ],
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 106496,
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -31.6
+          ],
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 106496,
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -31.6
+          ],
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 36,
+                "qualified_layouts": 36,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        }
+      ],
+      "ood": {
+        "deterministic": {
+          "summary": {
+            "agent": "deterministic",
+            "episodes": 120,
+            "success_rate": 0.0,
+            "death_rate": 1.0,
+            "truncation_rate": 0.0,
+            "mean_return": -6.811393903777273,
+            "mean_progress": 0.6431045525778785,
+            "mean_steps": 26.916666666666668,
+            "mean_coins": 0.0,
+            "mean_success_steps": null
+          },
+          "layouts": 12,
+          "landed_after_gap_rate": 0.0
+        },
+        "stochastic": {
+          "summary": {
+            "agent": "stochastic",
+            "episodes": 120,
+            "success_rate": 0.575,
+            "death_rate": 0.425,
+            "truncation_rate": 0.0,
+            "mean_return": 5.6874176846363165,
+            "mean_progress": 0.8454452035939298,
+            "mean_steps": 39.80833333333333,
+            "mean_coins": 0.0,
+            "mean_success_steps": 45.768115942028984
+          },
+          "layouts": 12,
+          "landed_after_gap_rate": 0.5583333333333333
+        },
+        "fixed_observation": {
+          "summary": {
+            "agent": "fixed_observation",
+            "episodes": 120,
+            "success_rate": 0.2833333333333333,
+            "death_rate": 0.7166666666666667,
+            "truncation_rate": 0.0,
+            "mean_return": -0.707867047946585,
+            "mean_progress": 0.7332599237440164,
+            "mean_steps": 40.833333333333336,
+            "mean_coins": 0.0,
+            "mean_success_steps": 52.88235294117647
+          },
+          "layouts": 12,
+          "landed_after_gap_rate": 0.2833333333333333
+        }
+      }
+    },
+    "v4": {
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_v4/model.zip",
+      "model_sha256": "f0eea0471ce6244a962f7ea85fe48da7b962b0918f35653a04fc1a7228ee6ffd",
+      "signature_hash": "82b57288fd44adbc5723e98c9259047e8f61275c081f9a4763fe659b8ef326aa",
+      "added_timesteps": 149192,
+      "status": "interrupted",
+      "initialization": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_v3/model.zip",
+        "source_sha256": "cc0364dfc626f13b25e9b17b60d35f800c89eb7c45ce21df7d1e6d53347ea898",
+        "source_timesteps": 106496,
+        "source_signature_hash": "540760ca19e7786d1b54ba7980c6183369f9625303954b056792de4b12439073",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      },
+      "final_validation": {
+        "flat": {
+          "layouts": 4,
+          "successful_layouts": 4,
+          "success_rate": 1.0,
+          "max_success_steps": 19
+        },
+        "obstacle": {
+          "layouts": 40,
+          "successful_layouts": 0,
+          "success_rate": 0.0,
+          "max_success_steps": null
+        },
+        "gap": {
+          "layouts": 54,
+          "successful_layouts": 54,
+          "success_rate": 1.0,
+          "max_success_steps": 40
+        }
+      },
+      "best": {
+        "gap": {
+          "score": [
+            0.0,
+            0.9629629629629629,
+            0.979320987654321,
+            0.9827464178917921,
+            -32.78947368421053
+          ],
+          "timesteps": 32768,
+          "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_v4/checkpoints/best_gap.zip"
+        }
+      },
+      "learning_curve": [
+        {
+          "timesteps": 8192,
+          "score": [
+            0.0,
+            0.425,
+            0.8083333333333332,
+            0.8264507181940439,
+            -33.36
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 17,
+                "qualified_fraction": 0.425,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 16384,
+          "score": [
+            0.0,
+            0.8,
+            0.9333333333333332,
+            0.9335437770408247,
+            -32.72222222222222
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 32,
+                "qualified_fraction": 0.8,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 24576,
+          "score": [
+            0.0,
+            0.8333333333333334,
+            0.9444444444444445,
+            0.9577842490638651,
+            -32.82022471910113
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 45,
+                "qualified_fraction": 0.8333333333333334,
+                "failures": {
+                  "v4_gap_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 32768,
+          "score": [
+            0.0,
+            0.9629629629629629,
+            0.979320987654321,
+            0.9827464178917921,
+            -32.78947368421053
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 39,
+                "qualified_fraction": 0.975,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 52,
+                "qualified_fraction": 0.9629629629629629,
+                "failures": {
+                  "v4_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 40960,
+          "score": [
+            0.0,
+            0.65,
+            0.8833333333333333,
+            0.8881588534483471,
+            -33.107142857142854
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 26,
+                "qualified_fraction": 0.65,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 49152,
+          "score": [
+            0.0,
+            0.325,
+            0.775,
+            0.8008549044047752,
+            -33.521126760563384
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 13,
+                "qualified_fraction": 0.325,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 57344,
+          "score": [
+            0.0,
+            0.625,
+            0.875,
+            0.8809491789560766,
+            -33.144578313253014
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 25,
+                "qualified_fraction": 0.625,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 65536,
+          "score": [
+            0.0,
+            0.75,
+            0.9166666666666666,
+            0.9178537471756179,
+            -32.92045454545455
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 30,
+                "qualified_fraction": 0.75,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 73728,
+          "score": [
+            0.0,
+            0.825,
+            0.9416666666666668,
+            0.941743338191073,
+            -32.76923076923077
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 33,
+                "qualified_fraction": 0.825,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 81920,
+          "score": [
+            0.0,
+            0.35,
+            0.7833333333333333,
+            0.8070746922390681,
+            -33.263888888888886
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 14,
+                "qualified_fraction": 0.35,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 90112,
+          "score": [
+            0.0,
+            0.525,
+            0.8416666666666667,
+            0.8531957131283159,
+            -33.18987341772152
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 21,
+                "qualified_fraction": 0.525,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 98304,
+          "score": [
+            0.0,
+            0.0,
+            0.6666666666666666,
+            0.7265588082680359,
+            -33.36206896551724
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 0,
+                "qualified_fraction": 0.0,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 106496,
+          "score": [
+            0.0,
+            0.0,
+            0.6666666666666666,
+            0.7265588082680359,
+            -33.36206896551724
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 0,
+                "qualified_fraction": 0.0,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 114688,
+          "score": [
+            0.0,
+            0.0,
+            0.6666666666666666,
+            0.7265588082680359,
+            -33.36206896551724
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 0,
+                "qualified_fraction": 0.0,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 122880,
+          "score": [
+            0.0,
+            0.0,
+            0.6666666666666666,
+            0.7265588082680359,
+            -33.36206896551724
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 0,
+                "qualified_fraction": 0.0,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 131072,
+          "score": [
+            0.0,
+            0.0,
+            0.6666666666666666,
+            0.7265588082680359,
+            -33.36206896551724
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 0,
+                "qualified_fraction": 0.0,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 139264,
+          "score": [
+            0.0,
+            0.55,
+            0.85,
+            0.8597891197217225,
+            -33.1
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 22,
+                "qualified_fraction": 0.55,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 147456,
+          "score": [
+            0.0,
+            0.0,
+            0.6666666666666666,
+            0.7265588082680359,
+            -33.36206896551724
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 0,
+                "qualified_fraction": 0.0,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 149192,
+          "score": [
+            0.0,
+            0.0,
+            0.6666666666666666,
+            0.7265588082680359,
+            -33.36206896551724
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 0,
+                "qualified_fraction": 0.0,
+                "failures": {
+                  "course_obstacle_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "course_obstacle_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_18": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_19": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_20": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_21": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_22": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_23": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_29": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_30": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_31": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_32": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_33": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_34": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        }
+      ]
+    },
+    "stable": {
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_stable/model.zip",
+      "model_sha256": "d951cb673f12ac54077e452cc260c333c30e26681292338ab4184f9226debc1a",
+      "signature_hash": "0b3a784656a2d68081a353fe37b7aec47a9642dfdc72a0dcd9208b0e2dd9ec9b",
+      "added_timesteps": 131072,
+      "status": "timesteps_limit",
+      "initialization": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_v4/checkpoints/best_gap.zip",
+        "source_sha256": "890a481e2ddfcf7cb7b1c14ae51b9f474a2106d3d4d9b034bc5695e8135c2ffd",
+        "source_timesteps": 32768,
+        "source_signature_hash": "82b57288fd44adbc5723e98c9259047e8f61275c081f9a4763fe659b8ef326aa",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      },
+      "final_validation": {
+        "flat": {
+          "layouts": 4,
+          "successful_layouts": 4,
+          "success_rate": 1.0,
+          "max_success_steps": 19
+        },
+        "obstacle": {
+          "layouts": 40,
+          "successful_layouts": 22,
+          "success_rate": 0.55,
+          "max_success_steps": 39
+        },
+        "gap": {
+          "layouts": 54,
+          "successful_layouts": 54,
+          "success_rate": 1.0,
+          "max_success_steps": 40
+        }
+      },
+      "best": {
+        "gap": {
+          "score": [
+            0.0,
+            0.9814814814814815,
+            0.9938271604938271,
+            0.9956846759523588,
+            -32.92783505154639
+          ],
+          "timesteps": 81920,
+          "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_stable/checkpoints/best_gap.zip"
+        }
+      },
+      "learning_curve": [
+        {
+          "timesteps": 8192,
+          "score": [
+            0.0,
+            0.875,
+            0.9583333333333334,
+            0.9582410687243704,
+            -32.86021505376344
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 35,
+                "qualified_fraction": 0.875,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 16384,
+          "score": [
+            0.0,
+            0.7592592592592593,
+            0.9197530864197532,
+            0.9388846942933673,
+            -33.082352941176474
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 41,
+                "qualified_fraction": 0.7592592592592593,
+                "failures": {
+                  "v2_gap_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 24576,
+          "score": [
+            0.0,
+            0.75,
+            0.9166666666666666,
+            0.9178537471756179,
+            -32.79545454545455
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 30,
+                "qualified_fraction": 0.75,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 32768,
+          "score": [
+            0.0,
+            0.625,
+            0.875,
+            0.8809491789560766,
+            -33.06024096385542
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 25,
+                "qualified_fraction": 0.625,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 40960,
+          "score": [
+            0.0,
+            0.85,
+            0.9500000000000001,
+            0.9500415075741221,
+            -32.82608695652174
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 34,
+                "qualified_fraction": 0.85,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 49152,
+          "score": [
+            0.0,
+            0.9074074074074074,
+            0.9691358024691358,
+            0.9771094882887232,
+            -32.73118279569893
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 49,
+                "qualified_fraction": 0.9074074074074074,
+                "failures": {
+                  "v4_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 57344,
+          "score": [
+            0.0,
+            0.7592592592592593,
+            0.9197530864197532,
+            0.9388846942933673,
+            -33.34117647058824
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 41,
+                "qualified_fraction": 0.7592592592592593,
+                "failures": {
+                  "v2_gap_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 65536,
+          "score": [
+            0.0,
+            0.7592592592592593,
+            0.9197530864197532,
+            0.9388846942933673,
+            -33.411764705882355
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 41,
+                "qualified_fraction": 0.7592592592592593,
+                "failures": {
+                  "v2_gap_validation_35": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_07": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_08": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_09": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_10": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 73728,
+          "score": [
+            0.0,
+            0.9444444444444444,
+            0.9814814814814815,
+            0.9863659153888406,
+            -32.71578947368421
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 51,
+                "qualified_fraction": 0.9444444444444444,
+                "failures": {
+                  "v4_gap_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_11": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 81920,
+          "score": [
+            0.0,
+            0.9814814814814815,
+            0.9938271604938271,
+            0.9956846759523588,
+            -32.92783505154639
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": false,
+                "layouts": 54,
+                "qualified_layouts": 53,
+                "qualified_fraction": 0.9814814814814815,
+                "failures": {
+                  "v4_gap_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 90112,
+          "score": [
+            0.0,
+            0.975,
+            0.9916666666666667,
+            0.9916124691634896,
+            -32.79381443298969
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 39,
+                "qualified_fraction": 0.975,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 98304,
+          "score": [
+            0.0,
+            0.85,
+            0.9500000000000001,
+            0.9500415075741221,
+            -32.82608695652174
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 34,
+                "qualified_fraction": 0.85,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 106496,
+          "score": [
+            0.0,
+            0.8,
+            0.9333333333333332,
+            0.9335437770408247,
+            -32.72222222222222
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 32,
+                "qualified_fraction": 0.8,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 114688,
+          "score": [
+            0.0,
+            0.85,
+            0.9500000000000001,
+            0.9500415075741221,
+            -32.82608695652174
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 34,
+                "qualified_fraction": 0.85,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 122880,
+          "score": [
+            0.0,
+            0.6,
+            0.8666666666666667,
+            0.8743557723626699,
+            -33.073170731707314
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 24,
+                "qualified_fraction": 0.6,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 131072,
+          "score": [
+            0.0,
+            0.6,
+            0.8666666666666667,
+            0.8743557723626699,
+            -33.21951219512195
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 24,
+                "qualified_fraction": 0.6,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 131072,
+          "score": [
+            0.0,
+            0.55,
+            0.85,
+            0.8597891197217225,
+            -33.175
+          ],
+          "gate": {
+            "passed": false,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": false,
+                "layouts": 40,
+                "qualified_layouts": 22,
+                "qualified_fraction": 0.55,
+                "failures": {
+                  "v3_obstacle_validation_00": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_01": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_02": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_03": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_04": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_05": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_06": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_12": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_13": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_14": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_15": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_16": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_17": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_24": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_25": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_26": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_27": [
+                    "success_rate",
+                    "success_steps"
+                  ],
+                  "v3_obstacle_validation_28": [
+                    "success_rate",
+                    "success_steps"
+                  ]
+                },
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        }
+      ]
+    },
+    "imitation": {
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_imitation/model.zip",
+      "model_sha256": "7c847b19c44da6a2012ef82cded57f8580d915d5ca85ab47c303f6f582892b55",
+      "signature_hash": "678b25fd13ccf6b42a4f00d05c0f73e167cff8cc49866fc4148533dd757dde15",
+      "added_timesteps": 16384,
+      "status": "ready_for_stage",
+      "initialization": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_v4/checkpoints/best_gap.zip",
+        "source_sha256": "890a481e2ddfcf7cb7b1c14ae51b9f474a2106d3d4d9b034bc5695e8135c2ffd",
+        "source_timesteps": 32768,
+        "source_signature_hash": "82b57288fd44adbc5723e98c9259047e8f61275c081f9a4763fe659b8ef326aa",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      },
+      "final_validation": {
+        "flat": {
+          "layouts": 4,
+          "successful_layouts": 4,
+          "success_rate": 1.0,
+          "max_success_steps": 19
+        },
+        "obstacle": {
+          "layouts": 40,
+          "successful_layouts": 40,
+          "success_rate": 1.0,
+          "max_success_steps": 39
+        },
+        "gap": {
+          "layouts": 54,
+          "successful_layouts": 54,
+          "success_rate": 1.0,
+          "max_success_steps": 40
+        }
+      },
+      "best": {
+        "gap": {
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -32.91836734693877
+          ],
+          "timesteps": 16384,
+          "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_imitation/checkpoints/best_gap.zip"
+        }
+      },
+      "learning_curve": [
+        {
+          "timesteps": 8192,
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -33.08163265306123
+          ],
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 16384,
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -32.91836734693877
+          ],
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        },
+        {
+          "timesteps": 16384,
+          "score": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            -32.91836734693877
+          ],
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "flat": {
+                "passed": true,
+                "layouts": 4,
+                "qualified_layouts": 4,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.95,
+                "max_success_steps": 128
+              },
+              "obstacle": {
+                "passed": true,
+                "layouts": 40,
+                "qualified_layouts": 40,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 160
+              },
+              "gap": {
+                "passed": true,
+                "layouts": 54,
+                "qualified_layouts": 54,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.8,
+                "max_success_steps": 192
+              }
+            }
+          }
+        }
+      ],
+      "ood": {
+        "deterministic": {
+          "summary": {
+            "agent": "deterministic",
+            "episodes": 120,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.961666666666668,
+            "mean_progress": 1.0,
+            "mean_steps": 38.333333333333336,
+            "mean_coins": 0.0,
+            "mean_success_steps": 38.333333333333336
+          },
+          "layouts": 12,
+          "landed_after_gap_rate": 1.0
+        },
+        "stochastic": {
+          "summary": {
+            "agent": "stochastic",
+            "episodes": 120,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 14.961666666666668,
+            "mean_progress": 1.0,
+            "mean_steps": 38.333333333333336,
+            "mean_coins": 0.0,
+            "mean_success_steps": 38.333333333333336
+          },
+          "layouts": 12,
+          "landed_after_gap_rate": 0.975
+        },
+        "fixed_observation": {
+          "summary": {
+            "agent": "fixed_observation",
+            "episodes": 120,
+            "success_rate": 0.0,
+            "death_rate": 1.0,
+            "truncation_rate": 0.0,
+            "mean_return": -6.807099776214213,
+            "mean_progress": 0.6439300447571574,
+            "mean_steps": 26.75,
+            "mean_coins": 0.0,
+            "mean_success_steps": null
+          },
+          "layouts": 12,
+          "landed_after_gap_rate": 0.0
+        }
+      },
+      "imitation": {
+        "teacher": "rule_jump_with_release_v1",
+        "source": "training layouts only",
+        "levels": [
+          "course_flat_00",
+          "course_flat_01",
+          "course_flat_02",
+          "course_flat_03",
+          "course_flat_04",
+          "course_flat_05",
+          "course_flat_06",
+          "course_flat_07",
+          "course_obstacle_00",
+          "course_obstacle_01",
+          "course_obstacle_02",
+          "course_obstacle_03",
+          "course_obstacle_04",
+          "course_obstacle_05",
+          "course_obstacle_06",
+          "course_obstacle_07",
+          "v3_obstacle_train_00",
+          "v3_obstacle_train_01",
+          "v3_obstacle_train_02",
+          "v3_obstacle_train_03",
+          "v3_obstacle_train_04",
+          "v3_obstacle_train_05",
+          "v3_obstacle_train_06",
+          "v3_obstacle_train_07",
+          "v3_obstacle_train_08",
+          "v3_obstacle_train_09",
+          "v3_obstacle_train_10",
+          "v3_obstacle_train_11",
+          "v3_obstacle_train_12",
+          "v3_obstacle_train_13",
+          "v3_obstacle_train_14",
+          "v3_obstacle_train_15",
+          "v3_obstacle_train_16",
+          "v3_obstacle_train_17",
+          "v3_obstacle_train_18",
+          "v3_obstacle_train_19",
+          "v3_obstacle_train_20",
+          "v3_obstacle_train_21",
+          "v3_obstacle_train_22",
+          "v3_obstacle_train_23",
+          "v3_obstacle_train_24",
+          "v3_obstacle_train_25",
+          "v3_obstacle_train_26",
+          "v3_obstacle_train_27",
+          "v3_obstacle_train_28",
+          "v3_obstacle_train_29",
+          "v3_obstacle_train_30",
+          "v3_obstacle_train_31",
+          "v3_obstacle_train_32",
+          "v3_obstacle_train_33",
+          "v3_obstacle_train_34",
+          "v3_obstacle_train_35",
+          "v2_gap_train_00",
+          "v2_gap_train_01",
+          "v2_gap_train_02",
+          "v2_gap_train_03",
+          "v2_gap_train_04",
+          "v2_gap_train_05",
+          "v2_gap_train_06",
+          "v2_gap_train_07",
+          "v2_gap_train_08",
+          "v2_gap_train_09",
+          "v2_gap_train_10",
+          "v2_gap_train_11",
+          "v2_gap_train_12",
+          "v2_gap_train_13",
+          "v2_gap_train_14",
+          "v2_gap_train_15",
+          "v2_gap_train_16",
+          "v2_gap_train_17",
+          "v2_gap_train_18",
+          "v2_gap_train_19",
+          "v2_gap_train_20",
+          "v2_gap_train_21",
+          "v2_gap_train_22",
+          "v2_gap_train_23",
+          "v2_gap_train_24",
+          "v2_gap_train_25",
+          "v2_gap_train_26",
+          "v2_gap_train_27",
+          "v2_gap_train_28",
+          "v2_gap_train_29",
+          "v2_gap_train_30",
+          "v2_gap_train_31",
+          "v2_gap_train_32",
+          "v2_gap_train_33",
+          "v2_gap_train_34",
+          "v2_gap_train_35",
+          "v4_gap_train_00",
+          "v4_gap_train_01",
+          "v4_gap_train_02",
+          "v4_gap_train_03",
+          "v4_gap_train_04",
+          "v4_gap_train_05",
+          "v4_gap_train_06",
+          "v4_gap_train_07",
+          "v4_gap_train_08",
+          "v4_gap_train_09",
+          "v4_gap_train_10",
+          "v4_gap_train_11",
+          "v4_gap_train_12",
+          "v4_gap_train_13",
+          "v4_gap_train_14",
+          "v4_gap_train_15",
+          "v4_gap_train_16",
+          "v4_gap_train_17"
+        ],
+        "seed": 20260923,
+        "options": {
+          "rounds": 4,
+          "epochs": 25,
+          "batch_size": 256,
+          "learning_rate": 0.001,
+          "max_steps_per_episode": 128
+        },
+        "rounds": [
+          {
+            "round": 1,
+            "samples": 3409,
+            "updates": 350,
+            "training_label_accuracy": 0.9920797944068909
+          },
+          {
+            "round": 2,
+            "samples": 6845,
+            "updates": 675,
+            "training_label_accuracy": 0.9985390901565552
+          },
+          {
+            "round": 3,
+            "samples": 10254,
+            "updates": 1025,
+            "training_label_accuracy": 1.0
+          },
+          {
+            "round": 4,
+            "samples": 13663,
+            "updates": 1350,
+            "training_label_accuracy": 1.0
+          }
+        ],
+        "gradient_updates": 3400,
+        "note": "Supervised actor warm start; not pure PPO learning. Critic and PPO optimizer unchanged."
+      }
+    }
+  },
+  "limitations": [
+    "Single training seed development acceptance; formal multi-training-seed acceptance remains future work.",
+    "OOD was inspected during development and is not an untouched final test. Learning policy final-test layouts were not evaluated.",
+    "Supervised samples and gradient updates are separately recorded; PPO sampling budget excludes imitation work.",
+    "Intermediate v3 automatic gate passed but OOD regressed; v4 was interrupted after sustained deterministic obstacle collapse. Neither was selected for handoff."
+  ],
+  "handoff": {
+    "stage": "mixed",
+    "checkpoint_status": "ready_for_stage",
+    "config": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_imitation/config.json",
+    "command": ".venv/bin/python -m scripts.train_ppo --config runs/mixed_prerequisites_imitation/config.json --resume runs/mixed_prerequisites_imitation/model.zip --timesteps 131072 --output-dir runs/mixed_stage_ready"
+  },
+  "raw_reports": {
+    "entry": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_imitation/mixed_entry_verified.json",
+    "ood": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/mixed_prerequisites_imitation/gap_ood_diagnostics.json",
+    "readiness": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/readiness_curriculum_v4.json"
+  }
+}

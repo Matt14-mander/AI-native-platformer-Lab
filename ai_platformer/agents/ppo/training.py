@@ -26,6 +26,8 @@ from ai_platformer.envs.factory import EnvironmentFactory, protocol_hash
 
 from .configuration import resolve_training_config
 from .curriculum import CourseSampler, CurriculumState
+from .gates import assess_prerequisites, joint_selection_score
+from .imitation import warm_start_policy
 
 
 class PolicyAgent:
@@ -78,7 +80,7 @@ def training_signature(config: dict, factory: EnvironmentFactory, stages: list[d
     stage_contracts = [
         {key: value for key, value in stage.items() if key != "max_timesteps"} for stage in stages
     ]
-    return {
+    signature = {
         "protocol": factory.protocol(levels),
         "seed": config["seed"],
         "train_seeds": config["train_seeds"],
@@ -91,6 +93,11 @@ def training_signature(config: dict, factory: EnvironmentFactory, stages: list[d
         "required_evaluations": config["curriculum"]["required_evaluations"],
         "action_ids": {action.name: int(action) for action in Action},
     }
+    if config["evaluation"].get("selection", "current_task") != "current_task":
+        signature["checkpoint_selection"] = config["evaluation"]["selection"]
+    if "imitation" in config:
+        signature["imitation"] = {"version": 1, **config["imitation"]}
+    return signature
 
 
 def checkpoint_metadata(path: Path) -> dict:
@@ -109,7 +116,16 @@ def checkpoint_metadata(path: Path) -> dict:
 
 class TrainingCallback(BaseCallback):
     def __init__(
-        self, config, factory, samplers, output_dir, state, signature, initialization=None
+        self,
+        config,
+        factory,
+        samplers,
+        output_dir,
+        state,
+        signature,
+        initialization=None,
+        stop_before_stage=None,
+        imitation=None,
     ):
         super().__init__()
         self.config = config
@@ -119,6 +135,8 @@ class TrainingCallback(BaseCallback):
         self.state = state
         self.signature = signature
         self.initialization = initialization
+        self.stop_before_stage = stop_before_stage
+        self.imitation = imitation
         self.last_eval = -1
         self.next_eval = 0
         self.next_checkpoint = 0
@@ -143,13 +161,16 @@ class TrainingCallback(BaseCallback):
                 "config": self.config,
                 "curriculum_state": deepcopy(self.state.data),
                 "initialization": self.initialization,
+                "imitation": self.imitation,
                 "resume_semantics": "optimizer and timestep continuation; environment/RNG reset",
             },
         )
 
     def evaluate(self, *, allow_promotion: bool) -> dict:
         index = self.state.data["stage_index"]
-        stage = self.state.stage
+        if self.state.data["status"] == "ready_for_stage":
+            index -= 1
+        stage = self.state.stages[index]
         # Diagnose the active task first while retaining all earlier regression tasks.
         levels = stage["validation_levels"] + [
             level for item in self.state.stages[:index] for level in item["validation_levels"]
@@ -171,10 +192,16 @@ class TrainingCallback(BaseCallback):
         if "max_success_steps" in stage:
             successful_steps = [item["steps"] for item in current if item["outcome"] == "success"]
             score.append(-sum(successful_steps) / len(successful_steps) if successful_steps else 0)
+        gate = None
+        if stage["success_threshold"] is not None:
+            gate = assess_prerequisites(self.state.stages[: index + 1], report)
+        if self.config["evaluation"].get("selection") == "joint_v1":
+            score = joint_selection_score(self.state.stages[: index + 1], report)
         entry = {
             "timesteps": self.num_timesteps,
             "stage": stage["task"],
             "selection_score": score,
+            "prerequisites": gate,
             "evaluation": report,
         }
         self.evaluations.append(entry)
@@ -188,11 +215,27 @@ class TrainingCallback(BaseCallback):
                 "model": str(stem.with_suffix(".zip").resolve()),
             }
             self.save(stem)
-        self.logger.record("validation/success_rate", score[0])
-        self.logger.record("validation/mean_progress", score[1])
+        self.logger.record(
+            "validation/success_rate",
+            sum(item["outcome"] == "success" for item in current) / len(current),
+        )
+        self.logger.record(
+            "validation/mean_progress", sum(item["progress"] for item in current) / len(current)
+        )
+        if gate is not None:
+            self.logger.record("validation/prerequisites_passed", int(gate["passed"]))
         self.logger.dump(self.num_timesteps)
         self.last_eval = self.num_timesteps
         if allow_promotion and self.state.observe(report, self.num_timesteps):
+            if self.state.stage["task"] == self.stop_before_stage:
+                self.state.data["status"] = "ready_for_stage"
+                self.state.data["readiness"] = {
+                    "target": self.stop_before_stage,
+                    "timesteps": self.num_timesteps,
+                    "prerequisites": gate,
+                    "required_evaluations": self.state.required,
+                    "evaluation_timesteps": self.state.data["history"][-1]["validation_timesteps"],
+                }
             for sampler in self.samplers:
                 sampler.stage_index = self.state.data["stage_index"]
             self.save(self.output_dir / "checkpoints" / f"stage_{self.num_timesteps}")
@@ -206,7 +249,7 @@ class TrainingCallback(BaseCallback):
         if self.num_timesteps >= self.next_eval or budget_expired:
             self.evaluate(allow_promotion=True)
             self.next_eval = self.num_timesteps + self.config["evaluation"]["every_timesteps"]
-            if self.state.data["status"] == "completed":
+            if self.state.data["status"] in {"completed", "ready_for_stage"}:
                 return False
             # Promotion starts a new budget, so recheck after the evaluation decision.
             stage = self.state.stage
@@ -230,6 +273,7 @@ def train_ppo(
     resume: Path | None = None,
     init_from: Path | None = None,
     start_stage: str | None = None,
+    stop_before_stage: str | None = None,
 ) -> dict:
     """Train additional transitions; refuse output overwrites and incompatible resume."""
     config, factory, stages = resolve_training_config(config)
@@ -237,6 +281,7 @@ def train_ppo(
     saved = None
     initial_weights = None
     initialization = None
+    imitation = None
     if resume is not None and init_from is not None:
         raise ValueError("resume and init_from are mutually exclusive")
     if start_stage is not None and start_stage not in {stage["task"] for stage in stages}:
@@ -251,6 +296,16 @@ def train_ppo(
         if saved["curriculum_state"]["status"] == "completed":
             raise ValueError("curriculum already completed; evaluate its checkpoints instead")
         initialization = saved.get("initialization")
+        imitation = saved.get("imitation")
+    if stop_before_stage is not None:
+        tasks = [stage["task"] for stage in stages]
+        index = (
+            tasks.index(start_stage)
+            if start_stage
+            else (saved["curriculum_state"]["stage_index"] if saved else 0)
+        )
+        if stop_before_stage not in tasks or tasks.index(stop_before_stage) <= index:
+            raise ValueError("stop_before_stage must be a configured stage after the initial stage")
     if init_from is not None:
         init_from = init_from.with_suffix(".zip")
         source = checkpoint_metadata(init_from)
@@ -344,11 +399,28 @@ def train_ppo(
             )
             if initial_weights is not None:
                 model.policy.load_state_dict(initial_weights, strict=True)
+            if "imitation" in config:
+                imitation = warm_start_policy(
+                    model,
+                    factory=factory,
+                    stages=stages[: state.data["stage_index"] + 1],
+                    options=config["imitation"],
+                    seeds=config["train_seeds"],
+                    seed=config["seed"],
+                )
         initial_timesteps = int(model.num_timesteps)
         if state.stage["success_threshold"] is None:
             state.data["stage_start"] = initial_timesteps
         callback = TrainingCallback(
-            config, factory, samplers, output_dir, state, signature, initialization
+            config,
+            factory,
+            samplers,
+            output_dir,
+            state,
+            signature,
+            initialization,
+            stop_before_stage,
+            imitation,
         )
         interrupted = False
         try:
@@ -407,7 +479,9 @@ def train_ppo(
             "added_timesteps": int(model.num_timesteps) - initial_timesteps,
             "resumed_from": str(resume.resolve()) if resume else None,
             "initialization": initialization,
+            "imitation": imitation,
             "requested_start_stage": start_stage,
+            "requested_stop_before_stage": stop_before_stage,
             "curriculum_state": state.data,
             "evaluation": evaluation,
             "evaluation_history": callback.evaluations,

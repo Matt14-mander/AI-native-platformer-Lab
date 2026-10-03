@@ -5,6 +5,8 @@ from __future__ import annotations
 import gymnasium as gym
 import numpy as np
 
+from .gates import assess_prerequisites
+
 
 class CourseSampler(gym.Wrapper):
     def __init__(
@@ -22,7 +24,14 @@ class CourseSampler(gym.Wrapper):
         if seed is not None:
             self.rng = np.random.default_rng(seed)
         index = self.stage_index
-        if index > 0 and self.rng.random() < self.replay_fraction:
+        weights = self.stages[index].get("sampling_weights")
+        if weights:
+            indices = [
+                i for i, stage in enumerate(self.stages[: index + 1]) if stage["task"] in weights
+            ]
+            probabilities = np.asarray([weights[self.stages[i]["task"]] for i in indices])
+            index = int(self.rng.choice(indices, p=probabilities / probabilities.sum()))
+        elif index > 0 and self.rng.random() < self.replay_fraction:
             index = int(self.rng.integers(index))
         levels = self.stages[index]["train_levels"]
         level_id = levels[int(self.rng.integers(len(levels)))]
@@ -45,6 +54,7 @@ class CurriculumState:
         if not 0 <= self.data["stage_index"] < len(stages):
             raise ValueError("invalid checkpoint curriculum stage")
         self.data["status"] = "training"
+        self.data.setdefault("passing_evaluations", [])
 
     @property
     def stage(self) -> dict:
@@ -69,6 +79,7 @@ class CurriculumState:
         self.data["stage_index"] = tasks.index(task)
         self.data["stage_start"] = timesteps
         self.data["consecutive_passes"] = 0
+        self.data["passing_evaluations"] = []
         self.data["status"] = "training"
 
     def observe(self, report: dict, timesteps: int) -> bool:
@@ -76,31 +87,14 @@ class CurriculumState:
         threshold = self.stage["success_threshold"]
         if threshold is None:
             return False
-        passed = all(
-            report["by_level"][level]["success_rate"] >= threshold
-            for level in self.stage["validation_levels"]
-        )
-        # Earlier tasks must still be mastered before promoting the next task.
-        for stage in self.stages[: self.data["stage_index"]]:
-            passed = passed and all(
-                report["by_level"][level]["success_rate"] >= stage["success_threshold"]
-                for level in stage["validation_levels"]
-            )
-        for stage in self.stages[: self.data["stage_index"] + 1]:
-            limit = stage.get("max_success_steps")
-            if limit is not None:
-                # Gate each layout: averaging would hide a stalled successful episode.
-                for level in stage["validation_levels"]:
-                    successful = [
-                        episode
-                        for episode in report.get("episodes", [])
-                        if episode["level_id"] == level and episode["outcome"] == "success"
-                    ]
-                    passed = (
-                        passed
-                        and bool(successful)
-                        and all(episode["steps"] <= limit for episode in successful)
-                    )
+        gate = assess_prerequisites(self.stages[: self.data["stage_index"] + 1], report)
+        passed = gate["passed"]
+        if passed:
+            self.data["passing_evaluations"] = (self.data["passing_evaluations"] + [timesteps])[
+                -self.required :
+            ]
+        else:
+            self.data["passing_evaluations"] = []
         self.data["consecutive_passes"] = self.data["consecutive_passes"] + 1 if passed else 0
         if self.data["consecutive_passes"] < self.required:
             return False
@@ -110,6 +104,7 @@ class CurriculumState:
                 "outcome": "mastered",
                 "start": self.data["stage_start"],
                 "end": timesteps,
+                "validation_timesteps": list(self.data["passing_evaluations"]),
             }
         )
         if self.data["stage_index"] == len(self.stages) - 1:
@@ -118,4 +113,5 @@ class CurriculumState:
             self.data["stage_index"] += 1
             self.data["stage_start"] = timesteps
             self.data["consecutive_passes"] = 0
+            self.data["passing_evaluations"] = []
         return True

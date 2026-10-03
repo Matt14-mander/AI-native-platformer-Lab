@@ -51,6 +51,30 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
         if not layers or any(not isinstance(item, int) or item <= 0 for item in layers):
             raise ValueError("network layers must be positive integers")
     evaluation = config["evaluation"]
+    if "imitation" in config:
+        imitation = config["imitation"]
+        expected = {"rounds", "epochs", "batch_size", "learning_rate", "max_steps_per_episode"}
+        if not isinstance(imitation, dict) or set(imitation) != expected:
+            raise ValueError(
+                "imitation requires explicit rounds/epochs/batch_size/learning_rate/max_steps_per_episode"
+            )
+        for key in expected - {"learning_rate"}:
+            if (
+                not isinstance(imitation[key], int)
+                or isinstance(imitation[key], bool)
+                or imitation[key] <= 0
+            ):
+                raise ValueError(f"invalid imitation {key}")
+        if (
+            isinstance(imitation["learning_rate"], bool)
+            or not isinstance(imitation["learning_rate"], (int, float))
+            or not isfinite(imitation["learning_rate"])
+            or imitation["learning_rate"] <= 0
+        ):
+            raise ValueError("invalid imitation learning_rate")
+    selection = evaluation.get("selection", "current_task")
+    if selection not in {"current_task", "joint_v1"}:
+        raise ValueError("unsupported checkpoint selection policy")
     evaluation.setdefault("every_timesteps", 10_000)
     config.setdefault("checkpoint_every_timesteps", 25_000)
     for value in (evaluation["every_timesteps"], config["checkpoint_every_timesteps"]):
@@ -120,6 +144,28 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
             if not isinstance(limit, int) or isinstance(limit, bool) or limit <= 0:
                 raise ValueError("max_success_steps must be a positive integer")
             stages[-1]["max_success_steps"] = limit
+        if "sampling_weights" in spec:
+            weights = spec["sampling_weights"]
+            allowed_tasks = {stage["task"] for stage in stages}
+            if (
+                not isinstance(weights, dict)
+                or not weights
+                or set(weights) - allowed_tasks
+                or task not in weights
+                or any(
+                    isinstance(value, bool)
+                    or not isinstance(value, (int, float))
+                    or not isfinite(value)
+                    or value <= 0
+                    for value in weights.values()
+                )
+            ):
+                raise ValueError(
+                    "sampling_weights require positive weights for current/earlier tasks"
+                )
+            stages[-1]["sampling_weights"] = dict(weights)
+            if not isfinite(sum(weights.values())):
+                raise ValueError("sampling_weights sum must be finite")
     if not stages:
         stages = [
             {
@@ -132,6 +178,8 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
         ]
     if len({stage["task"] for stage in stages}) != len(stages):
         raise ValueError("curriculum stages must be distinct")
+    if selection == "joint_v1" and any(stage["success_threshold"] is None for stage in stages):
+        raise ValueError("joint_v1 selection requires explicit curriculum stages")
     all_ids = {
         item for stage in stages for item in stage["train_levels"] + stage["validation_levels"]
     }

@@ -1,0 +1,102 @@
+{
+  "schema_version": 2,
+  "environment_id": "PlatformerState-v1",
+  "seed": 20260923,
+  "total_timesteps": 262144,
+  "n_envs": 4,
+  "device": "cpu",
+  "torch_threads": 1,
+  "verbose": 0,
+  "environment": {
+    "action_repeat": 4,
+    "episode_step_limit": 1024,
+    "curriculum_manifest": "config/curriculum_v4.json",
+    "sensor_range": 240
+  },
+  "network": {
+    "policy_layers": [
+      64,
+      64
+    ],
+    "value_layers": [
+      64,
+      64
+    ]
+  },
+  "algorithm": {
+    "learning_rate": 0.0001,
+    "n_steps": 256,
+    "batch_size": 256,
+    "n_epochs": 5,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_range": 0.2,
+    "ent_coef": 0.01,
+    "vf_coef": 0.5
+  },
+  "evaluation": {
+    "seeds": [
+      100
+    ],
+    "every_timesteps": 8192,
+    "selection": "joint_v1"
+  },
+  "train_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "checkpoint_every_timesteps": 32768,
+  "curriculum": {
+    "replay_fraction": 0.2,
+    "required_evaluations": 2,
+    "stages": [
+      {
+        "task": "flat",
+        "max_timesteps": 50000,
+        "success_threshold": 0.95,
+        "max_success_steps": 128
+      },
+      {
+        "task": "obstacle",
+        "max_timesteps": 150000,
+        "success_threshold": 0.8,
+        "max_success_steps": 160
+      },
+      {
+        "task": "gap",
+        "max_timesteps": 524288,
+        "success_threshold": 0.8,
+        "max_success_steps": 192,
+        "sampling_weights": {
+          "flat": 0.05,
+          "obstacle": 0.35,
+          "gap": 0.6
+        }
+      },
+      {
+        "task": "mixed",
+        "max_timesteps": 250000,
+        "success_threshold": 0.8,
+        "max_success_steps": 256,
+        "sampling_weights": {
+          "flat": 0.05,
+          "obstacle": 0.2,
+          "gap": 0.25,
+          "mixed": 0.5
+        }
+      },
+      {
+        "task": "full",
+        "max_timesteps": 400000,
+        "success_threshold": 0.5,
+        "max_success_steps": 768
+      }
+    ]
+  }
+}

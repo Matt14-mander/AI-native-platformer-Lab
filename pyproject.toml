@@ -18,6 +18,7 @@ platformer-rl-check = "scripts.validate_rl_readiness:main"
 platformer-train-ppo = "scripts.train_ppo:main"
 platformer-evaluate-ppo = "scripts.evaluate_ppo:main"
 platformer-diagnose-ppo = "scripts.diagnose_ppo:main"
+platformer-verify-stage-entry = "scripts.verify_stage_entry:main"
 
 [project.optional-dependencies]
 benchmark = [
