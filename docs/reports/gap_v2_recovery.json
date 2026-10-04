@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "accepted_for_mixed": true,
+  "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_gap_recovery/model.zip",
+  "model_sha256": "aa0ed5a861c2bc52c48bed04d0cef0a24836c37e5898dccbc3bac89835a6295f",
+  "signature_hash": "2a5df2f5d534b6a3abbde09b7bed3d37ad63c9876101bc6faf8e8dd587f0bcd3",
+  "method": "Prior v2 pure-PPO weights initialized; training-only rule demonstration/learner-state correction followed by PPO. This recovery is not pure PPO. Fresh PPO optimizer, timestep counter and curriculum.",
+  "initialization": {
+    "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_retrain/checkpoints/best_gap.zip",
+    "source_sha256": "0cf78b004c31e213ec5e4abd8381614d52824beb56f4a0fdc977af316fe1a833",
+    "source_timesteps": 229376,
+    "source_signature_hash": "ec046dc5a228621e90916c0ce9cae11f0aba23ada83da28b8f11ad55984dc223",
+    "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+  },
+  "physics": {
+    "player_width": 24.0,
+    "player_height": 32.0,
+    "walk_acceleration": 0.3,
+    "run_acceleration": 0.5,
+    "turn_acceleration": 0.7,
+    "max_walk_speed": 6.0,
+    "max_run_speed": 10.0,
+    "jump_velocity": -13.8,
+    "rising_gravity": 0.5,
+    "falling_gravity": 1.8,
+    "max_fall_speed": 11.0,
+    "max_episode_steps": 36000
+  },
+  "reward": {
+    "progress_scale": 5.0,
+    "coin_reward": 0.5,
+    "success_reward": 10.0,
+    "death_penalty": -10.0,
+    "time_penalty": -0.001
+  },
+  "ppo_transitions": 16384,
+  "demonstration_layouts": 106,
+  "demonstration_cumulative_samples": 14692,
+  "supervised_gradient_updates": 3650,
+  "gate": {
+    "passed": true,
+    "tasks": {
+      "flat": {
+        "passed": true,
+        "layouts": 4,
+        "qualified_layouts": 4,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.95,
+        "max_success_steps": 128
+      },
+      "obstacle": {
+        "passed": true,
+        "layouts": 40,
+        "qualified_layouts": 40,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 160
+      },
+      "gap": {
+        "passed": true,
+        "layouts": 54,
+        "qualified_layouts": 54,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 192
+      }
+    }
+  },
+  "automatic_promotion_evidence": {
+    "target": "mixed",
+    "timesteps": 16384,
+    "prerequisites": {
+      "passed": true,
+      "tasks": {
+        "flat": {
+          "passed": true,
+          "layouts": 4,
+          "qualified_layouts": 4,
+          "qualified_fraction": 1.0,
+          "failures": {},
+          "success_threshold": 0.95,
+          "max_success_steps": 128
+        },
+        "obstacle": {
+          "passed": true,
+          "layouts": 40,
+          "qualified_layouts": 40,
+          "qualified_fraction": 1.0,
+          "failures": {},
+          "success_threshold": 0.8,
+          "max_success_steps": 160
+        },
+        "gap": {
+          "passed": true,
+          "layouts": 54,
+          "qualified_layouts": 54,
+          "qualified_fraction": 1.0,
+          "failures": {},
+          "success_threshold": 0.8,
+          "max_success_steps": 192
+        }
+      }
+    },
+    "required_evaluations": 2,
+    "evaluation_timesteps": [
+      8192,
+      16384
+    ]
+  },
+  "gap_diagnostics": {
+    "deterministic": {
+      "summary": {
+        "agent": "deterministic",
+        "episodes": 162,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.962222222222223,
+        "mean_progress": 1.0,
+        "mean_steps": 37.77777777777778,
+        "mean_coins": 0.0,
+        "mean_success_steps": 37.77777777777778
+      },
+      "behavior": {
+        "mean_effective_jumps": 2.0,
+        "mean_landings": 1.0,
+        "landed_after_gap_rate": 1.0
+      }
+    },
+    "stochastic": {
+      "summary": {
+        "agent": "stochastic",
+        "episodes": 162,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 14.962222222222223,
+        "mean_progress": 1.0,
+        "mean_steps": 37.77777777777778,
+        "mean_coins": 0.0,
+        "mean_success_steps": 37.77777777777778
+      },
+      "behavior": {
+        "mean_effective_jumps": 2.0,
+        "mean_landings": 1.0,
+        "landed_after_gap_rate": 1.0
+      }
+    }
+  },
+  "mixed_transfer": {
+    "legacy_validation": {
+      "agent": "ppo",
+      "episodes": 36,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.949666666666666,
+      "mean_progress": 1.0,
+      "mean_steps": 50.333333333333336,
+      "mean_coins": 0.0,
+      "mean_success_steps": 50.333333333333336
+    },
+    "new_train_probe": {
+      "agent": "ppo",
+      "episodes": 64,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.95984375,
+      "mean_progress": 1.0,
+      "mean_steps": 40.15625,
+      "mean_coins": 0.0,
+      "mean_success_steps": 40.15625
+    },
+    "new_composition_validation": {
+      "agent": "ppo",
+      "episodes": 24,
+      "success_rate": 1.0,
+      "death_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_return": 14.959833333333334,
+      "mean_progress": 1.0,
+      "mean_steps": 40.166666666666664,
+      "mean_coins": 0.0,
+      "mean_success_steps": 40.166666666666664
+    }
+  },
+  "mixed_sampled_validation": {
+    "agent": "stochastic",
+    "episodes": 72,
+    "success_rate": 1.0,
+    "death_rate": 0.0,
+    "truncation_rate": 0.0,
+    "mean_return": 14.959833333333332,
+    "mean_progress": 1.0,
+    "mean_steps": 40.166666666666664,
+    "mean_coins": 0.0,
+    "mean_success_steps": 40.166666666666664
+  },
+  "provenance": {
+    "training_tasks": [
+      "flat",
+      "obstacle",
+      "gap"
+    ],
+    "mixed_supervision": false,
+    "heldout_supervision": false,
+    "test_ood_policy_evaluation": false,
+    "independent_training_seeds": 1,
+    "sampling_seeds": [
+      200,
+      201,
+      202
+    ]
+  },
+  "artifacts": {
+    "training_run": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_gap_recovery/run.json",
+    "stage_entry_reload": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_gap_recovery/mixed_entry_verified.json",
+    "gap_events": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/ppo_gameplay_v2_gap_recovery/gap_diagnostics.json",
+    "mixed_transfer": "runs/mixed_generalization_v5_gap_recovered.json",
+    "before_gap_events": "runs/gap_v2_before_diagnostics.json"
+  }
+}

@@ -22,6 +22,7 @@
 - SB3 checker、1,000 episode 稳定性门禁和 reward exploit audit；
 - 可复现的 MLP PPO 训练、Monitor 日志、模型保存与确定性评估链路；
 - [mixed v5 组合覆盖与零样本验证](docs/MIXED_GEOMETRY_V5.md)：版本化高度/缺口/恢复距离组合，保留旧布局和独立测试单元；
+- [v2 gap 前置门槛修复](docs/GAP_V2_RECOVERY.md)：训练集示范纠正＋PPO，重载确认 flat/obstacle/gap 全部通过，可进入 mixed；
 - 为 Gymnasium、PPO、PCG、DDA、Jev、LLM 和 ONNX 预留的模块边界。
 
 已迁移第一关前段的一种巡逻敌人、可破坏砖、一次性奖励箱与护盾道具；其余旧地图实体尚未纳入新核心。仍待完成：checkpoint/传送、完整音频流程，以及其他关卡的原创内容。
