@@ -69,7 +69,11 @@ def collect_observations(
     rng = np.random.default_rng(seed)
     observations = []
     levels = []
-    for task in ("flat", "obstacle", "gap"):
+    if "full" in factory.repository.manifest["splits"]:
+        levels.append(factory.level_id)
+    for task in ("flat", "obstacle", "gap", "mixed", "full"):
+        if task not in factory.repository.manifest["splits"]:
+            continue
         candidates = factory.repository.split(task, "validation")
         indices = sorted({0, len(candidates) // 2, len(candidates) - 1})
         levels.extend(candidates[index] for index in indices)

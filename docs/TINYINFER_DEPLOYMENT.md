@@ -3,6 +3,8 @@
 本阶段在本项目实现导出器、C ABI 动态库和 Python `ctypes` 适配器。构建从指定路径读取 TinyInfer 源码，所有构建产物写入本项目；不修改 TinyInfer 文件夹。
 当前支持 CPU FP32、静态单观测输入、离散动作、Linear/ReLU actor，以及 deterministic `argmax`。
 
+最新主模型结果见 [v9 部署回归](DEPLOYMENT_V9.md)：主 seed 已通过，另外两个 seed 的导出失败记录一并保留。下文旧模型示例与历史成绩保留供复现。
+
 ## 1. 导出真实 checkpoint
 
 导出和 PyTorch/ONNX Runtime 对照需要训练与部署依赖：
@@ -27,7 +29,7 @@
 PyTorch 为相同常量生成的 Identity 别名会物化为 initializer，再检查 ONNX 图和输出一致性。
 导出器不接受其他网络算子，而是明确报错。
 
-参考观测来自平地、障碍、缺口 validation 课程各选最多三个布局的完整 deterministic 回合，再补充 `[-1,1]` 随机输入。
+参考观测来自 flat、obstacle、gap、mixed，以及清单包含时的 full validation，各选最多三个布局的完整 deterministic 回合；包含 full 清单时还覆盖当前主区域，再补充 `[-1,1]` 随机输入。
 元数据记录真实/随机样本数、布局和 seed；这些是开发验证数据，不能作为最终泛化验收。
 导出成功要求 ONNX Runtime 的 logits 满足 `atol=1e-5, rtol=1e-5`，且动作与 SB3 全部一致。
 

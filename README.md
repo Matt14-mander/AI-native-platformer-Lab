@@ -135,7 +135,7 @@ python -m scripts.play_ppo --model runs/mixed_prerequisites_imitation/model.zip 
 参数和无窗口验证方式见 [PPO 模型播放](docs/PPO_PLAYBACK.md)。
 
 PPO actor 的 ONNX 导出、TinyInfer C++/Python 桥接和数值验证已提供，见 [TinyInfer 部署接入](docs/TINYINFER_DEPLOYMENT.md)。
-播放支持 `--backend tinyinfer`，部署耗时与 SB3 对比见 [性能测量](docs/DEPLOYMENT_PERFORMANCE.md)。
+播放支持 `--backend tinyinfer`，当前 v9 主模型的数值、47 地图逐步对照和性能结果见 [部署回归](docs/DEPLOYMENT_V9.md)；其余两个 seed 导出被数值门槛拦截，失败记录保留。历史测量见 [性能测量](docs/DEPLOYMENT_PERFORMANCE.md)。
 
 ```text
 Keyboard / Scripted / PPO / Jev

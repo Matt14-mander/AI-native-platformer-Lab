@@ -103,6 +103,8 @@ def measure_frames(policies: dict, factory, levels: list[str], seed: int) -> tup
                             "outcome": info.get("outcome"),
                             "steps": info["episode_step"],
                             "ticks": info["tick"],
+                            "coins_collected": info["coins_collected"],
+                            "coins_total": info["coins_total"],
                             "return": total_reward,
                             "trace_sha256": trace.hexdigest(),
                         }

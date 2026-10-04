@@ -93,8 +93,40 @@ def test_export_package_has_only_actor_and_checked_references(exported):
     assert metadata["output"]["shape"] == [1, 10]
     assert metadata["validation"]["onnxruntime_action_match_rate"] == 1
     assert metadata["validation"]["real_observations"] > 0
+    factory = EnvironmentFactory(metadata["environment"])
+    assert set(factory.repository.split("mixed", "validation")) & set(
+        metadata["validation"]["levels"]
+    )
     with pytest.raises(FileExistsError):
         export_actor(checkpoint, path.parent)
+
+
+def test_episode_regression_compares_backends_even_when_policy_fails(exported, library):
+    from scripts.regress_deployment import regress
+
+    checkpoint, actor = exported
+    report = regress(checkpoint, actor, library, seeds=[123])
+    assert report["mismatch"] is None
+    assert report["unchanged"]
+    assert len(report["episodes"]) == len(report["levels"])
+    assert all(ep["steps"] <= 16 for ep in report["episodes"])
+    assert report["passed"] == all(ep["outcome"] == "success" for ep in report["episodes"])
+    with pytest.raises(ValueError, match="distinct nonnegative"):
+        regress(checkpoint, actor, library, seeds=[123, 123])
+
+
+def test_v9_regression_covers_full_suites_without_generated_train_maps():
+    from scripts.regress_deployment import regression_levels
+
+    factory = EnvironmentFactory(
+        {"curriculum_manifest": "config/curriculum_v9.json", "level_id": "level_1_main"}
+    )
+    levels = regression_levels(factory)
+    assert len(levels) == len(set(levels)) == 47
+    assert levels[0] == "level_1_main"
+    for suite in ("validation", "test", "ood"):
+        assert set(factory.repository.split("full", suite)) <= set(levels)
+    assert not (set(factory.repository.split("full", "train")) - {"level_1_main"}) & set(levels)
 
 
 def test_both_native_paths_match_pytorch_references(exported, library):

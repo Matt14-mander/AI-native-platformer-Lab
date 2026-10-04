@@ -1,0 +1,1481 @@
+{
+  "schema_version": 1,
+  "primary_training_seed": 20261004,
+  "status": "primary_deployed_two_cohort_exports_blocked",
+  "protocol": {
+    "environment": "PlatformerState-v2",
+    "input": [
+      1,
+      15
+    ],
+    "output": [
+      1,
+      10
+    ],
+    "dtype": "float32",
+    "selection": "deterministic_argmax",
+    "action_repeat": 4
+  },
+  "primary": {
+    "source": {
+      "checkpoint": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/full_collection_v9/seed_20261004/model.zip",
+      "model_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+      "signature_hash": "b8976712ba6c46354f159d456fb07545cc0aa8f3220667abfd676df92362c55b",
+      "timesteps": 16384
+    },
+    "actor_sha256": "bcddfcedf2b8599fdb975a8d36038569dca75c43fac45513414a108f4b7972eb",
+    "export_validation": {
+      "file": "validation.npz",
+      "sha256": "459242d2fb127891c7cde11965137c8d7290bdd94cca4e85566b12f90ec692f6",
+      "seed": 100,
+      "samples": 2048,
+      "real_observations": 1279,
+      "random_observations": 769,
+      "levels": [
+        "level_1_main",
+        "course_flat_08",
+        "course_flat_10",
+        "course_flat_11",
+        "course_obstacle_08",
+        "v3_obstacle_validation_16",
+        "v3_obstacle_validation_35",
+        "v2_gap_validation_00",
+        "v2_gap_validation_27",
+        "v4_gap_validation_17",
+        "v2_mixed_validation_00",
+        "v2_mixed_validation_30",
+        "v5_mixed_validation_023",
+        "v7_full_validation_00",
+        "v8_full_validation_01",
+        "v8_full_validation_05"
+      ],
+      "atol": 1e-05,
+      "rtol": 1e-05,
+      "onnxruntime_max_abs_error": 0.00018310546875,
+      "sb3_action_match_rate": 1.0,
+      "onnxruntime_action_match_rate": 1.0
+    },
+    "tinyinfer_validation": {
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/deployment_v9/seed_20261004/actor.onnx",
+      "model_sha256": "bcddfcedf2b8599fdb975a8d36038569dca75c43fac45513414a108f4b7972eb",
+      "library": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/build/tinyinfer_bridge/libplatformer_tinyinfer.dylib",
+      "library_sha256": "dd9439e35811b85c710836c3307315cf80ab54b41f03b0488f76b3ca3d2de639",
+      "samples": 2048,
+      "atol": 1e-05,
+      "rtol": 1e-05,
+      "minimum_action_margin": 0.5132989883422852,
+      "paths": {
+        "original": {
+          "max_abs_error": 0.00018310546875,
+          "mean_abs_error": 8.726876330911182e-06,
+          "numerical_pass": true,
+          "action_match_rate": 1.0,
+          "action_mismatch_indices": [],
+          "numerical_mismatch_samples": []
+        },
+        "fused_relu": {
+          "max_abs_error": 0.00018310546875,
+          "mean_abs_error": 8.726876330911182e-06,
+          "numerical_pass": true,
+          "action_match_rate": 1.0,
+          "action_mismatch_indices": [],
+          "numerical_mismatch_samples": []
+        }
+      },
+      "note": "Fixed observations verify numerical/action parity; this is not a performance benchmark.",
+      "passed": true
+    },
+    "trajectory_regression": {
+      "schema_version": 1,
+      "checkpoint": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/full_collection_v9/seed_20261004/model.zip",
+      "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+      "actor_sha256": "bcddfcedf2b8599fdb975a8d36038569dca75c43fac45513414a108f4b7972eb",
+      "metadata_sha256": "34d0eaee056f164da46f362f0450ad86e474cab45093c725648af415ba8ed150",
+      "library_sha256": "dd9439e35811b85c710836c3307315cf80ab54b41f03b0488f76b3ca3d2de639",
+      "levels": [
+        "level_1_main",
+        "course_flat_08",
+        "course_flat_10",
+        "course_flat_11",
+        "course_obstacle_08",
+        "v3_obstacle_validation_16",
+        "v3_obstacle_validation_35",
+        "v2_gap_validation_00",
+        "v2_gap_validation_27",
+        "v4_gap_validation_17",
+        "v2_mixed_validation_00",
+        "v2_mixed_validation_30",
+        "v5_mixed_validation_023",
+        "v7_full_validation_00",
+        "v7_full_validation_01",
+        "v7_full_validation_02",
+        "v7_full_validation_03",
+        "v8_full_validation_00",
+        "v8_full_validation_01",
+        "v8_full_validation_02",
+        "v8_full_validation_03",
+        "v8_full_validation_04",
+        "v8_full_validation_05",
+        "v7_full_test_00",
+        "v7_full_test_01",
+        "v7_full_test_02",
+        "v7_full_test_03",
+        "v8_full_test_00",
+        "v8_full_test_01",
+        "v8_full_test_02",
+        "v8_full_test_03",
+        "v9_full_test_00",
+        "v9_full_test_01",
+        "v9_full_test_02",
+        "v9_full_test_03",
+        "v7_full_ood_00",
+        "v7_full_ood_01",
+        "v7_full_ood_02",
+        "v7_full_ood_03",
+        "v8_full_ood_00",
+        "v8_full_ood_01",
+        "v8_full_ood_02",
+        "v8_full_ood_03",
+        "v9_full_ood_00",
+        "v9_full_ood_01",
+        "v9_full_ood_02",
+        "v9_full_ood_03"
+      ],
+      "seeds": [
+        100
+      ],
+      "backends": [
+        "sb3",
+        "original",
+        "fused_relu"
+      ],
+      "episodes": [
+        {
+          "level_id": "level_1_main",
+          "seed": 100,
+          "steps": 243,
+          "outcome": "success",
+          "ticks": 969,
+          "coins_collected": 5,
+          "coins_total": 5,
+          "return": 17.257000000000005,
+          "trace_sha256": "57c9c318fe6a84fb40d7e06e5a7e3710d53cf87a475942ba7c3a9cf8ba203721"
+        },
+        {
+          "level_id": "course_flat_08",
+          "seed": 100,
+          "steps": 18,
+          "outcome": "success",
+          "ticks": 72,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.982,
+          "trace_sha256": "528f9d3ebe354f6a21989ac2973c6a8f81cd304eef703d88d1f85c80e25ca6f5"
+        },
+        {
+          "level_id": "course_flat_10",
+          "seed": 100,
+          "steps": 19,
+          "outcome": "success",
+          "ticks": 75,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.980999999999998,
+          "trace_sha256": "385cc9f6cccf2b1d735f940620d2cb84474d6ab8b0d8f06e52379cdff5f4bc9c"
+        },
+        {
+          "level_id": "course_flat_11",
+          "seed": 100,
+          "steps": 20,
+          "outcome": "success",
+          "ticks": 77,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.979999999999999,
+          "trace_sha256": "56739a647147b0d9816e2a1280436ba0068f5ab9db38ffdcd3a06ca4b36415aa"
+        },
+        {
+          "level_id": "course_obstacle_08",
+          "seed": 100,
+          "steps": 27,
+          "outcome": "success",
+          "ticks": 105,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.972999999999999,
+          "trace_sha256": "76983858cbba594744390db948d261463fbbe5a556cc1cbaa98fb71dc5e9f302"
+        },
+        {
+          "level_id": "v3_obstacle_validation_16",
+          "seed": 100,
+          "steps": 35,
+          "outcome": "success",
+          "ticks": 140,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.965,
+          "trace_sha256": "e05327c482a9f8e88af0b61889f947cf7203a05dd5376e5b43db6e00abc8d591"
+        },
+        {
+          "level_id": "v3_obstacle_validation_35",
+          "seed": 100,
+          "steps": 34,
+          "outcome": "success",
+          "ticks": 134,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.966000000000001,
+          "trace_sha256": "e4d6e6a180ac04a03f50a8895bf5613abf25a938ed8db8e730ea8bd861d0c7d9"
+        },
+        {
+          "level_id": "v2_gap_validation_00",
+          "seed": 100,
+          "steps": 37,
+          "outcome": "success",
+          "ticks": 146,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.963000000000001,
+          "trace_sha256": "12dfba7e1031a39a3acb864546412813f48cb00e03e4115872720d40a17f1ab0"
+        },
+        {
+          "level_id": "v2_gap_validation_27",
+          "seed": 100,
+          "steps": 34,
+          "outcome": "success",
+          "ticks": 134,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.966000000000001,
+          "trace_sha256": "5f3c536e4a44ae205465bad82c2f22851b7b76400e712bf5f51899fc41e6f383"
+        },
+        {
+          "level_id": "v4_gap_validation_17",
+          "seed": 100,
+          "steps": 41,
+          "outcome": "success",
+          "ticks": 164,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.959,
+          "trace_sha256": "f517b3256eed864d91a91a05f56aded1da35e104af711e5adc895c7f495f47ea"
+        },
+        {
+          "level_id": "v2_mixed_validation_00",
+          "seed": 100,
+          "steps": 52,
+          "outcome": "success",
+          "ticks": 206,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.948,
+          "trace_sha256": "8552693f5c1fa670505313fdee07c56be67e9f4bb96868d2082e90cb32bb3a3b"
+        },
+        {
+          "level_id": "v2_mixed_validation_30",
+          "seed": 100,
+          "steps": 49,
+          "outcome": "success",
+          "ticks": 194,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.951,
+          "trace_sha256": "b58ab59de6ebaba5a95505f2856360e2cf4b05c9d6b093176dfce5c6b85a9c05"
+        },
+        {
+          "level_id": "v5_mixed_validation_023",
+          "seed": 100,
+          "steps": 47,
+          "outcome": "success",
+          "ticks": 187,
+          "coins_collected": 0,
+          "coins_total": 0,
+          "return": 14.953000000000005,
+          "trace_sha256": "e496e3fa857efaf44989d2ae0977b75167cb039c2d3202fb18785ab4268bfaaf"
+        },
+        {
+          "level_id": "v7_full_validation_00",
+          "seed": 100,
+          "steps": 205,
+          "outcome": "success",
+          "ticks": 817,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.794999999999987,
+          "trace_sha256": "2ccb13ed87e11cc09711d1810d7c33feb007be5a61125c702dc7d4a1580862ba"
+        },
+        {
+          "level_id": "v7_full_validation_01",
+          "seed": 100,
+          "steps": 205,
+          "outcome": "success",
+          "ticks": 818,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.79500000000001,
+          "trace_sha256": "f592c11002a3a3ea41b3d176b9e3dba14b40a18ac096dbc57e1b4d2e68977a7e"
+        },
+        {
+          "level_id": "v7_full_validation_02",
+          "seed": 100,
+          "steps": 203,
+          "outcome": "success",
+          "ticks": 811,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.79699999999997,
+          "trace_sha256": "f44cbb96844e6f833bc75d9e9e580972743a292f1071ad8a371d8eea34d1cc14"
+        },
+        {
+          "level_id": "v7_full_validation_03",
+          "seed": 100,
+          "steps": 206,
+          "outcome": "success",
+          "ticks": 821,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.79400000000003,
+          "trace_sha256": "573ee235c5f3949ef67e9e022906bcebdc2574deea9290b55c5d546e1ea851e2"
+        },
+        {
+          "level_id": "v8_full_validation_00",
+          "seed": 100,
+          "steps": 209,
+          "outcome": "success",
+          "ticks": 833,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.290999999999972,
+          "trace_sha256": "b4f7a38d80e4e0c3106274903f19d45589f0e8bd532c3bf9c758d75635fec3f1"
+        },
+        {
+          "level_id": "v8_full_validation_01",
+          "seed": 100,
+          "steps": 209,
+          "outcome": "success",
+          "ticks": 836,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.29100000000002,
+          "trace_sha256": "fc0399107d2740ea78a38f07c1b5c47b0bbf0a891d6e3fc8d60064bfbbf16e3a"
+        },
+        {
+          "level_id": "v8_full_validation_02",
+          "seed": 100,
+          "steps": 209,
+          "outcome": "success",
+          "ticks": 833,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.79100000000001,
+          "trace_sha256": "5194c8209552c2f68840a55fc237c2a25168195fddfc8ac38629d39f7d7e66e7"
+        },
+        {
+          "level_id": "v8_full_validation_03",
+          "seed": 100,
+          "steps": 207,
+          "outcome": "success",
+          "ticks": 828,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.292999999999985,
+          "trace_sha256": "4f5d7ee29f460cae2dcf6ecb1837882714d89389a56475fdfb6b32b439519ed5"
+        },
+        {
+          "level_id": "v8_full_validation_04",
+          "seed": 100,
+          "steps": 206,
+          "outcome": "success",
+          "ticks": 823,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.29399999999997,
+          "trace_sha256": "214c13ef2e0d113e7d885a2044f0dc0c87b62e6517a5ef27e96f751c3331cc8c"
+        },
+        {
+          "level_id": "v8_full_validation_05",
+          "seed": 100,
+          "steps": 209,
+          "outcome": "success",
+          "ticks": 835,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.291000000000025,
+          "trace_sha256": "d4a6ea71ab8a8640dc915f12986e6198a257e4bc75b5f49415c661e2221bb911"
+        },
+        {
+          "level_id": "v7_full_test_00",
+          "seed": 100,
+          "steps": 204,
+          "outcome": "success",
+          "ticks": 814,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.79599999999999,
+          "trace_sha256": "7d8d63a2ead774cfda546878c898637d853260a19b4e320a3ec3cfd39abfff29"
+        },
+        {
+          "level_id": "v7_full_test_01",
+          "seed": 100,
+          "steps": 207,
+          "outcome": "success",
+          "ticks": 828,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.793000000000006,
+          "trace_sha256": "9fd8ba43e6949093df120bc13a60758539d011286d4c16464e13cde406091db0"
+        },
+        {
+          "level_id": "v7_full_test_02",
+          "seed": 100,
+          "steps": 204,
+          "outcome": "success",
+          "ticks": 813,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.79599999999997,
+          "trace_sha256": "3d385031c36b38aaa2393796d5f0273573d1aaffa3c323e208f4de7ec172541c"
+        },
+        {
+          "level_id": "v7_full_test_03",
+          "seed": 100,
+          "steps": 205,
+          "outcome": "success",
+          "ticks": 818,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.79500000000003,
+          "trace_sha256": "0d16500f31063395bd686668edd1cc12e6f63374552b79ff85313856f9bdd0ad"
+        },
+        {
+          "level_id": "v8_full_test_00",
+          "seed": 100,
+          "steps": 209,
+          "outcome": "success",
+          "ticks": 833,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.291000000000004,
+          "trace_sha256": "a8d503fad172d0e2263c1d46d2addae9abe51a5c173222d00b1cc53bc7211ff2"
+        },
+        {
+          "level_id": "v8_full_test_01",
+          "seed": 100,
+          "steps": 210,
+          "outcome": "success",
+          "ticks": 838,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.29000000000002,
+          "trace_sha256": "dbf59fb78f59f19e1ce9e8550be0216bb4eda5ea9caff01726465fec8417ee8a"
+        },
+        {
+          "level_id": "v8_full_test_02",
+          "seed": 100,
+          "steps": 211,
+          "outcome": "success",
+          "ticks": 841,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.789000000000005,
+          "trace_sha256": "96bf47ce75fc1caeeade7de3b235b709e991a925ddd66a79d242e069d0a8a14f"
+        },
+        {
+          "level_id": "v8_full_test_03",
+          "seed": 100,
+          "steps": 210,
+          "outcome": "success",
+          "ticks": 837,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.789999999999996,
+          "trace_sha256": "c46ad8489f56a3af62cb79e0e15117de2221498f9230190ef5eb8ce91c062134"
+        },
+        {
+          "level_id": "v9_full_test_00",
+          "seed": 100,
+          "steps": 216,
+          "outcome": "success",
+          "ticks": 863,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.78400000000002,
+          "trace_sha256": "d93e404eb5fcf40ba971591685fe9cb737359b4eb92097019f47a82d1064c6d1"
+        },
+        {
+          "level_id": "v9_full_test_01",
+          "seed": 100,
+          "steps": 216,
+          "outcome": "success",
+          "ticks": 863,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.283999999999992,
+          "trace_sha256": "cf2225ac1b958cd98055deb4303e857fdc10d483b29849280e77b252bd2d9002"
+        },
+        {
+          "level_id": "v9_full_test_02",
+          "seed": 100,
+          "steps": 218,
+          "outcome": "success",
+          "ticks": 871,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.781999999999982,
+          "trace_sha256": "77b279553fcd5f82ee0db259cce305802ac6b4dce028bb24ce7bcea9b3095819"
+        },
+        {
+          "level_id": "v9_full_test_03",
+          "seed": 100,
+          "steps": 217,
+          "outcome": "success",
+          "ticks": 867,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.78299999999999,
+          "trace_sha256": "c13ba2085efb2050f5a8b3c664376aeea7252e826adb8947be5d3b7c8265852a"
+        },
+        {
+          "level_id": "v7_full_ood_00",
+          "seed": 100,
+          "steps": 207,
+          "outcome": "success",
+          "ticks": 827,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.293000000000013,
+          "trace_sha256": "5004140a9a593e2c1149d4bfa329625cf29ae2edcb1c0c4d50d0a472f48f77d8"
+        },
+        {
+          "level_id": "v7_full_ood_01",
+          "seed": 100,
+          "steps": 210,
+          "outcome": "success",
+          "ticks": 838,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.789999999999992,
+          "trace_sha256": "9c99b446cd81f5cf137282ff0795f7f8bdb03fc854ad0247129acaebb6d0d387"
+        },
+        {
+          "level_id": "v7_full_ood_02",
+          "seed": 100,
+          "steps": 209,
+          "outcome": "success",
+          "ticks": 835,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.290999999999986,
+          "trace_sha256": "157b51615329d9e385c27a852e9f553883b27a245f1d53095ff980dd17ac4467"
+        },
+        {
+          "level_id": "v7_full_ood_03",
+          "seed": 100,
+          "steps": 208,
+          "outcome": "success",
+          "ticks": 831,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.292000000000034,
+          "trace_sha256": "0cc68d04e7b6b5d01826e737a23dc7f82c4290246d100b3762d5a97f50781990"
+        },
+        {
+          "level_id": "v8_full_ood_00",
+          "seed": 100,
+          "steps": 228,
+          "outcome": "success",
+          "ticks": 910,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.771999999999956,
+          "trace_sha256": "8e619176b4db4aac69edee7bb30304b1924707ab571bd7cdf7bc8e0f4098cdb9"
+        },
+        {
+          "level_id": "v8_full_ood_01",
+          "seed": 100,
+          "steps": 231,
+          "outcome": "success",
+          "ticks": 924,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.76899999999998,
+          "trace_sha256": "36db0d62a81400837134ea0393632b08ba3a4a7ad565f5989590dea33b43338a"
+        },
+        {
+          "level_id": "v8_full_ood_02",
+          "seed": 100,
+          "steps": 230,
+          "outcome": "success",
+          "ticks": 919,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.77000000000002,
+          "trace_sha256": "02a97cf09c8f1115c186f76c3632dfc87c3d8977be8863ace55ec0f963c8d2b0"
+        },
+        {
+          "level_id": "v8_full_ood_03",
+          "seed": 100,
+          "steps": 228,
+          "outcome": "success",
+          "ticks": 912,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.77200000000002,
+          "trace_sha256": "f45acbe8a05f8d506458994abdeeca3e9c428d908cee03c23b3b1194862f00b9"
+        },
+        {
+          "level_id": "v9_full_ood_00",
+          "seed": 100,
+          "steps": 234,
+          "outcome": "success",
+          "ticks": 936,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.266000000000027,
+          "trace_sha256": "0ffb055fd62cbc1627242264c607b407d47b39c76f90edb5459b532ebe9ef316"
+        },
+        {
+          "level_id": "v9_full_ood_01",
+          "seed": 100,
+          "steps": 237,
+          "outcome": "success",
+          "ticks": 946,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.76299999999997,
+          "trace_sha256": "1367f3cd0fa477f17cefdaba60dd4dd0f5f7921e8943bfae723e8af59d2953ad"
+        },
+        {
+          "level_id": "v9_full_ood_02",
+          "seed": 100,
+          "steps": 235,
+          "outcome": "success",
+          "ticks": 940,
+          "coins_collected": 12,
+          "coins_total": 12,
+          "return": 20.765000000000025,
+          "trace_sha256": "23307926deed60c33813d39a7d0c46dfd64efaa235a4d55dbadae566ceb813d9"
+        },
+        {
+          "level_id": "v9_full_ood_03",
+          "seed": 100,
+          "steps": 235,
+          "outcome": "success",
+          "ticks": 940,
+          "coins_collected": 11,
+          "coins_total": 12,
+          "return": 20.26500000000002,
+          "trace_sha256": "784db86b0bb3765a1f3466bc504d07075e09ba28afab00eccb32dce200757964"
+        }
+      ],
+      "mismatch": null,
+      "note": "Deployment parity regression on already exposed maps, not fresh policy generalization. Every step compares action, observation, reward, termination and full WorldSnapshot.",
+      "unchanged": true,
+      "passed": true
+    },
+    "playback": {
+      "backend": "tinyinfer",
+      "fuse_relu": true,
+      "level_id": "level_1_main",
+      "seed": 100,
+      "outcome": "success",
+      "steps": 243,
+      "coins_collected": 5,
+      "coins_total": 5,
+      "screenshot": "runs/deployment_v9/playback_main.png"
+    },
+    "performance": {
+      "schema_version": 1,
+      "created_at": "2026-10-04T05:52:01.879586+00:00",
+      "model": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/deployment_v9/seed_20261004/actor.onnx",
+      "model_sha256": "bcddfcedf2b8599fdb975a8d36038569dca75c43fac45513414a108f4b7972eb",
+      "library": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/build/tinyinfer_bridge/libplatformer_tinyinfer.dylib",
+      "library_sha256": "dd9439e35811b85c710836c3307315cf80ab54b41f03b0488f76b3ca3d2de639",
+      "platform": "macOS-15.8.1-x86_64-i386-64bit",
+      "machine": "x86_64",
+      "processor": "i386",
+      "cpu_count": 8,
+      "tinyinfer_execution_threads": 1,
+      "python": "3.12.14",
+      "numpy": "1.26.4",
+      "parameters": {
+        "warmup": 200,
+        "iterations": 5000,
+        "rounds": 3,
+        "startup_repeats": 5,
+        "episodes": 3,
+        "seed": 100
+      },
+      "validation_samples": 2048,
+      "timings": {
+        "tinyinfer_original": {
+          "first_create_us": 3520.691,
+          "first_predict_us": 205.364,
+          "session_create": {
+            "count": 5,
+            "p50_us": 1968.73,
+            "p95_us": 3221.6081999999997,
+            "p99_us": 3460.8744399999996,
+            "mean_us": 2256.28,
+            "min_us": 1868.664,
+            "max_us": 3520.691
+          },
+          "rounds": [
+            {
+              "native_run_us": {
+                "count": 5000,
+                "p50_us": 13.007,
+                "p95_us": 13.8062,
+                "p99_us": 29.55706,
+                "mean_us": 13.376505000000002,
+                "min_us": 12.38,
+                "max_us": 96.109
+              },
+              "native_call_us": {
+                "count": 5000,
+                "p50_us": 14.227,
+                "p95_us": 15.14705,
+                "p99_us": 31.025830000000017,
+                "mean_us": 14.633348800000002,
+                "min_us": 13.537,
+                "max_us": 98.702
+              },
+              "python_logits_us": {
+                "count": 5000,
+                "p50_us": 32.331,
+                "p95_us": 39.64815000000002,
+                "p99_us": 73.20780000000109,
+                "mean_us": 33.9455232,
+                "min_us": 30.383,
+                "max_us": 224.504
+              },
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 34.3975,
+                "p95_us": 42.44255000000006,
+                "p99_us": 74.41671000000007,
+                "mean_us": 36.102827600000005,
+                "min_us": 32.699,
+                "max_us": 165.406
+              }
+            },
+            {
+              "native_run_us": {
+                "count": 5000,
+                "p50_us": 12.545,
+                "p95_us": 13.02605,
+                "p99_us": 31.242010000000068,
+                "mean_us": 12.911018799999999,
+                "min_us": 12.033,
+                "max_us": 88.025
+              },
+              "native_call_us": {
+                "count": 5000,
+                "p50_us": 13.745,
+                "p95_us": 14.2641,
+                "p99_us": 32.866260000000004,
+                "mean_us": 14.1574016,
+                "min_us": 13.193,
+                "max_us": 90.662
+              },
+              "python_logits_us": {
+                "count": 5000,
+                "p50_us": 31.814,
+                "p95_us": 47.529400000000024,
+                "p99_us": 68.75225,
+                "mean_us": 33.401511000000006,
+                "min_us": 30.579,
+                "max_us": 154.563
+              },
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 34.5685,
+                "p95_us": 49.236250000000055,
+                "p99_us": 74.19560000000007,
+                "mean_us": 36.3266988,
+                "min_us": 32.744,
+                "max_us": 160.723
+              }
+            },
+            {
+              "native_run_us": {
+                "count": 5000,
+                "p50_us": 12.93,
+                "p95_us": 13.07405,
+                "p99_us": 31.823580000000014,
+                "mean_us": 13.2553044,
+                "min_us": 12.499,
+                "max_us": 115.868
+              },
+              "native_call_us": {
+                "count": 5000,
+                "p50_us": 14.141,
+                "p95_us": 14.317,
+                "p99_us": 33.217330000000004,
+                "mean_us": 14.4926088,
+                "min_us": 13.678,
+                "max_us": 117.158
+              },
+              "python_logits_us": {
+                "count": 5000,
+                "p50_us": 31.924999999999997,
+                "p95_us": 35.50945000000001,
+                "p99_us": 70.42961000000001,
+                "mean_us": 33.4221582,
+                "min_us": 30.352,
+                "max_us": 126.358
+              },
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 34.286500000000004,
+                "p95_us": 47.99315000000003,
+                "p99_us": 74.43033000000005,
+                "mean_us": 35.978738799999995,
+                "min_us": 32.598,
+                "max_us": 288.64
+              }
+            }
+          ],
+          "native_run_us": {
+            "count": 15000,
+            "p50_us": 12.878,
+            "p95_us": 13.544,
+            "p99_us": 30.247380000000007,
+            "mean_us": 13.180942733333334,
+            "min_us": 12.033,
+            "max_us": 115.868
+          },
+          "native_call_us": {
+            "count": 15000,
+            "p50_us": 14.08,
+            "p95_us": 14.815,
+            "p99_us": 32.75706,
+            "mean_us": 14.4277864,
+            "min_us": 13.193,
+            "max_us": 117.158
+          },
+          "python_logits_us": {
+            "count": 15000,
+            "p50_us": 31.966,
+            "p95_us": 37.84959999999991,
+            "p99_us": 71.38962000000001,
+            "mean_us": 33.5897308,
+            "min_us": 30.352,
+            "max_us": 224.504
+          },
+          "predict_us": {
+            "count": 15000,
+            "p50_us": 34.433499999999995,
+            "p95_us": 48.20939999999998,
+            "p99_us": 74.42924000000002,
+            "mean_us": 36.1360884,
+            "min_us": 32.598,
+            "max_us": 288.64
+          }
+        },
+        "tinyinfer_fused": {
+          "first_create_us": 2547.773,
+          "first_predict_us": 116.005,
+          "session_create": {
+            "count": 5,
+            "p50_us": 1809.688,
+            "p95_us": 2441.8822,
+            "p99_us": 2526.59484,
+            "mean_us": 1990.8814000000002,
+            "min_us": 1775.003,
+            "max_us": 2547.773
+          },
+          "rounds": [
+            {
+              "native_run_us": {
+                "count": 5000,
+                "p50_us": 9.209,
+                "p95_us": 9.6271,
+                "p99_us": 26.101200000000002,
+                "mean_us": 9.550885399999999,
+                "min_us": 8.806,
+                "max_us": 80.82
+              },
+              "native_call_us": {
+                "count": 5000,
+                "p50_us": 10.406,
+                "p95_us": 10.8871,
+                "p99_us": 27.57552000000001,
+                "mean_us": 10.7806572,
+                "min_us": 9.934,
+                "max_us": 83.023
+              },
+              "python_logits_us": {
+                "count": 5000,
+                "p50_us": 27.137500000000003,
+                "p95_us": 30.596450000000026,
+                "p99_us": 62.49389000000022,
+                "mean_us": 28.6297646,
+                "min_us": 26.411,
+                "max_us": 150.912
+              },
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 29.751,
+                "p95_us": 32.78700000000004,
+                "p99_us": 67.41985000000001,
+                "mean_us": 31.1924506,
+                "min_us": 28.736,
+                "max_us": 141.129
+              }
+            },
+            {
+              "native_run_us": {
+                "count": 5000,
+                "p50_us": 9.519,
+                "p95_us": 9.883,
+                "p99_us": 14.054590000000013,
+                "mean_us": 9.710473,
+                "min_us": 9.053,
+                "max_us": 62.028
+              },
+              "native_call_us": {
+                "count": 5000,
+                "p50_us": 10.768,
+                "p95_us": 11.16905,
+                "p99_us": 17.056660000000015,
+                "mean_us": 10.9780616,
+                "min_us": 10.198,
+                "max_us": 64.837
+              },
+              "python_logits_us": {
+                "count": 5000,
+                "p50_us": 27.982,
+                "p95_us": 43.9722,
+                "p99_us": 65.11636000000003,
+                "mean_us": 29.59688300000001,
+                "min_us": 26.431,
+                "max_us": 180.939
+              },
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 30.116500000000002,
+                "p95_us": 32.94745,
+                "p99_us": 67.17325000000001,
+                "mean_us": 31.609700399999994,
+                "min_us": 28.954,
+                "max_us": 294.151
+              }
+            },
+            {
+              "native_run_us": {
+                "count": 5000,
+                "p50_us": 9.458,
+                "p95_us": 10.0151,
+                "p99_us": 27.79108,
+                "mean_us": 9.9700932,
+                "min_us": 9.112,
+                "max_us": 95.486
+              },
+              "native_call_us": {
+                "count": 5000,
+                "p50_us": 10.684,
+                "p95_us": 11.454900000000004,
+                "p99_us": 29.184100000000004,
+                "mean_us": 11.2712352,
+                "min_us": 10.314,
+                "max_us": 97.269
+              },
+              "python_logits_us": {
+                "count": 5000,
+                "p50_us": 28.381,
+                "p95_us": 43.37585000000002,
+                "p99_us": 77.65007000000004,
+                "mean_us": 30.311399600000005,
+                "min_us": 26.595,
+                "max_us": 262.735
+              },
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 30.414,
+                "p95_us": 36.51015000000007,
+                "p99_us": 67.23680000000004,
+                "mean_us": 32.0182032,
+                "min_us": 28.683,
+                "max_us": 154.019
+              }
+            }
+          ],
+          "native_run_us": {
+            "count": 15000,
+            "p50_us": 9.371,
+            "p95_us": 9.858,
+            "p99_us": 26.10103,
+            "mean_us": 9.7438172,
+            "min_us": 8.806,
+            "max_us": 95.486
+          },
+          "native_call_us": {
+            "count": 15000,
+            "p50_us": 10.61,
+            "p95_us": 11.141,
+            "p99_us": 27.562120000000004,
+            "mean_us": 11.009984666666668,
+            "min_us": 9.934,
+            "max_us": 97.269
+          },
+          "python_logits_us": {
+            "count": 15000,
+            "p50_us": 27.871,
+            "p95_us": 42.85719999999992,
+            "p99_us": 64.81678000000002,
+            "mean_us": 29.512682400000003,
+            "min_us": 26.411,
+            "max_us": 262.735
+          },
+          "predict_us": {
+            "count": 15000,
+            "p50_us": 30.097,
+            "p95_us": 33.584050000000005,
+            "p99_us": 67.26823,
+            "mean_us": 31.60678473333333,
+            "min_us": 28.683,
+            "max_us": 294.151
+          }
+        },
+        "sb3": {
+          "rounds": [
+            {
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 237.087,
+                "p95_us": 308.98404999999997,
+                "p99_us": 400.30622,
+                "mean_us": 247.8354844,
+                "min_us": 226.247,
+                "max_us": 1989.166
+              }
+            },
+            {
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 240.762,
+                "p95_us": 320.33475000000004,
+                "p99_us": 411.95489000000026,
+                "mean_us": 252.44049919999995,
+                "min_us": 227.078,
+                "max_us": 647.494
+              }
+            },
+            {
+              "predict_us": {
+                "count": 5000,
+                "p50_us": 238.6385,
+                "p95_us": 309.5511,
+                "p99_us": 412.1352500000001,
+                "mean_us": 249.501583,
+                "min_us": 226.06,
+                "max_us": 1613.045
+              }
+            }
+          ],
+          "predict_us": {
+            "count": 15000,
+            "p50_us": 238.773,
+            "p95_us": 312.48079999999993,
+            "p99_us": 408.5778600000001,
+            "mean_us": 249.9258555333333,
+            "min_us": 226.06,
+            "max_us": 1989.166
+          }
+        },
+        "pytorch_actor": {
+          "rounds": [
+            {
+              "tensor_forward_us": {
+                "count": 5000,
+                "p50_us": 34.321,
+                "p95_us": 37.58560000000001,
+                "p99_us": 71.049,
+                "mean_us": 35.5245078,
+                "min_us": 32.924,
+                "max_us": 210.821
+              }
+            },
+            {
+              "tensor_forward_us": {
+                "count": 5000,
+                "p50_us": 34.23,
+                "p95_us": 47.99080000000006,
+                "p99_us": 70.96332,
+                "mean_us": 35.5759272,
+                "min_us": 32.875,
+                "max_us": 162.263
+              }
+            },
+            {
+              "tensor_forward_us": {
+                "count": 5000,
+                "p50_us": 34.168,
+                "p95_us": 38.042300000000004,
+                "p99_us": 70.12472000000004,
+                "mean_us": 35.3385032,
+                "min_us": 32.826,
+                "max_us": 189.704
+              }
+            }
+          ],
+          "tensor_forward_us": {
+            "count": 15000,
+            "p50_us": 34.251,
+            "p95_us": 38.69869999999992,
+            "p99_us": 70.76414,
+            "mean_us": 35.479646066666675,
+            "min_us": 32.826,
+            "max_us": 210.821
+          }
+        }
+      },
+      "correctness": {
+        "tinyinfer_original": {
+          "action_match_rate": 1.0,
+          "max_abs_error": 0.00018310546875
+        },
+        "tinyinfer_fused": {
+          "action_match_rate": 1.0,
+          "max_abs_error": 0.00018310546875
+        },
+        "sb3": {
+          "action_match_rate": 1.0
+        }
+      },
+      "notes": [
+        "All timings are microseconds. Input selection is outside Python timers.",
+        "First session creation includes CDLL/model/plan; subsequent creates share OS caches. Not cold disk I/O.",
+        "Native run excludes input binding/output extraction. Native call includes them and nested timers, excludes ctypes.",
+        "Python predict includes validation, allocation, ctypes, output extraction and argmax.",
+        "Correctness calls precede explicit warmup. Timers are not subtracted; median differences are not overhead decompositions.",
+        "Offscreen frames include predict/environment/renderer+flip; no HUD, FPS wait, trace hashing or asset load.",
+        "PyTorch actor timing uses prepared tensors, includes PyTorch dispatch, excludes input conversion/output extraction."
+      ],
+      "bridge_build": {
+        "library": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/build/tinyinfer_bridge/libplatformer_tinyinfer.dylib",
+        "library_sha256": "dd9439e35811b85c710836c3307315cf80ab54b41f03b0488f76b3ca3d2de639",
+        "tinyinfer_source": "/Users/zhengyuanhao/Desktop/Project/TinyInfer",
+        "tinyinfer_revision": "0749e722d0f111d1844fd01cb33090afb7e8ccc2",
+        "tinyinfer_source_dirty": false,
+        "configuration": "Release",
+        "native_arch": false,
+        "platform": "macOS-15.8.1-x86_64-i386-64bit",
+        "machine": "x86_64"
+      },
+      "sb3_load_us": 1555503.673,
+      "torch": "2.2.2",
+      "torch_threads": 1,
+      "torch_interop_threads": 8,
+      "round_order": [
+        [
+          "tinyinfer_original",
+          "tinyinfer_fused",
+          "sb3",
+          "pytorch_actor"
+        ],
+        [
+          "pytorch_actor",
+          "sb3",
+          "tinyinfer_fused",
+          "tinyinfer_original"
+        ],
+        [
+          "tinyinfer_original",
+          "tinyinfer_fused",
+          "sb3",
+          "pytorch_actor"
+        ]
+      ],
+      "timer_empty_call": {
+        "count": 5000,
+        "p50_us": 0.145,
+        "p95_us": 0.151,
+        "p99_us": 0.16,
+        "mean_us": 0.1518718,
+        "min_us": 0.133,
+        "max_us": 19.415
+      },
+      "sb3_predict_median_ratio": {
+        "tinyinfer_original": 6.934322679948307,
+        "tinyinfer_fused": 7.933448516463434
+      },
+      "frames": {
+        "tinyinfer_original": {
+          "episodes": [
+            {
+              "level_id": "level_1_main",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 243,
+              "ticks": 969,
+              "coins_collected": 5,
+              "coins_total": 5,
+              "return": 17.257000000000005,
+              "trace_sha256": "23230ee8f50c2c46d20a6435f04320f2dc19aa43f5e4b5ed65b33b3b75001b30"
+            },
+            {
+              "level_id": "v2_gap_validation_00",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 37,
+              "ticks": 146,
+              "coins_collected": 0,
+              "coins_total": 0,
+              "return": 14.963000000000001,
+              "trace_sha256": "fc190f1aec45543c8907afb0e3f156c5c692739b1b76fadfb96aadf8c353fc5d"
+            },
+            {
+              "level_id": "v8_full_validation_05",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 209,
+              "ticks": 835,
+              "coins_collected": 11,
+              "coins_total": 12,
+              "return": 20.291000000000025,
+              "trace_sha256": "921b353d36807199c65209285b2f344e515a1573bf9b0a833a6ef76f6aa6171c"
+            }
+          ],
+          "timings": {
+            "predict_us": {
+              "count": 489,
+              "p50_us": 65.914,
+              "p95_us": 114.26319999999996,
+              "p99_us": 139.00744,
+              "mean_us": 72.27962372188138,
+              "min_us": 57.52,
+              "max_us": 162.32
+            },
+            "environment_us": {
+              "count": 489,
+              "p50_us": 393.642,
+              "p95_us": 547.5444,
+              "p99_us": 692.2290000000002,
+              "mean_us": 366.40009406952964,
+              "min_us": 113.444,
+              "max_us": 799.421
+            },
+            "render_us": {
+              "count": 489,
+              "p50_us": 770.591,
+              "p95_us": 1284.4373999999998,
+              "p99_us": 1914.3254800000009,
+              "mean_us": 908.9349202453988,
+              "min_us": 614.115,
+              "max_us": 2715.193
+            },
+            "frame_us": {
+              "count": 489,
+              "p50_us": 1310.546,
+              "p95_us": 1826.0452,
+              "p99_us": 2427.4296400000007,
+              "mean_us": 1347.61463803681,
+              "min_us": 834.868,
+              "max_us": 3302.75
+            }
+          }
+        },
+        "tinyinfer_fused": {
+          "episodes": [
+            {
+              "level_id": "level_1_main",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 243,
+              "ticks": 969,
+              "coins_collected": 5,
+              "coins_total": 5,
+              "return": 17.257000000000005,
+              "trace_sha256": "23230ee8f50c2c46d20a6435f04320f2dc19aa43f5e4b5ed65b33b3b75001b30"
+            },
+            {
+              "level_id": "v2_gap_validation_00",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 37,
+              "ticks": 146,
+              "coins_collected": 0,
+              "coins_total": 0,
+              "return": 14.963000000000001,
+              "trace_sha256": "fc190f1aec45543c8907afb0e3f156c5c692739b1b76fadfb96aadf8c353fc5d"
+            },
+            {
+              "level_id": "v8_full_validation_05",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 209,
+              "ticks": 835,
+              "coins_collected": 11,
+              "coins_total": 12,
+              "return": 20.291000000000025,
+              "trace_sha256": "921b353d36807199c65209285b2f344e515a1573bf9b0a833a6ef76f6aa6171c"
+            }
+          ],
+          "timings": {
+            "predict_us": {
+              "count": 489,
+              "p50_us": 60.65,
+              "p95_us": 88.95219999999998,
+              "p99_us": 113.05800000000002,
+              "mean_us": 64.31194069529653,
+              "min_us": 50.937,
+              "max_us": 152.615
+            },
+            "environment_us": {
+              "count": 489,
+              "p50_us": 404.635,
+              "p95_us": 527.5845999999999,
+              "p99_us": 595.38948,
+              "mean_us": 364.5987934560327,
+              "min_us": 104.793,
+              "max_us": 1940.01
+            },
+            "render_us": {
+              "count": 489,
+              "p50_us": 751.423,
+              "p95_us": 1239.8645999999999,
+              "p99_us": 1919.31832,
+              "mean_us": 887.2091779141103,
+              "min_us": 607.263,
+              "max_us": 2441.468
+            },
+            "frame_us": {
+              "count": 489,
+              "p50_us": 1277.177,
+              "p95_us": 1767.3614,
+              "p99_us": 2391.8476400000004,
+              "mean_us": 1316.1199120654396,
+              "min_us": 867.19,
+              "max_us": 2985.589
+            }
+          }
+        },
+        "sb3": {
+          "episodes": [
+            {
+              "level_id": "level_1_main",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 243,
+              "ticks": 969,
+              "coins_collected": 5,
+              "coins_total": 5,
+              "return": 17.257000000000005,
+              "trace_sha256": "23230ee8f50c2c46d20a6435f04320f2dc19aa43f5e4b5ed65b33b3b75001b30"
+            },
+            {
+              "level_id": "v2_gap_validation_00",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 37,
+              "ticks": 146,
+              "coins_collected": 0,
+              "coins_total": 0,
+              "return": 14.963000000000001,
+              "trace_sha256": "fc190f1aec45543c8907afb0e3f156c5c692739b1b76fadfb96aadf8c353fc5d"
+            },
+            {
+              "level_id": "v8_full_validation_05",
+              "seed": 100,
+              "outcome": "success",
+              "steps": 209,
+              "ticks": 835,
+              "coins_collected": 11,
+              "coins_total": 12,
+              "return": 20.291000000000025,
+              "trace_sha256": "921b353d36807199c65209285b2f344e515a1573bf9b0a833a6ef76f6aa6171c"
+            }
+          ],
+          "timings": {
+            "predict_us": {
+              "count": 489,
+              "p50_us": 320.474,
+              "p95_us": 418.5157999999999,
+              "p99_us": 539.19352,
+              "mean_us": 335.25156441717786,
+              "min_us": 275.385,
+              "max_us": 641.552
+            },
+            "environment_us": {
+              "count": 489,
+              "p50_us": 431.452,
+              "p95_us": 537.2232,
+              "p99_us": 634.3537600000001,
+              "mean_us": 382.5411533742331,
+              "min_us": 123.527,
+              "max_us": 843.843
+            },
+            "render_us": {
+              "count": 489,
+              "p50_us": 774.474,
+              "p95_us": 1248.2599999999998,
+              "p99_us": 1967.5052400000002,
+              "mean_us": 902.3489059304703,
+              "min_us": 617.422,
+              "max_us": 2328.52
+            },
+            "frame_us": {
+              "count": 489,
+              "p50_us": 1563.341,
+              "p95_us": 2080.9098,
+              "p99_us": 2588.248640000001,
+              "mean_us": 1620.1416237218814,
+              "min_us": 1126.997,
+              "max_us": 3012.635
+            }
+          }
+        }
+      },
+      "trajectory_match": true,
+      "passed": true,
+      "raw_samples": {
+        "file": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/deployment_v9/seed_20261004/performance.samples.npz",
+        "sha256": "8e686bdca8c7d444f7ce833aa7e046c9c9b5623f21daf7709386f48f2ffc3815"
+      }
+    }
+  },
+  "blocked_exports": [
+    {
+      "training_seed": 20261005,
+      "checkpoint_sha256": "c44011dd954b75ea46622c9af12b9ea604e1084ae58c0c116a8350dcc4ebd737",
+      "stage": "PyTorch vs ONNX Runtime export validation",
+      "samples": 2048,
+      "seed": 100,
+      "atol": 1e-05,
+      "rtol": 1e-05,
+      "reason": "actor export failed: \nNot equal to tolerance rtol=1e-05, atol=1e-05\n\nMismatched elements: 1 / 20480 (0.00488%)\nMax absolute difference: 0.00018311\nMax relative difference: 8.370531e-05\n x: array([[ -53.508015,  -53.511005, -117.06676 , ...,  -53.519062,\n         -53.51956 ,  -50.02655 ],\n       [ -78.037605,  -78.03943 ,  -25.423351, ...,  -78.041145,...\n y: array([[ -53.508015,  -53.511013, -117.066765, ...,  -53.519066,\n         -53.519558,  -50.02655 ],\n       [ -78.03759 ,  -78.03943 ,  -25.423346, ...,  -78.041145,...\n",
+      "log": "runs/deployment_v9/export_failure_20261005.log",
+      "published": false
+    },
+    {
+      "training_seed": 20261006,
+      "checkpoint_sha256": "23cd443b69df31364c5142f3fc59f04442d1fd81774b859c24822789751de045",
+      "stage": "PyTorch vs ONNX Runtime export validation",
+      "samples": 2048,
+      "seed": 100,
+      "atol": 1e-05,
+      "rtol": 1e-05,
+      "reason": "actor export failed: \nNot equal to tolerance rtol=1e-05, atol=1e-05\n\nMismatched elements: 1 / 20480 (0.00488%)\nMax absolute difference: 0.00012207\nMax relative difference: 6.3101215e-05\n x: array([[ -44.233383,  -44.245827,  -39.325428, ...,  -44.226322,\n         -44.23274 ,  -58.884377],\n       [ -98.5715  ,  -98.52152 ,  -10.933312, ...,  -98.56119 ,...\n y: array([[ -44.233383,  -44.245834,  -39.325428, ...,  -44.226322,\n         -44.23274 ,  -58.884388],\n       [ -98.5715  ,  -98.52154 ,  -10.93332 , ...,  -98.561195,...\n",
+      "log": "runs/deployment_v9/export_failure_20261006.log",
+      "published": false
+    }
+  ],
+  "bridge": {
+    "library": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/build/tinyinfer_bridge/libplatformer_tinyinfer.dylib",
+    "library_sha256": "dd9439e35811b85c710836c3307315cf80ab54b41f03b0488f76b3ca3d2de639",
+    "tinyinfer_source": "/Users/zhengyuanhao/Desktop/Project/TinyInfer",
+    "tinyinfer_revision": "0749e722d0f111d1844fd01cb33090afb7e8ccc2",
+    "tinyinfer_source_dirty": false,
+    "configuration": "Release",
+    "native_arch": false,
+    "platform": "macOS-15.8.1-x86_64-i386-64bit",
+    "machine": "x86_64"
+  },
+  "checks": {
+    "pytest": "92 passed, 8 subtests passed; 2 legacy Gym deprecation warnings",
+    "ruff": "changed Python files passed"
+  },
+  "scope": "Existing validation/test/OOD maps are deployment regressions; no fresh generalization claim. TinyInfer uses deterministic argmax only. No tolerance relaxation or model reselection."
+}

@@ -1,5 +1,7 @@
 # TinyInfer 部署性能测量
 
+最新 v9 主模型测量见 [v9 部署回归](DEPLOYMENT_V9.md)，下文实测表为旧 checkpoint 的历史结果。
+
 `scripts.benchmark_deployment` 比较 TinyInfer 原始图、Gemm/ReLU 融合图，可选比较导出来源 SB3 checkpoint 和 PyTorch actor。
 数值与动作检查通过后才测量；提供 `--checkpoint` 时必须与导出来源模型的哈希一致。
 
