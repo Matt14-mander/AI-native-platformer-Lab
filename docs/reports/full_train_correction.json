@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "plan": {
+    "schema_version": 1,
+    "seed": 20261004,
+    "model_selection": "final checkpoint after automatic consecutive validation promotion; no holdout selection",
+    "evaluation_seeds": [
+      1000,
+      1001,
+      1002,
+      1003
+    ],
+    "modes": [
+      "deterministic",
+      "stochastic"
+    ],
+    "full_level": "level_1",
+    "full_interpretation": "Known training geometry; repeated evaluation seeds are not unseen levels. Only one full training seed.",
+    "reload_validation": "All five stages using original per-layout success/step gates",
+    "regression": "Reuse already exposed v6 test/OOD as regression after full correction; no new blind claim"
+  },
+  "model": "runs/ppo_full_train_correction/model.zip",
+  "model_sha256": "46148fadfaec83d9e5b313be2f4eb737e634108a1a0a73a249e8a3ca2614038d",
+  "saved_timesteps": 16384,
+  "automatic_completion_recorded": true,
+  "reload_gate": {
+    "passed": true,
+    "tasks": {
+      "flat": {
+        "passed": true,
+        "layouts": 4,
+        "qualified_layouts": 4,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.95,
+        "max_success_steps": 128
+      },
+      "obstacle": {
+        "passed": true,
+        "layouts": 40,
+        "qualified_layouts": 40,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 160
+      },
+      "gap": {
+        "passed": true,
+        "layouts": 54,
+        "qualified_layouts": 54,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 192
+      },
+      "mixed": {
+        "passed": true,
+        "layouts": 60,
+        "qualified_layouts": 60,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.8,
+        "max_success_steps": 256
+      },
+      "full": {
+        "passed": true,
+        "layouts": 1,
+        "qualified_layouts": 1,
+        "qualified_fraction": 1.0,
+        "failures": {},
+        "success_threshold": 0.5,
+        "max_success_steps": 768
+      }
+    }
+  },
+  "full": {
+    "deterministic": {
+      "summary": {
+        "agent": "deterministic",
+        "episodes": 4,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 15.754000000000007,
+        "mean_progress": 1.0,
+        "mean_steps": 246.0,
+        "mean_coins": 2.0,
+        "mean_success_steps": 246.0
+      },
+      "gate": {
+        "passed": true,
+        "tasks": {
+          "full": {
+            "passed": true,
+            "layouts": 1,
+            "qualified_layouts": 1,
+            "qualified_fraction": 1.0,
+            "failures": {},
+            "success_threshold": 0.5,
+            "max_success_steps": 768
+          }
+        }
+      }
+    },
+    "stochastic": {
+      "summary": {
+        "agent": "stochastic",
+        "episodes": 4,
+        "success_rate": 1.0,
+        "death_rate": 0.0,
+        "truncation_rate": 0.0,
+        "mean_return": 15.754000000000007,
+        "mean_progress": 1.0,
+        "mean_steps": 246.0,
+        "mean_coins": 2.0,
+        "mean_success_steps": 246.0
+      },
+      "gate": {
+        "passed": true,
+        "tasks": {
+          "full": {
+            "passed": true,
+            "layouts": 1,
+            "qualified_layouts": 1,
+            "qualified_fraction": 1.0,
+            "failures": {},
+            "success_threshold": 0.5,
+            "max_success_steps": 768
+          }
+        }
+      }
+    }
+  },
+  "regression": {
+    "test": {
+      "deterministic": {
+        "summary": {
+          "agent": "ppo",
+          "episodes": 696,
+          "success_rate": 1.0,
+          "death_rate": 0.0,
+          "truncation_rate": 0.0,
+          "mean_return": 14.96016091954023,
+          "mean_progress": 1.0,
+          "mean_steps": 39.839080459770116,
+          "mean_coins": 0.0,
+          "mean_success_steps": 39.839080459770116
+        },
+        "gate": {
+          "passed": true,
+          "tasks": {
+            "flat": {
+              "passed": true,
+              "layouts": 4,
+              "qualified_layouts": 4,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.95,
+              "max_success_steps": 128
+            },
+            "obstacle": {
+              "passed": true,
+              "layouts": 40,
+              "qualified_layouts": 40,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 160
+            },
+            "gap": {
+              "passed": true,
+              "layouts": 54,
+              "qualified_layouts": 54,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 192
+            },
+            "mixed": {
+              "passed": true,
+              "layouts": 76,
+              "qualified_layouts": 76,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 256
+            }
+          }
+        }
+      },
+      "stochastic": {
+        "summary": {
+          "agent": "stochastic",
+          "episodes": 696,
+          "success_rate": 1.0,
+          "death_rate": 0.0,
+          "truncation_rate": 0.0,
+          "mean_return": 14.96016091954023,
+          "mean_progress": 1.0,
+          "mean_steps": 39.839080459770116,
+          "mean_coins": 0.0,
+          "mean_success_steps": 39.839080459770116
+        },
+        "gate": {
+          "passed": true,
+          "tasks": {
+            "flat": {
+              "passed": true,
+              "layouts": 4,
+              "qualified_layouts": 4,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.95,
+              "max_success_steps": 128
+            },
+            "obstacle": {
+              "passed": true,
+              "layouts": 40,
+              "qualified_layouts": 40,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 160
+            },
+            "gap": {
+              "passed": true,
+              "layouts": 54,
+              "qualified_layouts": 54,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 192
+            },
+            "mixed": {
+              "passed": true,
+              "layouts": 76,
+              "qualified_layouts": 76,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 256
+            }
+          }
+        }
+      }
+    },
+    "ood": {
+      "deterministic": {
+        "summary": {
+          "agent": "ppo",
+          "episodes": 192,
+          "success_rate": 1.0,
+          "death_rate": 0.0,
+          "truncation_rate": 0.0,
+          "mean_return": 14.951458333333333,
+          "mean_progress": 1.0,
+          "mean_steps": 48.541666666666664,
+          "mean_coins": 0.0,
+          "mean_success_steps": 48.541666666666664
+        },
+        "gate": {
+          "passed": true,
+          "tasks": {
+            "gap": {
+              "passed": true,
+              "layouts": 12,
+              "qualified_layouts": 12,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 192
+            },
+            "mixed": {
+              "passed": true,
+              "layouts": 36,
+              "qualified_layouts": 36,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 256
+            }
+          }
+        }
+      },
+      "stochastic": {
+        "summary": {
+          "agent": "stochastic",
+          "episodes": 192,
+          "success_rate": 1.0,
+          "death_rate": 0.0,
+          "truncation_rate": 0.0,
+          "mean_return": 14.951458333333333,
+          "mean_progress": 1.0,
+          "mean_steps": 48.541666666666664,
+          "mean_coins": 0.0,
+          "mean_success_steps": 48.541666666666664
+        },
+        "gate": {
+          "passed": true,
+          "tasks": {
+            "gap": {
+              "passed": true,
+              "layouts": 12,
+              "qualified_layouts": 12,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 192
+            },
+            "mixed": {
+              "passed": true,
+              "layouts": 36,
+              "qualified_layouts": 36,
+              "qualified_fraction": 1.0,
+              "failures": {},
+              "success_threshold": 0.8,
+              "max_success_steps": 256
+            }
+          }
+        }
+      }
+    }
+  },
+  "checkpoint_unchanged": true,
+  "passed": true,
+  "sidecar_sha256": "e5da7867c6da5cb2342278f743f6035169b153c7cd2a175a21d2d1bbbfeecac8",
+  "training_only_audit": {
+    "imitation_training_only": true,
+    "ppo_completed_episodes": 80,
+    "ppo_unique_train_layouts": 18,
+    "ppo_training_only": true
+  },
+  "playback": {
+    "backend": "sb3",
+    "headless": true,
+    "outcome": "success",
+    "steps": 246,
+    "core_ticks": 981,
+    "screenshot": "runs/ppo_full_train_correction/playback.png"
+  }
+}

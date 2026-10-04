@@ -1,0 +1,126 @@
+{
+  "schema_version": 2,
+  "environment_id": "PlatformerState-v2",
+  "seed": 20261004,
+  "total_timesteps": 98304,
+  "n_envs": 4,
+  "device": "cpu",
+  "torch_threads": 1,
+  "verbose": 0,
+  "environment": {
+    "action_repeat": 4,
+    "episode_step_limit": 1024,
+    "curriculum_manifest": "config/curriculum_v6.json",
+    "sensor_range": 240.0,
+    "environment_id": "PlatformerState-v2",
+    "physics": {
+      "player_width": 24.0,
+      "player_height": 32.0,
+      "walk_acceleration": 0.3,
+      "run_acceleration": 0.5,
+      "turn_acceleration": 0.7,
+      "max_walk_speed": 6.0,
+      "max_run_speed": 10.0,
+      "jump_velocity": -13.8,
+      "rising_gravity": 0.5,
+      "falling_gravity": 1.8,
+      "max_fall_speed": 11.0,
+      "max_episode_steps": 36000
+    },
+    "reward": {
+      "progress_scale": 5.0,
+      "coin_reward": 0.5,
+      "success_reward": 10.0,
+      "death_penalty": -10.0,
+      "time_penalty": -0.001
+    },
+    "level_id": "level_1"
+  },
+  "network": {
+    "policy_layers": [
+      64,
+      64
+    ],
+    "value_layers": [
+      64,
+      64
+    ]
+  },
+  "algorithm": {
+    "learning_rate": 1e-05,
+    "n_steps": 256,
+    "batch_size": 256,
+    "n_epochs": 5,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_range": 0.2,
+    "ent_coef": 0.0,
+    "vf_coef": 0.5
+  },
+  "evaluation": {
+    "seeds": [
+      100
+    ],
+    "every_timesteps": 8192,
+    "selection": "joint_v1"
+  },
+  "train_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "checkpoint_every_timesteps": 32768,
+  "curriculum": {
+    "replay_fraction": 0.2,
+    "required_evaluations": 2,
+    "stages": [
+      {
+        "task": "flat",
+        "max_timesteps": 50000,
+        "success_threshold": 0.95,
+        "max_success_steps": 128
+      },
+      {
+        "task": "obstacle",
+        "max_timesteps": 150000,
+        "success_threshold": 0.8,
+        "max_success_steps": 160
+      },
+      {
+        "task": "gap",
+        "max_timesteps": 262144,
+        "success_threshold": 0.8,
+        "max_success_steps": 192,
+        "sampling_weights": {
+          "flat": 0.05,
+          "obstacle": 0.45,
+          "gap": 0.5
+        }
+      },
+      {
+        "task": "mixed",
+        "max_timesteps": 250000,
+        "success_threshold": 0.8,
+        "max_success_steps": 256
+      },
+      {
+        "task": "full",
+        "max_timesteps": 400000,
+        "success_threshold": 0.5,
+        "max_success_steps": 768
+      }
+    ]
+  },
+  "imitation": {
+    "rounds": 4,
+    "epochs": 50,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "max_steps_per_episode": 128
+  }
+}

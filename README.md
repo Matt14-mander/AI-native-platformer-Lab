@@ -122,6 +122,8 @@ python -m scripts.train_ppo --timesteps 4096 --output-dir runs/ppo_smoke
 
 训练配置位于 [`config/ppo_state_v0.json`](config/ppo_state_v0.json)，首轮实验结果与下一步分析见 [`docs/PPO_BASELINE_V0.md`](docs/PPO_BASELINE_V0.md)。当前 PPO v0 尚未通关，其 deterministic policy 与 move-right baseline 同样停在首个管道；下一轮应建立平地/单障碍 curriculum。
 
+当前 v2 mixed 已完成三独立训练 seed 正式验收，完整关卡训练进展见 [多 seed 与完整关卡报告](docs/FORMAL_MULTISEED_AND_FULL.md)。
+
 ## 架构
 
 PPO checkpoint 可直接用 Pygame 播放，支持暂停、重播、关卡切换和速度调节：

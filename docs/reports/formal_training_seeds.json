@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "plan": {
+    "schema_version": 1,
+    "date": "2026-10-04",
+    "training_seeds": [
+      20261004,
+      20261005,
+      20261006
+    ],
+    "runs": [
+      {
+        "seed": 20261004,
+        "config": "runs/formal_training_seed_cohort/config_20261004.json",
+        "config_sha256": "7c5efe4dba80c8a21cfb840e5ac1d473f01825092d99113bc18f35cb06e14886",
+        "signature_hash": "7bdf7e20c749315cc29f11f69d1495b88ce1b4214bd87f9346f6920fbf8b8261",
+        "run": "runs/formal_training_seed_cohort/seed_20261004",
+        "initialization": "independent random weights; no shared checkpoint"
+      },
+      {
+        "seed": 20261005,
+        "config": "runs/formal_training_seed_cohort/config_20261005.json",
+        "config_sha256": "d67ae2db2b87dae3027bc652d8b7b8c4a68f90ef8eca393c3acccbf350553271",
+        "signature_hash": "0f9e1bee603e8e5d3cfa9410205233c4934fc26613f395e5f93c359f31974da5",
+        "run": "runs/formal_training_seed_cohort/seed_20261005",
+        "initialization": "independent random weights; no shared checkpoint"
+      },
+      {
+        "seed": 20261006,
+        "config": "runs/formal_training_seed_cohort/config_20261006.json",
+        "config_sha256": "e5287a68968c3fd6b8932549843d0330ee8d44181395db7387eb28aff1e43f8a",
+        "signature_hash": "e95b5c320e6cd77c489cb1bd0cb6f5388732063f70af4b6afa5ce8f85899df96",
+        "run": "runs/formal_training_seed_cohort/seed_20261006",
+        "initialization": "independent random weights; no shared checkpoint"
+      }
+    ],
+    "primary_full_seed": 20261004,
+    "manifest": "config/curriculum_v6.json",
+    "manifest_sha256": "701b757ab6b5fa453c3c005b937a0ad2773a52e1fc0dec643130ee914f3f1b3c",
+    "method": "Independent random network initialization, supervised warm start on flat/obstacle/gap train only, then PPO gap to mixed. Same algorithm and budgets; all runs reported. Not pure PPO.",
+    "start_stage": "gap",
+    "stop_before_stage": "full",
+    "evaluation_seeds": [
+      1000,
+      1001,
+      1002,
+      1003
+    ],
+    "acceptance": "All three runs must automatically pass flat/obstacle/gap/mixed gates, reload and pass every layout in both modes. Existing v5 test/OOD are regression; v6 IDs are new blind geometry. No holdout-dependent seed or checkpoint selection.",
+    "full_selection": "Predeclared first seed, not selected by holdout results; begin full only if cohort passes."
+  },
+  "passed": true,
+  "training_seed_count": 3,
+  "total_episodes": 5328,
+  "fresh_geometry_episodes": 768,
+  "independent_final_models": true,
+  "runs": [
+    {
+      "seed": 20261004,
+      "model": "runs/formal_training_seed_cohort/seed_20261004/model.zip",
+      "model_sha256": "653492437cf0c33da656dee72f28c9e12fa993b7a2060ef9ec1ef199753606d0",
+      "ppo_timesteps": 32768,
+      "audit": {
+        "frozen_config": true,
+        "seed_matches": true,
+        "signature_matches": true,
+        "random_initialization": true,
+        "training_only_demos": true,
+        "automatic_full_readiness": true,
+        "frozen_model": true,
+        "acceptance_passed": true
+      },
+      "suites": {
+        "test": {
+          "deterministic": {
+            "all": {
+              "agent": "ppo",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "fresh_v6_geometry": {
+              "agent": "ppo",
+              "episodes": 80,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.959299999999999,
+              "mean_progress": 1.0,
+              "mean_steps": 40.7,
+              "mean_coins": 0.0,
+              "mean_success_steps": 40.7
+            }
+          },
+          "stochastic": {
+            "all": {
+              "agent": "stochastic",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "fresh_v6_geometry": {
+              "agent": "stochastic",
+              "episodes": 80,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.959299999999999,
+              "mean_progress": 1.0,
+              "mean_steps": 40.7,
+              "mean_coins": 0.0,
+              "mean_success_steps": 40.7
+            }
+          }
+        },
+        "ood": {
+          "deterministic": {
+            "all": {
+              "agent": "ppo",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "fresh_v6_geometry": {
+              "agent": "ppo",
+              "episodes": 48,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.95683333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 43.166666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 43.166666666666664
+            }
+          },
+          "stochastic": {
+            "all": {
+              "agent": "stochastic",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "fresh_v6_geometry": {
+              "agent": "stochastic",
+              "episodes": 48,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.95683333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 43.166666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 43.166666666666664
+            }
+          }
+        }
+      },
+      "monitor_audit": {
+        "completed_episodes": 869,
+        "unique_train_layouts": 199,
+        "training_only": true
+      }
+    },
+    {
+      "seed": 20261005,
+      "model": "runs/formal_training_seed_cohort/seed_20261005/model.zip",
+      "model_sha256": "8aa09811ffefd0aeaac8054fbdf9e65c38c5093f7fb2c897d32729593180c411",
+      "ppo_timesteps": 32768,
+      "audit": {
+        "frozen_config": true,
+        "seed_matches": true,
+        "signature_matches": true,
+        "random_initialization": true,
+        "training_only_demos": true,
+        "automatic_full_readiness": true,
+        "frozen_model": true,
+        "acceptance_passed": true
+      },
+      "suites": {
+        "test": {
+          "deterministic": {
+            "all": {
+              "agent": "ppo",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "fresh_v6_geometry": {
+              "agent": "ppo",
+              "episodes": 80,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.959299999999999,
+              "mean_progress": 1.0,
+              "mean_steps": 40.7,
+              "mean_coins": 0.0,
+              "mean_success_steps": 40.7
+            }
+          },
+          "stochastic": {
+            "all": {
+              "agent": "stochastic",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "fresh_v6_geometry": {
+              "agent": "stochastic",
+              "episodes": 80,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.959299999999999,
+              "mean_progress": 1.0,
+              "mean_steps": 40.7,
+              "mean_coins": 0.0,
+              "mean_success_steps": 40.7
+            }
+          }
+        },
+        "ood": {
+          "deterministic": {
+            "all": {
+              "agent": "ppo",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "fresh_v6_geometry": {
+              "agent": "ppo",
+              "episodes": 48,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.95683333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 43.166666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 43.166666666666664
+            }
+          },
+          "stochastic": {
+            "all": {
+              "agent": "stochastic",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "fresh_v6_geometry": {
+              "agent": "stochastic",
+              "episodes": 48,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.95683333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 43.166666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 43.166666666666664
+            }
+          }
+        }
+      },
+      "monitor_audit": {
+        "completed_episodes": 869,
+        "unique_train_layouts": 202,
+        "training_only": true
+      }
+    },
+    {
+      "seed": 20261006,
+      "model": "runs/formal_training_seed_cohort/seed_20261006/model.zip",
+      "model_sha256": "71dc777bccbcc60d9db3c2e8d6a18ee0bb4e3a9c1fab994a5793cb76ec264d8d",
+      "ppo_timesteps": 32768,
+      "audit": {
+        "frozen_config": true,
+        "seed_matches": true,
+        "signature_matches": true,
+        "random_initialization": true,
+        "training_only_demos": true,
+        "automatic_full_readiness": true,
+        "frozen_model": true,
+        "acceptance_passed": true
+      },
+      "suites": {
+        "test": {
+          "deterministic": {
+            "all": {
+              "agent": "ppo",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "fresh_v6_geometry": {
+              "agent": "ppo",
+              "episodes": 80,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.959299999999999,
+              "mean_progress": 1.0,
+              "mean_steps": 40.7,
+              "mean_coins": 0.0,
+              "mean_success_steps": 40.7
+            }
+          },
+          "stochastic": {
+            "all": {
+              "agent": "stochastic",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "fresh_v6_geometry": {
+              "agent": "stochastic",
+              "episodes": 80,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.959299999999999,
+              "mean_progress": 1.0,
+              "mean_steps": 40.7,
+              "mean_coins": 0.0,
+              "mean_success_steps": 40.7
+            }
+          }
+        },
+        "ood": {
+          "deterministic": {
+            "all": {
+              "agent": "ppo",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "fresh_v6_geometry": {
+              "agent": "ppo",
+              "episodes": 48,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.95683333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 43.166666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 43.166666666666664
+            }
+          },
+          "stochastic": {
+            "all": {
+              "agent": "stochastic",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "fresh_v6_geometry": {
+              "agent": "stochastic",
+              "episodes": 48,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.95683333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 43.166666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 43.166666666666664
+            }
+          }
+        }
+      },
+      "monitor_audit": {
+        "completed_episodes": 869,
+        "unique_train_layouts": 201,
+        "training_only": true
+      }
+    }
+  ],
+  "interpretation": "Three independent random initializations with training-only rule imitation then PPO; not pure PPO. Existing v5 test/OOD are regression. Fresh v6 test positions retain the same five previously exposed held-out composition cells; v6 OOD adds new geometry. Full-level seed was preregistered before acceptance."
+}

@@ -1,5 +1,7 @@
 # Mixed v5 训练与保留 test/OOD 验收
 
+后续已完成正式三训练 seed 验收和完整关卡基线，见 [最新报告](FORMAL_MULTISEED_AND_FULL.md)。以下保留本轮 v5 历史结果。
+
 2026-10-04。扩展 mixed 的训练及本次保留集验收均已完成，全部通过。当前推荐模型是 `runs/ppo_gameplay_v2_mixed_acceptance/model.zip`，配套 `model.json` 必须保留。
 
 ## 训练与选模

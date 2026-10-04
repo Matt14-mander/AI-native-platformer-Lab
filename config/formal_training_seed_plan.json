@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "training_seeds": [
+    20261004,
+    20261005,
+    20261006
+  ],
+  "runs": [
+    {
+      "seed": 20261004,
+      "config": "runs/formal_training_seed_cohort/config_20261004.json",
+      "config_sha256": "7c5efe4dba80c8a21cfb840e5ac1d473f01825092d99113bc18f35cb06e14886",
+      "signature_hash": "7bdf7e20c749315cc29f11f69d1495b88ce1b4214bd87f9346f6920fbf8b8261",
+      "run": "runs/formal_training_seed_cohort/seed_20261004",
+      "initialization": "independent random weights; no shared checkpoint"
+    },
+    {
+      "seed": 20261005,
+      "config": "runs/formal_training_seed_cohort/config_20261005.json",
+      "config_sha256": "d67ae2db2b87dae3027bc652d8b7b8c4a68f90ef8eca393c3acccbf350553271",
+      "signature_hash": "0f9e1bee603e8e5d3cfa9410205233c4934fc26613f395e5f93c359f31974da5",
+      "run": "runs/formal_training_seed_cohort/seed_20261005",
+      "initialization": "independent random weights; no shared checkpoint"
+    },
+    {
+      "seed": 20261006,
+      "config": "runs/formal_training_seed_cohort/config_20261006.json",
+      "config_sha256": "e5287a68968c3fd6b8932549843d0330ee8d44181395db7387eb28aff1e43f8a",
+      "signature_hash": "e95b5c320e6cd77c489cb1bd0cb6f5388732063f70af4b6afa5ce8f85899df96",
+      "run": "runs/formal_training_seed_cohort/seed_20261006",
+      "initialization": "independent random weights; no shared checkpoint"
+    }
+  ],
+  "primary_full_seed": 20261004,
+  "manifest": "config/curriculum_v6.json",
+  "manifest_sha256": "701b757ab6b5fa453c3c005b937a0ad2773a52e1fc0dec643130ee914f3f1b3c",
+  "method": "Independent random network initialization, supervised warm start on flat/obstacle/gap train only, then PPO gap to mixed. Same algorithm and budgets; all runs reported. Not pure PPO.",
+  "start_stage": "gap",
+  "stop_before_stage": "full",
+  "evaluation_seeds": [
+    1000,
+    1001,
+    1002,
+    1003
+  ],
+  "acceptance": "All three runs must automatically pass flat/obstacle/gap/mixed gates, reload and pass every layout in both modes. Existing v5 test/OOD are regression; v6 IDs are new blind geometry. No holdout-dependent seed or checkpoint selection.",
+  "full_selection": "Predeclared first seed, not selected by holdout results; begin full only if cohort passes."
+}

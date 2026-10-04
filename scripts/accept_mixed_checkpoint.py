@@ -116,8 +116,9 @@ def main():
             gate = acceptance_gate(stages, tasks, evaluation)
             mixed = tasks.get("mixed", [])
             cohorts = {
-                "legacy_mixed": [x for x in mixed if not x.startswith(PREFIX)],
+                "legacy_mixed": [x for x in mixed if not x.startswith((PREFIX, "v6_mixed_"))],
                 "v5_mixed": [x for x in mixed if x.startswith(PREFIX)],
+                "v6_mixed": [x for x in mixed if x.startswith("v6_mixed_")],
             }
             results[mode] = {
                 "summary": evaluation["summary"],
