@@ -17,7 +17,7 @@
 - 金币动态实体、收集状态、score、reward 与 HUD；
 - 暂停、快速重开和版本化 gameplay settings；
 - headless 单元测试与真实 Pygame 集成测试；
-- 已注册的 `PlatformerState-v0`：14 维状态 observation、10 个离散动作与 reward breakdown；
+- 已注册 `PlatformerState-v0/v1/v2`；当前训练使用 v2 的 15 维状态 observation、10 个离散动作与 reward breakdown；
 - random、move-right、rule-jump 三个固定 seed scripted benchmark 基线；
 - SB3 checker、1,000 episode 稳定性门禁和 reward exploit audit；
 - 可复现的 MLP PPO 训练、Monitor 日志、模型保存与确定性评估链路；
@@ -120,7 +120,7 @@ python -m scripts.train_ppo --output-dir runs/ppo_state_v0_seed_20260923
 python -m scripts.train_ppo --timesteps 4096 --output-dir runs/ppo_smoke
 ```
 
-训练配置位于 [`config/ppo_state_v0.json`](config/ppo_state_v0.json)，首轮实验结果与下一步分析见 [`docs/PPO_BASELINE_V0.md`](docs/PPO_BASELINE_V0.md)。当前 PPO v0 尚未通关，其 deterministic policy 与 move-right baseline 同样停在首个管道；下一轮应建立平地/单障碍 curriculum。
+训练配置位于 [`config/ppo_state_v0.json`](config/ppo_state_v0.json)，首轮实验结果与下一步分析见 [`docs/PPO_BASELINE_V0.md`](docs/PPO_BASELINE_V0.md)。历史 PPO v0 未通关，其 deterministic policy 与 move-right baseline 同样停在首个管道；该结果仅作为早期对照。当前使用下述 v9 基线。
 
 当前 v2 mixed 与完整关卡均完成三独立训练 seed 验收；主区域 5/5 松果收集和生成式多地图验收结果见 [最新 v9 报告](docs/FULL_MULTISEED_COLLECTION_V9.md)。
 
@@ -129,7 +129,7 @@ python -m scripts.train_ppo --timesteps 4096 --output-dir runs/ppo_smoke
 PPO checkpoint 可直接用 Pygame 播放，支持暂停、重播、关卡切换和速度调节：
 
 ```bash
-python -m scripts.play_ppo --model runs/mixed_prerequisites_imitation/model.zip --task gap
+python -m scripts.play_ppo --model runs/full_collection_v9/seed_20261004/model.zip --level-id level_1_main
 ```
 
 参数和无窗口验证方式见 [PPO 模型播放](docs/PPO_PLAYBACK.md)。
@@ -153,7 +153,7 @@ Keyboard / Scripted / PPO / Jev
 ai_platformer/
 ├── core/          # 动作、物理、碰撞、状态和 episode 规则
 ├── content/       # legacy adapter、未来 LevelSpec/PCG/验证器
-├── envs/          # Gymnasium environment（下一阶段）
+├── envs/          # Gymnasium v0/v1/v2 environment
 ├── agents/        # scripted、PPO、Jev、LLM adapters
 ├── adaptive/      # 玩家建模与 DDA
 ├── rendering/     # Pygame 输入和显示
@@ -174,7 +174,7 @@ game_content/
 
 ## AI 路线
 
-首个学习型 agent 计划采用 **PPO**，但接入顺序是：
+当前已完成 **规则示范修正 + PPO** 的训练与部署闭环。早期接入顺序为：
 
 1. 冻结 `Action v1`、结构化 observation 和 reward v1；
 2. 实现并注册 `PlatformerState-v0` Gymnasium environment；
@@ -191,10 +191,10 @@ LLM/PCG、DDA 和 Jev 会在 LevelSpec、telemetry 与 benchmark 稳定后接入
 
 ## 项目阶段
 
-当前阶段：**v2 mixed 与完整关卡三独立训练 seed 验收完成；主区域松果收集与生成式多地图泛化通过**。
+当前阶段：**强化学习 v9 基线阶段收尾；三 seed 训练验收和主模型部署回归完成**。收尾范围、归档与统一复跑入口见 [v9 基线收尾](docs/RL_V9_CLOSEOUT.md)。
 
 采用训练集规则示范修正 + PPO。可玩主区域 `level_1_main` 在确定性/随机策略下均为 243 步、5/5 松果；新增完整地图保留集 192 局全部成功，平均收集率 97.09%，旧课程与 full 回归 5,712 局全部通过。旧 `level_1` 保持兼容，后续区域尚未迁移的 20 个松果不计入新主区域分母。详见 [v9 训练与验收](docs/FULL_MULTISEED_COLLECTION_V9.md)。
 
-下一阶段：**迁移后续区域与传送/交互内容，扩展完整地图族，并为新模型重新导出与验证 TinyInfer 后端**。当前多地图结论限于声明的静态生成族，不代表所有 legacy 原始关卡已经通关。
+下一阶段：**先处理另两个 seed 的导出数值差异，再按需要迁移后续区域与传送/交互内容、扩展完整地图族，并为变化后的模型重新验收**。当前多地图结论限于声明的静态生成族，不代表所有 legacy 原始关卡已经通关。
 
 历史课程设施与早期模型结果见 [强化学习训练 v1](docs/RL_TRAINING_V1.md) 和 [正式 mixed 多 seed](docs/FORMAL_MULTISEED_AND_FULL.md)。
