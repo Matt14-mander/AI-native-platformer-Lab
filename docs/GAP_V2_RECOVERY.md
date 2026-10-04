@@ -1,5 +1,7 @@
 # V2 gap 前置门槛修复
 
+> 后续 mixed 训练和保留 test/OOD 验收已经完成，当前推荐模型及验收见 [mixed v5 验收](MIXED_V5_ACCEPTANCE.md)。本文保留 gap 修复阶段的模型和证据。
+
 2026-10-04。结论：新 checkpoint 已通过 flat、obstacle、gap 的连续两轮联合门禁，并经重新加载确认，可进入 mixed。没有降低成功率门槛、放宽成功步数、删除失败布局、修改物理或奖励。
 
 ## 失败原因与处理

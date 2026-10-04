@@ -1,5 +1,7 @@
 # Mixed v5 几何覆盖与组合迁移
 
+> 当前阶段：已完成 mixed 训练及保留 test/OOD 验收，见 [mixed v5 验收](MIXED_V5_ACCEPTANCE.md)。下文保留扩展课程时的零样本基线。
+
 > 本文记录扩展课程时的初始模型基线。后续 gap 修复模型在相同 v5 验证上已达到确定性 24/24、采样 72/72，详情见 [gap 门槛修复](GAP_V2_RECOVERY.md)。保留下面的初始结果用于前后对照。
 
 2026-10-04。课程文件：`config/curriculum_v5.json`；生成器：`ai_platformer/content/curriculum_v5.py`。保留 v4 的全部 434 个布局、内容和 split 归属，新增 120 个布局，总数 554。物理、动作、观测和旧模型协议没有改变。
