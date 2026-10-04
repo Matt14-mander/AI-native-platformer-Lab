@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "scope": "LevelSpec candidate loading, real-core bounded route search, independent replay and offscreen playback. No curriculum or frozen checkpoint changes. No new policy generalization or performance claims.",
+  "tests": {
+    "full": "130 passed, 8 subtests passed; 2 legacy Gym warnings",
+    "target_after_diagnostics": "15 passed",
+    "ruff": "changed files passed"
+  },
+  "routes": {
+    "flat": {
+      "status": "verified",
+      "reason": "successful_route_replayed",
+      "method": "MoveRightAgent",
+      "expansions": 18,
+      "budgets": {
+        "max_steps": 768,
+        "max_expansions": 25000,
+        "beam_width": 24,
+        "max_seconds": 15.0
+      },
+      "min_coin_ratio": 0.0,
+      "replay_passed": true,
+      "witness": {
+        "level_id": "course_flat_08",
+        "protocol_sha256": "48aa6ff60b189ae7a3a4ccd4977e1d59a51f70705adc94913212d0140a949f6a",
+        "seed": 100,
+        "steps": 18,
+        "ticks": 72,
+        "outcome": "success",
+        "coins_collected": 0,
+        "coins_total": 0,
+        "trace_sha256": "3dfd318118dbf43e993475644b4cace4ea8cf922f37c203b9ce1112616c56438"
+      },
+      "artifact": "runs/level_spec_routes_v1/flat.json",
+      "artifact_sha256": "94d0e1edba57833b028fb46b228f76136da7cfcc8b532645162a6ea27675f6d0"
+    },
+    "flat_beam": {
+      "status": "verified",
+      "reason": "successful_route_replayed",
+      "method": "beam_search",
+      "expansions": 1291,
+      "budgets": {
+        "max_steps": 768,
+        "max_expansions": 10000,
+        "beam_width": 8,
+        "max_seconds": 15.0
+      },
+      "min_coin_ratio": 0.0,
+      "replay_passed": true,
+      "witness": {
+        "level_id": "course_flat_08",
+        "protocol_sha256": "48aa6ff60b189ae7a3a4ccd4977e1d59a51f70705adc94913212d0140a949f6a",
+        "seed": 100,
+        "steps": 18,
+        "ticks": 72,
+        "outcome": "success",
+        "coins_collected": 0,
+        "coins_total": 0,
+        "trace_sha256": "8c7812a3daff4bf52f7e83f4ed9b02f9dc374cdbfd7b6f965438cfe10a2265ae"
+      },
+      "artifact": "runs/level_spec_routes_v1/flat_beam.json",
+      "artifact_sha256": "e8bb3a3dbdc90366ff4f2eed92bbb981e879bb271a75d36b89b5b204a2a0e44e"
+    },
+    "obstacle_beam": {
+      "status": "verified",
+      "reason": "successful_route_replayed",
+      "method": "beam_search",
+      "expansions": 2991,
+      "budgets": {
+        "max_steps": 768,
+        "max_expansions": 15000,
+        "beam_width": 12,
+        "max_seconds": 15.0
+      },
+      "min_coin_ratio": 0.0,
+      "replay_passed": true,
+      "witness": {
+        "level_id": "course_obstacle_08",
+        "protocol_sha256": "60180e750fd87a4f1cd1bfdff9372b3f656178629686eb0edd785dbc30cd8b7b",
+        "seed": 100,
+        "steps": 27,
+        "ticks": 105,
+        "outcome": "success",
+        "coins_collected": 0,
+        "coins_total": 0,
+        "trace_sha256": "80558f273e20d336af816d1526763fdbca5435a59debb6de7b0c79ecf1613b05"
+      },
+      "artifact": "runs/level_spec_routes_v1/obstacle_beam.json",
+      "artifact_sha256": "5677a2928cd6b8675484ca53f248c1fa5408456673d964d410d45dd5f4b252f9"
+    },
+    "full": {
+      "status": "verified",
+      "reason": "successful_route_replayed",
+      "method": "RuleJumpAgent",
+      "expansions": 958,
+      "budgets": {
+        "max_steps": 768,
+        "max_expansions": 25000,
+        "beam_width": 24,
+        "max_seconds": 15.0
+      },
+      "min_coin_ratio": 0.0,
+      "replay_passed": true,
+      "witness": {
+        "level_id": "v8_full_validation_05",
+        "protocol_sha256": "7746878651572179a93f92c0096a1ca69cac25d8c1330ba90f9ec094c072ffa7",
+        "seed": 100,
+        "steps": 190,
+        "ticks": 760,
+        "outcome": "success",
+        "coins_collected": 6,
+        "coins_total": 12,
+        "trace_sha256": "f0342451baf3b085bfa642bf799e7e82dd493be1a1b60877e3b4d9faead1995f"
+      },
+      "artifact": "runs/level_spec_routes_v1/full.json",
+      "artifact_sha256": "f002d15c47ef7db63bfb356bd537c8b525740746052edb4ed6aa86982cdb7284"
+    },
+    "full_collection": {
+      "status": "verified",
+      "reason": "successful_route_replayed",
+      "method": "CoinJumpAgent",
+      "expansions": 1167,
+      "budgets": {
+        "max_steps": 768,
+        "max_expansions": 25000,
+        "beam_width": 24,
+        "max_seconds": 15.0
+      },
+      "min_coin_ratio": 0.75,
+      "replay_passed": true,
+      "witness": {
+        "level_id": "v8_full_validation_05",
+        "protocol_sha256": "7746878651572179a93f92c0096a1ca69cac25d8c1330ba90f9ec094c072ffa7",
+        "seed": 100,
+        "steps": 209,
+        "ticks": 835,
+        "outcome": "success",
+        "coins_collected": 11,
+        "coins_total": 12,
+        "trace_sha256": "504fdde2af6c00d6c8b1128814aa0090d83bfbe1b16acaf4436c0d463f7740c5"
+      },
+      "artifact": "runs/level_spec_routes_v1/full_collection.json",
+      "artifact_sha256": "d91998e2d187eafff0119e0814d8485f11124411f4f0e00904e8152886f35a78"
+    }
+  },
+  "backend_parity": {
+    "schema_version": 1,
+    "passed": true,
+    "input": "game_content/level_specs/full_v1.json",
+    "input_sha256": "e58ad957f4a1c70d36b4a186c849de095a2971cef46727b1febf7deaf5083bee",
+    "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+    "actor_sha256": "bcddfcedf2b8599fdb975a8d36038569dca75c43fac45513414a108f4b7972eb",
+    "library_sha256": "dd9439e35811b85c710836c3307315cf80ab54b41f03b0488f76b3ca3d2de639",
+    "backends": {
+      "sb3": {
+        "outcome": "success",
+        "steps": 209,
+        "ticks": 835,
+        "coins_collected": 11,
+        "coins_total": 12,
+        "trace_sha256": "6e4ade6c3827ea7a6b71bf8bee3fab50985d9077f79bfc4d229cd96716ea462b"
+      },
+      "tinyinfer_original": {
+        "outcome": "success",
+        "steps": 209,
+        "ticks": 835,
+        "coins_collected": 11,
+        "coins_total": 12,
+        "trace_sha256": "6e4ade6c3827ea7a6b71bf8bee3fab50985d9077f79bfc4d229cd96716ea462b"
+      },
+      "tinyinfer_fused": {
+        "outcome": "success",
+        "steps": 209,
+        "ticks": 835,
+        "coins_collected": 11,
+        "coins_total": 12,
+        "trace_sha256": "6e4ade6c3827ea7a6b71bf8bee3fab50985d9077f79bfc4d229cd96716ea462b"
+      }
+    },
+    "comparison": "Every decision compares actions, observations, reward, termination, info and full WorldSnapshot. Candidate playback only, not new policy generalization."
+  },
+  "committed_witness": "game_content/routes/full_v1.route.json",
+  "replay_playback": {
+    "level_id": "v8_full_validation_05",
+    "outcome": "success",
+    "steps": 209,
+    "ticks": 835,
+    "coins_collected": 11,
+    "coins_total": 12,
+    "screenshot": "runs/level_spec_routes_v1/collection_replay.png",
+    "per_step_witness_hash_checked": true
+  },
+  "known_limits": [
+    "Heuristic quantization/beam pruning and budget exhaustion return unknown, never proof of unreachability.",
+    "Route search supports static solids/coins only; interactive content returns unknown.",
+    "A verified goal route does not imply full collection. Collection target is explicit.",
+    "Legacy level_1_main contains out-of-bounds solids and is rejected by strict new-format admission; frozen legacy playback remains available."
+  ]
+}

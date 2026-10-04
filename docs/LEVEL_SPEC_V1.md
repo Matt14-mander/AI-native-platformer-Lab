@@ -1,6 +1,6 @@
 # LevelSpec v1 与静态校验
 
-日期：2026-10-04。完成计划中的第一轮：严格关卡协议、JSON Schema、与核心的无损转换、结构/静态几何校验和数据集去重。尚未接入物理可达性搜索、LLM、训练数据自动入库或独立 LevelSpec 播放入口。
+日期：2026-10-04。完成计划中的第一轮：严格关卡协议、JSON Schema、与核心的无损转换、结构/静态几何校验和数据集去重。后续已接入新格式加载、播放和真实核心路线搜索/重放，见 [路线验证 v1](LEVEL_SPEC_ROUTES_V1.md)。LLM 和训练数据自动入库尚未接入。
 
 ## 协议
 
@@ -81,7 +81,7 @@ report = validate_level_spec(spec, physics=physics)
 if not report["static_valid"]:
     raise ValueError(report["issues"])
 level = to_level_definition(spec)
-# 下一轮再接 repository、环境与播放；转换器本身不是地图准入门槛。
+# 转换器本身不是地图准入门槛；环境加载与播放见路线验证文档。
 ```
 
 ## 验收结果与旧内容边界
@@ -94,4 +94,4 @@ level = to_level_definition(spec)
 
 机器报告：[level_spec_v1.json](reports/level_spec_v1.json)。新关卡应满足严格边界规则；如后续清理 legacy 残留，使用新的地图 ID/内容版本并重新验收，不能覆盖冻结基线。
 
-下一轮：repository/环境加载和 Pygame 播放 → 基于真实物理的可达性搜索与路线重放 → LLM + PCG。静态通过的新地图暂不自动进入 PPO 训练池。
+加载、播放与路线搜索/重放已实现，见 [路线验证](LEVEL_SPEC_ROUTES_V1.md)。下一轮为 LLM + PCG 的受约束生成请求与候选验证。静态通过的新地图暂不自动进入 PPO 训练池。

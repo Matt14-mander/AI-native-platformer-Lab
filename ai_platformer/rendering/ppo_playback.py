@@ -72,6 +72,8 @@ class PlaybackSession:
 
 def solids_for_playback(factory: EnvironmentFactory, level_id: str) -> dict:
     repository = factory.repository
+    if hasattr(repository, "solids_by_kind"):
+        return repository.solids_by_kind(level_id)
     spec = repository.manifest["levels"].get(level_id, {})
     if "main_area_source" in spec:
         return repository.legacy.load_solids_by_group(spec["main_area_source"])

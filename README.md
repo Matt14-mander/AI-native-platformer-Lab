@@ -25,6 +25,7 @@
 - [v2 gap 前置门槛修复](docs/GAP_V2_RECOVERY.md)：训练集示范纠正＋PPO，重载确认 flat/obstacle/gap 全部通过，可进入 mixed；
 - [mixed v5 训练与保留集验收](docs/MIXED_V5_ACCEPTANCE.md)：mixed 60/60 验证布局通过，test/OOD 190 个布局在确定性及采样模式下全部通关；
 - [LevelSpec v1 与静态校验](docs/LEVEL_SPEC_V1.md)：严格 JSON 协议、无损转换、错误定位与数据集去重；
+- [LevelSpec 加载、播放与路线验证](docs/LEVEL_SPEC_ROUTES_V1.md)：真实核心有界搜索、证据重放、键盘/PPO/TinyInfer 播放；
 - 为 Gymnasium、PPO、PCG、DDA、Jev、LLM 和 ONNX 预留的模块边界。
 
 已迁移第一关前段的一种巡逻敌人、可破坏砖、一次性奖励箱与护盾道具；其余旧地图实体尚未纳入新核心。仍待完成：checkpoint/传送、完整音频流程，以及其他关卡的原创内容。
@@ -196,6 +197,6 @@ LLM/PCG、DDA 和 Jev 会在 LevelSpec、telemetry 与 benchmark 稳定后接入
 
 采用训练集规则示范修正 + PPO。可玩主区域 `level_1_main` 在确定性/随机策略下均为 243 步、5/5 松果；新增完整地图保留集 192 局全部成功，平均收集率 97.09%，旧课程与 full 回归 5,712 局全部通过。旧 `level_1` 保持兼容，后续区域尚未迁移的 20 个松果不计入新主区域分母。详见 [v9 训练与验收](docs/FULL_MULTISEED_COLLECTION_V9.md)。
 
-内容开发进展：**LevelSpec v1、转换器与结构/静态几何校验已完成**，见 [LevelSpec 文档](docs/LEVEL_SPEC_V1.md)。下一轮接入新格式加载与播放，再实现真实物理可达性检查，为 LLM + PCG 准备准入管线。另两个 seed 的导出数值差异、后续区域与传送/交互内容继续保留为待办；发生协议变化时重新验收。当前多地图结论限于声明的静态生成族，不代表所有 legacy 原始关卡已经通关。
+内容开发进展：**LevelSpec v1、转换器与结构/静态几何校验已完成**，见 [LevelSpec 文档](docs/LEVEL_SPEC_V1.md)。新格式加载、播放和真实核心路线搜索/重放也已接入，见 [路线验证](docs/LEVEL_SPEC_ROUTES_V1.md)。下一轮建立受约束生成请求与 PCG，继而接入 LLM。另两个 seed 的导出数值差异、后续区域与传送/交互内容继续保留为待办；发生协议变化时重新验收。当前多地图结论限于声明的静态生成族，不代表所有 legacy 原始关卡已经通关。
 
 历史课程设施与早期模型结果见 [强化学习训练 v1](docs/RL_TRAINING_V1.md) 和 [正式 mixed 多 seed](docs/FORMAL_MULTISEED_AND_FULL.md)。

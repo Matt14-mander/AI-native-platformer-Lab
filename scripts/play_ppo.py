@@ -27,6 +27,9 @@ def main() -> None:
     )
     parser.add_argument("--suite", choices=("train", "validation", "ood"), default="validation")
     parser.add_argument("--level-id", help="play one explicit level instead of a task suite")
+    parser.add_argument(
+        "--level-spec", type=Path, help="explore a statically checked LevelSpec candidate"
+    )
     parser.add_argument("--seed", type=int, help="default: first checkpoint validation seed")
     parser.add_argument("--sampled", action="store_true", help="sample actions instead of argmax")
     parser.add_argument("--speed", type=float, default=1.0, help="wall-clock speed, 0.1 to 8")
@@ -38,6 +41,8 @@ def main() -> None:
     )
     parser.add_argument("--screenshot", type=Path, help="save the final rendered frame as PNG")
     args = parser.parse_args()
+    if args.level_spec and args.level_id:
+        parser.error("choose --level-spec or --level-id")
     if not math.isfinite(args.speed) or not 0.1 <= args.speed <= 8:
         parser.error("speed must be between 0.1 and 8")
     if args.episodes < 0 or (args.headless and args.episodes == 0):
@@ -63,10 +68,14 @@ def main() -> None:
             args.backend, args.model, library=args.library, fuse_relu=args.fuse_relu
         )
         factory = loaded.factory
+        if args.level_spec:
+            factory = factory.for_level_spec(args.level_spec)
         policy = loaded.policy
         path = loaded.model_path
         levels = (
-            [args.level_id]
+            [factory.level_id]
+            if args.level_spec
+            else [args.level_id]
             if args.level_id
             else [factory.level_id]
             if args.task == "full" and "full" not in factory.repository.manifest["splits"]

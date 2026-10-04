@@ -29,6 +29,7 @@ class EnvironmentFactory:
             "curriculum_manifest",
             "level_id",
             "environment_id",
+            "level_spec",
         }
         unknown = set(config) - allowed
         if unknown:
@@ -52,8 +53,19 @@ class EnvironmentFactory:
         self.reward = RewardConfig(**config.get("reward", {}))
         if any(not isfinite(value) for value in asdict(self.reward).values()):
             raise ValueError("reward values must be finite")
-        self.repository = TrainingLevelRepository(config.get("curriculum_manifest"))
-        self.level_id = str(config.get("level_id", self.settings.level_id))
+        if "level_spec" in config:
+            if "curriculum_manifest" in config:
+                raise ValueError("choose level_spec or curriculum_manifest, not both")
+            from ai_platformer.content.level_repository import LevelSpecRepository
+
+            self.repository = LevelSpecRepository(
+                config["level_spec"], physics=self.settings.physics
+            )
+            default_level = self.repository.spec.level_id
+        else:
+            self.repository = TrainingLevelRepository(config.get("curriculum_manifest"))
+            default_level = self.settings.level_id
+        self.level_id = str(config.get("level_id", default_level))
         self.action_repeat = config.get("action_repeat", 4)
         self.step_limit = config.get("episode_step_limit", 1024)
         self.sensor_range = float(config.get("sensor_range", 240.0))
@@ -115,6 +127,20 @@ class EnvironmentFactory:
             "curriculum_generator_version": self.repository.manifest["generator_version"],
             "curriculum_manifest_hash": protocol_hash(self.repository.manifest),
         }
+
+    def for_level_spec(self, path) -> EnvironmentFactory:
+        """Explore a candidate using the same resolved policy/environment settings."""
+        return EnvironmentFactory(
+            {
+                "environment_id": self.environment_id,
+                "level_spec": str(path),
+                "action_repeat": self.action_repeat,
+                "episode_step_limit": self.step_limit,
+                "sensor_range": self.sensor_range,
+                "physics": asdict(self.settings.physics),
+                "reward": asdict(self.reward),
+            }
+        )
 
 
 def protocol_hash(protocol: dict) -> str:
