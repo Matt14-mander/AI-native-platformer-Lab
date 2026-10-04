@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "level_id": "course_flat_08",
+  "world": {
+    "width": 768.0,
+    "height": 600.0,
+    "units": "pixels"
+  },
+  "spawn": {
+    "x": 48.0,
+    "bottom": 540.0
+  },
+  "goal": {
+    "x": 668.0
+  },
+  "solids": [
+    {
+      "x": 0,
+      "y": 540.0,
+      "width": 768.0,
+      "height": 60
+    }
+  ],
+  "collectibles": [],
+  "blocks": [],
+  "enemies": [],
+  "powerups": [],
+  "metadata": {
+    "title": "",
+    "theme": "lake",
+    "source": "config/curriculum_v9.json",
+    "generator_version": "",
+    "seed": null
+  }
+}

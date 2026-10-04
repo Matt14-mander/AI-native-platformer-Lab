@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "manifest": "config/curriculum_v9.json",
+  "maps": 645,
+  "lossless_roundtrips_and_legacy_hash_matches": 645,
+  "static_valid_maps": 644,
+  "static_invalid_maps": [
+    {
+      "level_id": "level_1_main",
+      "issues": [
+        {
+          "code": "entity_bounds",
+          "path": "/solids/3",
+          "severity": "error",
+          "message": "Rectangle exceeds world bounds"
+        },
+        {
+          "code": "entity_bounds",
+          "path": "/solids/10",
+          "severity": "error",
+          "message": "Rectangle exceeds world bounds"
+        },
+        {
+          "code": "entity_bounds",
+          "path": "/solids/38",
+          "severity": "error",
+          "message": "Rectangle exceeds world bounds"
+        },
+        {
+          "code": "interactive_reachability_unverified",
+          "path": "/",
+          "severity": "warning",
+          "message": "Interactive entities are supported by core but reachability has not been checked"
+        }
+      ]
+    }
+  ],
+  "issue_counts": {
+    "entity_bounds": 3,
+    "interactive_reachability_unverified": 1
+  },
+  "reachability": "not_checked",
+  "note": "Strict new-format geometry diagnostics expose legacy out-of-bounds solids. Existing curriculum/core is unchanged; no legacy geometry is cropped or replaced."
+}

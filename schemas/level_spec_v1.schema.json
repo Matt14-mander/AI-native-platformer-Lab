@@ -1,0 +1,727 @@
+{
+  "$defs": {
+    "BlockSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Y"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Height"
+        },
+        "entity_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "brick",
+            "box"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "reward": {
+          "default": "none",
+          "enum": [
+            "none",
+            "coin",
+            "shield"
+          ],
+          "title": "Reward",
+          "type": "string"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height",
+        "entity_id",
+        "kind"
+      ],
+      "title": "BlockSpec",
+      "type": "object"
+    },
+    "CollectibleSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Y"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Height"
+        },
+        "entity_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "coin",
+          "default": "coin",
+          "title": "Kind",
+          "type": "string"
+        },
+        "score": {
+          "default": 100,
+          "maximum": 1000000,
+          "minimum": 0,
+          "title": "Score",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height",
+        "entity_id"
+      ],
+      "title": "CollectibleSpec",
+      "type": "object"
+    },
+    "EnemySpec": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Y"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Height"
+        },
+        "entity_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "patrol_left": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Patrol Left"
+        },
+        "patrol_right": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Patrol Right"
+        },
+        "direction": {
+          "default": -1,
+          "enum": [
+            -1,
+            1
+          ],
+          "title": "Direction",
+          "type": "integer"
+        },
+        "speed": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "default": 1.0,
+          "title": "Speed"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height",
+        "entity_id",
+        "patrol_left",
+        "patrol_right"
+      ],
+      "title": "EnemySpec",
+      "type": "object"
+    },
+    "GoalSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "X"
+        }
+      },
+      "required": [
+        "x"
+      ],
+      "title": "GoalSpec",
+      "type": "object"
+    },
+    "MetadataSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "default": "",
+          "maxLength": 256,
+          "title": "Title",
+          "type": "string"
+        },
+        "theme": {
+          "default": "",
+          "maxLength": 128,
+          "title": "Theme",
+          "type": "string"
+        },
+        "source": {
+          "default": "",
+          "maxLength": 512,
+          "title": "Source",
+          "type": "string"
+        },
+        "generator_version": {
+          "default": "",
+          "maxLength": 128,
+          "title": "Generator Version",
+          "type": "string"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        }
+      },
+      "title": "MetadataSpec",
+      "type": "object"
+    },
+    "PowerupSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Y"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Height"
+        },
+        "entity_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Entity Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "shield",
+          "default": "shield",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height",
+        "entity_id"
+      ],
+      "title": "PowerupSpec",
+      "type": "object"
+    },
+    "RectSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "X"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Y"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Height"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ],
+      "title": "RectSpec",
+      "type": "object"
+    },
+    "SpawnSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "X"
+        },
+        "bottom": {
+          "anyOf": [
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "number"
+            },
+            {
+              "maximum": 1000000,
+              "minimum": -1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Bottom"
+        }
+      },
+      "required": [
+        "x",
+        "bottom"
+      ],
+      "title": "SpawnSpec",
+      "type": "object"
+    },
+    "WorldSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "number"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 1000000,
+              "type": "integer"
+            }
+          ],
+          "title": "Height"
+        },
+        "units": {
+          "const": "pixels",
+          "default": "pixels",
+          "title": "Units",
+          "type": "string"
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "title": "WorldSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "level_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Level Id",
+      "type": "string"
+    },
+    "world": {
+      "$ref": "#/$defs/WorldSpec"
+    },
+    "spawn": {
+      "$ref": "#/$defs/SpawnSpec"
+    },
+    "goal": {
+      "$ref": "#/$defs/GoalSpec"
+    },
+    "solids": {
+      "items": {
+        "$ref": "#/$defs/RectSpec"
+      },
+      "maxItems": 10000,
+      "minItems": 1,
+      "title": "Solids",
+      "type": "array"
+    },
+    "collectibles": {
+      "items": {
+        "$ref": "#/$defs/CollectibleSpec"
+      },
+      "maxItems": 10000,
+      "title": "Collectibles",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/BlockSpec"
+      },
+      "maxItems": 10000,
+      "title": "Blocks",
+      "type": "array"
+    },
+    "enemies": {
+      "items": {
+        "$ref": "#/$defs/EnemySpec"
+      },
+      "maxItems": 10000,
+      "title": "Enemies",
+      "type": "array"
+    },
+    "powerups": {
+      "items": {
+        "$ref": "#/$defs/PowerupSpec"
+      },
+      "maxItems": 10000,
+      "title": "Powerups",
+      "type": "array"
+    },
+    "metadata": {
+      "$ref": "#/$defs/MetadataSpec"
+    }
+  },
+  "required": [
+    "schema_version",
+    "level_id",
+    "world",
+    "spawn",
+    "goal",
+    "solids"
+  ],
+  "title": "LevelSpec",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

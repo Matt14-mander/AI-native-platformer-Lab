@@ -26,8 +26,13 @@ platformer-audit-gameplay = "scripts.audit_gameplay:main"
 platformer-accept-mixed = "scripts.accept_mixed_checkpoint:main"
 platformer-diagnose-ppo = "scripts.diagnose_ppo:main"
 platformer-verify-stage-entry = "scripts.verify_stage_entry:main"
+platformer-validate-level = "scripts.validate_level_spec:main"
+platformer-export-level = "scripts.export_level_spec:main"
 
 [project.optional-dependencies]
+content = [
+    "pydantic>=2,<3",
+]
 benchmark = [
     "gymnasium>=1.0,<2",
     "numpy>=1.26,<3",
@@ -50,6 +55,7 @@ inference = [
 dev = [
     "pytest>=8",
     "ruff>=0.6",
+    "pydantic>=2,<3",
 ]
 
 [tool.setuptools.packages.find]

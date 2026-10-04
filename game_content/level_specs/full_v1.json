@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "level_id": "v8_full_validation_05",
+  "world": {
+    "width": 7813.0,
+    "height": 600,
+    "units": "pixels"
+  },
+  "spawn": {
+    "x": 393.0,
+    "bottom": 540.0
+  },
+  "goal": {
+    "x": 7713.0
+  },
+  "solids": [
+    {
+      "x": 1133.0,
+      "y": 380.0,
+      "width": 64,
+      "height": 160.0
+    },
+    {
+      "x": 3589.0,
+      "y": 444.0,
+      "width": 64,
+      "height": 96.0
+    },
+    {
+      "x": 5893.0,
+      "y": 492.0,
+      "width": 64,
+      "height": 48.0
+    },
+    {
+      "x": 0.0,
+      "y": 540.0,
+      "width": 2117.0,
+      "height": 60
+    },
+    {
+      "x": 2289.0,
+      "y": 540.0,
+      "width": 2204.0,
+      "height": 60
+    },
+    {
+      "x": 4633.0,
+      "y": 540.0,
+      "width": 2324.0,
+      "height": 60
+    },
+    {
+      "x": 7053.0,
+      "y": 540.0,
+      "width": 760.0,
+      "height": 60
+    }
+  ],
+  "collectibles": [
+    {
+      "x": 573.0,
+      "y": 508,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-0-0",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 693.0,
+      "y": 430,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-0-1",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 2509.0,
+      "y": 508,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-0-2",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 2669.0,
+      "y": 430,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-0-3",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 3069.0,
+      "y": 508,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-1-0",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 3189.0,
+      "y": 430,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-1-1",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 4853.0,
+      "y": 508,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-1-2",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 5013.0,
+      "y": 430,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-1-3",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 5413.0,
+      "y": 508,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-2-0",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 5533.0,
+      "y": 430,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-2-1",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 7273.0,
+      "y": 508,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-2-2",
+      "kind": "coin",
+      "score": 100
+    },
+    {
+      "x": 7433.0,
+      "y": 430,
+      "width": 16.0,
+      "height": 24.0,
+      "entity_id": "coin-2-3",
+      "kind": "coin",
+      "score": 100
+    }
+  ],
+  "blocks": [],
+  "enemies": [],
+  "powerups": [],
+  "metadata": {
+    "title": "",
+    "theme": "lake",
+    "source": "config/curriculum_v9.json",
+    "generator_version": "",
+    "seed": null
+  }
+}
