@@ -21,6 +21,21 @@ def assess_prerequisites(stages: list[dict], report: dict) -> dict:
                 ]
                 if not successful or any(episode["steps"] > limit for episode in successful):
                     reasons.append("success_steps")
+            coin_limit = stage.get("coin_ratio_thresholds", {}).get(
+                level, stage.get("min_coin_ratio")
+            )
+            if coin_limit is not None:
+                successful = [
+                    episode
+                    for episode in report.get("episodes", [])
+                    if episode["level_id"] == level and episode["outcome"] == "success"
+                ]
+                if not successful or any(
+                    episode.get("coins_total", 0) <= 0
+                    or episode["coins_collected"] / episode["coins_total"] < coin_limit
+                    for episode in successful
+                ):
+                    reasons.append("coin_ratio")
             if reasons:
                 failures[level] = reasons
         count = len(stage["validation_levels"])
@@ -49,10 +64,24 @@ def joint_selection_score(stages: list[dict], report: dict) -> list[float]:
         if item["level_id"] in levels and item["outcome"] == "success"
     ]
     progress = [report["by_level"].get(level, {}).get("mean_progress", 0) for level in levels]
-    return [
+    score = [
         float(gate["passed"]),
         min(fractions),
         sum(fractions) / len(fractions),
         sum(progress) / len(progress),
-        -sum(successes) / len(successes) if successes else 0,
     ]
+    coin_levels = {
+        level
+        for stage in stages
+        if "min_coin_ratio" in stage or "coin_ratio_thresholds" in stage
+        for level in stage["validation_levels"]
+    }
+    if coin_levels:
+        ratios = [
+            min(1.0, item["coins_collected"] / item["coins_total"])
+            for item in report["episodes"]
+            if item["level_id"] in coin_levels and item.get("coins_total", 0) > 0
+        ]
+        score.append(sum(ratios) / len(ratios) if ratios else 0.0)
+    score.append(-sum(successes) / len(successes) if successes else 0)
+    return score

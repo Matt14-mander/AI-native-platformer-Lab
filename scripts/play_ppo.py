@@ -69,7 +69,7 @@ def main() -> None:
             [args.level_id]
             if args.level_id
             else [factory.level_id]
-            if args.task == "full"
+            if args.task == "full" and "full" not in factory.repository.manifest["splits"]
             else factory.repository.split(args.task, args.suite)
         )
         for level in levels:
@@ -173,6 +173,7 @@ def main() -> None:
                 ),
                 (
                     f"outcome={session.info.get('outcome', 'playing')} | "
+                    f"coins={session.info['coins_collected']}/{session.info['coins_total']} | "
                     "P/Space pause  R replay  N next  [/] speed  Esc quit"
                 ),
             ]

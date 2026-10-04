@@ -166,6 +166,7 @@ def diagnose_policy(
                             core_ticks=info["tick"],
                             progress=info["progress"],
                             coins_collected=info["coins_collected"],
+                            coins_total=info["coins_total"],
                             outcome=info["outcome"],
                             level_id=level_id,
                         )

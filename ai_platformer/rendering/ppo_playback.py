@@ -65,11 +65,16 @@ class PlaybackSession:
             "ticks": self.info["tick"],
             "progress": self.info["progress"],
             "return": self.episode_return,
+            "coins_collected": self.info["coins_collected"],
+            "coins_total": self.info["coins_total"],
         }
 
 
 def solids_for_playback(factory: EnvironmentFactory, level_id: str) -> dict:
     repository = factory.repository
+    spec = repository.manifest["levels"].get(level_id, {})
+    if "main_area_source" in spec:
+        return repository.legacy.load_solids_by_group(spec["main_area_source"])
     if level_id not in repository.levels:
         return repository.legacy.load_solids_by_group(level_id)
     level = repository.load(level_id)

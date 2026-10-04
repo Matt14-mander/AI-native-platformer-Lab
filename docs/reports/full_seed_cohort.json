@@ -1,0 +1,4563 @@
+{
+  "passed": true,
+  "training_seed_count": 3,
+  "runs": [
+    {
+      "seed": 20261004,
+      "model": "runs/ppo_full_train_correction/model.zip",
+      "model_sha256": "46148fadfaec83d9e5b313be2f4eb737e634108a1a0a73a249e8a3ca2614038d",
+      "full": {
+        "deterministic": {
+          "summary": {
+            "agent": "deterministic",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 15.754000000000007,
+            "mean_progress": 1.0,
+            "mean_steps": 246.0,
+            "mean_coins": 2.0,
+            "mean_success_steps": 246.0
+          },
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "full": {
+                "passed": true,
+                "layouts": 1,
+                "qualified_layouts": 1,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.5,
+                "max_success_steps": 768
+              }
+            }
+          }
+        },
+        "stochastic": {
+          "summary": {
+            "agent": "stochastic",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 15.754000000000007,
+            "mean_progress": 1.0,
+            "mean_steps": 246.0,
+            "mean_coins": 2.0,
+            "mean_success_steps": 246.0
+          },
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "full": {
+                "passed": true,
+                "layouts": 1,
+                "qualified_layouts": 1,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.5,
+                "max_success_steps": 768
+              }
+            }
+          }
+        }
+      },
+      "regression": {
+        "test": {
+          "deterministic": {
+            "summary": {
+              "agent": "ppo",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "flat": {
+                  "passed": true,
+                  "layouts": 4,
+                  "qualified_layouts": 4,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.95,
+                  "max_success_steps": 128
+                },
+                "obstacle": {
+                  "passed": true,
+                  "layouts": 40,
+                  "qualified_layouts": 40,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 160
+                },
+                "gap": {
+                  "passed": true,
+                  "layouts": 54,
+                  "qualified_layouts": 54,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 76,
+                  "qualified_layouts": 76,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "flat": {
+                "agent": "ppo",
+                "episodes": 16,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9795,
+                "mean_progress": 1.0,
+                "mean_steps": 20.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 20.5
+              },
+              "obstacle": {
+                "agent": "ppo",
+                "episodes": 160,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9655,
+                "mean_progress": 1.0,
+                "mean_steps": 34.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 34.5
+              },
+              "gap": {
+                "agent": "ppo",
+                "episodes": 216,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.962222222222223,
+                "mean_progress": 1.0,
+                "mean_steps": 37.77777777777778,
+                "mean_coins": 0.0,
+                "mean_success_steps": 37.77777777777778
+              },
+              "mixed": {
+                "agent": "ppo",
+                "episodes": 304,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.954868421052634,
+                "mean_progress": 1.0,
+                "mean_steps": 45.13157894736842,
+                "mean_coins": 0.0,
+                "mean_success_steps": 45.13157894736842
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "ppo",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949666666666669,
+                "mean_progress": 1.0,
+                "mean_steps": 50.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.333333333333336
+              },
+              "v5_mixed": {
+                "agent": "ppo",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959799999999998,
+                "mean_progress": 1.0,
+                "mean_steps": 40.2,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.2
+              },
+              "v6_mixed": {
+                "agent": "ppo",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959299999999999,
+                "mean_progress": 1.0,
+                "mean_steps": 40.7,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.7
+              }
+            },
+            "mixed_strata": {
+              "cell/48/100/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/48/108/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/100/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/130/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/160/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/80/160/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/100": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/108": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/130": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/138": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/160": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/168": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/48": {
+                "episodes": 176,
+                "successes": 176,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 44,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 96,
+                "successes": 96,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 24,
+                "success_rate": 1.0
+              },
+              "height/80": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/1069": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/709": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/829": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/949": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "flat": {
+                  "passed": true,
+                  "layouts": 4,
+                  "qualified_layouts": 4,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.95,
+                  "max_success_steps": 128
+                },
+                "obstacle": {
+                  "passed": true,
+                  "layouts": 40,
+                  "qualified_layouts": 40,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 160
+                },
+                "gap": {
+                  "passed": true,
+                  "layouts": 54,
+                  "qualified_layouts": 54,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 76,
+                  "qualified_layouts": 76,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "flat": {
+                "agent": "stochastic",
+                "episodes": 16,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9795,
+                "mean_progress": 1.0,
+                "mean_steps": 20.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 20.5
+              },
+              "obstacle": {
+                "agent": "stochastic",
+                "episodes": 160,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9655,
+                "mean_progress": 1.0,
+                "mean_steps": 34.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 34.5
+              },
+              "gap": {
+                "agent": "stochastic",
+                "episodes": 216,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.962222222222223,
+                "mean_progress": 1.0,
+                "mean_steps": 37.77777777777778,
+                "mean_coins": 0.0,
+                "mean_success_steps": 37.77777777777778
+              },
+              "mixed": {
+                "agent": "stochastic",
+                "episodes": 304,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.954868421052634,
+                "mean_progress": 1.0,
+                "mean_steps": 45.13157894736842,
+                "mean_coins": 0.0,
+                "mean_success_steps": 45.13157894736842
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "stochastic",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949666666666669,
+                "mean_progress": 1.0,
+                "mean_steps": 50.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.333333333333336
+              },
+              "v5_mixed": {
+                "agent": "stochastic",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959799999999998,
+                "mean_progress": 1.0,
+                "mean_steps": 40.2,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.2
+              },
+              "v6_mixed": {
+                "agent": "stochastic",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959299999999999,
+                "mean_progress": 1.0,
+                "mean_steps": 40.7,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.7
+              }
+            },
+            "mixed_strata": {
+              "cell/48/100/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/48/108/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/100/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/130/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/160/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/80/160/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/100": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/108": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/130": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/138": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/160": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/168": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/48": {
+                "episodes": 176,
+                "successes": 176,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 44,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 96,
+                "successes": 96,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 24,
+                "success_rate": 1.0
+              },
+              "height/80": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/1069": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/709": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/829": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/949": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              }
+            }
+          }
+        },
+        "ood": {
+          "deterministic": {
+            "summary": {
+              "agent": "ppo",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "gap": {
+                  "passed": true,
+                  "layouts": 12,
+                  "qualified_layouts": 12,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 36,
+                  "qualified_layouts": 36,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "gap": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.957666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 42.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 42.333333333333336
+              },
+              "mixed": {
+                "agent": "ppo",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949388888888889,
+                "mean_progress": 1.0,
+                "mean_steps": 50.611111111111114,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.611111111111114
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.932666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 67.33333333333333,
+                "mean_coins": 0.0,
+                "mean_success_steps": 67.33333333333333
+              },
+              "v5_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.958666666666666,
+                "mean_progress": 1.0,
+                "mean_steps": 41.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 41.333333333333336
+              },
+              "v6_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.95683333333333,
+                "mean_progress": 1.0,
+                "mean_steps": 43.166666666666664,
+                "mean_coins": 0.0,
+                "mean_success_steps": 43.166666666666664
+              }
+            },
+            "mixed_strata": {
+              "cell/64/170/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/88/180/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "gap_width/170": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/180": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/188": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/88": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/92": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "recovery/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "gap": {
+                  "passed": true,
+                  "layouts": 12,
+                  "qualified_layouts": 12,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 36,
+                  "qualified_layouts": 36,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "gap": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.957666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 42.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 42.333333333333336
+              },
+              "mixed": {
+                "agent": "stochastic",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949388888888889,
+                "mean_progress": 1.0,
+                "mean_steps": 50.611111111111114,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.611111111111114
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.932666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 67.33333333333333,
+                "mean_coins": 0.0,
+                "mean_success_steps": 67.33333333333333
+              },
+              "v5_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.958666666666666,
+                "mean_progress": 1.0,
+                "mean_steps": 41.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 41.333333333333336
+              },
+              "v6_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.95683333333333,
+                "mean_progress": 1.0,
+                "mean_steps": 43.166666666666664,
+                "mean_coins": 0.0,
+                "mean_success_steps": 43.166666666666664
+              }
+            },
+            "mixed_strata": {
+              "cell/64/170/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/88/180/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "gap_width/170": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/180": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/188": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/88": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/92": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "recovery/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              }
+            }
+          }
+        }
+      },
+      "status": "completed",
+      "ppo_timesteps": 16384,
+      "source": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/formal_training_seed_cohort/seed_20261004/model.zip",
+        "source_sha256": "653492437cf0c33da656dee72f28c9e12fa993b7a2060ef9ec1ef199753606d0",
+        "source_timesteps": 32768,
+        "source_signature_hash": "7bdf7e20c749315cc29f11f69d1495b88ce1b4214bd87f9346f6920fbf8b8261",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      }
+    },
+    {
+      "seed": 20261005,
+      "model": "runs/full_seed_cohort/seed_20261005/model.zip",
+      "model_sha256": "de3ccc69d72d9f3ab3d22f6b71749ba0a861f357cdd020f36ba9b71a10d87959",
+      "full": {
+        "deterministic": {
+          "summary": {
+            "agent": "deterministic",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 15.754000000000007,
+            "mean_progress": 1.0,
+            "mean_steps": 246.0,
+            "mean_coins": 2.0,
+            "mean_success_steps": 246.0
+          },
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "full": {
+                "passed": true,
+                "layouts": 1,
+                "qualified_layouts": 1,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.5,
+                "max_success_steps": 768
+              }
+            }
+          }
+        },
+        "stochastic": {
+          "summary": {
+            "agent": "stochastic",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 15.754000000000007,
+            "mean_progress": 1.0,
+            "mean_steps": 246.0,
+            "mean_coins": 2.0,
+            "mean_success_steps": 246.0
+          },
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "full": {
+                "passed": true,
+                "layouts": 1,
+                "qualified_layouts": 1,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.5,
+                "max_success_steps": 768
+              }
+            }
+          }
+        }
+      },
+      "regression": {
+        "test": {
+          "deterministic": {
+            "summary": {
+              "agent": "ppo",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "flat": {
+                  "passed": true,
+                  "layouts": 4,
+                  "qualified_layouts": 4,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.95,
+                  "max_success_steps": 128
+                },
+                "obstacle": {
+                  "passed": true,
+                  "layouts": 40,
+                  "qualified_layouts": 40,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 160
+                },
+                "gap": {
+                  "passed": true,
+                  "layouts": 54,
+                  "qualified_layouts": 54,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 76,
+                  "qualified_layouts": 76,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "flat": {
+                "agent": "ppo",
+                "episodes": 16,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9795,
+                "mean_progress": 1.0,
+                "mean_steps": 20.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 20.5
+              },
+              "obstacle": {
+                "agent": "ppo",
+                "episodes": 160,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9655,
+                "mean_progress": 1.0,
+                "mean_steps": 34.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 34.5
+              },
+              "gap": {
+                "agent": "ppo",
+                "episodes": 216,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.962222222222223,
+                "mean_progress": 1.0,
+                "mean_steps": 37.77777777777778,
+                "mean_coins": 0.0,
+                "mean_success_steps": 37.77777777777778
+              },
+              "mixed": {
+                "agent": "ppo",
+                "episodes": 304,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.954868421052634,
+                "mean_progress": 1.0,
+                "mean_steps": 45.13157894736842,
+                "mean_coins": 0.0,
+                "mean_success_steps": 45.13157894736842
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "ppo",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949666666666669,
+                "mean_progress": 1.0,
+                "mean_steps": 50.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.333333333333336
+              },
+              "v5_mixed": {
+                "agent": "ppo",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959799999999998,
+                "mean_progress": 1.0,
+                "mean_steps": 40.2,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.2
+              },
+              "v6_mixed": {
+                "agent": "ppo",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959299999999999,
+                "mean_progress": 1.0,
+                "mean_steps": 40.7,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.7
+              }
+            },
+            "mixed_strata": {
+              "cell/48/100/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/48/108/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/100/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/130/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/160/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/80/160/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/100": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/108": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/130": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/138": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/160": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/168": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/48": {
+                "episodes": 176,
+                "successes": 176,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 44,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 96,
+                "successes": 96,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 24,
+                "success_rate": 1.0
+              },
+              "height/80": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/1069": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/709": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/829": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/949": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "flat": {
+                  "passed": true,
+                  "layouts": 4,
+                  "qualified_layouts": 4,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.95,
+                  "max_success_steps": 128
+                },
+                "obstacle": {
+                  "passed": true,
+                  "layouts": 40,
+                  "qualified_layouts": 40,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 160
+                },
+                "gap": {
+                  "passed": true,
+                  "layouts": 54,
+                  "qualified_layouts": 54,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 76,
+                  "qualified_layouts": 76,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "flat": {
+                "agent": "stochastic",
+                "episodes": 16,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9795,
+                "mean_progress": 1.0,
+                "mean_steps": 20.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 20.5
+              },
+              "obstacle": {
+                "agent": "stochastic",
+                "episodes": 160,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9655,
+                "mean_progress": 1.0,
+                "mean_steps": 34.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 34.5
+              },
+              "gap": {
+                "agent": "stochastic",
+                "episodes": 216,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.962222222222223,
+                "mean_progress": 1.0,
+                "mean_steps": 37.77777777777778,
+                "mean_coins": 0.0,
+                "mean_success_steps": 37.77777777777778
+              },
+              "mixed": {
+                "agent": "stochastic",
+                "episodes": 304,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.954868421052634,
+                "mean_progress": 1.0,
+                "mean_steps": 45.13157894736842,
+                "mean_coins": 0.0,
+                "mean_success_steps": 45.13157894736842
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "stochastic",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949666666666669,
+                "mean_progress": 1.0,
+                "mean_steps": 50.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.333333333333336
+              },
+              "v5_mixed": {
+                "agent": "stochastic",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959799999999998,
+                "mean_progress": 1.0,
+                "mean_steps": 40.2,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.2
+              },
+              "v6_mixed": {
+                "agent": "stochastic",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959299999999999,
+                "mean_progress": 1.0,
+                "mean_steps": 40.7,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.7
+              }
+            },
+            "mixed_strata": {
+              "cell/48/100/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/48/108/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/100/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/130/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/160/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/80/160/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/100": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/108": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/130": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/138": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/160": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/168": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/48": {
+                "episodes": 176,
+                "successes": 176,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 44,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 96,
+                "successes": 96,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 24,
+                "success_rate": 1.0
+              },
+              "height/80": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/1069": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/709": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/829": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/949": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              }
+            }
+          }
+        },
+        "ood": {
+          "deterministic": {
+            "summary": {
+              "agent": "ppo",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "gap": {
+                  "passed": true,
+                  "layouts": 12,
+                  "qualified_layouts": 12,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 36,
+                  "qualified_layouts": 36,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "gap": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.957666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 42.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 42.333333333333336
+              },
+              "mixed": {
+                "agent": "ppo",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949388888888889,
+                "mean_progress": 1.0,
+                "mean_steps": 50.611111111111114,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.611111111111114
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.932666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 67.33333333333333,
+                "mean_coins": 0.0,
+                "mean_success_steps": 67.33333333333333
+              },
+              "v5_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.958666666666666,
+                "mean_progress": 1.0,
+                "mean_steps": 41.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 41.333333333333336
+              },
+              "v6_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.95683333333333,
+                "mean_progress": 1.0,
+                "mean_steps": 43.166666666666664,
+                "mean_coins": 0.0,
+                "mean_success_steps": 43.166666666666664
+              }
+            },
+            "mixed_strata": {
+              "cell/64/170/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/88/180/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "gap_width/170": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/180": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/188": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/88": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/92": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "recovery/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "gap": {
+                  "passed": true,
+                  "layouts": 12,
+                  "qualified_layouts": 12,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 36,
+                  "qualified_layouts": 36,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "gap": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.957666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 42.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 42.333333333333336
+              },
+              "mixed": {
+                "agent": "stochastic",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949388888888889,
+                "mean_progress": 1.0,
+                "mean_steps": 50.611111111111114,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.611111111111114
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.932666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 67.33333333333333,
+                "mean_coins": 0.0,
+                "mean_success_steps": 67.33333333333333
+              },
+              "v5_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.958666666666666,
+                "mean_progress": 1.0,
+                "mean_steps": 41.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 41.333333333333336
+              },
+              "v6_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.95683333333333,
+                "mean_progress": 1.0,
+                "mean_steps": 43.166666666666664,
+                "mean_coins": 0.0,
+                "mean_success_steps": 43.166666666666664
+              }
+            },
+            "mixed_strata": {
+              "cell/64/170/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/88/180/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "gap_width/170": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/180": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/188": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/88": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/92": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "recovery/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              }
+            }
+          }
+        }
+      },
+      "status": "completed",
+      "ppo_timesteps": 16384,
+      "source": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/formal_training_seed_cohort/seed_20261005/model.zip",
+        "source_sha256": "8aa09811ffefd0aeaac8054fbdf9e65c38c5093f7fb2c897d32729593180c411",
+        "source_timesteps": 32768,
+        "source_signature_hash": "0f9e1bee603e8e5d3cfa9410205233c4934fc26613f395e5f93c359f31974da5",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      }
+    },
+    {
+      "seed": 20261006,
+      "model": "runs/full_seed_cohort/seed_20261006/model.zip",
+      "model_sha256": "7b3b47fbf2b733d5eb569c8f044af87dd8c110f14e30f3d1606ce4fe744f156d",
+      "full": {
+        "deterministic": {
+          "summary": {
+            "agent": "deterministic",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 15.754000000000007,
+            "mean_progress": 1.0,
+            "mean_steps": 246.0,
+            "mean_coins": 2.0,
+            "mean_success_steps": 246.0
+          },
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "full": {
+                "passed": true,
+                "layouts": 1,
+                "qualified_layouts": 1,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.5,
+                "max_success_steps": 768
+              }
+            }
+          }
+        },
+        "stochastic": {
+          "summary": {
+            "agent": "stochastic",
+            "episodes": 4,
+            "success_rate": 1.0,
+            "death_rate": 0.0,
+            "truncation_rate": 0.0,
+            "mean_return": 15.754000000000007,
+            "mean_progress": 1.0,
+            "mean_steps": 246.0,
+            "mean_coins": 2.0,
+            "mean_success_steps": 246.0
+          },
+          "gate": {
+            "passed": true,
+            "tasks": {
+              "full": {
+                "passed": true,
+                "layouts": 1,
+                "qualified_layouts": 1,
+                "qualified_fraction": 1.0,
+                "failures": {},
+                "success_threshold": 0.5,
+                "max_success_steps": 768
+              }
+            }
+          }
+        }
+      },
+      "regression": {
+        "test": {
+          "deterministic": {
+            "summary": {
+              "agent": "ppo",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "flat": {
+                  "passed": true,
+                  "layouts": 4,
+                  "qualified_layouts": 4,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.95,
+                  "max_success_steps": 128
+                },
+                "obstacle": {
+                  "passed": true,
+                  "layouts": 40,
+                  "qualified_layouts": 40,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 160
+                },
+                "gap": {
+                  "passed": true,
+                  "layouts": 54,
+                  "qualified_layouts": 54,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 76,
+                  "qualified_layouts": 76,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "flat": {
+                "agent": "ppo",
+                "episodes": 16,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9795,
+                "mean_progress": 1.0,
+                "mean_steps": 20.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 20.5
+              },
+              "obstacle": {
+                "agent": "ppo",
+                "episodes": 160,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9655,
+                "mean_progress": 1.0,
+                "mean_steps": 34.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 34.5
+              },
+              "gap": {
+                "agent": "ppo",
+                "episodes": 216,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.962222222222223,
+                "mean_progress": 1.0,
+                "mean_steps": 37.77777777777778,
+                "mean_coins": 0.0,
+                "mean_success_steps": 37.77777777777778
+              },
+              "mixed": {
+                "agent": "ppo",
+                "episodes": 304,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.954868421052634,
+                "mean_progress": 1.0,
+                "mean_steps": 45.13157894736842,
+                "mean_coins": 0.0,
+                "mean_success_steps": 45.13157894736842
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "ppo",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949666666666669,
+                "mean_progress": 1.0,
+                "mean_steps": 50.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.333333333333336
+              },
+              "v5_mixed": {
+                "agent": "ppo",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959799999999998,
+                "mean_progress": 1.0,
+                "mean_steps": 40.2,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.2
+              },
+              "v6_mixed": {
+                "agent": "ppo",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959299999999999,
+                "mean_progress": 1.0,
+                "mean_steps": 40.7,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.7
+              }
+            },
+            "mixed_strata": {
+              "cell/48/100/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/48/108/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/100/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/130/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/160/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/80/160/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/100": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/108": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/130": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/138": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/160": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/168": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/48": {
+                "episodes": 176,
+                "successes": 176,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 44,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 96,
+                "successes": 96,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 24,
+                "success_rate": 1.0
+              },
+              "height/80": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/1069": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/709": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/829": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/949": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 696,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.96016091954023,
+              "mean_progress": 1.0,
+              "mean_steps": 39.839080459770116,
+              "mean_coins": 0.0,
+              "mean_success_steps": 39.839080459770116
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "flat": {
+                  "passed": true,
+                  "layouts": 4,
+                  "qualified_layouts": 4,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.95,
+                  "max_success_steps": 128
+                },
+                "obstacle": {
+                  "passed": true,
+                  "layouts": 40,
+                  "qualified_layouts": 40,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 160
+                },
+                "gap": {
+                  "passed": true,
+                  "layouts": 54,
+                  "qualified_layouts": 54,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 76,
+                  "qualified_layouts": 76,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "flat": {
+                "agent": "stochastic",
+                "episodes": 16,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9795,
+                "mean_progress": 1.0,
+                "mean_steps": 20.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 20.5
+              },
+              "obstacle": {
+                "agent": "stochastic",
+                "episodes": 160,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.9655,
+                "mean_progress": 1.0,
+                "mean_steps": 34.5,
+                "mean_coins": 0.0,
+                "mean_success_steps": 34.5
+              },
+              "gap": {
+                "agent": "stochastic",
+                "episodes": 216,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.962222222222223,
+                "mean_progress": 1.0,
+                "mean_steps": 37.77777777777778,
+                "mean_coins": 0.0,
+                "mean_success_steps": 37.77777777777778
+              },
+              "mixed": {
+                "agent": "stochastic",
+                "episodes": 304,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.954868421052634,
+                "mean_progress": 1.0,
+                "mean_steps": 45.13157894736842,
+                "mean_coins": 0.0,
+                "mean_success_steps": 45.13157894736842
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "stochastic",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949666666666669,
+                "mean_progress": 1.0,
+                "mean_steps": 50.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.333333333333336
+              },
+              "v5_mixed": {
+                "agent": "stochastic",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959799999999998,
+                "mean_progress": 1.0,
+                "mean_steps": 40.2,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.2
+              },
+              "v6_mixed": {
+                "agent": "stochastic",
+                "episodes": 80,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.959299999999999,
+                "mean_progress": 1.0,
+                "mean_steps": 40.7,
+                "mean_coins": 0.0,
+                "mean_success_steps": 40.7
+              }
+            },
+            "mixed_strata": {
+              "cell/48/100/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/48/108/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/108/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/138/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/1069": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/709": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/829": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/48/168/949": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/100/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/130/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/64/160/760": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "cell/80/160/400": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/100": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/108": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/130": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "gap_width/138": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/160": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "gap_width/168": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/48": {
+                "episodes": 176,
+                "successes": 176,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 44,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 96,
+                "successes": 96,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 24,
+                "success_rate": 1.0
+              },
+              "height/80": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/1069": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 32,
+                "successes": 32,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 8,
+                "success_rate": 1.0
+              },
+              "recovery/709": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 64,
+                "successes": 64,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 16,
+                "success_rate": 1.0
+              },
+              "recovery/829": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              },
+              "recovery/949": {
+                "episodes": 36,
+                "successes": 36,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 9,
+                "success_rate": 1.0
+              }
+            }
+          }
+        },
+        "ood": {
+          "deterministic": {
+            "summary": {
+              "agent": "ppo",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "gap": {
+                  "passed": true,
+                  "layouts": 12,
+                  "qualified_layouts": 12,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 36,
+                  "qualified_layouts": 36,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "gap": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.957666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 42.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 42.333333333333336
+              },
+              "mixed": {
+                "agent": "ppo",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949388888888889,
+                "mean_progress": 1.0,
+                "mean_steps": 50.611111111111114,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.611111111111114
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.932666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 67.33333333333333,
+                "mean_coins": 0.0,
+                "mean_success_steps": 67.33333333333333
+              },
+              "v5_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.958666666666666,
+                "mean_progress": 1.0,
+                "mean_steps": 41.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 41.333333333333336
+              },
+              "v6_mixed": {
+                "agent": "ppo",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.95683333333333,
+                "mean_progress": 1.0,
+                "mean_steps": 43.166666666666664,
+                "mean_coins": 0.0,
+                "mean_success_steps": 43.166666666666664
+              }
+            },
+            "mixed_strata": {
+              "cell/64/170/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/88/180/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "gap_width/170": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/180": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/188": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/88": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/92": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "recovery/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              }
+            }
+          },
+          "stochastic": {
+            "summary": {
+              "agent": "stochastic",
+              "episodes": 192,
+              "success_rate": 1.0,
+              "death_rate": 0.0,
+              "truncation_rate": 0.0,
+              "mean_return": 14.951458333333333,
+              "mean_progress": 1.0,
+              "mean_steps": 48.541666666666664,
+              "mean_coins": 0.0,
+              "mean_success_steps": 48.541666666666664
+            },
+            "gate": {
+              "passed": true,
+              "tasks": {
+                "gap": {
+                  "passed": true,
+                  "layouts": 12,
+                  "qualified_layouts": 12,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 192
+                },
+                "mixed": {
+                  "passed": true,
+                  "layouts": 36,
+                  "qualified_layouts": 36,
+                  "qualified_fraction": 1.0,
+                  "failures": {},
+                  "success_threshold": 0.8,
+                  "max_success_steps": 256
+                }
+              }
+            },
+            "tasks": {
+              "gap": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.957666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 42.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 42.333333333333336
+              },
+              "mixed": {
+                "agent": "stochastic",
+                "episodes": 144,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.949388888888889,
+                "mean_progress": 1.0,
+                "mean_steps": 50.611111111111114,
+                "mean_coins": 0.0,
+                "mean_success_steps": 50.611111111111114
+              }
+            },
+            "mixed_cohorts": {
+              "legacy_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.932666666666668,
+                "mean_progress": 1.0,
+                "mean_steps": 67.33333333333333,
+                "mean_coins": 0.0,
+                "mean_success_steps": 67.33333333333333
+              },
+              "v5_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.958666666666666,
+                "mean_progress": 1.0,
+                "mean_steps": 41.333333333333336,
+                "mean_coins": 0.0,
+                "mean_success_steps": 41.333333333333336
+              },
+              "v6_mixed": {
+                "agent": "stochastic",
+                "episodes": 48,
+                "success_rate": 1.0,
+                "death_rate": 0.0,
+                "truncation_rate": 0.0,
+                "mean_return": 14.95683333333333,
+                "mean_progress": 1.0,
+                "mean_steps": 43.166666666666664,
+                "mean_coins": 0.0,
+                "mean_success_steps": 43.166666666666664
+              }
+            },
+            "mixed_strata": {
+              "cell/64/170/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/64/170/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "cell/88/180/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/88/180/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "cell/92/188/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "gap_width/170": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/180": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "gap_width/188": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/64": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/88": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "height/92": {
+                "episodes": 48,
+                "successes": 48,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 12,
+                "success_rate": 1.0
+              },
+              "recovery/1216": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1276": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1336": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/1396": {
+                "episodes": 12,
+                "successes": 12,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 3,
+                "success_rate": 1.0
+              },
+              "recovery/400": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/420": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/560": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/600": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/760": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              },
+              "recovery/800": {
+                "episodes": 16,
+                "successes": 16,
+                "deaths": 0,
+                "timeouts": 0,
+                "unique_layouts": 4,
+                "success_rate": 1.0
+              }
+            }
+          }
+        }
+      },
+      "status": "completed",
+      "ppo_timesteps": 16384,
+      "source": {
+        "source": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/formal_training_seed_cohort/seed_20261006/model.zip",
+        "source_sha256": "71dc777bccbcc60d9db3c2e8d6a18ee0bb4e3a9c1fab994a5793cb76ec264d8d",
+        "source_timesteps": 32768,
+        "source_signature_hash": "e95b5c320e6cd77c489cb1bd0cb6f5388732063f70af4b6afa5ce8f85899df96",
+        "semantics": "actor and critic weights only; fresh optimizer, RNG, timesteps and curriculum"
+      }
+    }
+  ],
+  "full_episodes": 24,
+  "mixed_regression_episodes": 5328,
+  "method": "Independent mixed lineages, identical training-only full correction and PPO. Seed 20261004 completed before replication; old known map, not blind geometry."
+}

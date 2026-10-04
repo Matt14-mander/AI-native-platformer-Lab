@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "training_seeds": [
+    20261004,
+    20261005,
+    20261006
+  ],
+  "primary_seed": 20261004,
+  "entries": [
+    {
+      "seed": 20261004,
+      "config": "runs/full_collection_v8/config_20261004.json",
+      "config_sha256": "6238524bdbf75b1d9b3f151cfd6226a151eac557c382bf574a72cceedf9a49e4",
+      "source": "runs/full_collection_v7/seed_20261004/model.zip",
+      "source_sha256": "1ddaa88a1349e76cede4a2f043d6abd32d33f64baa03735ed7f34ad5484e4074",
+      "signature_hash": "9e472df16c9a19f9662867b0591ef72170987072d3b4eba35e04b242cb12e111"
+    },
+    {
+      "seed": 20261005,
+      "config": "runs/full_collection_v8/config_20261005.json",
+      "config_sha256": "b91a94b255fc8fe5849f27e79220ff8aaaf00089c3e4b08742e13482706396e0",
+      "source": "runs/full_collection_v7/seed_20261005/model.zip",
+      "source_sha256": "df39daf544c7cc190c765c01b21d91d73dc5db77e415aeed47f74b32c298ad80",
+      "signature_hash": "12b1dda72d91ec2a0a81a08cc3176025b3f9f4fcfe04be720d360c5776d26380"
+    },
+    {
+      "seed": 20261006,
+      "config": "runs/full_collection_v8/config_20261006.json",
+      "config_sha256": "1ad8d7afc3ebce868d0c6d04b642d0aed05846cb62110b7799a08ab8f09833a2",
+      "source": "runs/full_collection_v7/seed_20261006/model.zip",
+      "source_sha256": "fbb6b6ae992e134f41c1626d4fde7ce734aa03855a8e3a6602eebe63e9878b68",
+      "signature_hash": "af2531ac604a8f8f9e3e3ce8d3ef998aa58b6124a65966ccb94b7ead5b54c68b"
+    }
+  ],
+  "manifest": "config/curriculum_v8.json",
+  "manifest_sha256": "be8c495eea3a49b9570226ab6ce81666957065ae22bced9c4b109e782aae5939",
+  "evaluation_seeds": [
+    1000,
+    1001,
+    1002,
+    1003
+  ],
+  "selection": "All seed lineages retained including previously failed v7 models. Final automatic consecutive validation completion checkpoint; no new holdout selection.",
+  "training_change": "Training-only nuisance randomization of PLAYER_X, PROGRESS, COIN_RATIO, REMAINING_TIME, which both teachers ignore; expanded full train orders to all six permutations. No reserved observations/labels used.",
+  "acceptance": "Same .9 success /768 steps /.75 coin ratio new full maps; known level_1 .2. Existing gates unchanged. v7 full and all mixed pools regression. v8 test4+OOD4 are fresh geometries; all seeds must pass both modes.",
+  "fresh_scope": "New full heights/widths and spawn/spacing; test does not hold out order cells because all six now trained. OOD height178/gap200/recovery1040..1200; limited procedural family."
+}

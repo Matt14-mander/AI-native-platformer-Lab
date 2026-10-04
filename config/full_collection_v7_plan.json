@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "training_seeds": [
+    20261004,
+    20261005,
+    20261006
+  ],
+  "primary_seed": 20261004,
+  "entries": [
+    {
+      "seed": 20261004,
+      "config": "runs/full_collection_v7/config_20261004.json",
+      "config_sha256": "bcdf4e06ef161eedcef12b6697f4386f1135a2d3ecc9dc493ff29fd9ea5d2294",
+      "source": "runs/ppo_full_train_correction/model.zip",
+      "source_sha256": "46148fadfaec83d9e5b313be2f4eb737e634108a1a0a73a249e8a3ca2614038d",
+      "signature_hash": "69b9630793cb0aa8d90b7f2686f2355b6a7a63f2132e70fc9ece676fa7207332"
+    },
+    {
+      "seed": 20261005,
+      "config": "runs/full_collection_v7/config_20261005.json",
+      "config_sha256": "fde3b5662b147ed6a59f984b22156a5cb01a18d647342d2bb69a223d5ec9ffd4",
+      "source": "runs/full_seed_cohort/seed_20261005/model.zip",
+      "source_sha256": "de3ccc69d72d9f3ab3d22f6b71749ba0a861f357cdd020f36ba9b71a10d87959",
+      "signature_hash": "3587883448829b974fe5ff2d995a4a5d197d52d26a6c0b44f0428449991d53cb"
+    },
+    {
+      "seed": 20261006,
+      "config": "runs/full_collection_v7/config_20261006.json",
+      "config_sha256": "1744b01ab803c7b2d48ee50770f8a219814a48083bc7f51c14b7e2528ec4cc07",
+      "source": "runs/full_seed_cohort/seed_20261006/model.zip",
+      "source_sha256": "7b3b47fbf2b733d5eb569c8f044af87dd8c110f14e30f3d1606ce4fe744f156d",
+      "signature_hash": "a3b740a7618ea698e548201cac0afa785a672e71509911785a9d529d5b0020e9"
+    }
+  ],
+  "manifest": "config/curriculum_v7.json",
+  "manifest_sha256": "cb7a0adb85a7a94230479931383529d65e9f0931e81faf72ef3b05e58a7f31fc",
+  "evaluation_seeds": [
+    1000,
+    1001,
+    1002,
+    1003
+  ],
+  "policy_modes": [
+    "deterministic",
+    "stochastic"
+  ],
+  "selection": "All three reported; automatic final consecutive full gate checkpoint. No holdout-based checkpoint/seed selection.",
+  "method": "Training-only coin_jump_v1 imitation then PPO, fresh optimizer from each own independent full lineage; same 15 observation features and reward .5/coin.",
+  "acceptance": "Per-layout full success >=.9, steps<=768, coin ratio >=.75 on generated maps; known level_1 ratio>=.2. Prior gates retained. New full test/OOD blind on this frozen cohort first evaluation; old mixed regression.",
+  "test_design": "Unseen reversal of segment order; OOD height176 gap196 and reversal. Limited procedural map family, no unseen enemy/interactive entities claim."
+}

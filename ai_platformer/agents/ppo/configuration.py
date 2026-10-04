@@ -58,10 +58,36 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
     if "imitation" in config:
         imitation = config["imitation"]
         expected = {"rounds", "epochs", "batch_size", "learning_rate", "max_steps_per_episode"}
-        if not isinstance(imitation, dict) or set(imitation) != expected:
+        if (
+            not isinstance(imitation, dict)
+            or set(imitation)
+            - {"teacher", "augment_global_features", "level_repeats", "augmentation_exempt_levels"}
+            != expected
+        ):
             raise ValueError(
                 "imitation requires explicit rounds/epochs/batch_size/learning_rate/max_steps_per_episode"
             )
+        if imitation.get("teacher", "rule_jump_with_release_v1") not in {
+            "rule_jump_with_release_v1",
+            "coin_jump_v1",
+        }:
+            raise ValueError("unsupported imitation teacher")
+        if "augment_global_features" in imitation and not isinstance(
+            imitation["augment_global_features"], bool
+        ):
+            raise ValueError("augment_global_features must be boolean")
+        repeats = imitation.get("level_repeats", {})
+        if not isinstance(repeats, dict) or any(
+            not isinstance(v, int) or isinstance(v, bool) or v <= 0 for v in repeats.values()
+        ):
+            raise ValueError("level_repeats requires positive integer repeat counts")
+        exempt = imitation.get("augmentation_exempt_levels", [])
+        if (
+            not isinstance(exempt, list)
+            or any(not isinstance(v, str) for v in exempt)
+            or len(set(exempt)) != len(exempt)
+        ):
+            raise ValueError("augmentation_exempt_levels must contain distinct level IDs")
         for key in expected - {"learning_rate"}:
             if (
                 not isinstance(imitation[key], int)
@@ -126,9 +152,20 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
             if len(curriculum["stages"]) != 1:
                 raise ValueError("baseline cannot be combined with course stages")
             break  # Resolve saved baseline config using the new additional training budget.
-        train = [factory.level_id] if task == "full" else factory.repository.split(task, "train")
+        generated_full = task == "full" and "full" in factory.repository.manifest["splits"]
+        train = (
+            list(dict.fromkeys([factory.level_id] + factory.repository.split(task, "train")))
+            if generated_full
+            else [factory.level_id]
+            if task == "full"
+            else factory.repository.split(task, "train")
+        )
         validation = (
-            [factory.level_id] if task == "full" else factory.repository.split(task, "validation")
+            [factory.level_id] + factory.repository.split(task, "validation")
+            if generated_full
+            else [factory.level_id]
+            if task == "full"
+            else factory.repository.split(task, "validation")
         )
         threshold = float(spec["success_threshold"])
         budget = spec["max_timesteps"]
@@ -148,6 +185,26 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
             if not isinstance(limit, int) or isinstance(limit, bool) or limit <= 0:
                 raise ValueError("max_success_steps must be a positive integer")
             stages[-1]["max_success_steps"] = limit
+        for key in ("min_coin_ratio", "coin_ratio_thresholds"):
+            if key in spec:
+                values = (
+                    spec[key].values()
+                    if key == "coin_ratio_thresholds" and isinstance(spec[key], dict)
+                    else [spec[key]]
+                )
+                if any(
+                    isinstance(value, bool)
+                    or not isinstance(value, (int, float))
+                    or not isfinite(value)
+                    or not 0 < value <= 1
+                    for value in values
+                ):
+                    raise ValueError("invalid coin ratio threshold")
+                if key == "coin_ratio_thresholds" and (
+                    not isinstance(spec[key], dict) or set(spec[key]) - set(validation)
+                ):
+                    raise ValueError("coin ratio overrides must name validation levels")
+                stages[-1][key] = deepcopy(spec[key])
         if "sampling_weights" in spec:
             weights = spec["sampling_weights"]
             allowed_tasks = {stage["task"] for stage in stages}
@@ -189,6 +246,12 @@ def resolve_training_config(config: dict[str, Any]) -> tuple[dict, EnvironmentFa
     }
     for level in all_ids:
         factory.repository.load(level)
+    imitation = config.get("imitation", {})
+    supervised_ids = set(imitation.get("level_repeats", {})) | set(
+        imitation.get("augmentation_exempt_levels", [])
+    )
+    if supervised_ids - {level for stage in stages for level in stage["train_levels"]}:
+        raise ValueError("imitation weighting/exemption may only name training levels")
     config["curriculum"] = {
         "replay_fraction": fraction,
         "required_evaluations": required,

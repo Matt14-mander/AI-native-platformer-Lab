@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "training_seeds": [
+    20261004,
+    20261005,
+    20261006
+  ],
+  "primary_seed": 20261004,
+  "entries": [
+    {
+      "seed": 20261004,
+      "config": "runs/full_collection_v9/config_20261004.json",
+      "config_sha256": "5bc14c0aa99368eb6ea1f6cbef1606bf95f7852a36d2debd70c0bcbe7cb0dc00",
+      "source": "runs/full_collection_v8/seed_20261004/model.zip",
+      "source_sha256": "bab2f1472da5d5d7d6239be2aba379fe52cc216714b67dcd820a16bc2a80262d",
+      "signature_hash": "b8976712ba6c46354f159d456fb07545cc0aa8f3220667abfd676df92362c55b"
+    },
+    {
+      "seed": 20261005,
+      "config": "runs/full_collection_v9/config_20261005.json",
+      "config_sha256": "b5c9cc1f92fccb1b59d12e63c9403f89f752224fd609693d3a67806f1a1a4e72",
+      "source": "runs/full_collection_v8/seed_20261005/model.zip",
+      "source_sha256": "67a8b0d0ee47f89412a289a48118418f2fb794ef773aacbf9e5cd7a55a00e998",
+      "signature_hash": "71a42d9dec3b454a3d3133716442563ef407c5dcb7ca038b1ffe5fe1ba433cc6"
+    },
+    {
+      "seed": 20261006,
+      "config": "runs/full_collection_v9/config_20261006.json",
+      "config_sha256": "d253ce245a987fe8e30503abd186bad477aef0760c789e22ebdecf163196ad84",
+      "source": "runs/full_collection_v8/seed_20261006/model.zip",
+      "source_sha256": "4797bbaff981825cba0ea3b8bcf7a21526918d9063f5c0f3828f0df9fffb333e",
+      "signature_hash": "190177fbfff2c063b12e96e5b7510c6ed15f7612e339d44575dfe57cc122b7b9"
+    }
+  ],
+  "manifest": "config/curriculum_v9.json",
+  "manifest_sha256": "0799affd89255ebfde3736a6f38f12088a6f470d5216b68bfda5e594a1f06208",
+  "evaluation_seeds": [
+    1000,
+    1001,
+    1002,
+    1003
+  ],
+  "selection": "Final automatic consecutive full validation checkpoint. All three failed v8 source lineages retained, no seed selection.",
+  "training_change": "Known main training map repeated8 and exempt from global feature augmentation; 100 epochs per4 rounds. Generated train maps retain global augmentation. Explicit main-area content filters unreachable other-area coins; legacy level_1 unchanged.",
+  "acceptance": "Known playable main must collect all5 (same absolute target as earlier5/25); generated maps >=.75 coin ratio, >=.9 success and <=768 steps. Prior course gates unchanged. Both modes, all seeds, each layout.",
+  "fresh_scope": "v9 test4/OOD4 new geometry; old v7/v8 full and mixed reserved pools now regression. OOD positions/spacing fresh but physical extremes already exposed; no new max extrapolation claim."
+}

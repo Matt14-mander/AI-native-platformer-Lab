@@ -42,7 +42,7 @@ def main() -> None:
         parser.error("test seeds overlap training or validation")
     levels = (
         [factory.level_id]
-        if args.task == "full"
+        if args.task == "full" and "full" not in factory.repository.manifest["splits"]
         else factory.repository.split(args.task, args.suite)
     )
     model = PPO.load(path, device="cpu")
@@ -50,8 +50,8 @@ def main() -> None:
         "model": str(path.resolve()),
         "task": args.task,
         "suite": args.suite,
-        "note": "full level is a transfer/regression task, not unseen geometry"
-        if args.task == "full"
+        "note": "Legacy level_1 is known geometry; generated full test/OOD are holdouts only on first use"
+        if args.task == "full" and "full" not in factory.repository.manifest["splits"]
         else None,
         "protocol": factory.protocol(levels),
         "evaluation": evaluate_policy(

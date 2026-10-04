@@ -4,6 +4,15 @@
 SB3 加载 `model.zip` 与同名 `model.json`；TinyInfer 加载导出的 `actor.onnx`、同名 `actor.json` 与桥接动态库。
 两种路径都检查模型哈希、环境协议和关卡内容，随后恢复训练时的环境配置。
 
+当前推荐 SB3 模型为 `runs/full_collection_v9/seed_20261004/model.zip`，须保留同名 sidecar。主区域已修正不可达松果分母，播放时 HUD 与 JSON 都显示收集数：
+
+```bash
+.venv/bin/python -m scripts.play_ppo \
+  --model runs/full_collection_v9/seed_20261004/model.zip --level-id level_1_main
+```
+
+新模型的 `--task full --suite validation` 播放 manifest 中的生成完整地图，按 N 切换。没有 full split 的旧模型仍播放原完整关卡。完整训练/验收见 [v9 报告](FULL_MULTISEED_COLLECTION_V9.md)。新 checkpoint 尚未重测 TinyInfer，使用 TinyInfer 前须重新导出该模型并运行数值验证。以下保留旧 checkpoint 的使用示例。
+
 从项目根目录运行（先安装 `pip install -e '.[training]'`；本机已有 `.venv` 可直接使用）：
 
 ```bash
@@ -26,7 +35,7 @@ SB3 加载 `model.zip` 与同名 `model.json`；TinyInfer 加载导出的 `actor
 | [ / ] | 减速 / 加速（0.1–8 倍） |
 | Esc / 关闭窗口 | 退出 |
 
-HUD 显示后端、策略模式、速度、动作、进度、回报和单次 `predict()` 耗时。
+HUD 显示后端、策略模式、速度、动作、进度、松果数、回报和单次 `predict()` 耗时。
 默认 deterministic；SB3 可用 `--sampled` 启用动作采样。TinyInfer 暂只支持 deterministic，指定 `--sampled` 会报错。
 `--seed` 控制环境与采样随机数；SB3 默认取 checkpoint 的第一个 validation seed，TinyInfer 默认取部署验证 seed。
 `--level-id LEVEL_ID` 指定单个布局，覆盖 task/suite 选择；`--suite train` 或 `ood` 可查看对应课程分组。

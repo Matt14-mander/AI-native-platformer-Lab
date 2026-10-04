@@ -1,6 +1,6 @@
 # 正式多训练 seed 验收与完整关卡
 
-日期：2026-10-04。
+日期：2026-10-04。后续完整关卡三 seed、收集与多地图开发已完成，见 [最新 v9 报告](FULL_MULTISEED_COLLECTION_V9.md)；以下是首次 formal mixed / 单 seed full 的历史记录。
 
 ## 正式 mixed 验收：通过
 

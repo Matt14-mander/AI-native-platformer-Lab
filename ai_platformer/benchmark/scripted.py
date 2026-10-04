@@ -23,6 +23,7 @@ class EpisodeResult:
     coins_collected: int
     outcome: str
     level_id: str = "level_1"
+    coins_total: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,6 +35,11 @@ class BenchmarkResult:
         count = len(self.episodes)
         outcomes = Counter(episode.outcome for episode in self.episodes)
         successes = [item.steps for item in self.episodes if item.outcome == "success"]
+        coin_ratios = [
+            item.coins_collected / item.coins_total
+            for item in self.episodes
+            if item.coins_total > 0
+        ]
         return {
             "agent": self.agent,
             "episodes": count,
@@ -43,6 +49,7 @@ class BenchmarkResult:
             "mean_return": sum(item.episode_return for item in self.episodes) / count,
             "mean_progress": sum(item.progress for item in self.episodes) / count,
             "mean_steps": sum(item.steps for item in self.episodes) / count,
+            "mean_coin_ratio": sum(coin_ratios) / len(coin_ratios) if coin_ratios else None,
             "mean_coins": sum(item.coins_collected for item in self.episodes) / count,
             "mean_success_steps": sum(successes) / len(successes) if successes else None,
         }
@@ -141,6 +148,7 @@ def evaluate_agent(
                         core_ticks=int(info["tick"]),
                         progress=float(info["progress"]),
                         coins_collected=int(info["coins_collected"]),
+                        coins_total=int(info["coins_total"]),
                         outcome=outcome,
                         level_id=level_id,
                     )

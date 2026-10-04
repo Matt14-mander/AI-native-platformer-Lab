@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 
+from ai_platformer.content.full_courses import make_full_course
 from ai_platformer.content.legacy import LegacyLevelRepository
 from ai_platformer.core.level import LevelDefinition, SolidRect
 
@@ -22,6 +23,12 @@ def content_hash(level: LevelDefinition) -> str:
 
 def make_course(level_id: str, spec: dict) -> LevelDefinition:
     kind = spec["task"]
+    if kind == "full":
+        if "main_area_source" in spec:
+            source = LegacyLevelRepository().load(spec["main_area_source"])
+            coins = tuple(coin for coin in source.collectibles if 0 <= coin.x < source.goal_x)
+            return replace(source, level_id=level_id, collectibles=coins)
+        return make_full_course(level_id, spec)
     if kind not in {"flat", "obstacle", "gap", "mixed"}:
         raise ValueError(f"unknown course task: {kind}")
     width = float(spec["width"])
