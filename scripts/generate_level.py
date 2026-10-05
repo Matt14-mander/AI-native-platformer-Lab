@@ -20,6 +20,43 @@ def write(path, value):
     )
 
 
+def populate_package(result, folder, *, verify_route=False, max_seconds=15.0, max_expansions=25000):
+    write(folder / "request.json", result.request.model_dump())
+    write(folder / "level.json", result.level.model_dump())
+    report = dict(result.report)
+    if verify_route:
+        from ai_platformer.content.routes import search_route
+        from ai_platformer.envs.factory import EnvironmentFactory
+
+        factory = EnvironmentFactory(
+            {
+                "environment_id": "PlatformerState-v2",
+                "level_spec": str(folder / "level.json"),
+                "physics": asdict(result.physics),
+                "action_repeat": 4,
+                "episode_step_limit": 768,
+            }
+        )
+        route = search_route(
+            factory,
+            seed=100,
+            max_seconds=max_seconds,
+            max_expansions=max_expansions,
+            min_coin_ratio=result.request.min_coin_ratio,
+        )
+        write(folder / "route.json", route)
+        report["status"] = route["status"]
+        report["note"] = (
+            "Only verified means a collection-target route was independently replayed. No training split assignment."
+        )
+        report["route"] = {
+            "file": "route.json",
+            "status": route["status"],
+            "reason": route["reason"],
+        }
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--request", type=Path, required=True)
@@ -37,39 +74,13 @@ def main():
             folder.mkdir()
             try:
                 result = generate_level(load_generation_request(args.request))
-                write(folder / "request.json", result.request.model_dump())
-                write(folder / "level.json", result.level.model_dump())
-                report = dict(result.report)
-                if args.verify_route:
-                    from ai_platformer.content.routes import search_route
-                    from ai_platformer.envs.factory import EnvironmentFactory
-
-                    factory = EnvironmentFactory(
-                        {
-                            "environment_id": "PlatformerState-v2",
-                            "level_spec": str(folder / "level.json"),
-                            "physics": asdict(result.physics),
-                            "action_repeat": 4,
-                            "episode_step_limit": 768,
-                        }
-                    )
-                    route = search_route(
-                        factory,
-                        seed=100,
-                        max_seconds=args.max_seconds,
-                        max_expansions=args.max_expansions,
-                        min_coin_ratio=result.request.min_coin_ratio,
-                    )
-                    write(folder / "route.json", route)
-                    report["status"] = route["status"]
-                    report["note"] = (
-                        "Only verified means a collection-target route was independently replayed. No training split assignment."
-                    )
-                    report["route"] = {
-                        "file": "route.json",
-                        "status": route["status"],
-                        "reason": route["reason"],
-                    }
+                report = populate_package(
+                    result,
+                    folder,
+                    verify_route=args.verify_route,
+                    max_seconds=args.max_seconds,
+                    max_expansions=args.max_expansions,
+                )
             except ValidationError as error:
                 report = {
                     "schema_version": 1,

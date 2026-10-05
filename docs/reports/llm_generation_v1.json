@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "stage": "llm_generation_v1",
+  "provider": "gemini",
+  "prompt_version": "generation-intent-v1",
+  "output_schema_sha256": "2d57a1fd9df4b03f3a8d6d2ca8acab58b73ed4d42ac7ec70cea5e8fb448d2d83",
+  "live_api": {
+    "verified": false,
+    "reason": "GEMINI_API_KEY and GOOGLE_API_KEY absent"
+  },
+  "offline": {
+    "provider": "fixture",
+    "package": "runs/llm_v1/mixed",
+    "seed": 20261005,
+    "level_id": "pcg_mixed_v1",
+    "status": "verified",
+    "steps": 206,
+    "ticks": 823,
+    "coins_collected": 16,
+    "coins_total": 20,
+    "collection_ratio": 0.8,
+    "min_coin_ratio": 0.75,
+    "independent_replay": true
+  },
+  "checks": {
+    "transport": "mocked official REST URL/header/body, bounded response, redirects disabled",
+    "requests": "strict schema, seed/ID pinning, invalid retry, unsupported refusal",
+    "cache": "validated requests only, identity/hash rechecked, corrupt cache rejection",
+    "pipeline": "atomic publish, no overwrite, cache hit exact level bytes, fresh route replay"
+  },
+  "limitations": [
+    "No live model semantics, API compatibility, cost or latency measurements yet.",
+    "Only existing static segments-v1 generation family; candidates not assigned to training splits."
+  ],
+  "tests": {
+    "passed": 171,
+    "subtests_passed": 8,
+    "warnings": 2,
+    "warnings_reason": "existing Gymnasium v0/v1 deprecation",
+    "ruff": "changed Python files passed",
+    "diff_check": "passed"
+  }
+}
