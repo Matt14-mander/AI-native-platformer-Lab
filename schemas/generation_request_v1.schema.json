@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "GapRange": {
+      "additionalProperties": false,
+      "properties": {
+        "minimum": {
+          "default": 96,
+          "maximum": 176,
+          "minimum": 64,
+          "title": "Minimum",
+          "type": "integer"
+        },
+        "maximum": {
+          "default": 152,
+          "maximum": 176,
+          "minimum": 64,
+          "title": "Maximum",
+          "type": "integer"
+        }
+      },
+      "title": "GapRange",
+      "type": "object"
+    },
+    "HeightRange": {
+      "additionalProperties": false,
+      "properties": {
+        "minimum": {
+          "default": 48,
+          "maximum": 160,
+          "minimum": 16,
+          "title": "Minimum",
+          "type": "integer"
+        },
+        "maximum": {
+          "default": 96,
+          "maximum": 160,
+          "minimum": 16,
+          "title": "Maximum",
+          "type": "integer"
+        }
+      },
+      "title": "HeightRange",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "generator_version": {
+      "const": "segments-v1",
+      "default": "segments-v1",
+      "title": "Generator Version",
+      "type": "string"
+    },
+    "physics_profile": {
+      "const": "gameplay-ai-v2",
+      "default": "gameplay-ai-v2",
+      "title": "Physics Profile",
+      "type": "string"
+    },
+    "level_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Level Id",
+      "type": "string"
+    },
+    "seed": {
+      "maximum": 4294967295,
+      "minimum": 0,
+      "title": "Seed",
+      "type": "integer"
+    },
+    "obstacle_count": {
+      "default": 3,
+      "maximum": 8,
+      "minimum": 0,
+      "title": "Obstacle Count",
+      "type": "integer"
+    },
+    "gap_count": {
+      "default": 2,
+      "maximum": 8,
+      "minimum": 0,
+      "title": "Gap Count",
+      "type": "integer"
+    },
+    "obstacle_height": {
+      "$ref": "#/$defs/HeightRange"
+    },
+    "gap_width": {
+      "$ref": "#/$defs/GapRange"
+    },
+    "coin_layout": {
+      "default": "low_jump",
+      "enum": [
+        "none",
+        "ground",
+        "low_jump"
+      ],
+      "title": "Coin Layout",
+      "type": "string"
+    },
+    "min_coin_ratio": {
+      "default": 0.75,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Min Coin Ratio",
+      "type": "number"
+    },
+    "theme": {
+      "const": "lake",
+      "default": "lake",
+      "title": "Theme",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "level_id",
+    "seed"
+  ],
+  "title": "GenerationRequest",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

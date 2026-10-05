@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "generator_version": "segments-v1",
+  "scope": "GenerationRequest, deterministic static PCG and optional route verification. No LLM API calls, PPO training or changes to frozen v9 curriculum.",
+  "tests": {
+    "full": "155 passed, 8 subtests passed; 2 legacy Gym warnings",
+    "ruff": "changed Python files passed",
+    "boundary_seed_count": 32
+  },
+  "examples": {
+    "mixed": {
+      "request_sha256": "1275a51dec625a194dca471618fecaa2b465f560d1bb563fbb250738fde68aea",
+      "document_sha256": "d0e6302a194088d920eaa7fa64803c97abc9c37f9be4cd6bab13721d2c4a50f2",
+      "geometry_sha256": "37f7bfa101d08f9d70803c065babbf430a715ac9c6dc5a18af0264720f419473",
+      "counts": {
+        "obstacles": 3,
+        "gaps": 2,
+        "coins": 20
+      },
+      "physics": {
+        "player_width": 24.0,
+        "player_height": 32.0,
+        "walk_acceleration": 0.3,
+        "run_acceleration": 0.5,
+        "turn_acceleration": 0.7,
+        "max_walk_speed": 6.0,
+        "max_run_speed": 10.0,
+        "jump_velocity": -13.8,
+        "rising_gravity": 0.5,
+        "falling_gravity": 1.8,
+        "max_fall_speed": 11.0,
+        "max_episode_steps": 36000
+      },
+      "status": "verified",
+      "method": "CoinJumpAgent",
+      "objective": {
+        "min_coin_ratio": 0.75
+      },
+      "route": {
+        "protocol_sha256": "1e13c2c7827c16d1bebd7a2bfc6b230f1085750ab39be9544ef28b1605407a19",
+        "trace_sha256": "91fc22fbaa1c8d57fad6abe6551350d96b4ed6acbd249d81a44490048d76e13d",
+        "steps": 206,
+        "ticks": 823,
+        "coins_collected": 16,
+        "coins_total": 20,
+        "outcome": "success"
+      },
+      "artifacts": "runs/pcg_v1/mixed_final",
+      "route_artifact_sha256": "1748a153ca89ba7b66aaf637acb496a43f2b0b579202037fcd4dfc7a9b974556"
+    },
+    "flat": {
+      "request_sha256": "aebffd6afd0be08325842bdddb5d53fe3996b85d183939aee8d6c452bfe5b6a7",
+      "document_sha256": "90a8aa3a83d75bfec4b75c96be41206e873f0eb2a1133bb326f8aa4c73dd9cbf",
+      "geometry_sha256": "3c43b965b6ab270110b8360a1ffd447fbc3d066649d5d502dd83fcfe4a26a068",
+      "counts": {
+        "obstacles": 0,
+        "gaps": 0,
+        "coins": 4
+      },
+      "physics": {
+        "player_width": 24.0,
+        "player_height": 32.0,
+        "walk_acceleration": 0.3,
+        "run_acceleration": 0.5,
+        "turn_acceleration": 0.7,
+        "max_walk_speed": 6.0,
+        "max_run_speed": 10.0,
+        "jump_velocity": -13.8,
+        "rising_gravity": 0.5,
+        "falling_gravity": 1.8,
+        "max_fall_speed": 11.0,
+        "max_episode_steps": 36000
+      },
+      "status": "verified",
+      "method": "MoveRightAgent",
+      "objective": {
+        "min_coin_ratio": 1.0
+      },
+      "route": {
+        "protocol_sha256": "6edde046a6e3bd1c62259624b9dcebb2a5d891ac17372441ef6589d2e3c0555b",
+        "trace_sha256": "16897a773b84b9815b491cc139b41fc41aa8667f6ebee8892f8c2e9c1764c749",
+        "steps": 40,
+        "ticks": 158,
+        "coins_collected": 4,
+        "coins_total": 4,
+        "outcome": "success"
+      },
+      "artifacts": "runs/pcg_v1/flat",
+      "route_artifact_sha256": "ce7bceaf71e13212e4e593648cc490cfb6e2b8e90e56e7840d5d0c70e7ffa2db"
+    }
+  },
+  "mixed_playback": {
+    "outcome": "success",
+    "steps": 206,
+    "ticks": 823,
+    "coins_collected": 16,
+    "coins_total": 20,
+    "source_package": "runs/pcg_v1/mixed",
+    "screenshot": "runs/pcg_v1/mixed_replay.png",
+    "note": "Same deterministic request/map as mixed_final; actual replay hashes checked in playback."
+  }
+}

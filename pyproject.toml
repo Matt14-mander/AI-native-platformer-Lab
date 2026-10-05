@@ -31,6 +31,7 @@ platformer-export-level = "scripts.export_level_spec:main"
 platformer-play-level = "scripts.play_level_spec:main"
 platformer-search-route = "scripts.search_level_route:main"
 platformer-replay-route = "scripts.replay_level_route:main"
+platformer-generate-level = "scripts.generate_level:main"
 
 [project.optional-dependencies]
 content = [

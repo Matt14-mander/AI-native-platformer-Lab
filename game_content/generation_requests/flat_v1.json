@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "generator_version": "segments-v1",
+  "physics_profile": "gameplay-ai-v2",
+  "level_id": "pcg_flat_v1",
+  "seed": 42,
+  "obstacle_count": 0,
+  "gap_count": 0,
+  "obstacle_height": {
+    "minimum": 48,
+    "maximum": 96
+  },
+  "gap_width": {
+    "minimum": 96,
+    "maximum": 152
+  },
+  "coin_layout": "ground",
+  "min_coin_ratio": 1.0,
+  "theme": "lake"
+}
