@@ -72,3 +72,36 @@ def test_llm_failure_preserves_report_without_geometry(tmp_path):
     assert result.returncode == 1
     assert not (output / "level.json").exists()
     assert json.loads((output / "report.json").read_text())["status"] == "error"
+
+
+def test_missing_model_cli_prints_reason_and_preserves_failure_package(tmp_path):
+    import os
+
+    environment = dict(os.environ)
+    environment.pop("GEMINI_MODEL", None)
+    output = tmp_path / "missing-model"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "scripts.generate_level_llm",
+            "--prompt",
+            "test",
+            "--level-id",
+            "test",
+            "--seed",
+            "1",
+            "--output-dir",
+            str(output),
+        ],
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 1
+    assert "set --model or GEMINI_MODEL" in result.stdout
+    assert json.loads((output / "report.json").read_text())["reason"] == (
+        "set --model or GEMINI_MODEL to a Gemini model ID"
+    )
+    assert not (output / "level.json").exists()

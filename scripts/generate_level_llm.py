@@ -27,6 +27,7 @@ def main():
     parser.add_argument("--verify-route", action="store_true")
     parser.add_argument("--max-attempts", type=int, default=3)
     parser.add_argument("--timeout", type=float, default=30)
+    parser.add_argument("--tls-mode", choices=("default", "tls12"), default="default")
     parser.add_argument("--max-seconds", type=float, default=15)
     parser.add_argument("--max-expansions", type=int, default=25000)
     args = parser.parse_args()
@@ -46,6 +47,7 @@ def main():
                     "model": args.model,
                     "level_id": args.level_id,
                     "seed": args.seed,
+                    "tls_mode": args.tls_mode,
                 },
             )
             try:
@@ -59,6 +61,7 @@ def main():
                     cache_dir=args.cache_dir,
                     max_attempts=args.max_attempts,
                     timeout=args.timeout,
+                    tls_mode=args.tls_mode,
                 )
                 write(folder / "llm.json", record)
                 report = populate_package(
@@ -96,6 +99,29 @@ def main():
         parser.exit(2, "cannot publish candidate package\n")
     print(f"generation={report['status']}; package={args.output_dir}")
     if report["status"] not in {"candidate", "verified"}:
+        if report.get("reason"):
+            print(f"reason={report['reason']}")
+        log = args.output_dir / "llm.json"
+        if log.exists():
+            import json
+
+            for attempt in json.loads(log.read_text(encoding="utf-8")).get("attempts", []):
+                if not attempt.get("error"):
+                    continue
+                details = {
+                    key: attempt[key]
+                    for key in (
+                        "error",
+                        "http_status",
+                        "provider_status",
+                        "provider_message",
+                        "connection_category",
+                        "exception_type",
+                        "timeout_seconds",
+                    )
+                    if key in attempt
+                }
+                print(f"attempt={attempt['attempt']}; {json.dumps(details, ensure_ascii=False)}")
         parser.exit(1)
 
 

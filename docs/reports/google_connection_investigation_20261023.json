@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "status": "workaround_validated_single_live_candidate",
+  "date": "2026-10-23",
+  "confirmed": {
+    "tag_app": {
+      "bundle_id": "com.tag.lab",
+      "version": "1.0.18"
+    },
+    "agent_has_api_key": false,
+    "outside_sandbox_unauthenticated_tls": {
+      "passed": true,
+      "version": "TLSv1.3",
+      "seconds": 2.25
+    },
+    "outside_sandbox_curl_ipv4_http1_root": {
+      "exit_code": 0,
+      "http_status": 404
+    },
+    "proxy_listener_inventory": "No matching TAG listener observed; does not imply TUN failure"
+  },
+  "historical_attempts": {
+    "live_001": {
+      "reason": "request translation failed after bounded attempts",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "provider HTTP 503"
+        }
+      ]
+    },
+    "live_002": {
+      "reason": "request translation failed after bounded attempts",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "provider connection failed"
+        },
+        {
+          "attempt": 2,
+          "error": "provider connection failed"
+        },
+        {
+          "attempt": 3,
+          "error": "provider HTTP 503"
+        }
+      ]
+    },
+    "live_003": {
+      "reason": "invalid configuration, input, or pipeline failure"
+    },
+    "live_004": {
+      "reason": "request translation failed after bounded attempts",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "provider connection failed"
+        },
+        {
+          "attempt": 2,
+          "error": "provider HTTP 503"
+        },
+        {
+          "attempt": 3,
+          "error": "provider HTTP 503"
+        }
+      ]
+    },
+    "live_005": {
+      "reason": "request translation failed after bounded attempts",
+      "attempts": [
+        {
+          "attempt": 1,
+          "error": "provider connection failed",
+          "connection_category": "timeout",
+          "exception_type": "TimeoutError",
+          "timeout_seconds": 60.0
+        }
+      ]
+    }
+  },
+  "root_cause": "not_yet_determined",
+  "next_step": "Run scripts.diagnose_llm_connection in user terminal with configured API key; compare target and comparison model",
+  "validation": {
+    "llm_and_diagnostic_tests_passed": 27,
+    "ruff": "passed",
+    "diff_check": "passed"
+  },
+  "followup": {
+    "http_without_credentials": {
+      "socket_tls13_no_alpn": 403,
+      "socket_tls13_http1_alpn": 403,
+      "socket_tls12": 403,
+      "urllib_explicit_context": 403,
+      "urllib_default_context": 403,
+      "urllib_pha_enabled": 403,
+      "urllib_pha_disabled": 403
+    },
+    "user_terminal_report": "direct_tls succeeded but authenticated listing and both generation models returned SSLEOFError",
+    "interpretation": "Agent did not reproduce EOF in these unauthenticated probes; exact failure stage and root cause remain undetermined.",
+    "new_option": "--tls-mode tls12 on both diagnostic and generation CLIs; certificate and hostname verification retained",
+    "validation": {
+      "related_tests_passed": 30
+    },
+    "next_step": "Compare tls12 diagnostic with default on same user terminal and TAG node; only then test full structured generation."
+  },
+  "resolution": {
+    "model": "gemini-3.5-flash-lite",
+    "tls_mode": "tls12",
+    "candidate": "runs/llm/live_006",
+    "status": "verified",
+    "fresh_replay_passed": true,
+    "collection_ratio": 0.85,
+    "root_cause": "Still undetermined; not proof that TLS 1.3 or TAG itself is faulty."
+  }
+}

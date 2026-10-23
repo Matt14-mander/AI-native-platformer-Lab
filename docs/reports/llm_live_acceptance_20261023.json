@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "status": "verified",
+  "package": "runs/llm/live_006",
+  "model": "gemini-3.5-flash-lite",
+  "provider": "gemini",
+  "tls_mode": "tls12",
+  "cache_hit": false,
+  "attempt_count": 1,
+  "request": {
+    "schema_version": 1,
+    "generator_version": "segments-v1",
+    "physics_profile": "gameplay-ai-v2",
+    "level_id": "llm_test_001",
+    "seed": 20261010,
+    "obstacle_count": 3,
+    "gap_count": 2,
+    "obstacle_height": {
+      "minimum": 48,
+      "maximum": 96
+    },
+    "gap_width": {
+      "minimum": 96,
+      "maximum": 152
+    },
+    "coin_layout": "low_jump",
+    "min_coin_ratio": 0.75,
+    "theme": "lake"
+  },
+  "request_sha256": "7bae5762d7b9f71b8cdcff2641ca563841a240dec67c183f5fd5650c2054d93a",
+  "outcome": {
+    "steps": 211,
+    "ticks": 841,
+    "coins_collected": 17,
+    "coins_total": 20,
+    "min_coin_ratio": 0.75,
+    "trace_sha256": "aae6d00652e5ec571c08b966c49c03ce144750a883a77e7d10ab2c135734d22c"
+  },
+  "collection_ratio": 0.85,
+  "fresh_replay_passed": true,
+  "artifact_sha256": {
+    "request.json": "ca17ae2a7bd5de2feee9ca31221e55ede47ccf526060ed3a69db6318db14f74a",
+    "level.json": "db46226935e483d492b92f9b50464b9ddb3c3485fd8b0d0d0cad64179c18e15c",
+    "route.json": "b6f91dedabbc14adec337eafcc1482302f40fa8d1988cefb0387df6206dd59b1",
+    "report.json": "fb75b4d8c8050722edd30f37e3d2ad0434415fc5aaa5e782ada78e1ab5841ca6",
+    "llm.json": "8ca5258030d41d05bf5412c99ab67bca49dd890f2d422ee9d9caa6778a049f3b",
+    "intent.json": "c04ae4c1796a8a4ae3163971ae2276df50dee90421d1482acbb4deb49405e537"
+  },
+  "scope": "One real API intent-to-request-to-PCG candidate with independent route replay; no provider ranking or reliability benchmark.",
+  "connection_notes": "TLS 1.2 plus gemini-3.5-flash-lite succeeded on this run; exact cause of prior TLS EOF and gemini-3.8-flash timeout is not established."
+}

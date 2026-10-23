@@ -181,3 +181,92 @@ def test_corrupted_cache_is_rejected(tmp_path):
 def test_malformed_provider_envelope_is_bounded():
     with pytest.raises(GenerationError, match="bounded attempts"):
         call(transport=lambda *a, **k: [], max_attempts=1)
+
+
+def test_http_details_redact_credentials_and_preserve_provider_reason(monkeypatch):
+    import io
+
+    monkeypatch.setenv("GEMINI_API_KEY", "configured-secret")
+    monkeypatch.setenv("GOOGLE_API_KEY", "second-secret")
+    body = json.dumps(
+        {
+            "error": {
+                "status": "UNAVAILABLE",
+                "message": "Model overloaded configured-secret second-secret key=other-secret Bearer token-value",
+            }
+        }
+    ).encode()
+
+    def transport(*args, **kwargs):
+        raise urllib.error.HTTPError("https://secret", 503, "ignored", None, io.BytesIO(body))
+
+    with pytest.raises(GenerationError) as exc:
+        call(transport=transport, max_attempts=1)
+    attempt = exc.value.attempts[0]
+    assert attempt["http_status"] == 503
+    assert attempt["provider_status"] == "UNAVAILABLE"
+    assert "Model overloaded" in attempt["provider_message"]
+    assert "[REDACTED]" in attempt["provider_message"]
+    for secret in ("configured-secret", "second-secret", "other-secret", "token-value"):
+        assert secret not in json.dumps(attempt)
+
+
+@pytest.mark.parametrize("body", [b"<html>SECRET</html>", b"x" * 16385, b'{"error": []}'])
+def test_non_json_or_oversized_http_body_is_not_logged(body):
+    import io
+
+    def transport(*args, **kwargs):
+        raise urllib.error.HTTPError("https://secret", 503, "SECRET", None, io.BytesIO(body))
+
+    with pytest.raises(GenerationError) as exc:
+        call(transport=transport, max_attempts=1)
+    assert "provider_message" not in exc.value.attempts[0]
+    assert "SECRET" not in json.dumps(exc.value.attempts)
+
+
+def test_tls_timeout_is_distinguished_from_http_failure():
+    def transport(*args, **kwargs):
+        raise urllib.error.URLError(TimeoutError("The handshake operation timed out"))
+
+    with pytest.raises(GenerationError) as exc:
+        call(transport=transport, max_attempts=1)
+    attempt = exc.value.attempts[0]
+    assert attempt["connection_category"] == "tls_handshake_timeout"
+    assert attempt["exception_type"] == "TimeoutError"
+    assert attempt["timeout_seconds"] == 30
+
+
+def test_missing_model_reports_actionable_configuration_error(monkeypatch):
+    monkeypatch.delenv("GEMINI_MODEL", raising=False)
+    with pytest.raises(GenerationError, match="set --model or GEMINI_MODEL"):
+        translate_intent("test", level_id="test", seed=1)
+
+
+def test_tls12_context_retains_certificate_and_hostname_checks():
+    import ssl
+
+    from ai_platformer.agents.llm.generation import https_handlers
+
+    handlers = https_handlers("tls12")
+    context = handlers[1]._context
+    assert context.minimum_version == ssl.TLSVersion.TLSv1_2
+    assert context.maximum_version == ssl.TLSVersion.TLSv1_2
+    assert context.verify_mode == ssl.CERT_REQUIRED
+    assert context.check_hostname
+    with pytest.raises(ValueError):
+        https_handlers("insecure")
+
+
+def test_tls12_transport_option_and_separate_cache(tmp_path):
+    seen = []
+
+    def transport(payload, **options):
+        seen.append(options)
+        return response(read_json(FIXTURE))
+
+    call(transport=transport, cache_dir=tmp_path)
+    _, record = call(transport=transport, cache_dir=tmp_path, tls_mode="tls12")
+    assert len(seen) == 2
+    assert seen[-1]["tls_mode"] == "tls12"
+    assert record["identity"]["tls_mode"] == "tls12"
+    assert call(transport=transport, cache_dir=tmp_path, tls_mode="tls12")[1]["cache_hit"]

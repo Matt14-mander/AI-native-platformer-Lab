@@ -7,6 +7,8 @@ import json
 import math
 import os
 import re
+import socket
+import ssl
 import tempfile
 import time
 import urllib.error
@@ -30,6 +32,60 @@ minimum collection ratio .75. If requirements cannot be expressed, set unsupport
 with a concise explanation and request null. Otherwise set unsupported null and
 request to the design. Never emit code or instructions to execute."""
 MAX_BYTES = 1_000_000
+
+
+def safe_provider_text(value):
+    """Retain a bounded diagnostic, never configured credentials or query keys."""
+    if not isinstance(value, str):
+        return None
+    for name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):
+        secret = os.environ.get(name)
+        if secret:
+            value = value.replace(secret, "[REDACTED]")
+    value = re.sub(r"AIza[A-Za-z0-9_-]+", "[REDACTED]", value)
+    value = re.sub(
+        r"(?i)((?:x-goog-api-key|api[_-]?key|key)\s*[=:]\s*)[^\s&\"'<>]+",
+        r"\1[REDACTED]",
+        value,
+    )
+    value = re.sub(r"(?i)(Bearer\s+)\S+", r"\1[REDACTED]", value)
+    return " ".join(value.split())[:1000]
+
+
+def http_error_details(error):
+    """Read only the Google JSON error envelope; discard headers and HTML bodies."""
+    try:
+        raw = error.read(16385)
+        if len(raw) > 16384:
+            return {}
+        document = parse_level_json(raw)
+        details = document.get("error", {}) if isinstance(document, dict) else {}
+        if not isinstance(details, dict):
+            return {}
+        result = {}
+        for source, target in (("status", "provider_status"), ("message", "provider_message")):
+            text = safe_provider_text(details.get(source))
+            if text:
+                result[target] = text
+        return result
+    except (OSError, ValueError, TypeError, RecursionError):
+        return {}
+    finally:
+        error.close()
+
+
+def connection_error_details(error):
+    reason = error.reason if isinstance(error, urllib.error.URLError) else error
+    category = "connection"
+    if isinstance(reason, TimeoutError):
+        category = "tls_handshake_timeout" if "handshake" in str(reason).lower() else "timeout"
+    elif isinstance(reason, socket.gaierror):
+        category = "dns"
+    elif isinstance(reason, ssl.SSLCertVerificationError):
+        category = "tls_certificate"
+    elif isinstance(reason, ssl.SSLError):
+        category = "tls"
+    return {"connection_category": category, "exception_type": type(reason).__name__}
 
 
 class GenerationError(RuntimeError):
@@ -104,7 +160,19 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
-def gemini_call(payload, *, model, timeout):
+def https_handlers(tls_mode="default"):
+    if tls_mode == "default":
+        return [NoRedirect()]
+    if tls_mode != "tls12":
+        raise ValueError("tls_mode must be default or tls12")
+    context = ssl.create_default_context()
+    context.minimum_version = ssl.TLSVersion.TLSv1_2
+    context.maximum_version = ssl.TLSVersion.TLSv1_2
+    context.set_alpn_protocols(["http/1.1"])
+    return [NoRedirect(), urllib.request.HTTPSHandler(context=context)]
+
+
+def gemini_call(payload, *, model, timeout, tls_mode="default"):
     key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not key:
         raise GenerationError("GEMINI_API_KEY or GOOGLE_API_KEY is required")
@@ -114,7 +182,9 @@ def gemini_call(payload, *, model, timeout):
         method="POST",
         headers={"Content-Type": "application/json", "x-goog-api-key": key},
     )
-    with urllib.request.build_opener(NoRedirect()).open(request, timeout=timeout) as response:
+    with urllib.request.build_opener(*https_handlers(tls_mode)).open(
+        request, timeout=timeout
+    ) as response:
         raw = response.read(MAX_BYTES + 1)
     if len(raw) > MAX_BYTES:
         raise ValueError("provider response exceeds 1 MB limit")
@@ -133,6 +203,7 @@ def translate_intent(
     max_attempts=3,
     timeout=30.0,
     transport=None,
+    tls_mode="default",
 ):
     # Validate caller fields before any external request.
     GenerationRequest(schema_version=1, level_id=level_id, seed=seed)
@@ -144,10 +215,12 @@ def translate_intent(
         raise ValueError("timeout must be in (0,60]")
     if provider not in {"gemini", "fixture"}:
         raise ValueError("unknown LLM provider")
+    if tls_mode not in {"default", "tls12"}:
+        raise ValueError("tls_mode must be default or tls12")
     if provider == "gemini":
         model = model or os.environ.get("GEMINI_MODEL")
         if not model or not re.fullmatch(r"gemini-[A-Za-z0-9._-]{1,100}", model):
-            raise ValueError("set --model or GEMINI_MODEL to a Gemini model ID")
+            raise GenerationError("set --model or GEMINI_MODEL to a Gemini model ID")
         if fixture is not None:
             raise ValueError("fixture is only available with provider=fixture")
         fixture_data = None
@@ -168,6 +241,8 @@ def translate_intent(
         "model": model,
         "fixture_sha256": digest(fixture_data) if fixture_data is not None else None,
     }
+    if tls_mode != "default":
+        identity["tls_mode"] = tls_mode
     cache_key = digest(identity)
     cache_path = Path(cache_dir) / f"{cache_key}.json" if cache_dir is not None else None
     if cache_path is not None and cache_path.exists():
@@ -215,7 +290,10 @@ def translate_intent(
                         "responseJsonSchema": output_schema(),
                     },
                 }
-                response = (transport or gemini_call)(payload, model=model, timeout=timeout)
+                transport_options = {"model": model, "timeout": timeout}
+                if tls_mode != "default":
+                    transport_options["tls_mode"] = tls_mode
+                response = (transport or gemini_call)(payload, **transport_options)
                 candidates = response.get("candidates", [])
                 if not candidates or candidates[0].get("finishReason") != "STOP":
                     raise GenerationError("provider blocked or incomplete response", attempts)
@@ -252,15 +330,29 @@ def translate_intent(
             raise GenerationError(str(error), attempts) from None
         except urllib.error.HTTPError as error:
             reason = f"provider HTTP {error.code}"
-            attempts.append({"attempt": index + 1, "error": reason})
+            attempts.append(
+                {
+                    "attempt": index + 1,
+                    "error": reason,
+                    "http_status": error.code,
+                    **http_error_details(error),
+                }
+            )
             if error.code != 429 and not 500 <= error.code < 600:
                 raise GenerationError(reason, attempts) from None
             feedback = reason
             if index + 1 < max_attempts:
                 time.sleep(min(2**index, 4))
-        except (urllib.error.URLError, TimeoutError, OSError):
+        except (urllib.error.URLError, TimeoutError, OSError) as error:
             feedback = "provider connection failed"
-            attempts.append({"attempt": index + 1, "error": feedback})
+            attempts.append(
+                {
+                    "attempt": index + 1,
+                    "error": feedback,
+                    "timeout_seconds": timeout,
+                    **connection_error_details(error),
+                }
+            )
         except (
             ValidationError,
             ValueError,
