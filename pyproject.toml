@@ -33,6 +33,7 @@ platformer-search-route = "scripts.search_level_route:main"
 platformer-replay-route = "scripts.replay_level_route:main"
 platformer-generate-level = "scripts.generate_level:main"
 platformer-generate-level-llm = "scripts.generate_level_llm:main"
+platformer-evaluate-generated = "scripts.evaluate_generated_levels:main"
 
 [project.optional-dependencies]
 content = [

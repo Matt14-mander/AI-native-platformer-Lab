@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "suite_id": "small_generation_v1",
+  "mode": "expected-fixture",
+  "live_api_batch_executed": false,
+  "live_api_not_executed_reason": "API credentials are configured in the user terminal, not inherited by this Codex process.",
+  "suite_file": "game_content/generation_suites/small_v1.json",
+  "suite_sha256": "ecf72d3765ee21d180b810bcd0307b47c64f9162c3cb4444b5c62f5972d70816",
+  "run_directory": "runs/llm_eval/small_v1_offline_final",
+  "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+  "checkpoint": "runs/full_collection_v9/seed_20261004/model.zip",
+  "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+  "generation_seeds": [
+    20261024,
+    20261025,
+    20261026
+  ],
+  "policy_seed": 100,
+  "settings": {
+    "provider": "expected-fixture",
+    "model": "offline-expected-fixture",
+    "tls_mode": "tls12",
+    "timeout": 60,
+    "max_attempts": 1,
+    "route_seconds": 15,
+    "route_expansions": 25000
+  },
+  "summary": {
+    "planned": 18,
+    "processed": 18,
+    "remaining": 0,
+    "translation_valid": 18,
+    "static_valid": 18,
+    "request_expectation_matches": 18,
+    "route_verified": 15,
+    "route_unknown": 3,
+    "ppo_evaluated": 18,
+    "ppo_successes": 18,
+    "ppo_expected_target_met": 15,
+    "all_stage_passes": 15,
+    "failure_categories": {
+      "translation_error": 0,
+      "semantic_mismatch": 0,
+      "route_unknown": 3,
+      "route_error": 0,
+      "ppo_error": 0,
+      "ppo_non_success": 0,
+      "ppo_success_collection_miss": 3
+    },
+    "rates_over_planned": {
+      "static_valid": 1.0,
+      "route_verified": 0.8333333333333334,
+      "ppo_success": 1.0,
+      "all_stage_pass": 0.8333333333333334
+    },
+    "ppo_success_rate_over_evaluated": 1.0,
+    "ppo_target_rate_over_evaluated": 0.8333333333333334,
+    "mean_collection_ratio_nonempty_maps": 0.8838888888888888,
+    "maps_with_collection_denominator": 15,
+    "llm_semantic_match_rate_over_planned": null,
+    "mean_uncached_valid_translation_seconds": null,
+    "uncached_valid_translation_samples": 0,
+    "reported_uncached_token_usage": {
+      "promptTokenCount": 0,
+      "candidatesTokenCount": 0,
+      "totalTokenCount": 0,
+      "thoughtsTokenCount": 0
+    },
+    "billed_cost_usd": null,
+    "unique_geometry_count": 18,
+    "duplicate_geometry_groups": [],
+    "failures": []
+  },
+  "by_prompt": {
+    "flat_collect": {
+      "planned": 3,
+      "processed": 3,
+      "remaining": 0,
+      "translation_valid": 3,
+      "static_valid": 3,
+      "request_expectation_matches": 3,
+      "route_verified": 3,
+      "route_unknown": 0,
+      "ppo_evaluated": 3,
+      "ppo_successes": 3,
+      "ppo_expected_target_met": 3,
+      "all_stage_passes": 3,
+      "failure_categories": {
+        "translation_error": 0,
+        "semantic_mismatch": 0,
+        "route_unknown": 0,
+        "route_error": 0,
+        "ppo_error": 0,
+        "ppo_non_success": 0,
+        "ppo_success_collection_miss": 0
+      },
+      "rates_over_planned": {
+        "static_valid": 1.0,
+        "route_verified": 1.0,
+        "ppo_success": 1.0,
+        "all_stage_pass": 1.0
+      },
+      "ppo_success_rate_over_evaluated": 1.0,
+      "ppo_target_rate_over_evaluated": 1.0,
+      "mean_collection_ratio_nonempty_maps": 1.0,
+      "maps_with_collection_denominator": 3,
+      "llm_semantic_match_rate_over_planned": null,
+      "mean_uncached_valid_translation_seconds": null,
+      "uncached_valid_translation_samples": 0,
+      "reported_uncached_token_usage": {
+        "promptTokenCount": 0,
+        "candidatesTokenCount": 0,
+        "totalTokenCount": 0,
+        "thoughtsTokenCount": 0
+      },
+      "billed_cost_usd": null,
+      "unique_geometry_count": 3,
+      "duplicate_geometry_groups": [],
+      "failures": []
+    },
+    "low_obstacles": {
+      "planned": 3,
+      "processed": 3,
+      "remaining": 0,
+      "translation_valid": 3,
+      "static_valid": 3,
+      "request_expectation_matches": 3,
+      "route_verified": 3,
+      "route_unknown": 0,
+      "ppo_evaluated": 3,
+      "ppo_successes": 3,
+      "ppo_expected_target_met": 3,
+      "all_stage_passes": 3,
+      "failure_categories": {
+        "translation_error": 0,
+        "semantic_mismatch": 0,
+        "route_unknown": 0,
+        "route_error": 0,
+        "ppo_error": 0,
+        "ppo_non_success": 0,
+        "ppo_success_collection_miss": 0
+      },
+      "rates_over_planned": {
+        "static_valid": 1.0,
+        "route_verified": 1.0,
+        "ppo_success": 1.0,
+        "all_stage_pass": 1.0
+      },
+      "ppo_success_rate_over_evaluated": 1.0,
+      "ppo_target_rate_over_evaluated": 1.0,
+      "mean_collection_ratio_nonempty_maps": 0.75,
+      "maps_with_collection_denominator": 3,
+      "llm_semantic_match_rate_over_planned": null,
+      "mean_uncached_valid_translation_seconds": null,
+      "uncached_valid_translation_samples": 0,
+      "reported_uncached_token_usage": {
+        "promptTokenCount": 0,
+        "candidatesTokenCount": 0,
+        "totalTokenCount": 0,
+        "thoughtsTokenCount": 0
+      },
+      "billed_cost_usd": null,
+      "unique_geometry_count": 3,
+      "duplicate_geometry_groups": [],
+      "failures": []
+    },
+    "gaps_no_coins": {
+      "planned": 3,
+      "processed": 3,
+      "remaining": 0,
+      "translation_valid": 3,
+      "static_valid": 3,
+      "request_expectation_matches": 3,
+      "route_verified": 3,
+      "route_unknown": 0,
+      "ppo_evaluated": 3,
+      "ppo_successes": 3,
+      "ppo_expected_target_met": 3,
+      "all_stage_passes": 3,
+      "failure_categories": {
+        "translation_error": 0,
+        "semantic_mismatch": 0,
+        "route_unknown": 0,
+        "route_error": 0,
+        "ppo_error": 0,
+        "ppo_non_success": 0,
+        "ppo_success_collection_miss": 0
+      },
+      "rates_over_planned": {
+        "static_valid": 1.0,
+        "route_verified": 1.0,
+        "ppo_success": 1.0,
+        "all_stage_pass": 1.0
+      },
+      "ppo_success_rate_over_evaluated": 1.0,
+      "ppo_target_rate_over_evaluated": 1.0,
+      "mean_collection_ratio_nonempty_maps": null,
+      "maps_with_collection_denominator": 0,
+      "llm_semantic_match_rate_over_planned": null,
+      "mean_uncached_valid_translation_seconds": null,
+      "uncached_valid_translation_samples": 0,
+      "reported_uncached_token_usage": {
+        "promptTokenCount": 0,
+        "candidatesTokenCount": 0,
+        "totalTokenCount": 0,
+        "thoughtsTokenCount": 0
+      },
+      "billed_cost_usd": null,
+      "unique_geometry_count": 3,
+      "duplicate_geometry_groups": [],
+      "failures": []
+    },
+    "mixed_balanced": {
+      "planned": 3,
+      "processed": 3,
+      "remaining": 0,
+      "translation_valid": 3,
+      "static_valid": 3,
+      "request_expectation_matches": 3,
+      "route_verified": 3,
+      "route_unknown": 0,
+      "ppo_evaluated": 3,
+      "ppo_successes": 3,
+      "ppo_expected_target_met": 3,
+      "all_stage_passes": 3,
+      "failure_categories": {
+        "translation_error": 0,
+        "semantic_mismatch": 0,
+        "route_unknown": 0,
+        "route_error": 0,
+        "ppo_error": 0,
+        "ppo_non_success": 0,
+        "ppo_success_collection_miss": 0
+      },
+      "rates_over_planned": {
+        "static_valid": 1.0,
+        "route_verified": 1.0,
+        "ppo_success": 1.0,
+        "all_stage_pass": 1.0
+      },
+      "ppo_success_rate_over_evaluated": 1.0,
+      "ppo_target_rate_over_evaluated": 1.0,
+      "mean_collection_ratio_nonempty_maps": 0.85,
+      "maps_with_collection_denominator": 3,
+      "llm_semantic_match_rate_over_planned": null,
+      "mean_uncached_valid_translation_seconds": null,
+      "uncached_valid_translation_samples": 0,
+      "reported_uncached_token_usage": {
+        "promptTokenCount": 0,
+        "candidatesTokenCount": 0,
+        "totalTokenCount": 0,
+        "thoughtsTokenCount": 0
+      },
+      "billed_cost_usd": null,
+      "unique_geometry_count": 3,
+      "duplicate_geometry_groups": [],
+      "failures": []
+    },
+    "mixed_ground": {
+      "planned": 3,
+      "processed": 3,
+      "remaining": 0,
+      "translation_valid": 3,
+      "static_valid": 3,
+      "request_expectation_matches": 3,
+      "route_verified": 0,
+      "route_unknown": 3,
+      "ppo_evaluated": 3,
+      "ppo_successes": 3,
+      "ppo_expected_target_met": 0,
+      "all_stage_passes": 0,
+      "failure_categories": {
+        "translation_error": 0,
+        "semantic_mismatch": 0,
+        "route_unknown": 3,
+        "route_error": 0,
+        "ppo_error": 0,
+        "ppo_non_success": 0,
+        "ppo_success_collection_miss": 3
+      },
+      "rates_over_planned": {
+        "static_valid": 1.0,
+        "route_verified": 0.0,
+        "ppo_success": 1.0,
+        "all_stage_pass": 0.0
+      },
+      "ppo_success_rate_over_evaluated": 1.0,
+      "ppo_target_rate_over_evaluated": 0.0,
+      "mean_collection_ratio_nonempty_maps": 0.875,
+      "maps_with_collection_denominator": 3,
+      "llm_semantic_match_rate_over_planned": null,
+      "mean_uncached_valid_translation_seconds": null,
+      "uncached_valid_translation_samples": 0,
+      "reported_uncached_token_usage": {
+        "promptTokenCount": 0,
+        "candidatesTokenCount": 0,
+        "totalTokenCount": 0,
+        "thoughtsTokenCount": 0
+      },
+      "billed_cost_usd": null,
+      "unique_geometry_count": 3,
+      "duplicate_geometry_groups": [],
+      "failures": []
+    },
+    "tall_wide": {
+      "planned": 3,
+      "processed": 3,
+      "remaining": 0,
+      "translation_valid": 3,
+      "static_valid": 3,
+      "request_expectation_matches": 3,
+      "route_verified": 3,
+      "route_unknown": 0,
+      "ppo_evaluated": 3,
+      "ppo_successes": 3,
+      "ppo_expected_target_met": 3,
+      "all_stage_passes": 3,
+      "failure_categories": {
+        "translation_error": 0,
+        "semantic_mismatch": 0,
+        "route_unknown": 0,
+        "route_error": 0,
+        "ppo_error": 0,
+        "ppo_non_success": 0,
+        "ppo_success_collection_miss": 0
+      },
+      "rates_over_planned": {
+        "static_valid": 1.0,
+        "route_verified": 1.0,
+        "ppo_success": 1.0,
+        "all_stage_pass": 1.0
+      },
+      "ppo_success_rate_over_evaluated": 1.0,
+      "ppo_target_rate_over_evaluated": 1.0,
+      "mean_collection_ratio_nonempty_maps": 0.9444444444444443,
+      "maps_with_collection_denominator": 3,
+      "llm_semantic_match_rate_over_planned": null,
+      "mean_uncached_valid_translation_seconds": null,
+      "uncached_valid_translation_samples": 0,
+      "reported_uncached_token_usage": {
+        "promptTokenCount": 0,
+        "candidatesTokenCount": 0,
+        "totalTokenCount": 0,
+        "thoughtsTokenCount": 0
+      },
+      "billed_cost_usd": null,
+      "unique_geometry_count": 3,
+      "duplicate_geometry_groups": [],
+      "failures": []
+    }
+  },
+  "retained_collection_misses": [
+    {
+      "level_id": "eval_mixed_ground_s20261024",
+      "generation_seed": 20261024,
+      "route": {
+        "status": "unknown",
+        "reason": "budget_exhausted",
+        "seconds": 8.869981894000375
+      },
+      "ppo": {
+        "status": "ok",
+        "level_id": "eval_mixed_ground_s20261024",
+        "seed": 100,
+        "deterministic": true,
+        "outcome": "success",
+        "steps": 147,
+        "ticks": 586,
+        "progress": 1.0,
+        "return": 21.85300000000002,
+        "coins_collected": 14,
+        "coins_total": 16,
+        "collection_ratio": 0.875,
+        "meets_request_target": false,
+        "meets_expected_target": false,
+        "seconds": 0.10968459100695327
+      }
+    },
+    {
+      "level_id": "eval_mixed_ground_s20261025",
+      "generation_seed": 20261025,
+      "route": {
+        "status": "unknown",
+        "reason": "budget_exhausted",
+        "seconds": 9.453835567001079
+      },
+      "ppo": {
+        "status": "ok",
+        "level_id": "eval_mixed_ground_s20261025",
+        "seed": 100,
+        "deterministic": true,
+        "outcome": "success",
+        "steps": 141,
+        "ticks": 563,
+        "progress": 1.0,
+        "return": 21.858999999999977,
+        "coins_collected": 14,
+        "coins_total": 16,
+        "collection_ratio": 0.875,
+        "meets_request_target": false,
+        "meets_expected_target": false,
+        "seconds": 0.0976910350000253
+      }
+    },
+    {
+      "level_id": "eval_mixed_ground_s20261026",
+      "generation_seed": 20261026,
+      "route": {
+        "status": "unknown",
+        "reason": "budget_exhausted",
+        "seconds": 9.12843423999584
+      },
+      "ppo": {
+        "status": "ok",
+        "level_id": "eval_mixed_ground_s20261026",
+        "seed": 100,
+        "deterministic": true,
+        "outcome": "success",
+        "steps": 146,
+        "ticks": 582,
+        "progress": 1.0,
+        "return": 21.85400000000002,
+        "coins_collected": 14,
+        "coins_total": 16,
+        "collection_ratio": 0.875,
+        "meets_request_target": false,
+        "meets_expected_target": false,
+        "seconds": 0.10685737799940398
+      }
+    }
+  ],
+  "artifacts": {
+    "run.json": "40915cc0ecb3a8b91745005cba4c1a54799b3f9621c63f18473ff76dd3d9f832",
+    "suite.json": "ecf72d3765ee21d180b810bcd0307b47c64f9162c3cb4444b5c62f5972d70816",
+    "report.json": "83de7e6100a976f7fd447eb98dccdc7fadcb446cfd84bf559347d100395c69e8",
+    "report.md": "8d8470c544c2dfb0712c536f0d1b17c4bf97b006591758c78a06f3f9ec9270ab"
+  },
+  "validation": {
+    "pytest_passed": 204,
+    "subtests_passed": 8,
+    "warnings": 2,
+    "warnings_reason": "existing Gymnasium v0/v1 deprecations",
+    "resume": "completed batch resumes without rerunning candidates; unit/integration tests validate input and artifact changes rejected",
+    "real_policy_test": "offline 18 maps with unchanged v9 checkpoint; integration test also covers portable SB3 checkpoint loading and route replay"
+  },
+  "scope": [
+    "Offline design and geometry coverage only; not a real LLM semantic benchmark.",
+    "No training split assignment or checkpoint retraining.",
+    "Route unknown is not proof of infeasibility.",
+    "One deterministic policy seed; no independent stochastic trials or train-seed acceptance.",
+    "Internal geometry duplicates audited; no comprehensive training/holdout geometry overlap audit."
+  ]
+}

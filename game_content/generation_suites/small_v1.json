@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "suite_id": "small_generation_v1",
+  "purpose": "exploratory_evaluation_only",
+  "generation_seeds": [
+    20261024,
+    20261025,
+    20261026
+  ],
+  "policy_seed": 100,
+  "cases": [
+    {
+      "case_id": "flat_collect",
+      "prompt": "湖边平地关卡，不要障碍，也不要坑。松果全部放在地面，最低收集率100%。",
+      "expected": {
+        "obstacle_count": 0,
+        "gap_count": 0,
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      }
+    },
+    {
+      "case_id": "low_obstacles",
+      "prompt": "湖边关卡，仅设置3个障碍，不要坑。障碍高度范围32到64像素。松果使用短跳收集布局，最低收集率75%。",
+      "expected": {
+        "obstacle_count": 3,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 32,
+          "maximum": 64
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      }
+    },
+    {
+      "case_id": "gaps_no_coins",
+      "prompt": "湖边关卡，不要障碍，设置3个坑，坑宽范围96到152像素。不放松果，最低收集率设为0。",
+      "expected": {
+        "obstacle_count": 0,
+        "gap_count": 3,
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "none",
+        "min_coin_ratio": 0.0,
+        "theme": "lake"
+      }
+    },
+    {
+      "case_id": "mixed_balanced",
+      "prompt": "湖边关卡，设置3个障碍和2个坑。障碍高度范围48到96像素，坑宽范围96到152像素。松果使用短跳收集布局，最低收集率75%。",
+      "expected": {
+        "obstacle_count": 3,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      }
+    },
+    {
+      "case_id": "mixed_ground",
+      "prompt": "湖边关卡，设置2个障碍和2个坑。障碍高度范围48到96像素，坑宽范围96到152像素。所有松果放在地面，最低收集率100%。",
+      "expected": {
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      }
+    },
+    {
+      "case_id": "tall_wide",
+      "prompt": "湖边关卡，设置3个障碍和3个坑。障碍高度范围96到128像素，坑宽范围152到176像素。松果使用短跳收集布局，最低收集率75%。",
+      "expected": {
+        "obstacle_count": 3,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 96,
+          "maximum": 128
+        },
+        "gap_width": {
+          "minimum": 152,
+          "maximum": 176
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      }
+    }
+  ]
+}
