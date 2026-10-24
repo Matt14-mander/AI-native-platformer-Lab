@@ -200,6 +200,6 @@ LLM/PCG、DDA 和 Jev 会在 LevelSpec、telemetry 与 benchmark 稳定后接入
 
 内容开发进展：**LevelSpec v1、转换器与结构/静态几何校验已完成**，见 [LevelSpec 文档](docs/LEVEL_SPEC_V1.md)。新格式加载、播放和真实核心路线搜索/重放也已接入，见 [路线验证](docs/LEVEL_SPEC_ROUTES_V1.md)。受约束的 GenerationRequest v1 与确定性 PCG 也已完成，见 [PCG 管线](docs/PCG_GENERATION_V1.md)。Gemini LLM 结构化生成入口、有限重试与缓存已接入；已使用 gemini-3.5-flash-lite + TLS 1.2 完成首个真实 API 候选及独立路线重放（17/20松果，85%），批量稳定性尚待验收，见 [LLM 生成 v1](docs/LLM_GENERATION_V1.md)。另两个 seed 的导出数值差异、后续区域与传送/交互内容继续保留为待办；发生协议变化时重新验收。当前多地图结论限于声明的静态生成族，不代表所有 legacy 原始关卡已经通关。
 
-新增 [小规模生成评测集 v1](docs/GENERATED_LEVEL_EVALUATION_V1.md)：固定6类提示×3个生成seed，分开统计需求匹配、路线验证与v9 PPO表现；提供离线覆盖基线、真实API批量入口和断点恢复。
+新增 [小规模生成评测集 v1](docs/GENERATED_LEVEL_EVALUATION_V1.md)：固定6类提示×3个生成seed，分开统计需求匹配、路线验证与v9 PPO表现；提供离线覆盖基线、真实API批量入口和断点恢复。另有 [统一批量报告](docs/UNIFIED_GENERATION_REPORT_V1.md)，分别汇总离线批次、真实批次与单图证据。
 
 历史课程设施与早期模型结果见 [强化学习训练 v1](docs/RL_TRAINING_V1.md) 和 [正式 mixed 多 seed](docs/FORMAL_MULTISEED_AND_FULL.md)。

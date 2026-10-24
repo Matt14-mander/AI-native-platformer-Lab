@@ -1,0 +1,2634 @@
+{
+  "schema_version": 1,
+  "report_kind": "unified_generation_evaluation_v1",
+  "sources": [
+    {
+      "kind": "batch",
+      "path": "runs/llm_eval/small_v1_offline_final",
+      "source_id": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+      "suite_id": "small_generation_v1",
+      "suite_sha256": "bb03a7a237985c9811847c817d724a2f8b668cf459ac970bca4c951c018a6bf2",
+      "prompt_definitions": [
+        {
+          "case_id": "flat_collect",
+          "prompt": "湖边平地关卡，不要障碍，也不要坑。松果全部放在地面，最低收集率100%。",
+          "expected": {
+            "obstacle_count": 0,
+            "gap_count": 0,
+            "coin_layout": "ground",
+            "min_coin_ratio": 1.0,
+            "theme": "lake"
+          }
+        },
+        {
+          "case_id": "low_obstacles",
+          "prompt": "湖边关卡，仅设置3个障碍，不要坑。障碍高度范围32到64像素。松果使用短跳收集布局，最低收集率75%。",
+          "expected": {
+            "obstacle_count": 3,
+            "gap_count": 0,
+            "obstacle_height": {
+              "minimum": 32,
+              "maximum": 64
+            },
+            "coin_layout": "low_jump",
+            "min_coin_ratio": 0.75,
+            "theme": "lake"
+          }
+        },
+        {
+          "case_id": "gaps_no_coins",
+          "prompt": "湖边关卡，不要障碍，设置3个坑，坑宽范围96到152像素。不放松果，最低收集率设为0。",
+          "expected": {
+            "obstacle_count": 0,
+            "gap_count": 3,
+            "gap_width": {
+              "minimum": 96,
+              "maximum": 152
+            },
+            "coin_layout": "none",
+            "min_coin_ratio": 0.0,
+            "theme": "lake"
+          }
+        },
+        {
+          "case_id": "mixed_balanced",
+          "prompt": "湖边关卡，设置3个障碍和2个坑。障碍高度范围48到96像素，坑宽范围96到152像素。松果使用短跳收集布局，最低收集率75%。",
+          "expected": {
+            "obstacle_count": 3,
+            "gap_count": 2,
+            "obstacle_height": {
+              "minimum": 48,
+              "maximum": 96
+            },
+            "gap_width": {
+              "minimum": 96,
+              "maximum": 152
+            },
+            "coin_layout": "low_jump",
+            "min_coin_ratio": 0.75,
+            "theme": "lake"
+          }
+        },
+        {
+          "case_id": "mixed_ground",
+          "prompt": "湖边关卡，设置2个障碍和2个坑。障碍高度范围48到96像素，坑宽范围96到152像素。所有松果放在地面，最低收集率100%。",
+          "expected": {
+            "obstacle_count": 2,
+            "gap_count": 2,
+            "obstacle_height": {
+              "minimum": 48,
+              "maximum": 96
+            },
+            "gap_width": {
+              "minimum": 96,
+              "maximum": 152
+            },
+            "coin_layout": "ground",
+            "min_coin_ratio": 1.0,
+            "theme": "lake"
+          }
+        },
+        {
+          "case_id": "tall_wide",
+          "prompt": "湖边关卡，设置3个障碍和3个坑。障碍高度范围96到128像素，坑宽范围152到176像素。松果使用短跳收集布局，最低收集率75%。",
+          "expected": {
+            "obstacle_count": 3,
+            "gap_count": 3,
+            "obstacle_height": {
+              "minimum": 96,
+              "maximum": 128
+            },
+            "gap_width": {
+              "minimum": 152,
+              "maximum": 176
+            },
+            "coin_layout": "low_jump",
+            "min_coin_ratio": 0.75,
+            "theme": "lake"
+          }
+        }
+      ],
+      "mode": "expected-fixture",
+      "model": "offline-expected-fixture",
+      "tls_mode": "tls12",
+      "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+      "policy_seed": 100,
+      "input_sha256": {
+        "run.json": "40915cc0ecb3a8b91745005cba4c1a54799b3f9621c63f18473ff76dd3d9f832",
+        "report.json": "83de7e6100a976f7fd447eb98dccdc7fadcb446cfd84bf559347d100395c69e8",
+        "suite.json": "ecf72d3765ee21d180b810bcd0307b47c64f9162c3cb4444b5c62f5972d70816"
+      },
+      "cases": [
+        {
+          "case_id": "flat_collect",
+          "level_id": "eval_flat_collect_s20261024",
+          "generation_seed": 20261024,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.0063878389992169105,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "1f25d18a92826d0bf7fc624b3a40b4bb8232ddfcb00c5a8bea96ac3dbd3b30a4",
+            "request_sha256": "a53fa811a39df3fade1d687aeda417e83e97149a77ceef56aa54887bad60fd51"
+          },
+          "candidate_protocol_sha256": "05a3403f3a7fbc477ae3ad506ea3297cbdca35026a276b26779d789a45aeb5d2",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.030023476996575482
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_flat_collect_s20261024",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 34,
+            "ticks": 133,
+            "progress": 1.0,
+            "return": 16.966,
+            "coins_collected": 4,
+            "coins_total": 4,
+            "collection_ratio": 1.0,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.026140123001823667
+          },
+          "seconds": 0.06914765399415046,
+          "artifact_sha256": {
+            "fixture.json": "e1b89aad5ae5645af9e7295a2572d788c84c5201503c9b36311796d6184dcb49",
+            "request.json": "69bc4a35aa4fe335bf2bfab0e703ed299608e09c287b80f4d3ee8f5d97f4cf61",
+            "intent.json": "de61f099a393490782874a5d7ac5ae5abea71fda2bb0aa666bc592c26dbb5fe9",
+            "level.json": "bea216ba9049cb10cf86d5103e63d097f58611bc9d9aa50fb4d3745b805cd1ea",
+            "llm.json": "c19c8f3a4d201e2a621d346a813c7a85a5ab5dbe96298f71aa2a875736be9586",
+            "ppo.json": "023e7b15664ad628132e19166609eb6e64ab8463d9f9adb8fd2eff8bd61f1d0f",
+            "route.json": "2e76e7ec618256a7c202a970cf744db7fe3ac8b3625c151fbec9eb95746fb1f4",
+            "generation.json": "458da369d465613f9f15928f53592b8d5bcb18937bc488a1f6a941d40486f40e"
+          },
+          "expected_target": 1.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_flat_collect_s20261024",
+          "final_player": {
+            "x": 1283.0,
+            "y": 446.49999999999994,
+            "velocity_x": 10.0,
+            "velocity_y": -11.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "flat_collect",
+          "level_id": "eval_flat_collect_s20261025",
+          "generation_seed": 20261025,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004829147997952532,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "4d8e70af028bbe382201c2211a0bf78f32f19a360509b9812398cf6c3239e741",
+            "request_sha256": "8d3c5e133c83c060f34a8715b9b98c3c54b285a593242310b102f5d09dafbcfb"
+          },
+          "candidate_protocol_sha256": "9f54d7c8b91b2688260eb3d7cc25360e106582d51a702c2e5b2c1e85339afd04",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.07243373899837025
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_flat_collect_s20261025",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 39,
+            "ticks": 153,
+            "progress": 1.0,
+            "return": 16.961,
+            "coins_collected": 4,
+            "coins_total": 4,
+            "collection_ratio": 1.0,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.0456329230000847
+          },
+          "seconds": 0.13056232300004922,
+          "artifact_sha256": {
+            "fixture.json": "990920226fc4472e89eadee6aa199671bd83782b73ee8aa10dc7b2c01385a415",
+            "request.json": "c3be69c8608420ed1a47d78f85fae4d402fa2a941d5c09c8a53d501233170888",
+            "intent.json": "bdb5e5b099f8d04ab2de4b5294a7f4c7c6fba6656e5ecde3a9a8c25f762ad0cd",
+            "level.json": "ad580674a5eedd8b9fd89e980109affd9ff58d40564d78129e14ffc93a0fa610",
+            "llm.json": "a875b811aea5733fb436c3417c5d57ec2a39b7c10bd9093648c664f01e132523",
+            "ppo.json": "e42bd00d91f46c8a0ce868bd08ae4f87bf7654b742813fccc7ede2c58ecce9e0",
+            "route.json": "a22bbc3299927e68067087273fa966db46affc822560e1cb7f8bfc5a8f3c3a81",
+            "generation.json": "b11b830151eb2d2ab52f983bc7ffe6543f6aa01aa875581842e90deee2f0e9e2"
+          },
+          "expected_target": 1.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_flat_collect_s20261025",
+          "final_player": {
+            "x": 1483.0,
+            "y": 494.7,
+            "velocity_x": 10.0,
+            "velocity_y": -13.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "flat_collect",
+          "level_id": "eval_flat_collect_s20261026",
+          "generation_seed": 20261026,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.005931310006417334,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "e26420ada295251c16353aab2dceaa8ff54182d7d276fede1ce05b374a240f6d",
+            "request_sha256": "2fb9d5d90f71c7bffa92e111d008217cb324b42d2591414d0df404c1fccc0647"
+          },
+          "candidate_protocol_sha256": "636b641b648f944f5a3fc91287f1c1ebc92d9d3b57222f2086da1586c26c6df7",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.041951789004087914
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_flat_collect_s20261026",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 38,
+            "ticks": 150,
+            "progress": 1.0,
+            "return": 16.961999999999996,
+            "coins_collected": 4,
+            "coins_total": 4,
+            "collection_ratio": 1.0,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.022077262998209335
+          },
+          "seconds": 0.07963392800593283,
+          "artifact_sha256": {
+            "fixture.json": "58b14bc33775fb1f80c0559feadead32d79c44488e557294112987c9661fb394",
+            "request.json": "fd0cfb4506ed565569f9b4304f84833cbd9b928841e5aa665cd6e5f8bb2f31d5",
+            "intent.json": "b43a068784851f5d1c79b1dd2019b5e0905ec1480e5deec3faee0a8097e7c151",
+            "level.json": "881d2fb8fa29c9512ef7be68ee5b7ecf44e0350de7e702a3ca6c70867cbd094c",
+            "llm.json": "b5b665b4b170a400716cf3ed5bb956074afea5661d6cb09799898b38a05ec4c7",
+            "ppo.json": "c9f51cf978d8b8fbcf9a382368caec1a1dbec1e1d457233114c6e8304bd7aa95",
+            "route.json": "9ce31d443081ca62dd92eee449c13715c261310bf90a880b2630472c56ac0eac",
+            "generation.json": "2d553ce5016e3e46ba781a27a3627258149e0e75e0e78bd0acb8b3ea7efa5396"
+          },
+          "expected_target": 1.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_flat_collect_s20261026",
+          "final_player": {
+            "x": 1453.0,
+            "y": 481.9,
+            "velocity_x": 10.0,
+            "velocity_y": -12.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "low_obstacles",
+          "level_id": "eval_low_obstacles_s20261024",
+          "generation_seed": 20261024,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004080147999047767,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "c4bbbd7699a3e56c1eb1fe640c6c3719da133eb9f9839fa3bab4be3df0168507",
+            "request_sha256": "0b28f2fa4eee612c05853542f8412b91a525ffdb87ee2493f2fcb8e2ecdec8b9"
+          },
+          "candidate_protocol_sha256": "1817463a8b7bcbab0635fe27558ba7b6194023d838d8338dc8543461247dbc47",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.4736137500003679
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_low_obstacles_s20261024",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 126,
+            "ticks": 502,
+            "progress": 1.0,
+            "return": 19.374000000000002,
+            "coins_collected": 9,
+            "coins_total": 12,
+            "collection_ratio": 0.75,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.07730481600447092
+          },
+          "seconds": 0.5628292350011179,
+          "artifact_sha256": {
+            "fixture.json": "95de154744b2c0b550691d953174ca1692a38dfdc373fa597d56cca45158602a",
+            "request.json": "7746741c8cd720127f5006d47f1493b759eaf65d4e63aa25247e6e31981ff77e",
+            "intent.json": "fabc4ad5d61cba676a58c57987a82c01cd3313247c4f4317780c1ceaa42b22d4",
+            "level.json": "3ea38078005b8d0efb591cea1f0578e9c205557505ff98bff2e8ee868ea48f6f",
+            "llm.json": "48cd1f2bcd91f85344e0cf707fb3d39fab635fa4ca4b2a0cd887dc7b5f5ee7a5",
+            "ppo.json": "6b29b8b1a301a95a749ccf67ec38c47175ad15d0780bfd1c523708c9f150d966",
+            "route.json": "201977389050d850af0dfae00538dbd0d689bf06db4061bb6141cae5bc871d31",
+            "generation.json": "2d13ef667948020e1353590e35e935d67caef7af3666580a9fba552b6ae95e83"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_low_obstacles_s20261024",
+          "final_player": {
+            "x": 4217.0,
+            "y": 435.69999999999993,
+            "velocity_x": 10.0,
+            "velocity_y": -10.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "low_obstacles",
+          "level_id": "eval_low_obstacles_s20261025",
+          "generation_seed": 20261025,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.0042396380013087764,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "bef1b01ef1083982b4f8874125170cbd19e594668c0a77cb4010e866c294bb3a",
+            "request_sha256": "4722eb1d7a87e10db46fd126127b6c8cd977d1a8aecece5cbf4ec5885bf7f9d8"
+          },
+          "candidate_protocol_sha256": "4b8d960ef991b8967c2b58a02c4c6034fd0b81fad338a721ede928f483bccfb3",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.4889120260049822
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_low_obstacles_s20261025",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 122,
+            "ticks": 488,
+            "progress": 1.0,
+            "return": 19.377999999999993,
+            "coins_collected": 9,
+            "coins_total": 12,
+            "collection_ratio": 0.75,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.07409433900465956
+          },
+          "seconds": 0.5764216509996913,
+          "artifact_sha256": {
+            "fixture.json": "0800f277c0f1d7403f4de0b8a889ec1ac2249b66b8d3ae63df742725e200e2ad",
+            "request.json": "c976a8b330a38de79bbe1b250b68a0b5fa9848e480aeb88685ebfdad5f8b0282",
+            "intent.json": "6723af81697296f25378c9bfd3d050ab6eefad946885980a5a2fb94a292eaa7f",
+            "level.json": "0bfca7982f2af1677b1d7a7b1aa6f361b4ded22f54fcf5a46f72ffd7ad4761f7",
+            "llm.json": "decbf4ebb29293492571d2027d30fa63bf650b3a95654f36d133b72ee3082d94",
+            "ppo.json": "baa8b4ea55829abee81ce1beb3b758720b596d156a132c2749a9c870526a67be",
+            "route.json": "0d3810c212d57b9d6aa9b7dd2ea2f1e35e3b90457589d164f262ca4c9f9863a2",
+            "generation.json": "f990646b38ef4f94e1826d20283fec87951570874502ddae95cc345c62a8ee75"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_low_obstacles_s20261025",
+          "final_player": {
+            "x": 4077.0,
+            "y": 457.79999999999995,
+            "velocity_x": 10.0,
+            "velocity_y": -11.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "low_obstacles",
+          "level_id": "eval_low_obstacles_s20261026",
+          "generation_seed": 20261026,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004159543997957371,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "b4fdda202c2f61756483469897efeaf72687c0d6c6877e341b1d008b0ef3e2a0",
+            "request_sha256": "f26822c2e7d9df8133c172afc9af0527825831db7285895dd6aa84a6273a4517"
+          },
+          "candidate_protocol_sha256": "e69c8d677e8e7e329fc11411b3aa86507bc782e8f73a1cba90f39de958c9f176",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.44691481399786426
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_low_obstacles_s20261026",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 129,
+            "ticks": 514,
+            "progress": 1.0,
+            "return": 19.37100000000001,
+            "coins_collected": 9,
+            "coins_total": 12,
+            "collection_ratio": 0.75,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.07828609600255731
+          },
+          "seconds": 0.5376342110030237,
+          "artifact_sha256": {
+            "fixture.json": "6e55e02f2c65744674d0c2ef45d99c0d2ab3b51b2f9f6252ad9e7fd88a37c393",
+            "request.json": "6c793bbc7a5ced6403e38c13d92f2bfc8a7059b9d458a251f71572f9a06d97bb",
+            "intent.json": "5d181c21e8f857103dd8658bae2668bb5806a7727c8dbafd4ddc77bba250e98a",
+            "level.json": "1b40f7d20300ef38dcb1db6732f7ff38279e526e6de4f405b24f1a6a55209816",
+            "llm.json": "095d7b187818f1fcf65b467267d33d459ffe0682bd67277c70535db16f9604ff",
+            "ppo.json": "161fa1d0c9121494732c79a826637b18566c4101544e1095ac3443fdf7c391da",
+            "route.json": "62946efda9188c8af606e0779d85c3c296d5ecf85cc311ed7e6bcc833b5da9c3",
+            "generation.json": "eb80d83231838a3d9c09a44148334d0ddccdaeea96ab09013866c73448b7a1df"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_low_obstacles_s20261026",
+          "final_player": {
+            "x": 4337.0,
+            "y": 435.69999999999993,
+            "velocity_x": 10.0,
+            "velocity_y": -10.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "gaps_no_coins",
+          "level_id": "eval_gaps_no_coins_s20261024",
+          "generation_seed": 20261024,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004175302994553931,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "01285d5aaccef81cbc616ef91b4de0f209ce300d1c1f45789f7da90d2c35b6b3",
+            "request_sha256": "0036506a06f80a8f1e0449e3fcbbadcad2a71072533f085f3288ad8bb5c8a8b6"
+          },
+          "candidate_protocol_sha256": "09e64c538ed38251810ce9e665057732b6df884d9a65bec39249b5362bf89365",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.07206696100183763
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_gaps_no_coins_s20261024",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 112,
+            "ticks": 447,
+            "progress": 1.0,
+            "return": 14.888,
+            "coins_collected": 0,
+            "coins_total": 0,
+            "collection_ratio": null,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.05589847199735232
+          },
+          "seconds": 0.1386600960031501,
+          "artifact_sha256": {
+            "fixture.json": "cefc93b598653da34c1f6971c001f922b52a5aa1426a3c19f44c9c578df4e2fe",
+            "request.json": "496b67e42b57080d8d11dac6f32bd28c81816b3a9bf89d7d43187ab729ea8b40",
+            "intent.json": "dbed144a303ab04adf60db2c4a379ca633e522b22db7229c375071626491a077",
+            "level.json": "b093e049c8844a7e0f3fd4959d58025d82e9e74f4ce7e673842370c058a70dd7",
+            "llm.json": "9c5a4608046c3e709059c21d1d63ed09762430909dcfc1659541068e13bc0499",
+            "ppo.json": "667e6c6168064779a036a0c08576cc848c85af7940dfc2244f591f76b4867866",
+            "route.json": "c8a5d63db664463508c49eacbff07d2f25efe6350b2573d8ea4096fbddbd1fd0",
+            "generation.json": "b652369ce075d38554cf207f86848fa2adb16468d3b09eda58d7b68df27877b6"
+          },
+          "expected_target": 0.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_gaps_no_coins_s20261024",
+          "final_player": {
+            "x": 4423.0,
+            "y": 469.59999999999997,
+            "velocity_x": 10.0,
+            "velocity_y": -12.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "gaps_no_coins",
+          "level_id": "eval_gaps_no_coins_s20261025",
+          "generation_seed": 20261025,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.005231795999861788,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "9087aeee739ac7db56adac37abd364531bcb13c1298d1f6d01fa47f113bba485",
+            "request_sha256": "2cefd23f9678ac517de11dbbdabbbb9f2c4ad7f499899be705f4b624c6cb6fb1"
+          },
+          "candidate_protocol_sha256": "10162805f63cc4131c1de94c8d34871e4bed09d78d5453e3a1c84303586f8963",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.07761501100321766
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_gaps_no_coins_s20261025",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 108,
+            "ticks": 430,
+            "progress": 1.0,
+            "return": 14.892,
+            "coins_collected": 0,
+            "coins_total": 0,
+            "collection_ratio": null,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.05844485400302801
+          },
+          "seconds": 0.14941016700322507,
+          "artifact_sha256": {
+            "fixture.json": "bc8fc10c28389cd214fa5f72810442ea08f484be7c1ad764cbb3afccb1e19f7b",
+            "request.json": "1bb2a8ae2d7edb6758de541b07b47340724e7fce89b69498e1605d255ae2dea1",
+            "intent.json": "6ea6bf66f32f15e75e161b32928d3378b7c2f5af91996b8323edf47a0e51b615",
+            "level.json": "cf43fd5596cda676182ee6002974c8b3390f35c2f9bdf201cc7b77769c101269",
+            "llm.json": "67f7617a356ab3a64d53160d91ec994b6ca7bf728b0f0b60870d106ffb5c316d",
+            "ppo.json": "f38f62ddf2ecd853d6b154cf1a22bf5baff60a476f456009d6c708249bf7f866",
+            "route.json": "e7eec6877589fca28b2a821085f71fce27434dbf3a58fac6f0ff40062ea5f8c7",
+            "generation.json": "c35d691d3a3034fe4b40f966658f9423204b749e2eca407c0c70b82a05f37867"
+          },
+          "expected_target": 0.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_gaps_no_coins_s20261025",
+          "final_player": {
+            "x": 4253.0,
+            "y": 481.9,
+            "velocity_x": 10.0,
+            "velocity_y": -12.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "gaps_no_coins",
+          "level_id": "eval_gaps_no_coins_s20261026",
+          "generation_seed": 20261026,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004955166994477622,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "81bd10638b50db0b8d9dc696732cc3672a9e8eb0b9788b80b80b8df67685b19d",
+            "request_sha256": "4874749157946e8e49ceab7d996e4507e6945544c13488623cbf797ec2b88e09"
+          },
+          "candidate_protocol_sha256": "4d2250d14828e4b34dcb23831bb4c89517ec9823add22f4bb00aef9599783c30",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.08372142100415658
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_gaps_no_coins_s20261026",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 113,
+            "ticks": 452,
+            "progress": 1.0,
+            "return": 14.887000000000002,
+            "coins_collected": 0,
+            "coins_total": 0,
+            "collection_ratio": null,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.054528542001207825
+          },
+          "seconds": 0.15009270500013372,
+          "artifact_sha256": {
+            "fixture.json": "e92e5e55289aad4bebfde4d8289490bdb5fac2859b2b78316120562d0d4a391a",
+            "request.json": "45356deb8040ba9b45210c4fd7a0ebff067f3fc673cda798d1ce0eba55a04ca9",
+            "intent.json": "625d01656b36f295fa3ff300deb222f6f2a9878e9aed392683813d5312562250",
+            "level.json": "559701232ad054dd59b131ffc23e22245fc9069a6809d7d935596ae95d8e8c95",
+            "llm.json": "218e64fbdef5365d9f46574f09572fe88a5632abba796f2e16149b4399d6b4ea",
+            "ppo.json": "a173932a3f114da964a6a3ad9f34a173a269e0dbc86038191022fdcd5f50bf79",
+            "route.json": "93b8334cac17d37d54f6bed37af5627544ce9cd4a9ef7d624a20ddb00f4e7d37",
+            "generation.json": "5100eecb5f4b8a198f232ccdbcd55cbdea7a5cf68b314dc86f5a143ed99b7d83"
+          },
+          "expected_target": 0.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_gaps_no_coins_s20261026",
+          "final_player": {
+            "x": 4473.0,
+            "y": 457.79999999999995,
+            "velocity_x": 10.0,
+            "velocity_y": -11.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "mixed_balanced",
+          "level_id": "eval_mixed_balanced_s20261024",
+          "generation_seed": 20261024,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.0035042699964833446,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "625a53b4fd05aa5cec9bab51f1aab4f4576635d774c8f4c82c9b8b3b5a222b30",
+            "request_sha256": "b5bbd25c9a03b77f665e0cf0a4cd056a61d7c48bc81ef51d3325bcedbad8c9c7"
+          },
+          "candidate_protocol_sha256": "31790e5ede6ac780318e6cf0a7229fdbed7b50b81f31958b3b618319d628b11f",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.7519315200042911
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_mixed_balanced_s20261024",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 206,
+            "ticks": 822,
+            "progress": 1.0,
+            "return": 23.294,
+            "coins_collected": 17,
+            "coins_total": 20,
+            "collection_ratio": 0.85,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.14410468700225465
+          },
+          "seconds": 0.9079324850026751,
+          "artifact_sha256": {
+            "fixture.json": "678009ec06ec9fc2aec367f7a544bc7981b7021173d52dfec4a8939d1d72bdce",
+            "request.json": "2b3ff2e483d90fd3642bbcfa78d9b3515120d59625df5feb50253c58706979f6",
+            "intent.json": "8bad0c045a337b36e19538922188b9dc8ed771fda191b10855050d91ad893e38",
+            "level.json": "564481a927d854f86e95c8c4e49c4f2e45c59fb5381057aec67bcc6c84edc59c",
+            "llm.json": "190c87b3790cef6ddad5359e5b0f0edcd1ae674e32525146d0a4ad64810a4566",
+            "ppo.json": "368a9bef7cea26a762bc333e85768d1622918edf69e8d8919ec248dea45ff340",
+            "route.json": "1e61934d62d1844f6ec44074cc9a09ac1979efe9ff61561a85d99084999332dc",
+            "generation.json": "b2df57ad0da7ebeec129a457383c56fad0a6732ab294ec68b0b825ccb9d1c50f"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_balanced_s20261024",
+          "final_player": {
+            "x": 6913.0,
+            "y": 481.9,
+            "velocity_x": 10.0,
+            "velocity_y": -12.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "mixed_balanced",
+          "level_id": "eval_mixed_balanced_s20261025",
+          "generation_seed": 20261025,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004739461001008749,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "a02d4eb9d59b85d5c79b5eb571de1139d162a7a69904e5e2297c127f0dc9ff74",
+            "request_sha256": "ee9e2032c21a92efce27c9383ec023f4a077bc714dc649385b1ed9ccd07d07a9"
+          },
+          "candidate_protocol_sha256": "00ce605525f69b844a7524af24d7b11012131bed6d5eb4c6bd36840a45b1f427",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.39073216399992816
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_mixed_balanced_s20261025",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 215,
+            "ticks": 860,
+            "progress": 1.0,
+            "return": 23.28500000000004,
+            "coins_collected": 17,
+            "coins_total": 20,
+            "collection_ratio": 0.85,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.15189227000519168
+          },
+          "seconds": 0.5571475129981991,
+          "artifact_sha256": {
+            "fixture.json": "2397e1a5776c37e165b00f67d3bfc2e158a56dfd52e0d3fc9bc5f0d7b93be874",
+            "request.json": "5a70148f08991b02d501c61e9e867d2c5f76ff1b2cbec61b53d1041384dc99e6",
+            "intent.json": "2283df518c155836b9505e39bbca7be94998d0debef51ca0b14f37ceaddbd179",
+            "level.json": "25d103612bb3f0e4b2a66325f583c7a311f85a040df6ccb23934272418987cc3",
+            "llm.json": "b75df7356b4baf89005ae646583635013d7d89a013ebfdcf67482e6fd8a2e170",
+            "ppo.json": "5c9a9c65fcd7e48c86807e1667a217985dc0e83ed6bb046e7e991abf0ec59452",
+            "route.json": "d5df2e73d5a2fbdf9614eeb61265aae584c4376598fa4fafb20d4326aa8651e2",
+            "generation.json": "1c88127feda9ea53fb1e15d9f7efdfd740c21ae4256a45fd045101c4036d4f18"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_balanced_s20261025",
+          "final_player": {
+            "x": 7293.0,
+            "y": 457.79999999999995,
+            "velocity_x": 10.0,
+            "velocity_y": -11.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "mixed_balanced",
+          "level_id": "eval_mixed_balanced_s20261026",
+          "generation_seed": 20261026,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.0043326779996277764,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "527be9da46935a4e7734bb0b097c1b93925e963635332e3e4ebfb400bb043c91",
+            "request_sha256": "d939a31c6812c9f922f8fec67f74a4330629d5ece6d3ee669208d06d081e9151"
+          },
+          "candidate_protocol_sha256": "4947d9664965c230142713f6a2797d6064b248fb670d3b183e16f94ef1b20cdd",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.43238045400357805
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_mixed_balanced_s20261026",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 220,
+            "ticks": 877,
+            "progress": 1.0,
+            "return": 23.27999999999996,
+            "coins_collected": 17,
+            "coins_total": 20,
+            "collection_ratio": 0.85,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.17605579999508336
+          },
+          "seconds": 0.6220501829957357,
+          "artifact_sha256": {
+            "fixture.json": "37ff54df2544a1a352d8db9c787da0ccd1f144857b6d5dfc52c026bf9f106d9d",
+            "request.json": "9cbc8f4097617614775d945a1fad23b76f665449aef191fb02561b581e29e7e2",
+            "intent.json": "9025b815c4ac48bd739d366611be8234cbb5661f6d35af9644c486927f6cfd72",
+            "level.json": "0ed19c4923f6d4aacec29900494347ac1fd717c780fc13d6155c4ead2ef6c885",
+            "llm.json": "d4f6bbf8307b6d7478cb60caa19b4639928f0ce641caa5d65aa8f5191aee9304",
+            "ppo.json": "062756ac65a97b1e10ead45913f6160a1596dca8c0bc69173b5e004e717125ae",
+            "route.json": "0f32149dad5fe89093409bef8180eefd2a5b452066a82256e7f39ce33b09c4bd",
+            "generation.json": "48cfa1ffafba4b0aac8275b5e3fed2941d7f888177ac0aa833cb416516bfe4d0"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_balanced_s20261026",
+          "final_player": {
+            "x": 7463.0,
+            "y": 446.49999999999994,
+            "velocity_x": 10.0,
+            "velocity_y": -11.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "mixed_ground",
+          "level_id": "eval_mixed_ground_s20261024",
+          "generation_seed": 20261024,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.003550160996383056,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "fb5fe5851413a35a1ce65f813c7b63257c9714270adf92abb5e5ac4174d332aa",
+            "request_sha256": "6b07d9ce80ef0dd731015a412b11e75ff2596cfe2c04000c39d80ca023cc8be0"
+          },
+          "candidate_protocol_sha256": "d11ddd129c69939a4f2865a5216ca5381d2761c36edc3bc91d0475d8ab1a8112",
+          "route": {
+            "status": "unknown",
+            "reason": "budget_exhausted",
+            "seconds": 8.869981894000375
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_mixed_ground_s20261024",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 147,
+            "ticks": 586,
+            "progress": 1.0,
+            "return": 21.85300000000002,
+            "coins_collected": 14,
+            "coins_total": 16,
+            "collection_ratio": 0.875,
+            "meets_request_target": false,
+            "meets_expected_target": false,
+            "seconds": 0.10968459100695327
+          },
+          "seconds": 8.990712214006635,
+          "artifact_sha256": {
+            "fixture.json": "d366e35fcd21ebdab6511668c081a410e3dc0833583ba2a1b1bbe41072e293cb",
+            "request.json": "fe5756d380e77f2514ce1474e1b5d0bf30d0c827abb82001bdf9ccb906169440",
+            "intent.json": "4914f19fa35de77ac917e5d7c079d6dceb934bcc416b7e6cfd8ca487719127b2",
+            "level.json": "69bb755c42e5d9127ca28002e21a57bdee478562b5a0bd458290b08b6b552b0f",
+            "llm.json": "f54ac8ab50cddd8f513968bce9f62e38a0e7c4a0edb484396be12c243eac8ef6",
+            "ppo.json": "0a09722417f674a2f60aea403b4ceee0f699c497e7f1d0fe229ff70c593f59df",
+            "route.json": "83d61962d9fe7efbaa047aefcb52b4000825e13433e6b01a3e22a4aed212d89b",
+            "generation.json": "2b3e7e923424cd32b848c5a41273483050b08659863f090f1c2a83a3737b11be"
+          },
+          "expected_target": 1.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261024",
+          "final_player": {
+            "x": 5813.0,
+            "y": 435.69999999999993,
+            "velocity_x": 10.0,
+            "velocity_y": -10.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "mixed_ground",
+          "level_id": "eval_mixed_ground_s20261025",
+          "generation_seed": 20261025,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004666854998504277,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "2d4b231c730ee3ad453bf3328c716fa1725a8bdfe2d6d9f256a9a07a2578b31e",
+            "request_sha256": "d943e0dfefa253fdc07afc36bf6b2ada83b40c395b57baf5e5376b550e8c4b9a"
+          },
+          "candidate_protocol_sha256": "de534dc41408919e4b10a59f62970fbcc2965d6fc426ccffb63a38e63317603b",
+          "route": {
+            "status": "unknown",
+            "reason": "budget_exhausted",
+            "seconds": 9.453835567001079
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_mixed_ground_s20261025",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 141,
+            "ticks": 563,
+            "progress": 1.0,
+            "return": 21.858999999999977,
+            "coins_collected": 14,
+            "coins_total": 16,
+            "collection_ratio": 0.875,
+            "meets_request_target": false,
+            "meets_expected_target": false,
+            "seconds": 0.0976910350000253
+          },
+          "seconds": 9.564710598999227,
+          "artifact_sha256": {
+            "fixture.json": "d33a3b1b38d021028a5888844d5000f18f199ea08dea8aef172cc561c5fb4392",
+            "request.json": "e52f133b350b3e135ddce337708341d333000cbf069932ae70191366c50f4dce",
+            "intent.json": "774582117d9e835db783a137ad700793cc043d0a1165abb93c2af7cc70172bf1",
+            "level.json": "abd83deeec25b28f8c7da68dc265a79d7ed7f08a37bf4336fda6fcc287b32efd",
+            "llm.json": "bbc0108385fcd0220340c1c1320243221e8e8e5be512d14f2f961c8dbd117aab",
+            "ppo.json": "d50e8cb142ab0db5163a260fd19489ffaa897f093612125b00e9674b6b48a919",
+            "route.json": "13075b0a2ad8e0af4f31440ca3de3bf29f8de5f67c63424aa0ba1e50b490f68f",
+            "generation.json": "77c114c034a8c2221952fc2d9abb26379643164d7ea7a63a969901b056a1f866"
+          },
+          "expected_target": 1.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261025",
+          "final_player": {
+            "x": 5583.0,
+            "y": 469.59999999999997,
+            "velocity_x": 10.0,
+            "velocity_y": -12.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "mixed_ground",
+          "level_id": "eval_mixed_ground_s20261026",
+          "generation_seed": 20261026,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.0035285639969515614,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "948e8f14c8cd4635d1987798dc6185f4d62257795753d258dbaeb315aaf1a1be",
+            "request_sha256": "375d7d4b2962cdfb3c5088045df88143a21b456a707dbdd1b640cf251e1c2382"
+          },
+          "candidate_protocol_sha256": "a00ef07251b74e97f1370bc8ff3f93660eb7ba2b7f501ca1c1948c15df07413e",
+          "route": {
+            "status": "unknown",
+            "reason": "budget_exhausted",
+            "seconds": 9.12843423999584
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_mixed_ground_s20261026",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 146,
+            "ticks": 582,
+            "progress": 1.0,
+            "return": 21.85400000000002,
+            "coins_collected": 14,
+            "coins_total": 16,
+            "collection_ratio": 0.875,
+            "meets_request_target": false,
+            "meets_expected_target": false,
+            "seconds": 0.10685737799940398
+          },
+          "seconds": 9.248748441001226,
+          "artifact_sha256": {
+            "fixture.json": "8fb7be6dcf878016050cc1924fc06e4d43e2582d5a1bced29246d18329ff31ef",
+            "request.json": "0350d848e8d7d1d2285047e0757a96ebd50c5d70fe26b6e461ad25928acfc04b",
+            "intent.json": "30871e6dd7ecf578d9b98bf9d1cda0f92da71ffac8278a9ef1fc7b3c41964c70",
+            "level.json": "dee6efd81a764e19468050f3fb0a0a5eaf2fc9d969da360475b6f1a7ca71e0d5",
+            "llm.json": "50df6ab838f2b7eb3a19890214f73edf28fa59d0ede1723b442af0aa2bb3f9fd",
+            "ppo.json": "c3d25bbe5fd0e650b55556c8321c8f88a641ca24b274fcf3502663133eb75709",
+            "route.json": "5c94772a4cf83d3bd0fb2dd9c20f6a5711d54d1cffa626a4421d57a82860d8c3",
+            "generation.json": "957d0345f0800f0f69f39f6c6549d18a7bfd51b96f04db9484c2e685027aaf79"
+          },
+          "expected_target": 1.0,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261026",
+          "final_player": {
+            "x": 5773.0,
+            "y": 435.69999999999993,
+            "velocity_x": 10.0,
+            "velocity_y": -10.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "tall_wide",
+          "level_id": "eval_tall_wide_s20261024",
+          "generation_seed": 20261024,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.005001415003789589,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "c60188a95165884dc220860e461d434431657a659bd0f16dbb1012a9be7a9aa9",
+            "request_sha256": "a1120a81c6f8ebfb354846b39887a4947c0ca55eb55e5b3c1831dcb08d223a84"
+          },
+          "candidate_protocol_sha256": "a0569e6abf2cb44d88083170a249385387198bbc2393ed79d781806ffa11a43a",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.9837163499978487
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_tall_wide_s20261024",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 256,
+            "ticks": 1023,
+            "progress": 1.0,
+            "return": 25.744,
+            "coins_collected": 22,
+            "coins_total": 24,
+            "collection_ratio": 0.9166666666666666,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.20329038499767194
+          },
+          "seconds": 1.2063079080035095,
+          "artifact_sha256": {
+            "fixture.json": "bc7193ced1c20e2e229e70973f9902d5135efd0507a58499f4932b5006d6b61f",
+            "request.json": "b3beedffa490805c3635261af535455ed29b8abfba2105331acf3f6140178502",
+            "intent.json": "c3f0d757d13f1f69649b39eebf3540d085d9352096cb5985c1e0011126448d93",
+            "level.json": "4640194cf8c96e83976f3fe91470c94f6d7f1af77d5cf2977f696732c05d53ed",
+            "llm.json": "28711c64245eccd102cd8444e357d052cc8b1b46a0bec019cf81e150508cb8f4",
+            "ppo.json": "e442588cba34476055e79f4f2753d25334a6ba03dffa4a8a49b043f23a9c72a9",
+            "route.json": "2739868127a3d3b14ea90006831e8ea72fdf49fdec355f3edcd7a9029266a980",
+            "generation.json": "87d9dad05753cd941cc07a9ca528b626bccc9aa5224d2d4dc0c7f3dd8d085f08"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_tall_wide_s20261024",
+          "final_player": {
+            "x": 8558.0,
+            "y": 469.59999999999997,
+            "velocity_x": 10.0,
+            "velocity_y": -12.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "tall_wide",
+          "level_id": "eval_tall_wide_s20261025",
+          "generation_seed": 20261025,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.005440120999992359,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "cffc9e49c6edf95639a73a782af494d7b789e0e52197eb5f01b2528e4ddff751",
+            "request_sha256": "f3aee2fdc89dc7d481d1d2b2a26ebae23953851f10723753f2d940a72e65774a"
+          },
+          "candidate_protocol_sha256": "aa178f2f30d4b34d59ca364e07c30a86db25add186634eb807e0da9e77467f86",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 1.0068267149981693
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_tall_wide_s20261025",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 266,
+            "ticks": 1062,
+            "progress": 1.0,
+            "return": 26.73399999999998,
+            "coins_collected": 24,
+            "coins_total": 24,
+            "collection_ratio": 1.0,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.23131966100481804
+          },
+          "seconds": 1.2533700470012263,
+          "artifact_sha256": {
+            "fixture.json": "a1fb61608b7d2edbebb4772d9f7a3f6b4d8ff72d319ace950548db86d7875475",
+            "request.json": "7018e74c2bf8aa9109ae4c1169f7a7421ad3198e74be35fcc9d465758ef7bf2d",
+            "intent.json": "cd7534e2ce320e45a30c979ac29f79abe8fc4fdbe3a9dec0a53b8cf2bf877361",
+            "level.json": "d6146d9baefa8f65b52ec518162f7130f5d0504663a9fd66eb1db12e7114afd6",
+            "llm.json": "589c8252cb22b69823f01385f78786c553df824d58d049599576111ddf6d4d9c",
+            "ppo.json": "3b0721773ce5d87655230c7c4033b73e8b95b0eef810028dba61760337af8eca",
+            "route.json": "5573ca78ae4117950f32a06ac812aa15ed89ba1f772995fe807935595feb3843",
+            "generation.json": "2b19a69c897f294b0b38062049b887c06fdd1f53e0441b3b7ceb4a88500a684f"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_tall_wide_s20261025",
+          "final_player": {
+            "x": 8729.0,
+            "y": 481.9,
+            "velocity_x": 10.0,
+            "velocity_y": -12.8,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        },
+        {
+          "case_id": "tall_wide",
+          "level_id": "eval_tall_wide_s20261026",
+          "generation_seed": 20261026,
+          "policy_seed": 100,
+          "run_sha256": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+          "status": "completed",
+          "translation": {
+            "status": "ok",
+            "seconds": 0.004030623997095972,
+            "cache_hit": false,
+            "attempt_count": 1,
+            "reported_token_usage": null
+          },
+          "semantics": {
+            "passed": true,
+            "mismatches": []
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "6f85b20238b8cb7e18bde3764e358add86dec8558342356482f968b0da33dfd1",
+            "request_sha256": "fa85fe83865007080e9455b9581eed1fbffc02672f6ca3da9a2e0ad13b2251b2"
+          },
+          "candidate_protocol_sha256": "2ed1ff76d271fbc4615d189946e8a291cbf9d6e55acf2cd6359d7473a38ebb20",
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed",
+            "seconds": 0.5772349720064085
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "eval_tall_wide_s20261026",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 265,
+            "ticks": 1057,
+            "progress": 1.0,
+            "return": 25.73499999999997,
+            "coins_collected": 22,
+            "coins_total": 24,
+            "collection_ratio": 0.9166666666666666,
+            "meets_request_target": true,
+            "meets_expected_target": true,
+            "seconds": 0.21197248699900229
+          },
+          "seconds": 0.8034940529978485,
+          "artifact_sha256": {
+            "fixture.json": "07928acabff83063eecc9d93e0465ccd8c9643de54cd9bfa63a900c72c4608a4",
+            "request.json": "afeb4d72448c73ae91bd75cb512d97a7c5cc9bdb7a612a1401968d5e90311074",
+            "intent.json": "8afa00093936ac540ee0c42cf00ec15e7290656b640da943e6044b820ceafaee",
+            "level.json": "ea22f80a8a7ce0081dcb7b672113b24243f53cc9fe383fb3a88a4f64a7a2408f",
+            "llm.json": "d174779d21fed8babef9bfeddee597f492a518a2ff2dcdba27e9857b955b545e",
+            "ppo.json": "2863ee54fb51f69b4025788260811c450d298a65d10a4a9790bfae47f56fa90a",
+            "route.json": "6b51865dd5c4cca22d3d14faead1f987df36f10a80d7ea216ac9fd1620552c19",
+            "generation.json": "6bb091eb46f2855f72d1f3ca58f51efdee9e97ba971763e6715ee9240c497f14"
+          },
+          "expected_target": 0.75,
+          "package": "runs/llm_eval/small_v1_offline_final/cases/eval_tall_wide_s20261026",
+          "final_player": {
+            "x": 8881.0,
+            "y": 446.49999999999994,
+            "velocity_x": 10.0,
+            "velocity_y": -11.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        }
+      ],
+      "pending_level_ids": [],
+      "summary": {
+        "planned": 18,
+        "processed": 18,
+        "pending": 0,
+        "valid_requests_over_planned": {
+          "numerator": 18,
+          "denominator": 18,
+          "rate": 1.0
+        },
+        "llm_semantic_matches_over_planned": null,
+        "design_matches_over_asserted": {
+          "numerator": 18,
+          "denominator": 18,
+          "rate": 1.0
+        },
+        "static_valid_over_planned": {
+          "numerator": 18,
+          "denominator": 18,
+          "rate": 1.0
+        },
+        "route_verified_over_planned": {
+          "numerator": 15,
+          "denominator": 18,
+          "rate": 0.8333333333333334
+        },
+        "ppo_evaluated": 18,
+        "ppo_success_over_planned": {
+          "numerator": 18,
+          "denominator": 18,
+          "rate": 1.0
+        },
+        "ppo_success_over_evaluated": {
+          "numerator": 18,
+          "denominator": 18,
+          "rate": 1.0
+        },
+        "ppo_target_over_evaluated": {
+          "numerator": 15,
+          "denominator": 18,
+          "rate": 0.8333333333333334
+        },
+        "collection_ratio_nonempty_maps": {
+          "samples": 15,
+          "mean": 0.8838888888888888,
+          "p50": 0.875,
+          "p95": 1.0,
+          "max": 1.0
+        },
+        "weighted_coin_collection": {
+          "numerator": 200,
+          "denominator": 228,
+          "rate": 0.8771929824561403
+        },
+        "failure_categories": {
+          "route_unknown": 3,
+          "ppo_collection_miss": 3
+        },
+        "api": {
+          "applicable": false,
+          "cache_hits": 0,
+          "recorded_uncached_attempts": 0,
+          "observed_json_outputs": 0,
+          "attempts_with_unknown_response_outcome": 0,
+          "observed_json_response_rate_lower_bound": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          },
+          "transport_error_events": {},
+          "translation_latency_seconds": {
+            "samples": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "max": null
+          },
+          "valid_translation_latency_seconds": {
+            "samples": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "max": null
+          },
+          "reported_tokens": {
+            "promptTokenCount": null,
+            "candidatesTokenCount": null,
+            "totalTokenCount": null,
+            "thoughtsTokenCount": null
+          },
+          "token_field_sample_counts": {
+            "promptTokenCount": 0,
+            "candidatesTokenCount": 0,
+            "totalTokenCount": 0,
+            "thoughtsTokenCount": 0
+          },
+          "usage_reported_attempts": 0,
+          "billed_cost_usd": null
+        }
+      },
+      "by_prompt": {
+        "flat_collect": {
+          "planned": 3,
+          "processed": 3,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_evaluated": 3,
+          "ppo_success_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 3,
+            "mean": 1.0,
+            "p50": 1.0,
+            "p95": 1.0,
+            "max": 1.0
+          },
+          "weighted_coin_collection": {
+            "numerator": 12,
+            "denominator": 12,
+            "rate": 1.0
+          },
+          "failure_categories": {},
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        },
+        "low_obstacles": {
+          "planned": 3,
+          "processed": 3,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_evaluated": 3,
+          "ppo_success_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 3,
+            "mean": 0.75,
+            "p50": 0.75,
+            "p95": 0.75,
+            "max": 0.75
+          },
+          "weighted_coin_collection": {
+            "numerator": 27,
+            "denominator": 36,
+            "rate": 0.75
+          },
+          "failure_categories": {},
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        },
+        "gaps_no_coins": {
+          "planned": 3,
+          "processed": 3,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_evaluated": 3,
+          "ppo_success_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "max": null
+          },
+          "weighted_coin_collection": {
+            "numerator": 0,
+            "denominator": 0,
+            "rate": null
+          },
+          "failure_categories": {},
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        },
+        "mixed_balanced": {
+          "planned": 3,
+          "processed": 3,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_evaluated": 3,
+          "ppo_success_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 3,
+            "mean": 0.85,
+            "p50": 0.85,
+            "p95": 0.85,
+            "max": 0.85
+          },
+          "weighted_coin_collection": {
+            "numerator": 51,
+            "denominator": 60,
+            "rate": 0.85
+          },
+          "failure_categories": {},
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        },
+        "mixed_ground": {
+          "planned": 3,
+          "processed": 3,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 0,
+            "denominator": 3,
+            "rate": 0.0
+          },
+          "ppo_evaluated": 3,
+          "ppo_success_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 0,
+            "denominator": 3,
+            "rate": 0.0
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 3,
+            "mean": 0.875,
+            "p50": 0.875,
+            "p95": 0.875,
+            "max": 0.875
+          },
+          "weighted_coin_collection": {
+            "numerator": 42,
+            "denominator": 48,
+            "rate": 0.875
+          },
+          "failure_categories": {
+            "route_unknown": 3,
+            "ppo_collection_miss": 3
+          },
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        },
+        "tall_wide": {
+          "planned": 3,
+          "processed": 3,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_evaluated": 3,
+          "ppo_success_over_planned": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 3,
+            "denominator": 3,
+            "rate": 1.0
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 3,
+            "mean": 0.9444444444444443,
+            "p50": 0.9166666666666666,
+            "p95": 0.9916666666666667,
+            "max": 1.0
+          },
+          "weighted_coin_collection": {
+            "numerator": 68,
+            "denominator": 72,
+            "rate": 0.9444444444444444
+          },
+          "failure_categories": {},
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        }
+      },
+      "by_generation_seed": {
+        "20261024": {
+          "planned": 6,
+          "processed": 6,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 5,
+            "denominator": 6,
+            "rate": 0.8333333333333334
+          },
+          "ppo_evaluated": 6,
+          "ppo_success_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 5,
+            "denominator": 6,
+            "rate": 0.8333333333333334
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 5,
+            "mean": 0.8783333333333333,
+            "p50": 0.875,
+            "p95": 0.9833333333333333,
+            "max": 1.0
+          },
+          "weighted_coin_collection": {
+            "numerator": 66,
+            "denominator": 76,
+            "rate": 0.868421052631579
+          },
+          "failure_categories": {
+            "route_unknown": 1,
+            "ppo_collection_miss": 1
+          },
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        },
+        "20261025": {
+          "planned": 6,
+          "processed": 6,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 5,
+            "denominator": 6,
+            "rate": 0.8333333333333334
+          },
+          "ppo_evaluated": 6,
+          "ppo_success_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 5,
+            "denominator": 6,
+            "rate": 0.8333333333333334
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 5,
+            "mean": 0.8949999999999999,
+            "p50": 0.875,
+            "p95": 1.0,
+            "max": 1.0
+          },
+          "weighted_coin_collection": {
+            "numerator": 68,
+            "denominator": 76,
+            "rate": 0.8947368421052632
+          },
+          "failure_categories": {
+            "route_unknown": 1,
+            "ppo_collection_miss": 1
+          },
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        },
+        "20261026": {
+          "planned": 6,
+          "processed": 6,
+          "pending": 0,
+          "valid_requests_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "llm_semantic_matches_over_planned": null,
+          "design_matches_over_asserted": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "static_valid_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "route_verified_over_planned": {
+            "numerator": 5,
+            "denominator": 6,
+            "rate": 0.8333333333333334
+          },
+          "ppo_evaluated": 6,
+          "ppo_success_over_planned": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "ppo_success_over_evaluated": {
+            "numerator": 6,
+            "denominator": 6,
+            "rate": 1.0
+          },
+          "ppo_target_over_evaluated": {
+            "numerator": 5,
+            "denominator": 6,
+            "rate": 0.8333333333333334
+          },
+          "collection_ratio_nonempty_maps": {
+            "samples": 5,
+            "mean": 0.8783333333333333,
+            "p50": 0.875,
+            "p95": 0.9833333333333333,
+            "max": 1.0
+          },
+          "weighted_coin_collection": {
+            "numerator": 66,
+            "denominator": 76,
+            "rate": 0.868421052631579
+          },
+          "failure_categories": {
+            "route_unknown": 1,
+            "ppo_collection_miss": 1
+          },
+          "api": {
+            "applicable": false,
+            "cache_hits": 0,
+            "recorded_uncached_attempts": 0,
+            "observed_json_outputs": 0,
+            "attempts_with_unknown_response_outcome": 0,
+            "observed_json_response_rate_lower_bound": {
+              "numerator": 0,
+              "denominator": 0,
+              "rate": null
+            },
+            "transport_error_events": {},
+            "translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "valid_translation_latency_seconds": {
+              "samples": 0,
+              "mean": null,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "reported_tokens": {
+              "promptTokenCount": null,
+              "candidatesTokenCount": null,
+              "totalTokenCount": null,
+              "thoughtsTokenCount": null
+            },
+            "token_field_sample_counts": {
+              "promptTokenCount": 0,
+              "candidatesTokenCount": 0,
+              "totalTokenCount": 0,
+              "thoughtsTokenCount": 0
+            },
+            "usage_reported_attempts": 0,
+            "billed_cost_usd": null
+          }
+        }
+      }
+    },
+    {
+      "kind": "single",
+      "path": "runs/llm/live_006",
+      "source_id": "dd66ef5c307aa1df66c8221f28c70e3cb5fbf7069dc29f51d6907d46daaa0fb3",
+      "suite_id": null,
+      "mode": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "tls_mode": "tls12",
+      "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+      "policy_seed": 100,
+      "input_sha256": {
+        "report.json": "fb75b4d8c8050722edd30f37e3d2ad0434415fc5aaa5e782ada78e1ab5841ca6",
+        "intent.json": "c04ae4c1796a8a4ae3163971ae2276df50dee90421d1482acbb4deb49405e537",
+        "llm.json": "8ca5258030d41d05bf5412c99ab67bca49dd890f2d422ee9d9caa6778a049f3b",
+        "request.json": "ca17ae2a7bd5de2feee9ca31221e55ede47ccf526060ed3a69db6318db14f74a",
+        "level.json": "db46226935e483d492b92f9b50464b9ddb3c3485fd8b0d0d0cad64179c18e15c",
+        "route.json": "b6f91dedabbc14adec337eafcc1482302f40fa8d1988cefb0387df6206dd59b1"
+      },
+      "cases": [
+        {
+          "case_id": "single_candidate",
+          "level_id": "llm_test_001",
+          "generation_seed": 20261010,
+          "policy_seed": 100,
+          "package": "runs/llm/live_006",
+          "semantics": {},
+          "translation": {
+            "status": "ok",
+            "cache_hit": false
+          },
+          "generation": {
+            "status": "valid",
+            "geometry_sha256": "98ccd48ce05422eba538469539d08148e0a18c149e03dbcd341433b322ce4070"
+          },
+          "expected_target": 0.75,
+          "route": {
+            "status": "verified",
+            "reason": "successful_route_replayed"
+          },
+          "ppo": {
+            "status": "ok",
+            "level_id": "llm_test_001",
+            "seed": 100,
+            "deterministic": true,
+            "outcome": "success",
+            "steps": 211,
+            "ticks": 841,
+            "progress": 1.0,
+            "return": 23.288999999999994,
+            "coins_collected": 17,
+            "coins_total": 20,
+            "collection_ratio": 0.85,
+            "meets_request_target": true,
+            "meets_expected_target": true
+          },
+          "final_player": {
+            "x": 7103.0,
+            "y": 446.49999999999994,
+            "velocity_x": 10.0,
+            "velocity_y": -11.3,
+            "grounded": false,
+            "alive": true,
+            "facing": 1
+          }
+        }
+      ],
+      "by_prompt": {},
+      "pending_level_ids": [],
+      "semantics_note": "No frozen expectation assertions in this single package; semantic accuracy is unscored.",
+      "summary": {
+        "planned": 1,
+        "processed": 1,
+        "pending": 0,
+        "valid_requests_over_planned": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "llm_semantic_matches_over_planned": null,
+        "design_matches_over_asserted": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "static_valid_over_planned": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "route_verified_over_planned": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "ppo_evaluated": 1,
+        "ppo_success_over_planned": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "ppo_success_over_evaluated": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "ppo_target_over_evaluated": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "collection_ratio_nonempty_maps": {
+          "samples": 1,
+          "mean": 0.85,
+          "p50": 0.85,
+          "p95": 0.85,
+          "max": 0.85
+        },
+        "weighted_coin_collection": {
+          "numerator": 17,
+          "denominator": 20,
+          "rate": 0.85
+        },
+        "failure_categories": {},
+        "api": {
+          "applicable": true,
+          "cache_hits": 0,
+          "recorded_uncached_attempts": 1,
+          "observed_json_outputs": 1,
+          "attempts_with_unknown_response_outcome": 0,
+          "observed_json_response_rate_lower_bound": {
+            "numerator": 1,
+            "denominator": 1,
+            "rate": 1.0
+          },
+          "transport_error_events": {},
+          "translation_latency_seconds": {
+            "samples": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "max": null
+          },
+          "valid_translation_latency_seconds": {
+            "samples": 0,
+            "mean": null,
+            "p50": null,
+            "p95": null,
+            "max": null
+          },
+          "reported_tokens": {
+            "promptTokenCount": 261,
+            "candidatesTokenCount": 124,
+            "totalTokenCount": 385,
+            "thoughtsTokenCount": null
+          },
+          "token_field_sample_counts": {
+            "promptTokenCount": 1,
+            "candidatesTokenCount": 1,
+            "totalTokenCount": 1,
+            "thoughtsTokenCount": 0
+          },
+          "usage_reported_attempts": 1,
+          "billed_cost_usd": null
+        }
+      },
+      "fresh_ppo_artifact": "single_00_ppo.json",
+      "checkpoint_path": "runs/full_collection_v9/seed_20261004/model.zip"
+    }
+  ],
+  "evidence_counts": {
+    "live_batches": 0,
+    "live_single_packages": 1,
+    "offline_batches": 1
+  },
+  "failure_catalog": [
+    {
+      "source_id": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+      "mode": "expected-fixture",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261024",
+      "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261024",
+      "category": "route_unknown",
+      "reason": "budget_exhausted"
+    },
+    {
+      "source_id": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+      "mode": "expected-fixture",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261024",
+      "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261024",
+      "category": "ppo_collection_miss",
+      "collected": 14,
+      "total": 16,
+      "required_ratio": 1.0,
+      "final_player": {
+        "x": 5813.0,
+        "y": 435.69999999999993,
+        "velocity_x": 10.0,
+        "velocity_y": -10.8,
+        "grounded": false,
+        "alive": true,
+        "facing": 1
+      }
+    },
+    {
+      "source_id": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+      "mode": "expected-fixture",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261025",
+      "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261025",
+      "category": "route_unknown",
+      "reason": "budget_exhausted"
+    },
+    {
+      "source_id": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+      "mode": "expected-fixture",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261025",
+      "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261025",
+      "category": "ppo_collection_miss",
+      "collected": 14,
+      "total": 16,
+      "required_ratio": 1.0,
+      "final_player": {
+        "x": 5583.0,
+        "y": 469.59999999999997,
+        "velocity_x": 10.0,
+        "velocity_y": -12.3,
+        "grounded": false,
+        "alive": true,
+        "facing": 1
+      }
+    },
+    {
+      "source_id": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+      "mode": "expected-fixture",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261026",
+      "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261026",
+      "category": "route_unknown",
+      "reason": "budget_exhausted"
+    },
+    {
+      "source_id": "92e3a3e930e101fc473cbc3c0d707f9f103e1dc50cc231eb45b1e5f50fc7d78b",
+      "mode": "expected-fixture",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261026",
+      "package": "runs/llm_eval/small_v1_offline_final/cases/eval_mixed_ground_s20261026",
+      "category": "ppo_collection_miss",
+      "collected": 14,
+      "total": 16,
+      "required_ratio": 1.0,
+      "final_player": {
+        "x": 5773.0,
+        "y": 435.69999999999993,
+        "velocity_x": 10.0,
+        "velocity_y": -10.8,
+        "grounded": false,
+        "alive": true,
+        "facing": 1
+      }
+    }
+  ],
+  "geometry_audit": {
+    "unique_geometry_count": 19,
+    "duplicate_groups": []
+  },
+  "billed_cost_usd": null,
+  "notes": [
+    "离线、真实批次、单图和重复运行不合并计算总成功率。",
+    "API JSON输出观测率仅为已记录尝试的下界，不代表HTTP精确成功率或服务可用性。",
+    "缺失的历史耗时、用量和语义断言保留为未知；只覆盖所选来源，不等于全部调试请求或账单。",
+    "失败类型可以重叠；路线unknown不代表不可通关。",
+    "单图PPO目标来自生成请求；没有冻结需求断言时，不推断其LLM语义正确率。",
+    "本报告限于探索性的静态生成族；未改变训练/保留集，也未重新训练模型。"
+  ],
+  "output_artifact_sha256": {
+    "single_00_ppo.json": "0f494f921a73c60584ab6f5b6993ec07639a3bee154029f8997182f5f0ad15c7"
+  },
+  "snapshot_origin": "runs/llm_eval/unified_v1_final/report.json",
+  "validation": {
+    "full_pytest_passed": 213,
+    "subtests_passed": 8,
+    "warnings": 2,
+    "report_specific_tests_passed": 9,
+    "date": "2026-10-24"
+  },
+  "original_report_sha256": "ab9ccda966435b9de668cd640846facb31e72098d05cb54ee2076ae99a60315a"
+}
