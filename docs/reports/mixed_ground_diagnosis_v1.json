@@ -1,0 +1,819 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "scope": "Three frozen live mixed_ground maps, v9 training seed 20261004, deterministic policy seed 100. Diagnostic interventions use full map/state knowledge; they are not PPO acceptance results.",
+  "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+  "original_source_files_unchanged": true,
+  "cases": [
+    {
+      "generation_seed": 20261024,
+      "policy_seed": 100,
+      "source_sha256": {
+        "request.json": "fe5756d380e77f2514ce1474e1b5d0bf30d0c827abb82001bdf9ccb906169440",
+        "intent.json": "4914f19fa35de77ac917e5d7c079d6dceb934bcc416b7e6cfd8ca487719127b2",
+        "level.json": "69bb755c42e5d9127ca28002e21a57bdee478562b5a0bd458290b08b6b552b0f",
+        "result.json": "7dd20b1419401ed7fee0b5d22dd1f3cee6e853693b03e81670dbb67c0ddcfd06",
+        "llm.json": "351eae3b0b7e9bd75789cf6b140d1b1830c538276c67bacb9132c772b7cca6dd",
+        "ppo.json": "0a09722417f674a2f60aea403b4ceee0f699c497e7f1d0fe229ff70c593f59df",
+        "route.json": "063b1d0cf11eb81bdbfcdf67efc556dcee52788f0fbe4aacf10f6cf54ac26fd0",
+        "generation.json": "2b3e7e923424cd32b848c5a41273483050b08659863f090f1c2a83a3737b11be"
+      },
+      "baseline_reproduced": true,
+      "baseline": {
+        "outcome": "success",
+        "steps": 147,
+        "ticks": 586,
+        "coins_collected": 14,
+        "coins_total": 16
+      },
+      "recovery": {
+        "outcome": "success",
+        "steps": 187,
+        "ticks": 746,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "interventions": [
+          {
+            "coin_id": "coin-0-2",
+            "start_tick": 104,
+            "start_x": 993.0,
+            "collected_tick": 144
+          },
+          {
+            "coin_id": "coin-2-2",
+            "start_tick": 476,
+            "start_x": 3913.0,
+            "collected_tick": 516
+          }
+        ],
+        "independent_replay": {
+          "schema_version": 1,
+          "passed": true,
+          "mismatch_field": null,
+          "mismatch_step": null
+        }
+      },
+      "early_release": {
+        "outcome": "success",
+        "steps": 150,
+        "ticks": 599,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "changes": [
+          {
+            "decision": 19,
+            "tick": 76,
+            "x": 713.0,
+            "obstacle_right": 685,
+            "proposed": 9,
+            "executed": 6
+          }
+        ],
+        "remaining_coins": [],
+        "independent_replay_passed": true
+      },
+      "early_release_walk": {
+        "outcome": "success",
+        "steps": 154,
+        "ticks": 616,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "changes": [
+          {
+            "decision": 19,
+            "tick": 76,
+            "x": 713.0,
+            "obstacle_right": 685,
+            "proposed": 9,
+            "executed": 2
+          },
+          {
+            "decision": 21,
+            "tick": 84,
+            "x": 761.0,
+            "obstacle_right": 685,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 22,
+            "tick": 88,
+            "x": 785.0,
+            "obstacle_right": 685,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 23,
+            "tick": 92,
+            "x": 809.0,
+            "obstacle_right": 685,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 24,
+            "tick": 96,
+            "x": 833.0,
+            "obstacle_right": 685,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 97,
+            "tick": 388,
+            "x": 3622.0,
+            "obstacle_right": 3615,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 98,
+            "tick": 392,
+            "x": 3646.0,
+            "obstacle_right": 3615,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 99,
+            "tick": 396,
+            "x": 3670.0,
+            "obstacle_right": 3615,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 100,
+            "tick": 400,
+            "x": 3694.0,
+            "obstacle_right": 3615,
+            "proposed": 6,
+            "executed": 2
+          }
+        ],
+        "remaining_coins": [],
+        "independent_replay_passed": true
+      },
+      "baseline_action_counts": {
+        "6": 117,
+        "9": 30
+      },
+      "misses": [
+        {
+          "coin_id": "coin-0-2",
+          "coin_x": 905,
+          "coin_y": 508,
+          "obstacle_x": 621,
+          "obstacle_height": 75,
+          "obstacle_right": 685,
+          "coin_offset_after_obstacle": 220,
+          "launch_tick": 57,
+          "launch_x": 523.0,
+          "held_jump_ticks": 28,
+          "overlap_tick_start": 93,
+          "overlap_tick_end": 96,
+          "min_vertical_clearance_px": 46.4,
+          "landing_tick": 104,
+          "landing_x": 993.0,
+          "landing_past_coin_left_px": 88.0,
+          "overlap_frames": [
+            {
+              "tick": 93,
+              "x": 883.0,
+              "y": 396.5999999999997,
+              "bottom": 428.5999999999997,
+              "vertical_clearance": 79.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 94,
+              "x": 893.0,
+              "y": 407.5999999999997,
+              "bottom": 439.5999999999997,
+              "vertical_clearance": 68.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 95,
+              "x": 903.0,
+              "y": 418.5999999999997,
+              "bottom": 450.5999999999997,
+              "vertical_clearance": 57.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 96,
+              "x": 913.0,
+              "y": 429.5999999999997,
+              "bottom": 461.5999999999997,
+              "vertical_clearance": 46.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            }
+          ]
+        },
+        {
+          "coin_id": "coin-2-2",
+          "coin_x": 3835,
+          "coin_y": 508,
+          "obstacle_x": 3551,
+          "obstacle_height": 96,
+          "obstacle_right": 3615,
+          "coin_offset_after_obstacle": 220,
+          "launch_tick": 349,
+          "launch_x": 3443.0,
+          "held_jump_ticks": 28,
+          "overlap_tick_start": 386,
+          "overlap_tick_end": 389,
+          "min_vertical_clearance_px": 35.4,
+          "landing_tick": 396,
+          "landing_x": 3913.0,
+          "landing_past_coin_left_px": 78.0,
+          "overlap_frames": [
+            {
+              "tick": 386,
+              "x": 3813.0,
+              "y": 407.5999999999997,
+              "bottom": 439.5999999999997,
+              "vertical_clearance": 68.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 387,
+              "x": 3823.0,
+              "y": 418.5999999999997,
+              "bottom": 450.5999999999997,
+              "vertical_clearance": 57.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 388,
+              "x": 3833.0,
+              "y": 429.5999999999997,
+              "bottom": 461.5999999999997,
+              "vertical_clearance": 46.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 389,
+              "x": 3843.0,
+              "y": 440.5999999999997,
+              "bottom": 472.5999999999997,
+              "vertical_clearance": 35.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "generation_seed": 20261025,
+      "policy_seed": 100,
+      "source_sha256": {
+        "request.json": "e52f133b350b3e135ddce337708341d333000cbf069932ae70191366c50f4dce",
+        "intent.json": "774582117d9e835db783a137ad700793cc043d0a1165abb93c2af7cc70172bf1",
+        "level.json": "abd83deeec25b28f8c7da68dc265a79d7ed7f08a37bf4336fda6fcc287b32efd",
+        "result.json": "5e9d729041ef844bfa7888d0cc96b62fbd574fb0e5ff5489610487c03a6724f3",
+        "llm.json": "ae6c8d4c398a23b35beefbc9a07f8fcdedf1c0c2a695ee40c0c4d8264d5ee185",
+        "ppo.json": "d50e8cb142ab0db5163a260fd19489ffaa897f093612125b00e9674b6b48a919",
+        "route.json": "bbffb6467744cc4399c186df41eb27ec3084992d400fcf6f64a9a0379583ab62",
+        "generation.json": "77c114c034a8c2221952fc2d9abb26379643164d7ea7a63a969901b056a1f866"
+      },
+      "baseline_reproduced": true,
+      "baseline": {
+        "outcome": "success",
+        "steps": 141,
+        "ticks": 563,
+        "coins_collected": 14,
+        "coins_total": 16
+      },
+      "recovery": {
+        "outcome": "success",
+        "steps": 177,
+        "ticks": 707,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "interventions": [
+          {
+            "coin_id": "coin-0-2",
+            "start_tick": 104,
+            "start_x": 993.0,
+            "collected_tick": 140
+          },
+          {
+            "coin_id": "coin-1-2",
+            "start_tick": 312,
+            "start_x": 2353.0,
+            "collected_tick": 348
+          }
+        ],
+        "independent_replay": {
+          "schema_version": 1,
+          "passed": true,
+          "mismatch_field": null,
+          "mismatch_step": null
+        }
+      },
+      "early_release": {
+        "outcome": "success",
+        "steps": 143,
+        "ticks": 569,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "changes": [
+          {
+            "decision": 19,
+            "tick": 76,
+            "x": 713.0,
+            "obstacle_right": 712,
+            "proposed": 9,
+            "executed": 6
+          },
+          {
+            "decision": 54,
+            "tick": 216,
+            "x": 2083.0,
+            "obstacle_right": 2065,
+            "proposed": 9,
+            "executed": 6
+          }
+        ],
+        "remaining_coins": [],
+        "independent_replay_passed": true
+      },
+      "early_release_walk": {
+        "outcome": "success",
+        "steps": 147,
+        "ticks": 585,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "changes": [
+          {
+            "decision": 19,
+            "tick": 76,
+            "x": 713.0,
+            "obstacle_right": 712,
+            "proposed": 9,
+            "executed": 2
+          },
+          {
+            "decision": 21,
+            "tick": 84,
+            "x": 761.0,
+            "obstacle_right": 712,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 22,
+            "tick": 88,
+            "x": 785.0,
+            "obstacle_right": 712,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 56,
+            "tick": 224,
+            "x": 2083.0,
+            "obstacle_right": 2065,
+            "proposed": 9,
+            "executed": 2
+          },
+          {
+            "decision": 58,
+            "tick": 232,
+            "x": 2131.0,
+            "obstacle_right": 2065,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 59,
+            "tick": 236,
+            "x": 2155.0,
+            "obstacle_right": 2065,
+            "proposed": 6,
+            "executed": 2
+          }
+        ],
+        "remaining_coins": [],
+        "independent_replay_passed": true
+      },
+      "baseline_action_counts": {
+        "6": 112,
+        "9": 29
+      },
+      "misses": [
+        {
+          "coin_id": "coin-0-2",
+          "coin_x": 932,
+          "coin_y": 508,
+          "obstacle_x": 648,
+          "obstacle_height": 49,
+          "obstacle_right": 712,
+          "coin_offset_after_obstacle": 220,
+          "launch_tick": 57,
+          "launch_x": 523.0,
+          "held_jump_ticks": 28,
+          "overlap_tick_start": 96,
+          "overlap_tick_end": 99,
+          "min_vertical_clearance_px": 13.4,
+          "landing_tick": 104,
+          "landing_x": 993.0,
+          "landing_past_coin_left_px": 61.0,
+          "overlap_frames": [
+            {
+              "tick": 96,
+              "x": 913.0,
+              "y": 429.5999999999997,
+              "bottom": 461.5999999999997,
+              "vertical_clearance": 46.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 97,
+              "x": 923.0,
+              "y": 440.5999999999997,
+              "bottom": 472.5999999999997,
+              "vertical_clearance": 35.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 98,
+              "x": 933.0,
+              "y": 451.5999999999997,
+              "bottom": 483.5999999999997,
+              "vertical_clearance": 24.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 99,
+              "x": 943.0,
+              "y": 462.5999999999997,
+              "bottom": 494.5999999999997,
+              "vertical_clearance": 13.400000000000318,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            }
+          ]
+        },
+        {
+          "coin_id": "coin-1-2",
+          "coin_x": 2285,
+          "coin_y": 508,
+          "obstacle_x": 2001,
+          "obstacle_height": 88,
+          "obstacle_right": 2065,
+          "coin_offset_after_obstacle": 220,
+          "launch_tick": 193,
+          "launch_x": 1883.0,
+          "held_jump_ticks": 28,
+          "overlap_tick_start": 231,
+          "overlap_tick_end": 234,
+          "min_vertical_clearance_px": 24.4,
+          "landing_tick": 240,
+          "landing_x": 2353.0,
+          "landing_past_coin_left_px": 68.0,
+          "overlap_frames": [
+            {
+              "tick": 231,
+              "x": 2263.0,
+              "y": 418.5999999999997,
+              "bottom": 450.5999999999997,
+              "vertical_clearance": 57.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 232,
+              "x": 2273.0,
+              "y": 429.5999999999997,
+              "bottom": 461.5999999999997,
+              "vertical_clearance": 46.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 233,
+              "x": 2283.0,
+              "y": 440.5999999999997,
+              "bottom": 472.5999999999997,
+              "vertical_clearance": 35.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 234,
+              "x": 2293.0,
+              "y": 451.5999999999997,
+              "bottom": 483.5999999999997,
+              "vertical_clearance": 24.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "generation_seed": 20261026,
+      "policy_seed": 100,
+      "source_sha256": {
+        "request.json": "0350d848e8d7d1d2285047e0757a96ebd50c5d70fe26b6e461ad25928acfc04b",
+        "intent.json": "30871e6dd7ecf578d9b98bf9d1cda0f92da71ffac8278a9ef1fc7b3c41964c70",
+        "level.json": "dee6efd81a764e19468050f3fb0a0a5eaf2fc9d969da360475b6f1a7ca71e0d5",
+        "result.json": "e7de6348ff203511f57f98cf02e4fba4b30c30ede51cbdb6f167c60afa095165",
+        "llm.json": "9c57a455402dcac6929f5c03f0cb57de5df56d60e47607a3d5c8d774662655f1",
+        "ppo.json": "c3d25bbe5fd0e650b55556c8321c8f88a641ca24b274fcf3502663133eb75709",
+        "route.json": "598c075ee517a7c72d672d6d0f97e0a3207307c62cdc815d001f4439212f3636",
+        "generation.json": "957d0345f0800f0f69f39f6c6549d18a7bfd51b96f04db9484c2e685027aaf79"
+      },
+      "baseline_reproduced": true,
+      "baseline": {
+        "outcome": "success",
+        "steps": 146,
+        "ticks": 582,
+        "coins_collected": 14,
+        "coins_total": 16
+      },
+      "recovery": {
+        "outcome": "success",
+        "steps": 186,
+        "ticks": 742,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "interventions": [
+          {
+            "coin_id": "coin-0-2",
+            "start_tick": 116,
+            "start_x": 1113.0,
+            "collected_tick": 156
+          },
+          {
+            "coin_id": "coin-1-2",
+            "start_tick": 324,
+            "start_x": 2393.0,
+            "collected_tick": 364
+          }
+        ],
+        "independent_replay": {
+          "schema_version": 1,
+          "passed": true,
+          "mismatch_field": null,
+          "mismatch_step": null
+        }
+      },
+      "early_release": {
+        "outcome": "success",
+        "steps": 147,
+        "ticks": 588,
+        "coins_collected": 15,
+        "coins_total": 16,
+        "changes": [
+          {
+            "decision": 22,
+            "tick": 88,
+            "x": 833.0,
+            "obstacle_right": 805,
+            "proposed": 9,
+            "executed": 6
+          },
+          {
+            "decision": 55,
+            "tick": 220,
+            "x": 2123.0,
+            "obstacle_right": 2096,
+            "proposed": 9,
+            "executed": 6
+          }
+        ],
+        "remaining_coins": [
+          {
+            "id": "coin-2-2",
+            "x": 3835,
+            "y": 508
+          }
+        ]
+      },
+      "early_release_walk": {
+        "outcome": "success",
+        "steps": 151,
+        "ticks": 604,
+        "coins_collected": 15,
+        "coins_total": 16,
+        "changes": [
+          {
+            "decision": 22,
+            "tick": 88,
+            "x": 833.0,
+            "obstacle_right": 805,
+            "proposed": 9,
+            "executed": 2
+          },
+          {
+            "decision": 24,
+            "tick": 96,
+            "x": 881.0,
+            "obstacle_right": 805,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 25,
+            "tick": 100,
+            "x": 905.0,
+            "obstacle_right": 805,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 26,
+            "tick": 104,
+            "x": 929.0,
+            "obstacle_right": 805,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 57,
+            "tick": 228,
+            "x": 2123.0,
+            "obstacle_right": 2096,
+            "proposed": 9,
+            "executed": 2
+          },
+          {
+            "decision": 59,
+            "tick": 236,
+            "x": 2171.0,
+            "obstacle_right": 2096,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 60,
+            "tick": 240,
+            "x": 2195.0,
+            "obstacle_right": 2096,
+            "proposed": 6,
+            "executed": 2
+          },
+          {
+            "decision": 61,
+            "tick": 244,
+            "x": 2219.0,
+            "obstacle_right": 2096,
+            "proposed": 6,
+            "executed": 2
+          }
+        ],
+        "remaining_coins": [
+          {
+            "id": "coin-2-2",
+            "x": 3835,
+            "y": 508
+          }
+        ]
+      },
+      "baseline_action_counts": {
+        "6": 116,
+        "9": 30
+      },
+      "misses": [
+        {
+          "coin_id": "coin-0-2",
+          "coin_x": 1025,
+          "coin_y": 508,
+          "obstacle_x": 741,
+          "obstacle_height": 86,
+          "obstacle_right": 805,
+          "coin_offset_after_obstacle": 220,
+          "launch_tick": 69,
+          "launch_x": 643.0,
+          "held_jump_ticks": 28,
+          "overlap_tick_start": 105,
+          "overlap_tick_end": 108,
+          "min_vertical_clearance_px": 46.4,
+          "landing_tick": 116,
+          "landing_x": 1113.0,
+          "landing_past_coin_left_px": 88.0,
+          "overlap_frames": [
+            {
+              "tick": 105,
+              "x": 1003.0,
+              "y": 396.5999999999997,
+              "bottom": 428.5999999999997,
+              "vertical_clearance": 79.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 106,
+              "x": 1013.0,
+              "y": 407.5999999999997,
+              "bottom": 439.5999999999997,
+              "vertical_clearance": 68.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 107,
+              "x": 1023.0,
+              "y": 418.5999999999997,
+              "bottom": 450.5999999999997,
+              "vertical_clearance": 57.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 108,
+              "x": 1033.0,
+              "y": 429.5999999999997,
+              "bottom": 461.5999999999997,
+              "vertical_clearance": 46.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            }
+          ]
+        },
+        {
+          "coin_id": "coin-1-2",
+          "coin_x": 2316,
+          "coin_y": 508,
+          "obstacle_x": 2032,
+          "obstacle_height": 51,
+          "obstacle_right": 2096,
+          "coin_offset_after_obstacle": 220,
+          "launch_tick": 197,
+          "launch_x": 1923.0,
+          "held_jump_ticks": 28,
+          "overlap_tick_start": 234,
+          "overlap_tick_end": 237,
+          "min_vertical_clearance_px": 35.4,
+          "landing_tick": 244,
+          "landing_x": 2393.0,
+          "landing_past_coin_left_px": 77.0,
+          "overlap_frames": [
+            {
+              "tick": 234,
+              "x": 2293.0,
+              "y": 407.5999999999997,
+              "bottom": 439.5999999999997,
+              "vertical_clearance": 68.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 235,
+              "x": 2303.0,
+              "y": 418.5999999999997,
+              "bottom": 450.5999999999997,
+              "vertical_clearance": 57.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 236,
+              "x": 2313.0,
+              "y": 429.5999999999997,
+              "bottom": 461.5999999999997,
+              "vertical_clearance": 46.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            },
+            {
+              "tick": 237,
+              "x": 2323.0,
+              "y": 440.5999999999997,
+              "bottom": 472.5999999999997,
+              "vertical_clearance": 35.40000000000032,
+              "vy": 11.0,
+              "action": "RIGHT_RUN"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "artifact_sha256": {
+    "20261024_release_walk_route.json": "0a108e7f809ee8be71fc9b16aa86e0281b23eac94fb69d77230c44a406e77ae9",
+    "20261024_release_route.json": "221e40ab81f6842e7cc328928213358e63af0a161219fe248bff93163876d820",
+    "20261025_recovery_route.json": "d0ef9cfe5a3b05b4c16389d99328f7655f5c40c0d7a6c99a029bb16628edd3c8",
+    "20261024_recovery_route.json": "3de303eb4029f252990fc2f9bc667e118627ab01e7a2901cfd39267a19388cd1",
+    "20261026_recovery_route.json": "4e0827430820962976c900724d17a586a25792743c7f7da4b122700b7aa78ae2",
+    "20261025_release_walk_route.json": "acb73670c755f981c0c7f2c9c75dfde397b3226f4a59984337446d7f64f2472e",
+    "20261025_release_route.json": "f4c6401f3be2b3295376e80db8654bbfa0343da5e783ea92c10865020fce3403"
+  }
+}
