@@ -1,0 +1,1139 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "status": "batch_completed_with_collection_gaps",
+  "source": "runs/llm_eval/small_v1_live",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash-lite",
+  "tls_mode": "tls12",
+  "suite_id": "small_generation_v1",
+  "run_sha256": "741032130576ec713383e98f7d7e994b5564d2e5aefeab532f30df9aba860d0e",
+  "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+  "summary": {
+    "planned": 18,
+    "processed": 18,
+    "pending": 0,
+    "valid_requests_over_planned": {
+      "numerator": 18,
+      "denominator": 18,
+      "rate": 1.0
+    },
+    "llm_semantic_matches_over_planned": {
+      "numerator": 18,
+      "denominator": 18,
+      "rate": 1.0
+    },
+    "design_matches_over_asserted": {
+      "numerator": 18,
+      "denominator": 18,
+      "rate": 1.0
+    },
+    "static_valid_over_planned": {
+      "numerator": 18,
+      "denominator": 18,
+      "rate": 1.0
+    },
+    "route_verified_over_planned": {
+      "numerator": 15,
+      "denominator": 18,
+      "rate": 0.8333333333333334
+    },
+    "ppo_evaluated": 18,
+    "ppo_success_over_planned": {
+      "numerator": 18,
+      "denominator": 18,
+      "rate": 1.0
+    },
+    "ppo_success_over_evaluated": {
+      "numerator": 18,
+      "denominator": 18,
+      "rate": 1.0
+    },
+    "ppo_target_over_evaluated": {
+      "numerator": 15,
+      "denominator": 18,
+      "rate": 0.8333333333333334
+    },
+    "collection_ratio_nonempty_maps": {
+      "samples": 15,
+      "mean": 0.8838888888888888,
+      "p50": 0.875,
+      "p95": 1.0,
+      "max": 1.0
+    },
+    "weighted_coin_collection": {
+      "numerator": 200,
+      "denominator": 228,
+      "rate": 0.8771929824561403
+    },
+    "failure_categories": {
+      "route_unknown": 3,
+      "ppo_collection_miss": 3
+    },
+    "api": {
+      "applicable": true,
+      "cache_hits": 0,
+      "recorded_uncached_attempts": 18,
+      "observed_json_outputs": 18,
+      "attempts_with_unknown_response_outcome": 0,
+      "observed_json_response_rate_lower_bound": {
+        "numerator": 18,
+        "denominator": 18,
+        "rate": 1.0
+      },
+      "transport_error_events": {},
+      "translation_latency_seconds": {
+        "samples": 18,
+        "mean": 7.586352543333002,
+        "p50": 6.7526813490039785,
+        "p95": 13.576391059056174,
+        "max": 20.219971124010044
+      },
+      "valid_translation_latency_seconds": {
+        "samples": 18,
+        "mean": 7.586352543333002,
+        "p50": 6.7526813490039785,
+        "p95": 13.576391059056174,
+        "max": 20.219971124010044
+      },
+      "reported_tokens": {
+        "promptTokenCount": 5199,
+        "candidatesTokenCount": 3378,
+        "totalTokenCount": 8577,
+        "thoughtsTokenCount": null
+      },
+      "token_field_sample_counts": {
+        "promptTokenCount": 18,
+        "candidatesTokenCount": 18,
+        "totalTokenCount": 18,
+        "thoughtsTokenCount": 0
+      },
+      "usage_reported_attempts": 18,
+      "billed_cost_usd": null
+    }
+  },
+  "by_prompt": {
+    "flat_collect": {
+      "planned": 3,
+      "processed": 3,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_evaluated": 3,
+      "ppo_success_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 3,
+        "mean": 1.0,
+        "p50": 1.0,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "weighted_coin_collection": {
+        "numerator": 12,
+        "denominator": 12,
+        "rate": 1.0
+      },
+      "failure_categories": {},
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 3,
+        "observed_json_outputs": 3,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 3,
+          "denominator": 3,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 3,
+          "mean": 11.852672300670141,
+          "p50": 7.755034315006924,
+          "p95": 18.97347744310973,
+          "max": 20.219971124010044
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 3,
+          "mean": 11.852672300670141,
+          "p50": 7.755034315006924,
+          "p95": 18.97347744310973,
+          "max": 20.219971124010044
+        },
+        "reported_tokens": {
+          "promptTokenCount": 822,
+          "candidatesTokenCount": 459,
+          "totalTokenCount": 1281,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 3,
+          "candidatesTokenCount": 3,
+          "totalTokenCount": 3,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 3,
+        "billed_cost_usd": null
+      }
+    },
+    "low_obstacles": {
+      "planned": 3,
+      "processed": 3,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_evaluated": 3,
+      "ppo_success_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 3,
+        "mean": 0.75,
+        "p50": 0.75,
+        "p95": 0.75,
+        "max": 0.75
+      },
+      "weighted_coin_collection": {
+        "numerator": 27,
+        "denominator": 36,
+        "rate": 0.75
+      },
+      "failure_categories": {},
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 3,
+        "observed_json_outputs": 3,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 3,
+          "denominator": 3,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 3,
+          "mean": 6.176801876000051,
+          "p50": 6.349909734999528,
+          "p95": 6.721941276098368,
+          "max": 6.76327811399824
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 3,
+          "mean": 6.176801876000051,
+          "p50": 6.349909734999528,
+          "p95": 6.721941276098368,
+          "max": 6.76327811399824
+        },
+        "reported_tokens": {
+          "promptTokenCount": 855,
+          "candidatesTokenCount": 624,
+          "totalTokenCount": 1479,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 3,
+          "candidatesTokenCount": 3,
+          "totalTokenCount": 3,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 3,
+        "billed_cost_usd": null
+      }
+    },
+    "gaps_no_coins": {
+      "planned": 3,
+      "processed": 3,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_evaluated": 3,
+      "ppo_success_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "max": null
+      },
+      "weighted_coin_collection": {
+        "numerator": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "failure_categories": {},
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 3,
+        "observed_json_outputs": 3,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 3,
+          "denominator": 3,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 3,
+          "mean": 6.13263583832789,
+          "p50": 6.203575570994872,
+          "p95": 7.76362366129033,
+          "max": 7.936962337989826
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 3,
+          "mean": 6.13263583832789,
+          "p50": 6.203575570994872,
+          "p95": 7.76362366129033,
+          "max": 7.936962337989826
+        },
+        "reported_tokens": {
+          "promptTokenCount": 855,
+          "candidatesTokenCount": 543,
+          "totalTokenCount": 1398,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 3,
+          "candidatesTokenCount": 3,
+          "totalTokenCount": 3,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 3,
+        "billed_cost_usd": null
+      }
+    },
+    "mixed_balanced": {
+      "planned": 3,
+      "processed": 3,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_evaluated": 3,
+      "ppo_success_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 3,
+        "mean": 0.85,
+        "p50": 0.85,
+        "p95": 0.85,
+        "max": 0.85
+      },
+      "weighted_coin_collection": {
+        "numerator": 51,
+        "denominator": 60,
+        "rate": 0.85
+      },
+      "failure_categories": {},
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 3,
+        "observed_json_outputs": 3,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 3,
+          "denominator": 3,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 3,
+          "mean": 6.3785399389986805,
+          "p50": 6.589604986002087,
+          "p95": 6.739155099703931,
+          "max": 6.755771779004135
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 3,
+          "mean": 6.3785399389986805,
+          "p50": 6.589604986002087,
+          "p95": 6.739155099703931,
+          "max": 6.755771779004135
+        },
+        "reported_tokens": {
+          "promptTokenCount": 888,
+          "candidatesTokenCount": 627,
+          "totalTokenCount": 1515,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 3,
+          "candidatesTokenCount": 3,
+          "totalTokenCount": 3,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 3,
+        "billed_cost_usd": null
+      }
+    },
+    "mixed_ground": {
+      "planned": 3,
+      "processed": 3,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 0,
+        "denominator": 3,
+        "rate": 0.0
+      },
+      "ppo_evaluated": 3,
+      "ppo_success_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 0,
+        "denominator": 3,
+        "rate": 0.0
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 3,
+        "mean": 0.875,
+        "p50": 0.875,
+        "p95": 0.875,
+        "max": 0.875
+      },
+      "weighted_coin_collection": {
+        "numerator": 42,
+        "denominator": 48,
+        "rate": 0.875
+      },
+      "failure_categories": {
+        "route_unknown": 3,
+        "ppo_collection_miss": 3
+      },
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 3,
+        "observed_json_outputs": 3,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 3,
+          "denominator": 3,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 3,
+          "mean": 7.542454159333526,
+          "p50": 6.102950820000842,
+          "p95": 11.77389020130504,
+          "max": 12.403994577005506
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 3,
+          "mean": 7.542454159333526,
+          "p50": 6.102950820000842,
+          "p95": 11.77389020130504,
+          "max": 12.403994577005506
+        },
+        "reported_tokens": {
+          "promptTokenCount": 885,
+          "candidatesTokenCount": 492,
+          "totalTokenCount": 1377,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 3,
+          "candidatesTokenCount": 3,
+          "totalTokenCount": 3,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 3,
+        "billed_cost_usd": null
+      }
+    },
+    "tall_wide": {
+      "planned": 3,
+      "processed": 3,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_evaluated": 3,
+      "ppo_success_over_planned": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 3,
+        "denominator": 3,
+        "rate": 1.0
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 3,
+        "mean": 0.9444444444444443,
+        "p50": 0.9166666666666666,
+        "p95": 0.9916666666666667,
+        "max": 1.0
+      },
+      "weighted_coin_collection": {
+        "numerator": 68,
+        "denominator": 72,
+        "rate": 0.9444444444444444
+      },
+      "failure_categories": {},
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 3,
+        "observed_json_outputs": 3,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 3,
+          "denominator": 3,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 3,
+          "mean": 7.435011146667724,
+          "p50": 7.096224337990861,
+          "p95": 8.322918798506725,
+          "max": 8.459218183008488
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 3,
+          "mean": 7.435011146667724,
+          "p50": 7.096224337990861,
+          "p95": 8.322918798506725,
+          "max": 8.459218183008488
+        },
+        "reported_tokens": {
+          "promptTokenCount": 894,
+          "candidatesTokenCount": 633,
+          "totalTokenCount": 1527,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 3,
+          "candidatesTokenCount": 3,
+          "totalTokenCount": 3,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 3,
+        "billed_cost_usd": null
+      }
+    }
+  },
+  "by_generation_seed": {
+    "20261024": {
+      "planned": 6,
+      "processed": 6,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 5,
+        "denominator": 6,
+        "rate": 0.8333333333333334
+      },
+      "ppo_evaluated": 6,
+      "ppo_success_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 5,
+        "denominator": 6,
+        "rate": 0.8333333333333334
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 5,
+        "mean": 0.8783333333333333,
+        "p50": 0.875,
+        "p95": 0.9833333333333333,
+        "max": 1.0
+      },
+      "weighted_coin_collection": {
+        "numerator": 66,
+        "denominator": 76,
+        "rate": 0.868421052631579
+      },
+      "failure_categories": {
+        "route_unknown": 1,
+        "ppo_collection_miss": 1
+      },
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 6,
+        "observed_json_outputs": 6,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 6,
+          "mean": 8.06077200700141,
+          "p50": 7.259156214502582,
+          "p95": 11.287236517251586,
+          "max": 12.403994577005506
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 6,
+          "mean": 8.06077200700141,
+          "p50": 7.259156214502582,
+          "p95": 11.287236517251586,
+          "max": 12.403994577005506
+        },
+        "reported_tokens": {
+          "promptTokenCount": 1733,
+          "candidatesTokenCount": 1090,
+          "totalTokenCount": 2823,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 6,
+          "candidatesTokenCount": 6,
+          "totalTokenCount": 6,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 6,
+        "billed_cost_usd": null
+      }
+    },
+    "20261025": {
+      "planned": 6,
+      "processed": 6,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 5,
+        "denominator": 6,
+        "rate": 0.8333333333333334
+      },
+      "ppo_evaluated": 6,
+      "ppo_success_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 5,
+        "denominator": 6,
+        "rate": 0.8333333333333334
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 5,
+        "mean": 0.8949999999999999,
+        "p50": 0.875,
+        "p95": 1.0,
+        "max": 1.0
+      },
+      "weighted_coin_collection": {
+        "numerator": 68,
+        "denominator": 76,
+        "rate": 0.8947368421052632
+      },
+      "failure_categories": {
+        "route_unknown": 1,
+        "ppo_collection_miss": 1
+      },
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 6,
+        "observed_json_outputs": 6,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 6,
+          "mean": 8.105582811665954,
+          "p50": 6.469757360500807,
+          "p95": 16.93903442750525,
+          "max": 20.219971124010044
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 6,
+          "mean": 8.105582811665954,
+          "p50": 6.469757360500807,
+          "p95": 16.93903442750525,
+          "max": 20.219971124010044
+        },
+        "reported_tokens": {
+          "promptTokenCount": 1733,
+          "candidatesTokenCount": 1042,
+          "totalTokenCount": 2775,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 6,
+          "candidatesTokenCount": 6,
+          "totalTokenCount": 6,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 6,
+        "billed_cost_usd": null
+      }
+    },
+    "20261026": {
+      "planned": 6,
+      "processed": 6,
+      "pending": 0,
+      "valid_requests_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "llm_semantic_matches_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "design_matches_over_asserted": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "static_valid_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "route_verified_over_planned": {
+        "numerator": 5,
+        "denominator": 6,
+        "rate": 0.8333333333333334
+      },
+      "ppo_evaluated": 6,
+      "ppo_success_over_planned": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "ppo_success_over_evaluated": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1.0
+      },
+      "ppo_target_over_evaluated": {
+        "numerator": 5,
+        "denominator": 6,
+        "rate": 0.8333333333333334
+      },
+      "collection_ratio_nonempty_maps": {
+        "samples": 5,
+        "mean": 0.8783333333333333,
+        "p50": 0.875,
+        "p95": 0.9833333333333333,
+        "max": 1.0
+      },
+      "weighted_coin_collection": {
+        "numerator": 66,
+        "denominator": 76,
+        "rate": 0.868421052631579
+      },
+      "failure_categories": {
+        "route_unknown": 1,
+        "ppo_collection_miss": 1
+      },
+      "api": {
+        "applicable": true,
+        "cache_hits": 0,
+        "recorded_uncached_attempts": 6,
+        "observed_json_outputs": 6,
+        "attempts_with_unknown_response_outcome": 0,
+        "observed_json_response_rate_lower_bound": {
+          "numerator": 6,
+          "denominator": 6,
+          "rate": 1.0
+        },
+        "transport_error_events": {},
+        "translation_latency_seconds": {
+          "samples": 6,
+          "mean": 6.592702811331644,
+          "p50": 6.153263195497857,
+          "p95": 8.24016650300473,
+          "max": 8.459218183008488
+        },
+        "valid_translation_latency_seconds": {
+          "samples": 6,
+          "mean": 6.592702811331644,
+          "p50": 6.153263195497857,
+          "p95": 8.24016650300473,
+          "max": 8.459218183008488
+        },
+        "reported_tokens": {
+          "promptTokenCount": 1733,
+          "candidatesTokenCount": 1246,
+          "totalTokenCount": 2979,
+          "thoughtsTokenCount": null
+        },
+        "token_field_sample_counts": {
+          "promptTokenCount": 6,
+          "candidatesTokenCount": 6,
+          "totalTokenCount": 6,
+          "thoughtsTokenCount": 0
+        },
+        "usage_reported_attempts": 6,
+        "billed_cost_usd": null
+      }
+    }
+  },
+  "cache_hits": 0,
+  "retained_failures": [
+    {
+      "source_id": "741032130576ec713383e98f7d7e994b5564d2e5aefeab532f30df9aba860d0e",
+      "mode": "gemini",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261024",
+      "package": "runs/llm_eval/small_v1_live/cases/eval_mixed_ground_s20261024",
+      "category": "route_unknown",
+      "reason": "budget_exhausted"
+    },
+    {
+      "source_id": "741032130576ec713383e98f7d7e994b5564d2e5aefeab532f30df9aba860d0e",
+      "mode": "gemini",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261024",
+      "package": "runs/llm_eval/small_v1_live/cases/eval_mixed_ground_s20261024",
+      "category": "ppo_collection_miss",
+      "collected": 14,
+      "total": 16,
+      "required_ratio": 1.0,
+      "final_player": {
+        "x": 5813.0,
+        "y": 435.69999999999993,
+        "velocity_x": 10.0,
+        "velocity_y": -10.8,
+        "grounded": false,
+        "alive": true,
+        "facing": 1
+      }
+    },
+    {
+      "source_id": "741032130576ec713383e98f7d7e994b5564d2e5aefeab532f30df9aba860d0e",
+      "mode": "gemini",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261025",
+      "package": "runs/llm_eval/small_v1_live/cases/eval_mixed_ground_s20261025",
+      "category": "route_unknown",
+      "reason": "budget_exhausted"
+    },
+    {
+      "source_id": "741032130576ec713383e98f7d7e994b5564d2e5aefeab532f30df9aba860d0e",
+      "mode": "gemini",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261025",
+      "package": "runs/llm_eval/small_v1_live/cases/eval_mixed_ground_s20261025",
+      "category": "ppo_collection_miss",
+      "collected": 14,
+      "total": 16,
+      "required_ratio": 1.0,
+      "final_player": {
+        "x": 5583.0,
+        "y": 469.59999999999997,
+        "velocity_x": 10.0,
+        "velocity_y": -12.3,
+        "grounded": false,
+        "alive": true,
+        "facing": 1
+      }
+    },
+    {
+      "source_id": "741032130576ec713383e98f7d7e994b5564d2e5aefeab532f30df9aba860d0e",
+      "mode": "gemini",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261026",
+      "package": "runs/llm_eval/small_v1_live/cases/eval_mixed_ground_s20261026",
+      "category": "route_unknown",
+      "reason": "budget_exhausted"
+    },
+    {
+      "source_id": "741032130576ec713383e98f7d7e994b5564d2e5aefeab532f30df9aba860d0e",
+      "mode": "gemini",
+      "kind": "batch",
+      "level_id": "eval_mixed_ground_s20261026",
+      "package": "runs/llm_eval/small_v1_live/cases/eval_mixed_ground_s20261026",
+      "category": "ppo_collection_miss",
+      "collected": 14,
+      "total": 16,
+      "required_ratio": 1.0,
+      "final_player": {
+        "x": 5773.0,
+        "y": 435.69999999999993,
+        "velocity_x": 10.0,
+        "velocity_y": -10.8,
+        "grounded": false,
+        "alive": true,
+        "facing": 1
+      }
+    }
+  ],
+  "comparison": {
+    "offline_source": "runs/llm_eval/small_v1_offline_final",
+    "geometry_pairs_matched": 18,
+    "ppo_summary_pairs_matched": 18,
+    "pooled_independent_map_count": null
+  },
+  "source_sha256": {
+    "run.json": "7d7e0cb38cfb24f3de6e5a70f1e812c12a4db397e90688fa981b8a16a6446b8c",
+    "report.json": "a38056a35ca12ec889b926b530a5abbb0dc4e7d654d17cb9f692502b8e0776b8",
+    "suite.json": "ecf72d3765ee21d180b810bcd0307b47c64f9162c3cb4444b5c62f5972d70816"
+  },
+  "scope": [
+    "One completed small real API batch, not a long-term reliability or OOD claim.",
+    "All 18 requests match explicit frozen design assertions; three maps miss the 100% collection target.",
+    "Search unknown does not establish infeasibility.",
+    "Model weights, targets, prompts and evaluation seeds were not changed to make failures pass.",
+    "Missing thoughtsTokenCount remains unknown; total usage is provider-reported, not a billing estimate."
+  ]
+}

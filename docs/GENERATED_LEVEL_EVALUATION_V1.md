@@ -78,4 +78,15 @@ export XDG_CACHE_HOME="$PWD/.venv/cache"
 
 `expected-fixture`直接从每条提示的期望设计构造显式本地响应，再走同一协议、PCG、路线和真实PPO流程。它是管线和几何覆盖基线，**不是LLM真实生成结果**；LLM语义评分和云端延迟为null，API尝试预算为0。初步18张覆盖中，静态校验18/18、PPO通关18/18、路线与PPO收集目标各15/18。三个 `mixed_ground` 地图均通关但只收集14/16（87.5%），未达到该类提示的100%目标；搜索返回budget_exhausted，不能据此断言不存在100%路线。保留样本，不为获得全通过而降低目标或替换seed。
 
-详见 [离线验收记录](reports/generated_level_evaluation_v1.json)。初始 `live_006` 的真实Gemini调用与PPO成功仅作为此前单图闭环证据，不计入这18张新覆盖结果。真实批量语义和API稳定性评测需要上述live命令完成。
+详见 [离线验收记录](reports/generated_level_evaluation_v1.json)。初始 `live_006` 的真实Gemini调用与PPO成功仅作为此前单图闭环证据，不计入这18张新覆盖结果。真实批次现已完成，见下文；不把离线结果冒充真实生成。
+
+
+## 首次真实18张批次（2026-10-24）
+
+`runs/llm_eval/small_v1_live` 已完成，使用 `gemini-3.5-flash-lite`、TLS1.2和既有v9 checkpoint。18次未缓存调用均产生合法请求且匹配冻结需求断言，未记录HTTP或连接错误。静态有效18/18，PPO通关18/18，路线verified与PPO收集目标各15/18。三个mixed_ground均只收集14/16，保留为未达标样本。
+
+翻译耗时平均7.586秒、P50为6.753秒、P95为13.576秒、最大20.220秒；报告prompt tokens 5199、candidate tokens 3378、total 8577。耗时含校验，不含PCG/路线/PPO；未估算账单。provider未单独报告thoughtsTokenCount，不能将缺失字段当作已验证的0。
+
+与离线对照逐对核验，18张几何和PPO通关/步数/奖励/松果等摘要一致。说明当前三张目标缺口不来自观察到的需求翻译偏差，但不证明100%目标不可达。下一步可分析漏收集的位置、路线预算与PPO动作，不修改已冻结提示/seed来消除失败。
+
+详见 [真实批次验收记录](reports/llm_generation_live_batch_v1.json) 和 [更新后的统一报告](reports/generated_evaluation_unified_v1.md)。本次只支持该小批次和静态族的结论，长期服务稳定性及更广泛的提示泛化尚待评估。

@@ -6,9 +6,10 @@
 
 - `small_v1_offline_final`：6类提示×3生成seed，18个不同几何；PPO通关18/18，收集目标15/18。3个mixed_ground样本均收集14/16，未达到100%目标；搜索为unknown。
 - `live_006`：真实Gemini单图，报告生成时又运行一次绑定v9 checkpoint的CPU PPO推理，211步、841tick、17/20松果，满足75%目标。
-- 真实LLM的18张批量评测尚无输入产物，因此真实API批次计数为0。两种模式没有合成19张的总成功率。
+- `small_v1_live`：真实LLM批次18/18有效请求、18/18匹配冻结需求断言；PPO通关18/18、收集达标15/18。18张均未命中缓存，无记录到的连接/HTTP错误。平均翻译7.586秒，P95为13.576秒，报告8577 tokens。
+- 真实批次与离线对照18对地图几何相同，PPO所核对摘要一致；这些配对不计为36张独立新地图。三个来源共37条地图记录，对应19个不同几何。失败目录含两份批次各6个重叠事件，共12条事件，不代表12张不同失败地图。
 
-查看 [已生成的统一报告](reports/generated_evaluation_unified_v1.md) 与 [JSON快照](reports/generated_evaluation_unified_v1.json)。原始完整输出保存在 `runs/llm_eval/unified_v1_final/`，快照使用项目相对路径，记录与原始输出对应的来源和产物哈希。
+查看 [已生成的统一报告](reports/generated_evaluation_unified_v1.md) 与 [JSON快照](reports/generated_evaluation_unified_v1.json)。原始完整输出保存在 `runs/llm_eval/unified_v1_live/`，快照使用项目相对路径，记录与原始输出对应的来源和产物哈希。
 
 ## 生成报告
 
@@ -25,7 +26,7 @@ export XDG_CACHE_HOME="$PWD/.venv/cache"
   --output-dir runs/llm_eval/unified_next
 ```
 
-批量结果本身已记录checkpoint哈希，不需要再次推理。真实批次完成后，将其加入输入即可：
+批量结果本身已记录checkpoint哈希，不需要再次推理。只汇总两个已完成批次时：
 
 ```bash
 .venv/bin/python -m scripts.report_generated_levels \
@@ -56,3 +57,6 @@ export XDG_CACHE_HOME="$PWD/.venv/cache"
 Token只累加provider实际报告的字段及覆盖样本数。缺失字段为null，失败调用可能存在未报告消耗。`live_006`记录261个prompt token、124个candidate token、total 385；该单图没有保存API耗时。报告不估算实际费用或把token简单换算成账单，也不包含未选入的历史连接调试请求。
 
 本报告是探索性静态生成族证据，不执行训练、不分配train/test/OOD split、不替代正式多训练seed验收。
+
+
+本次真实批次的结构化验收记录见 [llm_generation_live_batch_v1.json](reports/llm_generation_live_batch_v1.json)。旧单图385 tokens仍单独展示，不与真实批次8577 tokens混淆。
