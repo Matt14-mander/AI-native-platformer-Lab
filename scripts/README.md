@@ -11,6 +11,8 @@
 
 脚本只负责编排，领域逻辑必须保留在 `ai_platformer/` 中。
 
+`play_level_spec --telemetry-dir ... [--player-id ...] [--trace-actions]` 可记录键盘、规则或路线重放；`inspect_telemetry --input ...` 离线校验与查看尝试账本。见 [Telemetry v1](../docs/TELEMETRY_V1.md)。
+
 课程训练、独立评估和续训命令见 [强化学习训练 v1](../docs/RL_TRAINING_V1.md)。`train_ppo` 支持 `--resume`、`--eval-every`；`benchmark_scripted` 支持 `--config`、`--task`；`validate_rl_readiness --courses` 覆盖课程门禁。
 
 `train_ppo --resume ... --start-stage gap` 可以显式进入缺口实验，历史会记录手动切换，保持原有 checkpoint 兼容性校验。

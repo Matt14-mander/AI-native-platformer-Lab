@@ -21,6 +21,9 @@ def main():
     parser.add_argument("--speed", type=float, default=1.0)
     parser.add_argument("--headless", action="store_true")
     parser.add_argument("--screenshot", type=Path)
+    parser.add_argument("--telemetry-dir", type=Path, help="new local telemetry session directory")
+    parser.add_argument("--player-id", help="optional stable local player identifier")
+    parser.add_argument("--trace-actions", action="store_true", help="record each decision action")
     args = parser.parse_args()
     if (
         args.seed < 0
@@ -35,6 +38,12 @@ def main():
         parser.error("--route is required only for replay controller")
     if args.screenshot and args.screenshot.suffix.lower() != ".png":
         parser.error("screenshot must be PNG")
+    if (args.player_id is not None or args.trace_actions) and not args.telemetry_dir:
+        parser.error("--player-id/--trace-actions require --telemetry-dir")
+    if args.player_id is not None and not args.player_id.strip():
+        parser.error("--player-id must not be empty")
+    if args.telemetry_dir and args.telemetry_dir.exists():
+        parser.error("telemetry directory exists; choose a new session directory")
     if args.headless:
         os.environ["SDL_VIDEODRIVER"] = os.environ["SDL_AUDIODRIVER"] = "dummy"
     try:
@@ -70,7 +79,33 @@ def main():
     from ai_platformer.rendering.ppo_playback import create_renderer
 
     env = factory.make()
+    recorder = None
+    close_reason = "error"
     try:
+        if args.telemetry_dir:
+            from ai_platformer.adaptive.telemetry import TelemetryRecorder
+
+            try:
+                recorder = TelemetryRecorder(
+                    args.telemetry_dir, factory,
+                    actor_type={"keyboard": "human", "rule": "scripted", "replay": "replay"}[
+                        args.controller
+                    ],
+                    player_id=args.player_id, trace_actions=args.trace_actions,
+                    playback_speed=args.speed, headless=args.headless,
+                    source={
+                        "entrypoint": "play_level_spec", "controller": args.controller,
+                        "level_spec": str(args.input.resolve()),
+                    },
+                )
+                env.telemetry = recorder
+            except OSError as error:
+                import warnings
+
+                warnings.warn(
+                    f"telemetry unavailable; continuing gameplay ({type(error).__name__})",
+                    RuntimeWarning,
+                )
         pygame.display.init()
         pygame.font.init()
         screen = pygame.display.set_mode((1000, 600))
@@ -95,6 +130,8 @@ def main():
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_p:
                     paused = not paused
+                    if recorder:
+                        recorder.set_paused(paused)
                     accumulator = 0.0
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                     reset = True
@@ -175,10 +212,13 @@ def main():
                         index = 0
                         done = False
                         total = accumulator = terminal_elapsed = 0.0
+        close_reason = "quit"
         if args.screenshot:
             args.screenshot.parent.mkdir(parents=True, exist_ok=True)
             pygame.image.save(screen, str(args.screenshot))
     finally:
+        if recorder:
+            recorder.close(close_reason)
         env.close()
         pygame.quit()
 

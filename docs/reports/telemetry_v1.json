@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "implementation_scope": "Telemetry v1: LevelSpec keyboard/scripted/replay CLI, optional shared environment observer, no player profile or DDA. PPO used API in this validation.",
+  "tests": {
+    "pytest_passed": 236,
+    "subtests_passed": 8,
+    "warnings": 2,
+    "warning_scope": "existing Gymnasium v0/v1 deprecation",
+    "ruff": "passed"
+  },
+  "environment": {
+    "platform": "macOS-15.8.1-x86_64-i386-64bit",
+    "python": "3.12.14"
+  },
+  "rule_cli_smoke": {
+    "attempts": 2,
+    "outcome": "success",
+    "steps_each": 18,
+    "ticks_each": 72,
+    "actor_type": "scripted",
+    "session_complete": true,
+    "eligible_for_profile": false,
+    "path": "runs/telemetry/v1_rule_smoke_001"
+  },
+  "v9_live006": {
+    "checkpoint_sha256": "f6f5eabb26446fb7ee999c99e2cd76acfb98bb88c0abd4660e26d71658e42e3c",
+    "summary": {
+      "outcome": "success",
+      "tick": 841,
+      "coins_collected": 17,
+      "coins_total": 20,
+      "steps": 211,
+      "return": 23.288999999999994
+    },
+    "recording_actor": "ppo",
+    "session_complete": true,
+    "eligible_for_profile": false,
+    "path": "runs/telemetry/v1_validation_001/ppo_live006",
+    "identical_actions_final_state_and_return": true
+  },
+  "benchmark": {
+    "method": "5 rotating-order trials per mode; 10 episodes per trial, fixed saved PPO actions on original mixed_ground seed 20261024; no policy inference or rendering; includes session setup, reset, step, manifests and close I/O. Relative overhead is workload/local-machine specific.",
+    "decisions_per_trial": 1470,
+    "ticks_per_trial": 5860,
+    "measurements": {
+      "disabled": {
+        "median_ms_per_decision": 0.33493709932025967,
+        "relative_to_disabled": 1.0,
+        "samples": [
+          {
+            "seconds": 0.5269858179963194,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.3584937537389928
+          },
+          {
+            "seconds": 0.5075684300099965,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.34528464626530375
+          },
+          {
+            "seconds": 0.46293330000480637,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.3149206122481676
+          },
+          {
+            "seconds": 0.47064148499339353,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.32016427550570986
+          },
+          {
+            "seconds": 0.4923575360007817,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.33493709932025967
+          }
+        ]
+      },
+      "events": {
+        "median_ms_per_decision": 0.37868933673579,
+        "relative_to_disabled": 1.1306282209534972,
+        "samples": [
+          {
+            "seconds": 0.5904812380031217,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.4016879170089263
+          },
+          {
+            "seconds": 0.5566733250016114,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.37868933673579
+          },
+          {
+            "seconds": 0.5642663610051386,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.38385466735043444
+          },
+          {
+            "seconds": 0.5534510839934228,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.3764973360499475
+          },
+          {
+            "seconds": 0.5474569100042572,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.3724196666695627
+          }
+        ]
+      },
+      "actions_and_hashes": {
+        "median_ms_per_decision": 0.6788177292482757,
+        "relative_to_disabled": 2.026702119967919,
+        "samples": [
+          {
+            "seconds": 0.9978620619949652,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.6788177292482757
+          },
+          {
+            "seconds": 0.9880454149970319,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.672139738093219
+          },
+          {
+            "seconds": 0.9996157729910919,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.6800107299259129
+          },
+          {
+            "seconds": 1.0043634189933073,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.6832404210838825
+          },
+          {
+            "seconds": 0.959261633004644,
+            "decisions": 1470,
+            "ticks": 5860,
+            "ms_per_decision": 0.6525589340167646
+          }
+        ]
+      }
+    }
+  },
+  "manual_human_playtest": "not performed; real Pygame keyboard loop tested with automated pause/restart/quit events"
+}

@@ -86,6 +86,15 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         self._episode_done = True
         self._episode_return = 0.0
         self._episode_steps = 0
+        # Runtime observer only: excluded from observations, rewards and protocol hashes.
+        self.telemetry = None
+
+    def _telemetry(self, method, *args):
+        if self.telemetry is not None and not self.telemetry.failed and not self.telemetry.closed:
+            try:
+                getattr(self.telemetry, method)(*args)
+            except Exception as error:  # noqa: BLE001 -- optional observer must not stop gameplay
+                self.telemetry.disable(error)
 
     def reset(
         self,
@@ -104,6 +113,7 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         self._episode_done = False
         self._episode_return = 0.0
         self._episode_steps = 0
+        self._telemetry("on_reset", self, state)
         return self._observation(state), self._info(state, core_ticks=0)
 
     def step(self, action: int) -> tuple[np.ndarray, float, bool, bool, dict[str, Any]]:
@@ -119,8 +129,11 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         core_ticks = 0
         core_info: dict[str, Any] = {}
 
+        self._telemetry("on_decision", action, self._episode_steps + 1)
         for _ in range(self.action_repeat):
+            tick_before = self.core.state
             result = self.core.step(Action(int(action)))
+            self._telemetry("on_tick", tick_before, action, result)
             core_ticks += 1
             core_info = dict(result.info)
             terminated = result.terminated
@@ -153,6 +166,7 @@ class PlatformerStateEnv(gym.Env[np.ndarray, int]):
         info.update(core_info)
         info["reward_components"] = reward_parts
         info["episode_return"] = self._episode_return
+        self._telemetry("on_step_end", info, self._episode_done)
         return self._observation(state), reward, terminated, truncated, info
 
     def render(self) -> None:

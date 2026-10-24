@@ -35,6 +35,7 @@ platformer-generate-level = "scripts.generate_level:main"
 platformer-generate-level-llm = "scripts.generate_level_llm:main"
 platformer-evaluate-generated = "scripts.evaluate_generated_levels:main"
 platformer-report-generated = "scripts.report_generated_levels:main"
+platformer-inspect-telemetry = "scripts.inspect_telemetry:main"
 
 [project.optional-dependencies]
 content = [
