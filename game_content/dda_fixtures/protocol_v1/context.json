@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "dda_context_v1",
+  "context_id": "fixture-context",
+  "mode": "suggestion_only",
+  "boundary": "before_next_level_generation",
+  "profile": {
+    "profile_version": 1,
+    "metrics_version": 1,
+    "profile_id": "f8bb4082064b2f6add6d0ab97dbfdc37a9213e3fb91b071a5141cfb92fdd316c",
+    "profile_sha256": "79025e760d3f51f2d6a6bf92ddb50c1ee9797529a9671c7d1a1da7e335d2e4e7",
+    "environment_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "identity": {
+      "scope": "player",
+      "id": "protocol_fixture"
+    },
+    "status": "insufficient_data",
+    "valid_attempts": 0,
+    "map_content_sha256": [],
+    "evidence": []
+  },
+  "target_environment_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "base_request": {
+    "schema_version": 1,
+    "generator_version": "segments-v1",
+    "physics_profile": "gameplay-ai-v2",
+    "level_id": "dda_next_001",
+    "seed": 20261026,
+    "obstacle_count": 3,
+    "gap_count": 2,
+    "obstacle_height": {
+      "minimum": 48,
+      "maximum": 96
+    },
+    "gap_width": {
+      "minimum": 96,
+      "maximum": 152
+    },
+    "coin_layout": "low_jump",
+    "min_coin_ratio": 0.75,
+    "theme": "lake"
+  },
+  "base_request_sha256": "50c59e2efc9afb2e7280df2b27331ad1cec9b8988740abe17adb1b0040e78042",
+  "permissions": {
+    "obstacle_height": null,
+    "gap_width": null
+  }
+}

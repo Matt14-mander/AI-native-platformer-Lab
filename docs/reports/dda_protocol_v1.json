@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "DDA context/proposal protocol and offline validator only; no behavior policy, generation or application",
+  "tests": {
+    "pytest_passed": 289,
+    "new_dda_tests": 41,
+    "subtests_passed": 8,
+    "warnings": 2,
+    "warnings_scope": "existing Gymnasium v0/v1 deprecations",
+    "ruff": "passed",
+    "diff_check": "passed"
+  },
+  "fixture": {
+    "synthetic": true,
+    "real_human_profile": false,
+    "source_sha256": {
+      "game_content/dda_fixtures/protocol_v1/context.json": "9604fd0e8ac29c637f59a980011ccb4dc05bbe22e0d804e6a15d549e2b8ffd90",
+      "game_content/dda_fixtures/protocol_v1/profile.json": "4cf6fb4042c95760848dcd65b719774d02dc71f62debe389d281ac9283630298",
+      "game_content/dda_fixtures/protocol_v1/proposal.json": "a5a19eb6a7a502e9032c7284bfa0588ec296d7bc969d4fa78b567463d51eadd2"
+    }
+  },
+  "schema_sha256": {
+    "schemas/dda_context_v1.schema.json": "22c3abffdfb5e52beca3524910f1699f06091820a65bf289893c608ba9ba6239",
+    "schemas/dda_proposal_v1.schema.json": "519d41cefc75e9aadd813b18e5be2946e2f9efa6fa09064c9ae48fa3470c0bd9"
+  },
+  "hold_cli": {
+    "schema_version": 1,
+    "kind": "dda_contract_validation_v1",
+    "contract_valid": true,
+    "context_sha256": "8ecd9219f5c4b134840bea5ec676576f5e78f335ca44898f7d1c991426acb1a1",
+    "proposal_sha256": "0fff7ff167bfdcd8f3b3d7de7f47f0d27bb7cd0f52ac4cd3d482a4ed7850b8a4",
+    "profile_sha256": "79025e760d3f51f2d6a6bf92ddb50c1ee9797529a9671c7d1a1da7e335d2e4e7",
+    "base_request_sha256": "50c59e2efc9afb2e7280df2b27331ad1cec9b8988740abe17adb1b0040e78042",
+    "candidate_request_sha256": "50c59e2efc9afb2e7280df2b27331ad1cec9b8988740abe17adb1b0040e78042",
+    "action": "hold",
+    "changes": [],
+    "application": "not_applied",
+    "generation": "not_run",
+    "static_validation": "not_run",
+    "route_verification": "not_run",
+    "ppo_evaluation": "not_run"
+  },
+  "real_profile_absence_cli": {
+    "schema_version": 1,
+    "kind": "dda_contract_validation_v1",
+    "contract_valid": false,
+    "error": "profile report must contain exactly one matching profile_id",
+    "application": "not_applied",
+    "generation": "not_run",
+    "static_validation": "not_run",
+    "route_verification": "not_run",
+    "ppo_evaluation": "not_run"
+  },
+  "verified_boundaries": [
+    "default locked permissions",
+    "insufficient_data requires hold",
+    "original request fields immutable except explicitly authorized height/width ranges",
+    "candidate ranges contained in original envelope",
+    "endpoint step caps and action direction",
+    "real changes and current-window evidence required for adjustments",
+    "profile/context/base/candidate digest binding",
+    "strict schema versions and unknown-field rejection",
+    "schema export matches models",
+    "no claims of execution or playability verification",
+    "offline validation without Gymnasium/Pygame/Torch imports"
+  ],
+  "next_stage": "Versioned rule suggestion policy and candidate PCG verification; real-human effectiveness remains untested"
+}

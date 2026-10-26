@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "profile_version": 1,
+  "metrics_version": 1,
+  "profile_id": "f8bb4082064b2f6add6d0ab97dbfdc37a9213e3fb91b071a5141cfb92fdd316c",
+  "identity": {
+    "scope": "player",
+    "id": "protocol_fixture"
+  },
+  "environment_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "status": "insufficient_data",
+  "readiness": {
+    "valid_attempts": 0,
+    "independent_map_count": 0,
+    "minimum_attempts": 5,
+    "minimum_maps": 2,
+    "meaning": "engineering sample gate, not statistical confidence or a skill rank",
+    "unmet": [
+      "need_more_attempts",
+      "need_more_maps"
+    ]
+  },
+  "window": {
+    "maximum_attempts": 10,
+    "order_basis": "explicit_input_order"
+  },
+  "evidence": [],
+  "lifetime": {
+    "scope": "all supplied sessions in this identity/environment",
+    "valid_attempts": 0,
+    "excluded_attempts": [
+      {
+        "attempt_id": "attempt-0",
+        "reasons": [
+          "nonterminal_attempt"
+        ]
+      }
+    ],
+    "retry_starts_after_failure": 0
+  },
+  "by_map": [],
+  "dimensions": {
+    "completion_stability": {
+      "status": "unknown",
+      "basis": "by_map.observed.success_rate"
+    },
+    "progress_efficiency": {
+      "status": "unknown",
+      "basis": "per-map simulation time and net horizontal speed"
+    },
+    "collection_performance": {
+      "status": "unknown",
+      "basis": "per-map weighted collection ratio, excluding empty denominators"
+    },
+    "motion_behavior": {
+      "status": "unknown",
+      "available_attempts": 0,
+      "missing_attempts": 0,
+      "basis": "per-map measured airborne, backtracking and horizontal stagnation"
+    },
+    "jump_behavior": {
+      "status": "unknown",
+      "basis": "per-map requests, accepted jumps and completed/censored hold lengths"
+    },
+    "retry_behavior": {
+      "status": "unknown",
+      "basis": "lifetime.retry_starts_after_failure; no cross-session inference"
+    },
+    "collection_preference": {
+      "status": "unknown",
+      "reason": "performance_does_not_identify_preference"
+    },
+    "jump_error_rate": {
+      "status": "unknown",
+      "reason": "no_validated_error_opportunity_definition"
+    },
+    "combat_skill": {
+      "status": "unknown",
+      "reason": "no_encounter_opportunity_denominator"
+    }
+  }
+}

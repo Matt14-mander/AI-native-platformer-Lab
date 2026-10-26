@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "dda_proposal_v1",
+  "decision_id": "fixture-hold-001",
+  "context_sha256": "8ecd9219f5c4b134840bea5ec676576f5e78f335ca44898f7d1c991426acb1a1",
+  "profile_sha256": "79025e760d3f51f2d6a6bf92ddb50c1ee9797529a9671c7d1a1da7e335d2e4e7",
+  "base_request_sha256": "50c59e2efc9afb2e7280df2b27331ad1cec9b8988740abe17adb1b0040e78042",
+  "policy_version": "protocol-hold-v1",
+  "action": "hold",
+  "reason": {
+    "code": "insufficient_data",
+    "summary": "Keep the caller's request unchanged.",
+    "evidence": []
+  },
+  "candidate_request": {
+    "schema_version": 1,
+    "generator_version": "segments-v1",
+    "physics_profile": "gameplay-ai-v2",
+    "level_id": "dda_next_001",
+    "seed": 20261026,
+    "obstacle_count": 3,
+    "gap_count": 2,
+    "obstacle_height": {
+      "minimum": 48,
+      "maximum": 96
+    },
+    "gap_width": {
+      "minimum": 96,
+      "maximum": 152
+    },
+    "coin_layout": "low_jump",
+    "min_coin_ratio": 0.75,
+    "theme": "lake"
+  },
+  "candidate_request_sha256": "50c59e2efc9afb2e7280df2b27331ad1cec9b8988740abe17adb1b0040e78042",
+  "application": "not_applied",
+  "validation_status": "pending",
+  "fallback": "hold"
+}

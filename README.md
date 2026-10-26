@@ -29,6 +29,7 @@
 - [GenerationRequest v1 与 PCG](docs/PCG_GENERATION_V1.md)：有界生成请求、确定性地图、静态检查及可选路线验收；
 - [Telemetry v1](docs/TELEMETRY_V1.md)：LevelSpec 游玩事件、独立尝试、暂停/重开记录及离线完整性校验；
 - [行为指标与玩家画像 v1](docs/PLAYER_PROFILE_V1.md)：版本化运动统计、来源隔离、最近证据窗口与可重建的本地报告；
+- [DDA 建议协议 v1](docs/DDA_PROTOCOL_V1.md)：画像/请求绑定、显式参数授权、保守回退与只读协议校验；
 - 为 Gymnasium、PPO、PCG、DDA、Jev、LLM 和 ONNX 预留的模块边界。
 
 已迁移第一关前段的一种巡逻敌人、可破坏砖、一次性奖励箱与护盾道具；其余旧地图实体尚未纳入新核心。仍待完成：checkpoint/传送、完整音频流程，以及其他关卡的原创内容。

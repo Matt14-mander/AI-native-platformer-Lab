@@ -1,0 +1,363 @@
+{
+  "$defs": {
+    "AdjustmentPermissions": {
+      "additionalProperties": false,
+      "properties": {
+        "obstacle_height": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ParameterPermission"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "gap_width": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ParameterPermission"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "AdjustmentPermissions",
+      "type": "object"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "session_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "attempt_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Attempt Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "session_id",
+        "attempt_id"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "GapRange": {
+      "additionalProperties": false,
+      "properties": {
+        "minimum": {
+          "default": 96,
+          "maximum": 176,
+          "minimum": 64,
+          "title": "Minimum",
+          "type": "integer"
+        },
+        "maximum": {
+          "default": 152,
+          "maximum": 176,
+          "minimum": 64,
+          "title": "Maximum",
+          "type": "integer"
+        }
+      },
+      "title": "GapRange",
+      "type": "object"
+    },
+    "GenerationRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "generator_version": {
+          "const": "segments-v1",
+          "default": "segments-v1",
+          "title": "Generator Version",
+          "type": "string"
+        },
+        "physics_profile": {
+          "const": "gameplay-ai-v2",
+          "default": "gameplay-ai-v2",
+          "title": "Physics Profile",
+          "type": "string"
+        },
+        "level_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Level Id",
+          "type": "string"
+        },
+        "seed": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "obstacle_count": {
+          "default": 3,
+          "maximum": 8,
+          "minimum": 0,
+          "title": "Obstacle Count",
+          "type": "integer"
+        },
+        "gap_count": {
+          "default": 2,
+          "maximum": 8,
+          "minimum": 0,
+          "title": "Gap Count",
+          "type": "integer"
+        },
+        "obstacle_height": {
+          "$ref": "#/$defs/HeightRange"
+        },
+        "gap_width": {
+          "$ref": "#/$defs/GapRange"
+        },
+        "coin_layout": {
+          "default": "low_jump",
+          "enum": [
+            "none",
+            "ground",
+            "low_jump"
+          ],
+          "title": "Coin Layout",
+          "type": "string"
+        },
+        "min_coin_ratio": {
+          "default": 0.75,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Min Coin Ratio",
+          "type": "number"
+        },
+        "theme": {
+          "const": "lake",
+          "default": "lake",
+          "title": "Theme",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "level_id",
+        "seed"
+      ],
+      "title": "GenerationRequest",
+      "type": "object"
+    },
+    "HeightRange": {
+      "additionalProperties": false,
+      "properties": {
+        "minimum": {
+          "default": 48,
+          "maximum": 160,
+          "minimum": 16,
+          "title": "Minimum",
+          "type": "integer"
+        },
+        "maximum": {
+          "default": 96,
+          "maximum": 160,
+          "minimum": 16,
+          "title": "Maximum",
+          "type": "integer"
+        }
+      },
+      "title": "HeightRange",
+      "type": "object"
+    },
+    "ParameterPermission": {
+      "additionalProperties": false,
+      "properties": {
+        "max_endpoint_delta_px": {
+          "maximum": 32,
+          "minimum": 1,
+          "title": "Max Endpoint Delta Px",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_endpoint_delta_px"
+      ],
+      "title": "ParameterPermission",
+      "type": "object"
+    },
+    "PlayerIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "enum": [
+            "player",
+            "session_only"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scope",
+        "id"
+      ],
+      "title": "PlayerIdentity",
+      "type": "object"
+    },
+    "ProfileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "profile_version": {
+          "const": 1,
+          "title": "Profile Version",
+          "type": "integer"
+        },
+        "metrics_version": {
+          "const": 1,
+          "title": "Metrics Version",
+          "type": "integer"
+        },
+        "profile_id": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "profile_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Profile Sha256",
+          "type": "string"
+        },
+        "environment_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Environment Sha256",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/$defs/PlayerIdentity"
+        },
+        "status": {
+          "enum": [
+            "ready",
+            "insufficient_data"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "valid_attempts": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Valid Attempts",
+          "type": "integer"
+        },
+        "map_content_sha256": {
+          "items": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Map Content Sha256",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "maxItems": 100,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "profile_version",
+        "metrics_version",
+        "profile_id",
+        "profile_sha256",
+        "environment_sha256",
+        "identity",
+        "status",
+        "valid_attempts",
+        "map_content_sha256",
+        "evidence"
+      ],
+      "title": "ProfileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "kind": {
+      "const": "dda_context_v1",
+      "title": "Kind",
+      "type": "string"
+    },
+    "context_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "title": "Context Id",
+      "type": "string"
+    },
+    "mode": {
+      "const": "suggestion_only",
+      "default": "suggestion_only",
+      "title": "Mode",
+      "type": "string"
+    },
+    "boundary": {
+      "const": "before_next_level_generation",
+      "default": "before_next_level_generation",
+      "title": "Boundary",
+      "type": "string"
+    },
+    "profile": {
+      "$ref": "#/$defs/ProfileRef"
+    },
+    "target_environment_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Target Environment Sha256",
+      "type": "string"
+    },
+    "base_request": {
+      "$ref": "#/$defs/GenerationRequest"
+    },
+    "base_request_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Base Request Sha256",
+      "type": "string"
+    },
+    "permissions": {
+      "$ref": "#/$defs/AdjustmentPermissions"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "context_id",
+    "profile",
+    "target_environment_sha256",
+    "base_request",
+    "base_request_sha256"
+  ],
+  "title": "DDAContext",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

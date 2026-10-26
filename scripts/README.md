@@ -15,6 +15,8 @@
 
 `play_ppo --telemetry-dir ... [--trace-actions]` 记录带模型来源的 PPO 游玩；`summarize_play_sessions --input SESSION_OLD SESSION_NEW --output-dir ...` 生成行为指标与真人画像。见 [玩家画像 v1](../docs/PLAYER_PROFILE_V1.md)。
 
+`validate_dda_proposal --context ... --proposal ... --profile ... --output ...` 只校验建议与授权，不生成或修改关卡。见 [DDA 协议 v1](../docs/DDA_PROTOCOL_V1.md)。
+
 课程训练、独立评估和续训命令见 [强化学习训练 v1](../docs/RL_TRAINING_V1.md)。`train_ppo` 支持 `--resume`、`--eval-every`；`benchmark_scripted` 支持 `--config`、`--task`；`validate_rl_readiness --courses` 覆盖课程门禁。
 
 `train_ppo --resume ... --start-stage gap` 可以显式进入缺口实验，历史会记录手动切换，保持原有 checkpoint 兼容性校验。

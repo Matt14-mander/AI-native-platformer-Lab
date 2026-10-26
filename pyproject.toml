@@ -37,6 +37,7 @@ platformer-evaluate-generated = "scripts.evaluate_generated_levels:main"
 platformer-report-generated = "scripts.report_generated_levels:main"
 platformer-inspect-telemetry = "scripts.inspect_telemetry:main"
 platformer-summarize-play = "scripts.summarize_play_sessions:main"
+platformer-validate-dda = "scripts.validate_dda_proposal:main"
 
 [project.optional-dependencies]
 content = [
