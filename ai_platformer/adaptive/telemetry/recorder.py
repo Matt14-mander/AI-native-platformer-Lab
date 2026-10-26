@@ -12,6 +12,7 @@ from uuid import uuid4
 from ai_platformer.content.curriculum import content_hash
 from ai_platformer.core import control_for
 
+from .motion import MotionAccumulator
 from .schema import ACTORS, END_REASONS
 from .storage import SessionWriter
 
@@ -133,6 +134,7 @@ class TelemetryRecorder:
             "player": asdict(state.player), "coins_total": state.metadata["coins_total"],
             "initially_paused": self.paused,
         })
+        self.motion = MotionAccumulator(self.metadata["tick_hz"])
         self._manifest("recording")
 
     def on_decision(self, action, decision):
@@ -143,6 +145,7 @@ class TelemetryRecorder:
             self._emit("action", {"action": int(action)})
 
     def on_tick(self, before, action, result):
+        self.motion.observe(before, result.state)
         self.state = result.state
         self.max_progress = max(self.max_progress, self.state.progress)
         control = control_for(action)
@@ -206,6 +209,11 @@ class TelemetryRecorder:
         self.paused = paused
         self._emit("pause" if paused else "resume", {})
 
+    def set_speed(self, speed):
+        if not 0.1 <= speed <= 8:
+            raise ValueError("invalid playback speed")
+        self._emit("speed_changed", {"speed": speed})
+
     def end_attempt(self, reason):
         if reason not in END_REASONS:
             raise ValueError("invalid attempt end reason")
@@ -224,6 +232,7 @@ class TelemetryRecorder:
             "coins_collected": self.state.metadata["coins_collected"],
             "coins_total": self.state.metadata["coins_total"],
             "jump_held_ticks_at_end": self.held_ticks if self.jump_held else 0,
+            "motion": self.motion.snapshot(),
         }
         self._emit("attempt_end", summary)
         self.summaries.append({"attempt_id": self.attempt_id, **self.context, **summary})
@@ -234,7 +243,12 @@ class TelemetryRecorder:
     def close(self, reason="quit"):
         if self.closed:
             return
-        self.end_attempt(reason)
+        if self.failed:
+            # A callback may have failed midway through reset; do not synthesize a
+            # terminal summary from partially initialized or stale attempt state.
+            self.attempt_id = self.context = None
+        else:
+            self.end_attempt(reason)
         self._emit("session_end", {"attempts": len(self.summaries)})
         try:
             from .storage import atomic_json

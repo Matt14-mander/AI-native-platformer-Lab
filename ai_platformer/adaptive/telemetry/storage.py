@@ -180,6 +180,8 @@ def read_session(directory):
         "eligible_for_profile": bool(
             complete and manifest["actor_type"] == "human"
             and manifest.get("playback_speed") == 1.0 and not manifest.get("headless")
+            and not any(e["type"] == "speed_changed" and e["payload"]["speed"] != 1.0
+                        for e in events)
             and any(a["reason"] in {"success", "death", "time_limit"} for a in attempts)
         ),
     }

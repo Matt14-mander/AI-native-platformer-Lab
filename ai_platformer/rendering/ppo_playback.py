@@ -24,9 +24,11 @@ class PlaybackSession:
         level_id: str,
         seed: int,
         deterministic: bool = True,
+        telemetry=None,
     ) -> None:
         self.policy = policy
         self.env = factory.make(level_id=level_id, seed=seed)
+        self.env.telemetry = telemetry
         self.seed = seed
         self.deterministic = deterministic
         self.reset()

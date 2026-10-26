@@ -6,13 +6,15 @@ import json
 import math
 import re
 
+from .motion import validate_motion
+
 SCHEMA_VERSION = 1
 ACTORS = {"human", "scripted", "ppo", "replay"}
 END_REASONS = {
     "success", "death", "time_limit", "restart", "quit", "level_switch", "replay", "error"
 }
 EVENT_TYPES = {
-    "session_start", "session_end", "attempt_start", "attempt_end", "pause", "resume",
+    "session_start", "session_end", "attempt_start", "attempt_end", "pause", "resume", "speed_changed",
     "action", "step", "jump_requested", "jump_started", "jump_released", "landed",
     "coin_collected", "interaction",
 }
@@ -62,7 +64,7 @@ def validate_event(event):
         raise ValueError("invalid wall time")
     context = ("level_id", "level_sha256", "protocol_sha256", "seed", "tick", "decision")
     if event["attempt_id"] is None:
-        if event["type"] not in {"session_start", "session_end", "pause", "resume"}:
+        if event["type"] not in {"session_start", "session_end", "pause", "resume", "speed_changed"}:
             raise ValueError("attempt event without attempt_id")
         if any(event[key] is not None for key in context):
             raise ValueError("session event has attempt context")
@@ -92,7 +94,13 @@ def validate_event(event):
         raise ValueError("invalid jump request")
     if event["type"] == "session_end" and not _integer(payload.get("attempts")):
         raise ValueError("invalid session end payload")
+    if event["type"] == "speed_changed" and (
+        type(payload.get("speed")) not in (int, float) or not 0.1 <= payload["speed"] <= 8
+    ):
+        raise ValueError("invalid playback speed event")
     if event["type"] == "attempt_end":
+        if "motion" in payload:
+            validate_motion(payload["motion"], event["tick"])
         if payload.get("reason") not in END_REASONS:
             raise ValueError("invalid attempt end reason")
         if any(not _integer(payload.get(k)) for k in ("coins_collected", "coins_total")):

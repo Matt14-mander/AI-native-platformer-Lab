@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "scope": "Offline Metrics v1, PlayerProfile v1, per-tick motion summaries and PPO playback telemetry; no DDA or Jev",
+  "tests": {
+    "pytest_passed": 248,
+    "subtests_passed": 8,
+    "warnings": 2,
+    "warnings_scope": "existing Gymnasium v0/v1 deprecation",
+    "ruff": "passed",
+    "diff_check": "passed"
+  },
+  "verified_rules": [
+    "real physical-tick motion sums match independent core trace",
+    "natural outcome denominators exclude quit/restart",
+    "empty coin denominator and old missing motion remain null",
+    "recent valid attempt window and 5-attempt/2-content gate",
+    "same geometry with renamed level_id cannot satisfy two-map gate",
+    "human identity, anonymous sessions, environment and actor isolation",
+    "nonhuman additions leave human profiles unchanged",
+    "incomplete/headless/nonstandard speed sessions excluded",
+    "source read-only hashes, repeatable output and duplicate rejection",
+    "PPO CLI source metadata and independent source separation",
+    "recorder failure midway through reset cannot break gameplay/close"
+  ],
+  "real_smoke": {
+    "sources": [
+      {
+        "path": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/telemetry/v1_rule_smoke_001",
+        "sha256": {
+          "manifest.json": "ce62175e602b44a155d57681ddb760ab38ba873fa3d1dd0c44b8105df6e74065",
+          "events.jsonl": "fa426184e5a565d7602e4431a3e4a2e3d4d5b24d6a90db95749a3053aee413db"
+        },
+        "session_id": "89bee19b9480441eb3f8abb2ca29ed44",
+        "actor_type": "scripted",
+        "complete": true
+      },
+      {
+        "path": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/telemetry/v1_validation_001/ppo_live006",
+        "sha256": {
+          "manifest.json": "959a0996fef98f2ebb47b22cbab8951bf085a984d7dda66c46efc4ecdff98287",
+          "events.jsonl": "d59f1664f44bc855e523b54b66062c82fac8b3e9b22f272a0116ebcd8a1d32e1"
+        },
+        "session_id": "05b98fb5c0394ce6a458a529c42190dc",
+        "actor_type": "ppo",
+        "complete": true
+      },
+      {
+        "path": "/Users/zhengyuanhao/Desktop/Project/AI-native-platformer-Lab/runs/telemetry/metrics_profile_v1/ppo_live006",
+        "sha256": {
+          "manifest.json": "438abad740287946c36085ef4261ca77facd12b4a704b129719f2c744c75ad95",
+          "events.jsonl": "2f1db1b76be83742958cf3842094bcc826c4e00287097259eb6446cccf12cf85"
+        },
+        "session_id": "21493ec7a2904e9a816728f0a73e3e03",
+        "actor_type": "ppo",
+        "complete": true
+      }
+    ],
+    "attempt_count": 4,
+    "human_profiles": 0,
+    "ready_profiles": 0,
+    "source_files_unchanged": true,
+    "report_path": "runs/telemetry/metrics_profile_v1/report",
+    "report_json_sha256": "07f7f8f92f86d686d97e6c88dc5fcf97f7d2883d69c7ead599f3548b3d73ca38",
+    "new_ppo_attempt": {
+      "attempt_id": "e17f7879e25d4d48a19b4c5fa58ba7a8",
+      "level_id": "llm_test_001",
+      "level_sha256": "f51be98ff5d074fa82732fd31318c5762f373dbc63580b61146fba8e3d3ef7c8",
+      "protocol_sha256": "706381e2f065702f9c60fda62ce1f59d0fa631387b21e308982bd1484fb4a03f",
+      "seed": 100,
+      "reason": "success",
+      "session_id": "21493ec7a2904e9a816728f0a73e3e03",
+      "actor_type": "ppo",
+      "playback_mode": {
+        "speed": 1.0,
+        "headless": true,
+        "speed_changes": []
+      },
+      "identity": {
+        "scope": "session_only",
+        "id": "21493ec7a2904e9a816728f0a73e3e03"
+      },
+      "controller_source_sha256": "26ae4577255f3b6466e9a154569dc1b5ce4471949d3707e5fb392fdfdc227d57",
+      "environment_sha256": "b2379387a133aed6d189116fb8157ee619656e1e7d0bf7f461df389202c3ddf5",
+      "order": [
+        2,
+        0
+      ],
+      "tick_hz": 60,
+      "valid_terminal": true,
+      "profile_eligible": false,
+      "profile_exclusion_reasons": [
+        "nonhuman_actor",
+        "headless_session"
+      ],
+      "ticks": 841,
+      "simulation_seconds": 14.016666666666667,
+      "active_wall_seconds": 1.131524939002702,
+      "paused_wall_seconds": 0.0,
+      "max_progress": 1.0,
+      "net_horizontal_speed_px_s": 503.32936979785967,
+      "coins_collected": 17,
+      "coins_total": 20,
+      "collection_ratio": 0.85,
+      "jump_requests": 16,
+      "accepted_jumps": 16,
+      "landings": 15,
+      "jump_hold_completed_ticks": [
+        8,
+        28,
+        8,
+        8,
+        28,
+        8,
+        8,
+        28,
+        8,
+        8,
+        28,
+        8,
+        8,
+        28,
+        8
+      ],
+      "jump_hold_censored_ticks": 5,
+      "motion": {
+        "version": 1,
+        "observed_ticks": 841,
+        "airborne_ticks": 500,
+        "stationary_ticks": 0,
+        "forward_distance_px": 7055.0,
+        "backward_distance_px": 0.0,
+        "stagnation_ticks": 0,
+        "stagnation_runs": 0,
+        "stationary_epsilon_px": 0.05,
+        "stagnation_min_ticks": 120
+      },
+      "retry_after_failure": false,
+      "death_location": null,
+      "interactions": {}
+    },
+    "old_and_new_ppo_actions_step_hashes_and_returns_identical": true
+  },
+  "performance": {
+    "method": "3 rotating-order trials per mode, 10 episodes each, fixed original mixed_ground PPO actions; setup/reset/step/flush/close included, no inference/rendering",
+    "decisions_per_trial": 1470,
+    "platform": "macOS-15.8.1-x86_64-i386-64bit",
+    "median_ms_per_decision": {
+      "disabled": 0.3147332768706719,
+      "events": 0.4177097408148479,
+      "trace": 0.7278830816392743
+    },
+    "relative_to_disabled": {
+      "disabled": 1.0,
+      "events": 1.3271864512327702,
+      "trace": 2.3126981959977853
+    },
+    "samples_ms_per_decision": {
+      "disabled": [
+        0.33738842379732603,
+        0.3147332768706719,
+        0.3114609074696493
+      ],
+      "events": [
+        0.4177097408148479,
+        0.4337294523954252,
+        0.36513126735594503
+      ],
+      "trace": [
+        0.8043097448931235,
+        0.7278830816392743,
+        0.6654557360567431
+      ]
+    }
+  },
+  "human_validation": {
+    "real_human_sessions_available": false,
+    "readiness_tests_are_synthetic_automated_fixtures": true,
+    "manual_play_and_profile_validity": "pending"
+  }
+}

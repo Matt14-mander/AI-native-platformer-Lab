@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -40,9 +41,15 @@ def main() -> None:
         "--headless", action="store_true", help="render offscreen, run without delays"
     )
     parser.add_argument("--screenshot", type=Path, help="save the final rendered frame as PNG")
+    parser.add_argument("--telemetry-dir", type=Path, help="new local PPO telemetry directory")
+    parser.add_argument("--trace-actions", action="store_true")
     args = parser.parse_args()
     if args.level_spec and args.level_id:
         parser.error("choose --level-spec or --level-id")
+    if args.trace_actions and not args.telemetry_dir:
+        parser.error("--trace-actions requires --telemetry-dir")
+    if args.telemetry_dir and args.telemetry_dir.exists():
+        parser.error("telemetry directory exists; choose a new directory")
     if not math.isfinite(args.speed) or not 0.1 <= args.speed <= 8:
         parser.error("speed must be between 0.1 and 8")
     if args.episodes < 0 or (args.headless and args.episodes == 0):
@@ -89,7 +96,24 @@ def main() -> None:
             loaded.close()
         parser.error(str(error))
 
+    recorder = None
     try:
+        if args.telemetry_dir:
+            from ai_platformer.adaptive.telemetry import TelemetryRecorder
+
+            try:
+                recorder = TelemetryRecorder(
+                    args.telemetry_dir, factory, actor_type="ppo",
+                    trace_actions=args.trace_actions, playback_speed=args.speed,
+                    headless=args.headless,
+                    source={"entrypoint": "play_ppo", "backend": args.backend,
+                            "model_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                            "deterministic": not args.sampled, "fuse_relu": args.fuse_relu},
+                )
+            except OSError as error:
+                import warnings
+
+                warnings.warn(f"telemetry unavailable ({type(error).__name__})", RuntimeWarning)
         pygame.display.init()
         pygame.font.init()
         screen = pygame.display.set_mode((1000, 600))
@@ -97,6 +121,8 @@ def main() -> None:
         font = pygame.font.Font(None, 24)
         clock = pygame.time.Clock()
     except BaseException:
+        if recorder:
+            recorder.close("error")
         loaded.close()
         pygame.quit()
         raise
@@ -107,17 +133,23 @@ def main() -> None:
     accumulator = terminal_elapsed = 0.0
     running = True
 
-    def start_level():
+    def start_level(reason="restart"):
         nonlocal session, accumulator, terminal_elapsed, paused
         if session is not None:
+            if recorder:
+                recorder.end_attempt(reason)
             session.env.close()
+        if recorder:
+            recorder.set_paused(False)
         session = PlaybackSession(
-            policy, factory, level_id=levels[index], seed=seed, deterministic=not args.sampled
+            policy, factory, level_id=levels[index], seed=seed, deterministic=not args.sampled,
+            telemetry=recorder,
         )
         accumulator = terminal_elapsed = 0.0
         paused = False
         return create_renderer(factory, session, screen.get_size())
 
+    close_reason = "error"
     try:
         renderer = start_level()
         print("P/Space: pause | R: replay | N: next level | [/]: speed | Esc: quit")
@@ -132,17 +164,21 @@ def main() -> None:
                         running = False
                     elif event.key in (pygame.K_p, pygame.K_SPACE):
                         paused = not paused
+                        if recorder:
+                            recorder.set_paused(paused)
                         reset_clock = True
                     elif event.key in (pygame.K_r, pygame.K_n):
                         if event.key == pygame.K_n:
                             index = (index + 1) % len(levels)
-                        renderer = start_level()
+                        renderer = start_level("level_switch" if event.key == pygame.K_n else "replay")
                         reset_clock = True
                     elif event.key in (pygame.K_LEFTBRACKET, pygame.K_RIGHTBRACKET):
                         speed = max(
                             0.1,
                             min(8.0, speed * (0.5 if event.key == pygame.K_LEFTBRACKET else 2.0)),
                         )
+                        if recorder:
+                            recorder.set_speed(speed)
                         reset_clock = True
             if not running:
                 break
@@ -202,10 +238,13 @@ def main() -> None:
                     else:
                         index = (index + 1) % len(levels)
                         renderer = start_level()
+        close_reason = "quit"
         if args.screenshot:
             args.screenshot.parent.mkdir(parents=True, exist_ok=True)
             pygame.image.save(screen, str(args.screenshot))
     finally:
+        if recorder:
+            recorder.close(close_reason)
         if session is not None:
             session.env.close()
         loaded.close()
