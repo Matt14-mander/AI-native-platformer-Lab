@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+import json
 
 import pygame
 
 from ai_platformer.core import WorldSnapshot
 from ai_platformer.core.level import SolidRect
-from ai_platformer.rendering.art import fit_height, fit_rect, load_art
+from ai_platformer.rendering.art import ASSET_ROOT, fit_height, fit_rect, load_art
+from ai_platformer.rendering.player_animation import PlayerAnimator
 
 
 class PygameLevelRenderer:
@@ -49,25 +51,21 @@ class PygameLevelRenderer:
         self.enemy = fit_rect(load_art("enemies/shadow-hedgehog.png"), 28, 28)
         self.enemy_right = pygame.transform.flip(self.enemy, True, False)
         self.shield_berry = fit_rect(load_art("items/blue-ward-berry.png"), 24, 24)
+        manifest = json.loads((ASSET_ROOT / "characters/child-with-puppy.animation.json").read_text(encoding="utf-8"))
         self.player_frames = {
-            "idle": (self._player_frame("child-with-puppy-idle.png"),),
-            "run": (
-                self._player_frame("child-with-puppy-run-1.png"),
-                self._player_frame("child-with-puppy-run-2.png"),
-            ),
-            "jump": (self._player_frame("child-with-puppy-jump.png"),),
-            "fall": (self._player_frame("child-with-puppy-fall.png"),),
+            name: tuple(fit_height(load_art(f"characters/{filename}"), spec.get("height_px", 52))
+                        for filename in spec["frames"])
+            for name, spec in manifest["states"].items()
         }
+        self.animator = PlayerAnimator()
+        self._pose_cache = {}
         self.pause_font = pygame.font.Font(None, 54)
         self._stump_cache: dict[tuple[int, int], pygame.Surface] = {}
         self._step_cache: dict[tuple[int, int], pygame.Surface] = {}
 
-    @staticmethod
-    def _player_frame(filename: str) -> pygame.Surface:
-        return fit_height(load_art(f"characters/{filename}"), 52)
-
     def reset(self) -> None:
         self.camera_x = 0.0
+        self.animator.reset()
 
     def draw(self, surface: pygame.Surface, state: WorldSnapshot) -> None:
         self._update_camera(state)
@@ -163,19 +161,22 @@ class PygameLevelRenderer:
         )
 
     def _draw_player(self, surface: pygame.Surface, state: WorldSnapshot) -> None:
-        if state.metadata.get("invulnerable_ticks", 0) and state.tick % 6 < 3:
+        pose = self.animator.update(state)
+        if state.player.alive and state.metadata.get("invulnerable_ticks", 0) and state.tick % 6 < 3:
             return
         player = state.player
-        if not player.grounded:
-            pose = "jump" if player.velocity_y < 0 else "fall"
-        elif abs(player.velocity_x) >= 0.35:
-            pose = "run"
-        else:
-            pose = "idle"
-        frames = self.player_frames[pose]
-        frame = frames[(state.tick // 7) % len(frames)]
-        if player.facing < 0:
-            frame = pygame.transform.flip(frame, True, False)
+        key = (pose, player.facing)
+        frame = self._pose_cache.get(key)
+        if frame is None:
+            frames = self.player_frames[pose.name]
+            frame = frames[pose.frame % len(frames)]
+            if pose.height_delta:
+                frame = fit_rect(frame, frame.get_width(), frame.get_height() + pose.height_delta)
+            if player.facing < 0:
+                frame = pygame.transform.flip(frame, True, False)
+            if pose.angle:
+                frame = pygame.transform.rotate(frame, pose.angle)
+            self._pose_cache[key] = frame
         center_x = player.x + self.player_width / 2 - self.camera_x
         feet_y = player.y + self.player_height
         surface.blit(frame, (round(center_x - frame.get_width() / 2), round(feet_y - frame.get_height())))

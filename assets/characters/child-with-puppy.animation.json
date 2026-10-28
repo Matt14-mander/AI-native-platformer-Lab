@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "character": "child-with-puppy",
   "facing": "right",
   "mirror_for_left": true,
@@ -13,8 +13,27 @@
     },
     "run": {
       "when": "grounded and moving horizontally",
-      "frames": ["child-with-puppy-run-1.png", "child-with-puppy-run-2.png"],
-      "frames_per_second": 7
+      "frames": ["child-with-puppy-run-1.png", "child-with-puppy-idle.png", "child-with-puppy-run-2.png", "child-with-puppy-idle.png"],
+      "distance_per_frame_px": 22
+    },
+    "walk": {
+      "frames": ["child-with-puppy-run-1.png", "child-with-puppy-idle.png", "child-with-puppy-run-2.png", "child-with-puppy-idle.png"]
+    },
+    "land": {
+      "frames": ["child-with-puppy-land.png"],
+      "height_px": 46,
+      "duration_ticks": 8
+    },
+    "brake": {
+      "frames": ["child-with-puppy-brake.png"],
+      "height_px": 50
+    },
+    "apex": {
+      "frames": ["child-with-puppy-jump.png"],
+      "height_px": 50
+    },
+    "hurt": {
+      "frames": ["child-with-puppy-fall.png"]
     },
     "jump": {
       "when": "airborne and rising",
