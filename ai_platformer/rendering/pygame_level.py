@@ -12,6 +12,7 @@ from ai_platformer.core.level import SolidRect
 from ai_platformer.rendering.art import ASSET_ROOT, fit_height, fit_rect, load_art
 from ai_platformer.rendering.player_animation import PlayerAnimator
 from ai_platformer.rendering.feedback import InteractionFeedback
+from ai_platformer.rendering.scenery import LakesideScenery
 
 
 class PygameLevelRenderer:
@@ -33,9 +34,7 @@ class PygameLevelRenderer:
         self.player_height = player_height
         self.camera_x = 0.0
 
-        backdrop = load_art("backgrounds/lakeside-day.png", crop=False)
-        backdrop_width = round(backdrop.get_width() * self.screen_height / backdrop.get_height())
-        self.background = fit_rect(backdrop, backdrop_width, self.screen_height)
+        self.scenery = LakesideScenery(screen_size, solids_by_kind)
         ground_art = load_art("tilesets/moss-earth-ground.png")
         edge_trim = round(ground_art.get_width() * 0.018)
         ground_art = ground_art.subsurface(
@@ -72,8 +71,10 @@ class PygameLevelRenderer:
 
     def draw(self, surface: pygame.Surface, state: WorldSnapshot) -> None:
         self._update_camera(state)
-        self._draw_background(surface)
+        self._draw_background(surface, state.tick)
         self._draw_solids(surface)
+        self.scenery.draw_edges(surface, self.camera_x)
+        self.scenery.draw_ambient(surface, self.camera_x, state.tick)
         self._draw_goal(surface)
         for entity in state.entities:
             if not entity.active:
@@ -99,11 +100,8 @@ class PygameLevelRenderer:
         self._draw_player(surface, state)
         self.feedback.draw_world(surface, self.camera_x, self.brick, self.enemy)
 
-    def _draw_background(self, surface: pygame.Surface) -> None:
-        width = self.background.get_width()
-        offset = round(self.camera_x * 0.18) % width
-        for x in range(-offset, self.screen_width, width):
-            surface.blit(self.background, (x, 0))
+    def _draw_background(self, surface: pygame.Surface, tick: int = 0) -> None:
+        self.scenery.draw_background(surface, self.camera_x, tick)
 
     def _draw_solids(self, surface: pygame.Surface) -> None:
         camera = self.camera_x
@@ -118,12 +116,12 @@ class PygameLevelRenderer:
             ground_rect = pygame.Rect(x, y, width, height)
             pygame.draw.rect(surface, (61, 53, 44), ground_rect)
             old_clip = surface.get_clip()
-            surface.set_clip(old_clip.clip(pygame.Rect(x, y - 4, width, height + 4)))
+            surface.set_clip(old_clip.clip(ground_rect))
             tile_width = self.ground_tile.get_width()
             first = max(0, int((camera - solid.x) // tile_width))
             tile_x = solid.x + first * tile_width
             while tile_x < min(solid.right, visible_right):
-                surface.blit(self.ground_tile, (round(tile_x - camera), y - 4))
+                surface.blit(self.ground_tile, (round(tile_x - camera), y))
                 tile_x += tile_width
             surface.set_clip(old_clip)
 
