@@ -10,6 +10,13 @@ from ai_platformer.core import Action
 class PygameKeyboardController:
     """Translate current keyboard state into one discrete core action."""
 
+    @staticmethod
+    def jump_pressed(keys) -> bool | None:
+        was_pressed = getattr(keys, "was_pressed", None)
+        if was_pressed is None:
+            return None
+        return was_pressed(pygame.K_a) or was_pressed(pygame.K_SPACE)
+
     def action(self, keys) -> Action:
         left = keys[pygame.K_LEFT]
         right = keys[pygame.K_RIGHT]

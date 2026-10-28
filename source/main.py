@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pygame
 
-from ai_platformer.settings import AI_GAMEPLAY_PATH, load_gameplay_settings
+from ai_platformer.settings import load_gameplay_settings
 from source import constants as C
 from source import tools
 from source.states import level, load_screen, main_menu
@@ -16,8 +16,8 @@ def main():
     parser.add_argument(
         "--settings",
         type=Path,
-        default=AI_GAMEPLAY_PATH,
-        help="gameplay JSON; default: variable-height AI-friendly v2 candidate",
+        default=Path(__file__).resolve().parents[1] / "config" / "gameplay_player.json",
+        help="gameplay JSON; default: responsive player controls",
     )
     args = parser.parse_args()
     settings = load_gameplay_settings(args.settings)

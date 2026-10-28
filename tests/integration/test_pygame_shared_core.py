@@ -41,6 +41,46 @@ class SharedCorePygameTests(unittest.TestCase):
         self.assertGreater(level.state.player.x, start.player.x)
         self.assertEqual(level.state.tick, 60)
 
+    def test_short_tap_between_ticks_still_jumps(self):
+        from source.input import KeyboardInput
+        from pathlib import Path
+        from ai_platformer.settings import load_gameplay_settings
+        level = self.level_type(load_gameplay_settings(Path("config/gameplay_player.json")))
+        keys = KeyboardInput()
+        keys.handle_event(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_SPACE))
+        keys.handle_event(pygame.event.Event(pygame.KEYUP, key=pygame.K_SPACE))
+        level.update(self.surface, keys)
+        self.assertLess(level.state.player.velocity_y, 0)
+        self.assertFalse(level.state.player.grounded)
+
+    def test_fixed_clock_preserves_edges_until_a_tick_and_consumes_once(self):
+        from source.tools import Game
+
+        class CounterState:
+            finished = False
+            def __init__(self):
+                self.ticks = 0
+                self.presses = 0
+            def update(self, surface, keys):
+                self.ticks += 1
+                self.presses += int(keys.was_pressed(pygame.K_SPACE))
+
+        for fps in (30, 60, 144):
+            state = CounterState()
+            game = Game({"play": state}, "play", render_fps=fps)
+            for _ in range(fps):
+                game.advance(1 / fps)
+            self.assertEqual(state.ticks, 60)
+        state = CounterState()
+        game = Game({"play": state}, "play")
+        game.input.handle_event(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_SPACE))
+        game.input.handle_event(pygame.event.Event(pygame.KEYUP, key=pygame.K_SPACE))
+        game.advance(0.001)
+        self.assertEqual(state.presses, 0)
+        game.advance(0.10)
+        self.assertEqual(state.presses, 1)
+        self.assertLessEqual(game.advance(5.0), 15)
+
     def test_v2_keyboard_and_gym_follow_same_trajectory(self) -> None:
         from ai_platformer.core import Action
         from ai_platformer.envs.factory import EnvironmentFactory

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "level_id": "level_1",
+  "seed": 0,
+  "render_fps": 60,
+  "terminal_display_ms": 1000,
+  "physics": {
+    "player_width": 24.0,
+    "player_height": 32.0,
+    "walk_acceleration": 0.45,
+    "run_acceleration": 0.6,
+    "turn_acceleration": 1.1,
+    "responsive_controls": true,
+    "ground_braking": 0.9,
+    "air_acceleration": 0.25,
+    "air_braking": 0.04,
+    "coyote_ticks": 6,
+    "jump_buffer_ticks": 7,
+    "jump_cut_velocity": -8.0,
+    "max_walk_speed": 6.0,
+    "max_run_speed": 12.0,
+    "jump_velocity": -10.5,
+    "rising_gravity": 0.3,
+    "falling_gravity": 1.0,
+    "max_fall_speed": 11.0,
+    "max_episode_steps": 36000
+  }
+}

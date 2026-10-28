@@ -69,7 +69,7 @@ class Level:
 
         if self.outcome is None and not self.paused:
             action = self.controller.action(keys)
-            result = self.core.step(action)
+            result = self.core.step(action, jump_pressed=self.controller.jump_pressed(keys))
             self.state = result.state
             if result.terminated or result.truncated:
                 self.outcome = result.info.get("outcome", "time_limit")

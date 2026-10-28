@@ -62,7 +62,9 @@ $env:PYTHONPATH = (Resolve-Path ".deps").Path
 | 重开当前关卡 | `R` |
 | 菜单确认 | `Enter` |
 
-手动游戏默认使用 [`config/gameplay_ai_v2.json`](config/gameplay_ai_v2.json)：短按低跳、长按高跳，移动响应更快。长按高度有上限且只起跳一次，落地后需松开再按。旧设置保留在 [`config/gameplay.json`](config/gameplay.json)，可用 `python -m source.main --settings config/gameplay.json` 试玩对照。当前参数、收集奖励和验证结果见 [可变高度跳跃](docs/VARIABLE_JUMP_V2.md)。
+手动游戏默认使用 [`config/gameplay_player.json`](config/gameplay_player.json)：加速、刹车和掉头分别调节，空中保留惯性并允许方向微调；短按低跳、长按高跳。离开平台后 100ms 内仍可起跳，落地前约 117ms 的跳跃输入会被缓存；长按不会自动连跳。物理更新固定为每秒 60 次，短按事件保留至下一次更新，长时间卡顿最多补算 250ms。
+
+旧设置保留在 [`config/gameplay.json`](config/gameplay.json)，可用 `python -m source.main --settings config/gameplay.json` 试玩对照。其他环境仍使用各自配置；原 v2 参数与验证见 [可变高度跳跃](docs/VARIABLE_JUMP_V2.md)。
 
 ## 测试
 

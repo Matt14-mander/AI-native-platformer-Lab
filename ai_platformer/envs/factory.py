@@ -47,6 +47,18 @@ class EnvironmentFactory:
         physics = asdict(self.settings.physics)
         physics.update(config.get("physics", {}))
         for key, value in physics.items():
+            if key == "responsive_controls":
+                if not isinstance(value, bool):
+                    raise ValueError(f"invalid physics {key}")
+                continue
+            if key in {"coyote_ticks", "jump_buffer_ticks"}:
+                if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                    raise ValueError(f"invalid physics {key}")
+                continue
+            if key == "jump_cut_velocity":
+                if value is not None and (not isfinite(value) or value >= 0):
+                    raise ValueError(f"invalid physics {key}")
+                continue
             if not isfinite(value) or (value >= 0 if key == "jump_velocity" else value <= 0):
                 raise ValueError(f"invalid physics {key}")
         self.settings = replace(self.settings, physics=PhysicsConfig(**physics))

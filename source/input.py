@@ -19,6 +19,9 @@ class KeyboardInput:
             self._pressed.add(event.key)
         elif event.type == pygame.KEYUP:
             self._pressed.discard(event.key)
+        elif event.type == pygame.WINDOWFOCUSLOST:
+            self._pressed.clear()
+            self._just_pressed.clear()
 
     def sync(self, pressed) -> None:
         """Synchronize gameplay keys with the physical keyboard each frame.
@@ -44,6 +47,8 @@ class KeyboardInput:
         )
         for key in tracked_keys:
             if pressed[key]:
+                if key not in self._pressed:
+                    self._just_pressed.add(key)
                 self._pressed.add(key)
             else:
                 self._pressed.discard(key)
@@ -55,6 +60,7 @@ class KeyboardInput:
         return key in self._just_pressed
 
     def end_frame(self) -> None:
+        """Consume edges after a simulation tick, not after a render-only frame."""
         self._just_pressed.clear()
 
     def __getitem__(self, key: int) -> bool:

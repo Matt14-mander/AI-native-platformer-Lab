@@ -25,6 +25,13 @@ class PhysicsConfig:
     falling_gravity: float = 1.0
     max_fall_speed: float = 11.0
     max_episode_steps: int = 36_000
+    responsive_controls: bool = False
+    ground_braking: float = 0.9
+    air_acceleration: float = 0.25
+    air_braking: float = 0.04
+    coyote_ticks: int = 0
+    jump_buffer_ticks: int = 0
+    jump_cut_velocity: float | None = None
 
 
 @dataclass(slots=True)
@@ -57,6 +64,9 @@ class BasicPlatformerCore:
         self._seed = 0
         self._episode_id = ""
         self._jump_was_pressed = False
+        self._coyote_remaining = 0
+        self._jump_buffer_remaining = 0
+        self._jump_cut = False
         self._collected_ids: set[str] = set()
         self._collected_powerups: set[str] = set()
         self._broken_blocks: set[str] = set()
@@ -88,6 +98,9 @@ class BasicPlatformerCore:
         self._alive = True
         self._facing = 1
         self._jump_was_pressed = False
+        self._coyote_remaining = 0
+        self._jump_buffer_remaining = 0
+        self._jump_cut = False
         self._collected_ids.clear()
         self._collected_powerups.clear()
         self._broken_blocks.clear()
@@ -107,22 +120,26 @@ class BasicPlatformerCore:
         self._state = self._snapshot()
         return self._state
 
-    def step(self, action: Action) -> StepResult:
+    def step(self, action: Action, *, jump_pressed: bool | None = None) -> StepResult:
         level = self._require_level()
         if not self._alive or self.state.progress >= 1.0:
             raise RuntimeError("episode is finished; call reset() before step()")
 
         control = control_for(action)
+        was_grounded = self._grounded
         previous_progress = self.state.progress
         previous_bottom = self._y + self.config.player_height
         self._tick += 1
         self._events.clear()
         self._invulnerable_ticks = max(0, self._invulnerable_ticks - 1)
         self._update_horizontal_velocity(control)
-        self._start_jump(control)
+        self._start_jump(control, jump_pressed=jump_pressed)
         self._move_horizontal()
         self._apply_vertical_acceleration(control)
         self._move_vertical()
+        # A press just before landing is consumed on the landing tick itself.
+        if self.config.jump_buffer_ticks > 0 and self._grounded and self._jump_buffer_remaining > 0:
+            self._try_jump(control)
         collected = self._collect_overlapping_items()
         self._collect_powerups()
         self._advance_enemies()
@@ -139,6 +156,9 @@ class BasicPlatformerCore:
         if truncated:
             outcome = "time_limit"
         self._jump_was_pressed = control.jump
+        self._jump_buffer_remaining = max(0, self._jump_buffer_remaining - 1)
+        if not was_grounded:
+            self._coyote_remaining = max(0, self._coyote_remaining - 1)
         self._state = self._snapshot()
         reward = self._state.progress - previous_progress + 0.05 * len(collected)
         if outcome == "success":
@@ -181,6 +201,24 @@ class BasicPlatformerCore:
         return solids
 
     def _update_horizontal_velocity(self, control: Control) -> None:
+        if self.config.responsive_controls:
+            if control.horizontal:
+                self._facing = control.horizontal
+            max_speed = self.config.max_run_speed if control.run else self.config.max_walk_speed
+            target = control.horizontal * max_speed
+            if not self._grounded:
+                rate = self.config.air_acceleration if control.horizontal else self.config.air_braking
+            elif not control.horizontal or (
+                self._velocity_x * target > 0 and abs(self._velocity_x) > abs(target)
+            ):
+                rate = self.config.ground_braking
+            elif self._velocity_x * target < 0:
+                rate = self.config.turn_acceleration
+            else:
+                rate = self.config.run_acceleration if control.run else self.config.walk_acceleration
+            delta = target - self._velocity_x
+            self._velocity_x += max(-rate, min(rate, delta))
+            return
         if control.horizontal == 0:
             acceleration = self.config.run_acceleration if control.run else self.config.walk_acceleration
             if self._velocity_x > 0:
@@ -196,13 +234,36 @@ class BasicPlatformerCore:
         self._velocity_x += control.horizontal * acceleration
         self._velocity_x = max(-max_speed, min(max_speed, self._velocity_x))
 
-    def _start_jump(self, control: Control) -> None:
-        if control.jump and not self._jump_was_pressed and self._grounded:
-            self._velocity_y = self.config.jump_velocity
-            self._grounded = False
+    def _start_jump(self, control: Control, *, jump_pressed: bool | None = None) -> None:
+        if self._grounded:
+            self._coyote_remaining = self.config.coyote_ticks
+        pressed = control.jump and not self._jump_was_pressed
+        if jump_pressed is not None:
+            pressed = jump_pressed
+        if pressed:
+            self._jump_buffer_remaining = max(1, self.config.jump_buffer_ticks)
+        self._try_jump(control)
+
+    def _try_jump(self, control: Control) -> None:
+        if self._jump_buffer_remaining <= 0:
+            return
+        if not (self._grounded or self._coyote_remaining > 0):
+            return
+        self._velocity_y = self.config.jump_velocity
+        self._grounded = False
+        self._jump_buffer_remaining = 0
+        self._coyote_remaining = 0
+        self._jump_cut = False
+        self._cut_jump(control)
+
+    def _cut_jump(self, control: Control) -> None:
+        if self.config.jump_cut_velocity is not None and not control.jump and self._velocity_y < 0:
+            self._velocity_y = max(self._velocity_y, self.config.jump_cut_velocity)
+            self._jump_cut = True
 
     def _apply_vertical_acceleration(self, control: Control) -> None:
-        gravity = self.config.rising_gravity if self._velocity_y < 0 and control.jump else self.config.falling_gravity
+        self._cut_jump(control)
+        gravity = self.config.rising_gravity if self._velocity_y < 0 and control.jump and not self._jump_cut else self.config.falling_gravity
         self._velocity_y = min(self.config.max_fall_speed, self._velocity_y + gravity)
 
     def _move_horizontal(self) -> None:

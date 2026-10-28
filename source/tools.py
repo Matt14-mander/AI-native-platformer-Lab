@@ -13,6 +13,19 @@ class Game:
         self.state_dict = state_dict
         self.state = self.state_dict[start_state]
         self.render_fps = render_fps
+        self._accumulator = 0.0
+        self.fixed_dt = 1.0 / 60.0
+
+    def advance(self, elapsed_seconds):
+        """Run 60 physics ticks/second; bound catch-up after a long stall."""
+        self._accumulator += min(max(elapsed_seconds, 0.0), 0.25)
+        ticks = 0
+        while self._accumulator + 1e-12 >= self.fixed_dt:
+            self.update()
+            self.input.end_frame()
+            self._accumulator = max(0.0, self._accumulator - self.fixed_dt)
+            ticks += 1
+        return ticks
 
     def update(self):
         self.state.update(self.screen, self.input)
@@ -30,17 +43,19 @@ class Game:
         frame_count = 0
         running = True
         while running:
+            elapsed = self.clock.tick(self.render_fps) / 1000.0
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                 else:
                     self.input.handle_event(event)
 
+            if not running:
+                break
+
             self.input.sync(pygame.key.get_pressed())
-            self.update()
-            self.input.end_frame()
+            self.advance(elapsed)
             pygame.display.update()
-            self.clock.tick(self.render_fps)
             frame_count += 1
             if max_frames is not None and frame_count >= max_frames:
                 running = False
