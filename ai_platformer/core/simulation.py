@@ -320,6 +320,8 @@ class BasicPlatformerCore:
                     )
                 )
                 self._events.append(("powerup_spawned", block.entity_id))
+        else:
+            self._events.append(("box_bumped", block.entity_id))
 
     def _has_support(self) -> bool:
         feet = self._y + self.config.player_height

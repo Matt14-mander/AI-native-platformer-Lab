@@ -11,6 +11,7 @@ from ai_platformer.core import WorldSnapshot
 from ai_platformer.core.level import SolidRect
 from ai_platformer.rendering.art import ASSET_ROOT, fit_height, fit_rect, load_art
 from ai_platformer.rendering.player_animation import PlayerAnimator
+from ai_platformer.rendering.feedback import InteractionFeedback
 
 
 class PygameLevelRenderer:
@@ -58,6 +59,7 @@ class PygameLevelRenderer:
             for name, spec in manifest["states"].items()
         }
         self.animator = PlayerAnimator()
+        self.feedback = InteractionFeedback()
         self._pose_cache = {}
         self.pause_font = pygame.font.Font(None, 54)
         self._stump_cache: dict[tuple[int, int], pygame.Surface] = {}
@@ -66,6 +68,7 @@ class PygameLevelRenderer:
     def reset(self) -> None:
         self.camera_x = 0.0
         self.animator.reset()
+        self.feedback.reset()
 
     def draw(self, surface: pygame.Surface, state: WorldSnapshot) -> None:
         self._update_camera(state)
@@ -85,6 +88,7 @@ class PygameLevelRenderer:
                 sprite = self.brick
             elif entity.kind == "box":
                 sprite = self.used_box if entity.state == "used" else self.box
+                y += self.feedback.box_offset(entity.entity_id)
             elif entity.kind == "enemy":
                 sprite = self.enemy if entity.facing < 0 else self.enemy_right
             elif entity.kind == "powerup-shield":
@@ -93,6 +97,7 @@ class PygameLevelRenderer:
                 continue
             surface.blit(sprite, (x, y))
         self._draw_player(surface, state)
+        self.feedback.draw_world(surface, self.camera_x, self.brick, self.enemy)
 
     def _draw_background(self, surface: pygame.Surface) -> None:
         width = self.background.get_width()
@@ -162,6 +167,12 @@ class PygameLevelRenderer:
 
     def _draw_player(self, surface: pygame.Surface, state: WorldSnapshot) -> None:
         pose = self.animator.update(state)
+        if state.metadata.get("shield_charges", 0):
+            halo = pygame.Surface((70, 70), pygame.SRCALPHA)
+            pygame.draw.circle(halo, (130, 211, 255, 30), (35, 35), 31)
+            pygame.draw.circle(halo, (161, 228, 255, 160), (35, 35), 31, 2)
+            surface.blit(halo, (round(state.player.x + self.player_width / 2 - self.camera_x - 35),
+                                round(state.player.y + self.player_height - 26 - 35)))
         if state.player.alive and state.metadata.get("invulnerable_ticks", 0) and state.tick % 6 < 3:
             return
         player = state.player

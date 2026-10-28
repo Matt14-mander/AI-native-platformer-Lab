@@ -29,7 +29,7 @@ class Info:
         cream = (255, 239, 210)
         soft = (210, 225, 215)
         score = int(game_state.metadata.get("score", 0))
-        collected = int(game_state.metadata.get("coins_collected", 0))
+        collected = int(game_state.metadata.get("coins_collected", 0)) + int(game_state.metadata.get("box_coins", 0))
         surface.blit(self.font.render("PUPPY TRAIL", True, cream), (34, 24))
         surface.blit(self.small_font.render(f"SCORE  {score:06d}", True, soft), (35, 53))
         surface.blit(self.acorn, (276, 30))

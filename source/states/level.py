@@ -66,10 +66,21 @@ class Level:
             return
         if was_pressed(pygame.K_p) or was_pressed(pygame.K_ESCAPE):
             self.paused = not self.paused
+            if pygame.mixer.get_init():
+                if self.paused:
+                    pygame.mixer.pause()
+                else:
+                    pygame.mixer.unpause()
+
+        if not self.paused:
+            self.renderer.feedback.advance()
 
         if self.outcome is None and not self.paused:
             action = self.controller.action(keys)
             result = self.core.step(action, jump_pressed=self.controller.jump_pressed(keys))
+            self.renderer._update_camera(result.state)
+            self.renderer.feedback.consume(self.state, result, self.renderer.camera_x,
+                                           (self.settings.physics.player_width, self.settings.physics.player_height))
             self.state = result.state
             if result.terminated or result.truncated:
                 self.outcome = result.info.get("outcome", "time_limit")
@@ -87,5 +98,6 @@ class Level:
     def draw(self, surface):
         self.renderer.draw(surface, self.state)
         self.info.draw(surface, self.state)
+        self.renderer.feedback.draw_overlay(surface, self.renderer.acorn)
         if self.paused:
             self.renderer.draw_pause(surface)
