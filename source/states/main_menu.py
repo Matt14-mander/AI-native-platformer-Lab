@@ -24,6 +24,9 @@ class MainMenu:
                 self.show_help=False
             else:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
+        self.draw(surface)
+
+    def draw(self, surface):
         surface.blit(self.background,((surface.get_width()-self.background.get_width())//2,0))
         surface.blit(self.ground,(0,540))
         surface.blit(self.hero,self.hero.get_rect(midbottom=(145,540)))

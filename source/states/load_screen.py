@@ -3,6 +3,8 @@ import pygame
 from ai_platformer.rendering.art import fit_height, load_art
 from source.ui import panel, text, pressed, SOFT
 class LoadScreen:
+    title="准备出发"
+    subtitle="新的湖岸旅程即将开始。"
     def __init__(self):
         self.background=fit_height(load_art("backgrounds/lakeside-day.png",crop=False),600)
         self.summary={}
@@ -10,6 +12,7 @@ class LoadScreen:
     def enter(self):
         self.finished=False
         self.next="level"
+        self.summary={}
     def receive_result(self,summary):
         self.summary=dict(summary)
     def is_finished(self):
@@ -19,8 +22,9 @@ class LoadScreen:
     def draw(self,surface):
         surface.blit(self.background,((surface.get_width()-self.background.get_width())//2,0))
         panel(surface,pygame.Rect(surface.get_width()//2-260,110,520,390))
-        text(surface,self.title,142,36)
-        text(surface,self.subtitle,201,19,SOFT)
+        timed_out = self.summary.get("outcome") == "time_limit"
+        text(surface,"本次旅程时间已到" if timed_out else self.title,142,36)
+        text(surface,"已经走过的路，都会成为下一次的经验。" if timed_out else self.subtitle,201,19,SOFT)
         score=self.summary.get("score",0)
         coins=self.summary.get("coins",0)
         seconds=int(self.summary.get("ticks",0)/60)
