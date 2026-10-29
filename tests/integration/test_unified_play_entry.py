@@ -194,3 +194,29 @@ def test_main_cli_wires_custom_specs_into_same_game(monkeypatch):
     monkeypatch.setattr("sys.argv", ["main", "--level-spec", "game_content/level_specs/full_v1.json"])
     main()
     assert observed == ["full_v1.json"]
+
+
+def test_transition_discards_old_screen_catchup(surface, settings):
+    session, game = make_game(settings)
+    game.input.handle_event(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RETURN))
+    game.input.handle_event(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RIGHT))
+    game.advance(0.25)
+    assert isinstance(game.state, Level)
+    assert game.state.state.tick == 0
+    game.advance(1 / 60)
+    assert game.state.state.tick == 1
+
+
+def test_failed_admission_from_help_is_visible_and_recoverable(surface, settings, tmp_path):
+    session, game = make_game(settings, [tmp_path / "missing.json"])
+    original = session.prepared
+    tap(game, pygame.K_LEFT)
+    tap(game, pygame.K_h)
+    tap(game, pygame.K_RETURN)
+    assert isinstance(game.state, MainMenu)
+    assert game.state.error and not game.state.show_help
+    assert session.prepared is original
+    tap(game, pygame.K_RIGHT)
+    tap(game, pygame.K_RETURN)
+    assert isinstance(game.state, Level)
+    assert game.state.settings.level_id == settings.level_id

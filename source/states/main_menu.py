@@ -35,6 +35,7 @@ class MainMenu:
                 self.finished=True
             except PlayAdmissionError as error:
                 self.error = str(error)
+                self.show_help = False
         if pressed(keys,pygame.K_h):
             self.show_help=not self.show_help
         if pressed(keys,pygame.K_ESCAPE):
