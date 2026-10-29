@@ -49,6 +49,7 @@ class PlaySession:
         self.settings = settings
         self.entries = entries
         self.index = 0
+        self.records = None
         self.prepared = self._prepare(entries[0])
 
     @property

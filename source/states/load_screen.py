@@ -39,6 +39,16 @@ class LoadScreen:
             label = self.error or ("N   前往下一关" if self.session.has_next else "已完成目录中的最后一关")
             text(surface, label, 352, 18, SOFT)
         text(surface,"Esc / M   返回主菜单",443,20,SOFT)
+        if self.session and self.session.records:
+            records = self.session.records
+            best = records.best(self.session.prepared)
+            label = records.notice
+            if not label and best:
+                label = f"已保存 · 最高分 {best['best_score']} · 最多橡果 {best['best_coins']}"
+                if best["fastest_ticks"] is not None:
+                    label += f" · 最快 {best['fastest_ticks'] / 60:.1f}秒"
+            if label:
+                text(surface, label, 478, 16, SOFT)
 class GameOver(LoadScreen):
     title="没关系，再试一次"
     subtitle="调整起跳时机，小狗还在陪着你。"

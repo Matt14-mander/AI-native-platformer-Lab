@@ -191,7 +191,7 @@ def test_main_cli_wires_custom_specs_into_same_game(monkeypatch):
         pygame.quit()
 
     monkeypatch.setattr(Game, "run", run)
-    monkeypatch.setattr("sys.argv", ["main", "--level-spec", "game_content/level_specs/full_v1.json"])
+    monkeypatch.setattr("sys.argv", ["main", "--no-save", "--level-spec", "game_content/level_specs/full_v1.json"])
     main()
     assert observed == ["full_v1.json"]
 
