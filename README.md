@@ -82,6 +82,21 @@ python -m source.main --level-spec game_content/level_specs/full_v1.json
 
 旧设置保留在 [`config/gameplay.json`](config/gameplay.json)，可用 `python -m source.main --settings config/gameplay.json` 试玩对照。其他环境仍使用各自配置；原 v2 参数与验证见 [可变高度跳跃](docs/VARIABLE_JUMP_V2.md)。
 
+## 本地游玩记录与存档
+
+主游戏默认将进度保存在 `runs/player/progress.json`，游玩事件保存在 `runs/player/sessions/`。每个保存目录对应一个自动生成的本地玩家标识；数据不上传网络。可用 `--save-dir <目录>` 切换本地档案，或 `--no-save` 同时关闭记录和存档。
+
+```powershell
+python -m source.main --save-dir runs/my-play
+python -m source.main --no-save
+```
+
+进入关卡才开始记录，菜单选关及验证失败不会增加尝试数。重试产生新的 attempt ID；暂停/失焦时间单独统计，通关、死亡、超时、返回菜单和退出只结束一次尝试。物理时间始终按 60 Hz 计算，和窗口帧率分开。记录兼容现有 `inspect_telemetry`、`summarize_play_sessions` 工具，使用独立的 `HumanPlatformer-v1` 环境标识，按玩家、关卡内容与物理配置隔离；不会混入 PPO/replay 画像。
+
+存档包含尝试次数、通关状态、最高分、最多橡果（含箱子奖励）、最快成功用时和上次游玩的关卡。最高分/收集纪录仅在自然结束时更新，最快时间仅统计通关；重开/退出不计为死亡。重新启动时菜单定位到仍在目录中的上次关卡，重新开始整关，不恢复中途位置；现有可选关卡不增加解锁限制。已载入关卡的菜单/结算页显示个人纪录。
+
+写入采用同目录临时文件、原子替换与上一份有效备份；损坏原文件会保留为 `progress.corrupt-*.json` 并尝试恢复 `progress.backup.json`。未知版本保留原样且停止写入，避免降级覆盖。写入失败或另一个窗口占用存档时，游戏继续并提示本次仅保留内存进度。游玩记录失败会标记为不完整，不能作为有效画像证据。历史记录默认保留，不自动清理。
+
 ## 测试
 
 完整测试统一使用 **pytest**，同时收集 `unittest.TestCase` 和函数式/参数化用例。不要用 `unittest discover` 作为全量验收入口，它会遗漏函数式用例。

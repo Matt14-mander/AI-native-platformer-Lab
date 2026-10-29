@@ -64,6 +64,7 @@ class BasicPlatformerCore:
         self._seed = 0
         self._episode_id = ""
         self._jump_was_pressed = False
+        self.jump_started_this_tick = False
         self._coyote_remaining = 0
         self._jump_buffer_remaining = 0
         self._jump_cut = False
@@ -87,6 +88,7 @@ class BasicPlatformerCore:
         return self._state
 
     def reset(self, *, seed: int, level_id: str) -> WorldSnapshot:
+        self.jump_started_this_tick = False
         self._level = self._level_loader(level_id)
         self._seed = seed
         self._episode_id = f"{level_id}:{seed}"
@@ -121,6 +123,7 @@ class BasicPlatformerCore:
         return self._state
 
     def step(self, action: Action, *, jump_pressed: bool | None = None) -> StepResult:
+        self.jump_started_this_tick = False
         level = self._require_level()
         if not self._alive or self.state.progress >= 1.0:
             raise RuntimeError("episode is finished; call reset() before step()")
@@ -250,6 +253,8 @@ class BasicPlatformerCore:
         if not (self._grounded or self._coyote_remaining > 0):
             return
         self._velocity_y = self.config.jump_velocity
+        # Observer-only fact; not part of snapshot/reward/replay contracts.
+        self.jump_started_this_tick = True
         self._grounded = False
         self._jump_buffer_remaining = 0
         self._coyote_remaining = 0

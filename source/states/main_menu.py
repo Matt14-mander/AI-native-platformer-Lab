@@ -15,6 +15,11 @@ class MainMenu:
         self.next="level"
         self.show_help=False
         self.selection = self.session.index if self.session else 0
+        if self.session and self.session.records:
+            from ai_platformer.adaptive.human_play import entry_key
+            last = self.session.records.store.data["last_entry"]
+            self.selection = next((i for i, entry in enumerate(self.session.entries)
+                                   if entry_key(entry) == last), self.selection)
         self.error = ""
     def is_finished(self):
         return self.finished
@@ -61,5 +66,13 @@ class MainMenu:
                 lines = [f"←  {entry.title}  →",
                          f"第 {self.selection + 1} / {len(self.session.entries)} 关 · Enter 开始",
                          "H 操作说明   Esc 退出", self.error or "选择关卡，和小狗一起出发"]
+                records = self.session.records
+                if records and not self.error:
+                    best = records.best(self.session.prepared) if self.selection == self.session.index else None
+                    if best:
+                        status = "已通关" if best["completed"] else "尚未通关"
+                        lines[3] = f"{status} · 最高分 {best['best_score']} · 橡果 {best['best_coins']}"
+                    if records.notice:
+                        lines[3] = records.notice
         for index,line in enumerate(lines):
             text(surface,line,280+index*45,18 if index==3 or self.show_help else 22,x=520)
