@@ -21,10 +21,14 @@ class Game:
         self._accumulator += min(max(elapsed_seconds, 0.0), 0.25)
         ticks = 0
         while self._accumulator + 1e-12 >= self.fixed_dt:
-            self.update()
+            transitioned = self.update()
             self.input.end_frame()
             self._accumulator = max(0.0, self._accumulator - self.fixed_dt)
             ticks += 1
+            if transitioned:
+                # Time accumulated on the old screen must not advance a new run.
+                self._accumulator = 0.0
+                break
         return ticks
 
     def update(self):
@@ -47,6 +51,8 @@ class Game:
             draw = getattr(self.state, "draw", None)
             if draw is not None:
                 draw(self.screen)
+            return True
+        return False
 
     def run(self, max_frames=None):
         """Run the legacy loop; ``max_frames`` supports automated smoke tests."""

@@ -12,12 +12,17 @@ from source.ui import pause_screen, text, panel
 
 
 class Level:
-    def __init__(self, settings: GameplaySettings | None = None):
+    def __init__(self, settings: GameplaySettings | None = None, *, session=None):
+        self.session = session
+        self._prepared = None
         self.settings = settings or load_gameplay_settings()
         self.finished = False
         self.next = "game_over"
         self.info = info.Info("level")
-        self.repository = LegacyLevelRepository()
+        self.repository = session.prepared.repository if session else LegacyLevelRepository()
+        if session:
+            self.settings = session.prepared.settings
+            self._prepared = session.prepared
         self.level_definition = self.repository.load(self.settings.level_id)
         self.core = BasicPlatformerCore(
             self.repository.load,
@@ -36,13 +41,22 @@ class Level:
             screen_size=pygame.display.get_surface().get_size(),
             level_width=self.level_definition.width,
             goal_x=self.level_definition.goal_x,
-            solids_by_kind=self.repository.load_solids_by_group(self.settings.level_id),
+            solids_by_kind=(self._prepared.solids if self._prepared else
+                            self.repository.load_solids_by_group(self.settings.level_id)),
             player_width=self.settings.physics.player_width,
             player_height=self.settings.physics.player_height,
         )
 
     def enter(self):
         """Start a fresh episode every time the state becomes active."""
+        if self.session and self._prepared is not self.session.prepared:
+            self.renderer.feedback.reset()
+            self._prepared = self.session.prepared
+            self.settings = self._prepared.settings
+            self.repository = self._prepared.repository
+            self.level_definition = self.repository.load(self.settings.level_id)
+            self.core = BasicPlatformerCore(self.repository.load, config=self.settings.physics)
+            self.renderer = self._create_renderer()
         self.finished = False
         self.next = "game_over"
         self.outcome = None
@@ -131,7 +145,8 @@ class Level:
 
     def draw(self, surface):
         self.renderer.draw(surface, self.state)
-        self.info.draw(surface, self.state)
+        self.info.draw(surface, self.state,
+                       title=self.session.title if self.session else "湖岸旅程")
         self.renderer.feedback.draw_overlay(surface, self.renderer.acorn)
         if self.paused:
             pause_screen(surface)
