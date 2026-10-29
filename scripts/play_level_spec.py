@@ -10,6 +10,8 @@ from pathlib import Path
 
 from ai_platformer.envs.factory import EnvironmentFactory
 
+PAUSE_CONTROLS = ("P   继续播放", "R   重开本关（保持暂停）", "Esc   退出播放",
+                  "键盘模式：← → 移动   空格跳跃   Shift 奔跑")
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -198,7 +200,7 @@ def main():
                 (10, 32),
             )
             if paused:
-                renderer.draw_pause(screen)
+                renderer.draw_pause(screen, controls=PAUSE_CONTROLS)
             pygame.display.flip()
             if done and not paused:
                 terminal_elapsed += elapsed

@@ -228,7 +228,10 @@ def main() -> None:
             for line_index, line in enumerate(lines):
                 screen.blit(font.render(line, True, (255, 240, 211)), (10, 8 + 24 * line_index))
             if paused:
-                renderer.draw_pause(screen)
+                renderer.draw_pause(screen, controls=(
+                    "P / Space   继续播放", "R   重播    N   下一关",
+                    "Esc   退出播放", "[ / ]   调整播放速度",
+                ))
             pygame.display.flip()
             if session.done and not paused:
                 terminal_elapsed += elapsed
