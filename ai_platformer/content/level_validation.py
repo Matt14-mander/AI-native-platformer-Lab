@@ -31,7 +31,11 @@ def _overlap(a, b) -> bool:
 
 def validate_geometry(spec: LevelSpec, *, physics: PhysicsConfig | None = None) -> list[Issue]:
     physics = physics or PhysicsConfig()
-    if not all(isfinite(v) for v in asdict(physics).values()):
+    if not all(
+        isfinite(value)
+        for name, value in asdict(physics).items()
+        if not (name == "jump_cut_velocity" and value is None)
+    ):
         raise ValueError("physics values must be finite")
     if not all(v > 0 for v in (physics.player_width, physics.player_height)):
         raise ValueError("player dimensions must be positive and finite")

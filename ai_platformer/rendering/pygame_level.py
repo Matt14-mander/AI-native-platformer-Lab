@@ -195,9 +195,11 @@ class PygameLevelRenderer:
         player_screen_x = state.player.x - self.camera_x
         if player_screen_x > follow_line:
             self.camera_x = state.player.x - follow_line
+        elif player_screen_x < self.screen_width / 4:
+            self.camera_x = state.player.x - self.screen_width / 4
         max_camera = max(0.0, self.level_width - self.screen_width)
         self.camera_x = max(0.0, min(max_camera, self.camera_x))
 
-    def draw_pause(self, surface: pygame.Surface) -> None:
+    def draw_pause(self, surface: pygame.Surface, *, controls=None) -> None:
         from source.ui import pause_screen
-        pause_screen(surface)
+        pause_screen(surface, controls=controls)

@@ -206,6 +206,23 @@ def test_numeric_spellings_and_entity_ids_cannot_hide_duplicate_geometry(data):
     assert not validate_dataset({"train": [a], "test": [b]})["static_valid"]
 
 
+@pytest.mark.parametrize("cut", [None, -8.0])
+def test_geometry_accepts_optional_jump_cut(data, cut):
+    from ai_platformer.core import PhysicsConfig
+    from ai_platformer.content.level_validation import validate_geometry
+
+    validate_geometry(LevelSpec.model_validate(data), physics=PhysicsConfig(jump_cut_velocity=cut))
+
+
+def test_geometry_still_rejects_nonfinite_jump_cut(data):
+    from ai_platformer.core import PhysicsConfig
+    from ai_platformer.content.level_validation import validate_geometry
+
+    with pytest.raises(ValueError, match="finite"):
+        validate_geometry(LevelSpec.model_validate(data),
+                          physics=PhysicsConfig(jump_cut_velocity=float("nan")))
+
+
 def test_loader_rejects_duplicate_json_keys(tmp_path):
     p = tmp_path / "duplicate.json"
     p.write_text('{"schema_version":1,"schema_version":2}')

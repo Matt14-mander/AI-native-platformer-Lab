@@ -73,17 +73,23 @@ $env:PYTHONPATH = (Resolve-Path ".deps").Path
 
 ## 测试
 
-不安装 Pygame 也能运行 headless core 测试；Pygame 集成测试会自动跳过：
+完整测试统一使用 **pytest**，同时收集 `unittest.TestCase` 和函数式/参数化用例。不要用 `unittest discover` 作为全量验收入口，它会遗漏函数式用例。
+
+在上述虚拟环境中安装测试及运行依赖后执行：
 
 ```powershell
-python -m unittest discover -s tests -p "test_*.py" -v
+.\.venv\Scripts\python.exe -m pip install -e ".[dev,content,benchmark,training,deployment]"
+.\.venv\Scripts\python.exe -m pytest --collect-only -q
+.\.venv\Scripts\python.exe -m pytest -ra
 ```
 
-安装完整项目依赖后，所有集成测试都应执行并通过：
+快速检查核心和界面修复可运行以下子集（不能替代全量验收）：
 
 ```powershell
-.\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_*.py" -v
+.\.venv\Scripts\python.exe -m pytest tests/unit/test_core_contracts.py tests/unit/test_gameplay_feel.py tests/integration/test_chinese_ui_flow.py tests/integration/test_playback_review_regressions.py -ra
 ```
+
+`-ra` 会列出跳过与失败原因；缺少可选依赖、模型文件或原生推理桥导致的 skip 不代表对应功能已通过。训练/部署用例可能需要额外本地产物，见相关专项文档。无显示设备时可设置 `SDL_VIDEODRIVER=dummy` 和 `SDL_AUDIODRIVER=dummy`；这不能替代人工游玩验收。
 
 ## Gymnasium 环境与 Benchmark
 
