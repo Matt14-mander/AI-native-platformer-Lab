@@ -19,7 +19,7 @@ class Info:
     def update(self):
         pass
 
-    def draw(self, surface: pygame.Surface, game_state=None):
+    def draw(self, surface: pygame.Surface, game_state=None, *, title="湖岸旅程"):
         if self.state != "level" or game_state is None:
             return
         width = surface.get_width()
@@ -31,7 +31,11 @@ class Info:
         soft = (210, 225, 215)
         score = int(game_state.metadata.get("score", 0))
         collected = int(game_state.metadata.get("coins_collected", 0)) + int(game_state.metadata.get("box_coins", 0))
-        surface.blit(self.font.render("湖岸旅程", True, cream), (34, 22))
+        title_image = self.font.render(title, True, cream)
+        if title_image.get_width() > 220:
+            height = max(1, round(title_image.get_height() * 220 / title_image.get_width()))
+            title_image = pygame.transform.smoothscale(title_image, (220, height))
+        surface.blit(title_image, (34, 22))
         surface.blit(self.small_font.render(f"得分  {score:06d}", True, soft), (35, 53))
         surface.blit(self.acorn, (276, 30))
         surface.blit(self.font.render(f"x {collected:02d}", True, cream), (303, 34))

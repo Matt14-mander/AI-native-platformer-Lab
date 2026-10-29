@@ -53,6 +53,17 @@ $env:PYTHONPATH = (Resolve-Path ".deps").Path
 
 ## 操作
 
+主菜单支持 `← / →` 选择本地关卡，`Enter` 开始。默认目录包含“湖岸旅程”（兼容原关卡）和“湖岸练习场”（LevelSpec）；通关结算后按 `N` 进入目录中的下一关，`Enter / R` 重试当前关，最后一关不会自动循环。
+
+将更多本地 LevelSpec 加入同一个菜单（可重复传入参数）：
+
+```powershell
+python -m pip install -e ".[content,benchmark]"
+python -m source.main --level-spec game_content/level_specs/full_v1.json
+```
+
+新增关卡首次进入时会进行静态校验，并使用当前 `--settings` 的物理参数、seed 和每 tick 一次动作搜索并独立重放通关路线；搜索有预算限制，未找到证据只表示暂未验证，不代表关卡不可玩。当前准入支持高度 600 的静态地形/收集物关卡，含敌人或交互物的 LevelSpec 暂不准入。失败会留在菜单或结算页并保留当前关卡；已载入关卡在本次游玩和重试期间使用内存快照。游戏内沿用同一套中文 HUD、跳跃输入缓存、失焦暂停和交互反馈，不更改 PPO/replay 的独立评测配置。首次验证时会短暂显示检查提示。
+
 | 操作 | 按键 |
 | --- | --- |
 | 移动 | `←` / `→` |

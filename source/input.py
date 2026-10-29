@@ -54,6 +54,7 @@ class KeyboardInput:
             pygame.K_p,
             pygame.K_r,
             pygame.K_m,
+            pygame.K_n,
             pygame.K_h,
             pygame.K_ESCAPE,
         )
