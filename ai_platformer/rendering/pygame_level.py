@@ -199,9 +199,5 @@ class PygameLevelRenderer:
         self.camera_x = max(0.0, min(max_camera, self.camera_x))
 
     def draw_pause(self, surface: pygame.Surface) -> None:
-        overlay = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
-        overlay.fill((22, 29, 36, 145))
-        surface.blit(overlay, (0, 0))
-        label = self.pause_font.render("PAUSED", True, (255, 240, 211))
-        rect = label.get_rect(center=(self.screen_width // 2, self.screen_height // 2))
-        surface.blit(label, rect)
+        from source.ui import pause_screen
+        pause_screen(surface)

@@ -43,6 +43,8 @@ class KeyboardInput:
             pygame.K_RSHIFT,
             pygame.K_p,
             pygame.K_r,
+            pygame.K_m,
+            pygame.K_h,
             pygame.K_ESCAPE,
         )
         for key in tracked_keys:

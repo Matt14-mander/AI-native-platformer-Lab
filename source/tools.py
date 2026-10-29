@@ -30,12 +30,16 @@ class Game:
     def update(self):
         self.state.update(self.screen, self.input)
         if self.state.finished:
+            summary = getattr(self.state, "result_summary", None)
             next_state = self.state.next
             self.state.finished = False
             self.state = self.state_dict[next_state]
             enter = getattr(self.state, 'enter', None)
             if enter is not None:
                 enter()
+            receive = getattr(self.state, "receive_result", None)
+            if receive is not None and summary is not None:
+                receive(summary())
 
     def run(self, max_frames=None):
         """Run the legacy loop; ``max_frames`` supports automated smoke tests."""

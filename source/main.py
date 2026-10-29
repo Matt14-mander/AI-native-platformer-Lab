@@ -23,7 +23,7 @@ def main():
     settings = load_gameplay_settings(args.settings)
     pygame.init()
     pygame.display.set_mode((C.SCREEN_W, C.SCREEN_H))
-    pygame.display.set_caption("Puppy Trail")
+    pygame.display.set_caption("抱着小狗去旅行")
 
     state_dict = {
         "main_menu": main_menu.MainMenu(),

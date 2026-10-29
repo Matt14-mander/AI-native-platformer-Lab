@@ -8,6 +8,7 @@ from ai_platformer.rendering.keyboard import PygameKeyboardController
 from ai_platformer.rendering.pygame_level import PygameLevelRenderer
 from ai_platformer.settings import GameplaySettings, load_gameplay_settings
 from source.components import info
+from source.ui import pause_screen, text, panel
 
 
 class Level:
@@ -52,6 +53,14 @@ class Level:
             level_id=self.settings.level_id,
         )
         self.renderer.reset()
+        if pygame.mixer.get_init():
+            pygame.mixer.unpause()
+
+    def result_summary(self):
+        metadata = self.state.metadata
+        return {"score": metadata.get("score", 0),
+                "coins": metadata.get("coins_collected", 0) + metadata.get("box_coins", 0),
+                "ticks": self.state.tick, "enemies": metadata.get("enemies_defeated", 0)}
 
     def is_finished(self):
         return self.finished
@@ -59,12 +68,24 @@ class Level:
     def update(self, surface, keys):
         current_time = pygame.time.get_ticks()
         was_pressed = getattr(keys, "was_pressed", lambda _key: False)
-        if was_pressed(pygame.K_r):
+        if self.outcome == "success" and was_pressed(pygame.K_RETURN):
+            self.next, self.finished = "level_complete", True
+            return
+        if was_pressed(pygame.K_r) or (self.outcome is not None and was_pressed(pygame.K_RETURN)):
             self.enter()
             self.info.update()
             self.draw(surface)
             return
-        if was_pressed(pygame.K_p) or was_pressed(pygame.K_ESCAPE):
+        if (self.paused or self.outcome is not None) and (
+            was_pressed(pygame.K_m) or (self.outcome is not None and was_pressed(pygame.K_ESCAPE))
+        ):
+            self.renderer.feedback.reset()
+            if pygame.mixer.get_init():
+                pygame.mixer.unpause()
+            self.next, self.finished = "main_menu", True
+            return
+        if self.outcome is None and (was_pressed(pygame.K_p) or was_pressed(pygame.K_ESCAPE)
+                                     or (self.paused and was_pressed(pygame.K_RETURN))):
             self.paused = not self.paused
             if pygame.mixer.get_init():
                 if self.paused:
@@ -87,7 +108,7 @@ class Level:
                 self.terminal_timer = current_time
         elif (
             self.outcome is not None
-            and current_time - self.terminal_timer >= self.settings.terminal_display_ms
+            and current_time - self.terminal_timer >= (self.settings.terminal_display_ms if self.outcome == "success" else 250)
         ):
             self.next = "level_complete" if self.outcome == "success" else "game_over"
             self.finished = True
@@ -100,4 +121,11 @@ class Level:
         self.info.draw(surface, self.state)
         self.renderer.feedback.draw_overlay(surface, self.renderer.acorn)
         if self.paused:
-            self.renderer.draw_pause(surface)
+            pause_screen(surface)
+        elif self.outcome is not None:
+            panel(surface, pygame.Rect(160, 205, 480, 140))
+            text(surface, "抵达终点！" if self.outcome == "success" else "再试一次就好", 225, 30)
+            text(surface, "Enter 查看结算    R 再玩一次" if self.outcome == "success" else "Enter / R 立即重试    Esc 返回菜单", 286, 20)
+        elif self.state.tick < 360:
+            panel(surface, pygame.Rect(145, 95, 510, 45), 195)
+            text(surface, "← → 移动   空格跳跃   Shift 奔跑   Esc 暂停", 105, 18)

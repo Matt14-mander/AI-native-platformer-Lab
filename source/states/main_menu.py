@@ -1,49 +1,38 @@
-"""Opening menu for the lakeside platformer."""
-
+"""Chinese opening menu with compact controls."""
 import pygame
-
 from ai_platformer.rendering.art import fit_height, fit_rect, load_art
-
-
+from source.ui import panel, text, pressed, SOFT
 class MainMenu:
     def __init__(self):
-        self.finished = False
-        self.next = "load_screen"
-        self.background = fit_height(
-            load_art("backgrounds/lakeside-day.png", crop=False), 600
-        )
-        self.hero = fit_height(load_art("characters/child-with-puppy-idle.png"), 250)
-        self.ground = fit_rect(load_art("tilesets/moss-earth-ground.png"), 800, 60)
-        self.title_font = pygame.font.Font(None, 72)
-        self.body_font = pygame.font.Font(None, 30)
-        self.small_font = pygame.font.Font(None, 25)
-
+        self.background=fit_height(load_art("backgrounds/lakeside-day.png",crop=False),600)
+        self.hero=fit_height(load_art("characters/child-with-puppy-idle.png"),230)
+        self.ground=fit_rect(load_art("tilesets/moss-earth-ground.png"),800,60)
+        self.enter()
     def enter(self):
-        self.finished = False
-        self.next = "load_screen"
-
+        self.finished=False
+        self.next="level"
+        self.show_help=False
     def is_finished(self):
         return self.finished
-
-    def update(self, surface, keys):
-        if keys[pygame.K_RETURN]:
-            self.finished = True
-
-        x = (surface.get_width() - self.background.get_width()) // 2
-        surface.blit(self.background, (x, 0))
-        surface.blit(self.ground, (0, 540))
-        surface.blit(self.hero, (96, 290))
-
-        panel = pygame.Surface((432, 300), pygame.SRCALPHA)
-        pygame.draw.rect(panel, (31, 42, 45, 205), panel.get_rect(), border_radius=24)
-        surface.blit(panel, (327, 157))
-
-        cream = (255, 237, 204)
-        soft = (216, 227, 219)
-        surface.blit(self.title_font.render("PUPPY TRAIL", True, cream), (360, 204))
-        surface.blit(self.body_font.render("A lakeside adventure", True, soft), (365, 279))
-        surface.blit(self.body_font.render("PRESS ENTER TO PLAY", True, cream), (365, 354))
-        surface.blit(
-            self.small_font.render("Move: arrows   Jump: Space   Run: Shift", True, soft),
-            (351, 414),
-        )
+    def update(self,surface,keys):
+        if pressed(keys,pygame.K_RETURN):
+            self.finished=True
+        if pressed(keys,pygame.K_h):
+            self.show_help=not self.show_help
+        if pressed(keys,pygame.K_ESCAPE):
+            if self.show_help:
+                self.show_help=False
+            else:
+                pygame.event.post(pygame.event.Event(pygame.QUIT))
+        surface.blit(self.background,((surface.get_width()-self.background.get_width())//2,0))
+        surface.blit(self.ground,(0,540))
+        surface.blit(self.hero,self.hero.get_rect(midbottom=(145,540)))
+        panel(surface,pygame.Rect(280,125,480,365))
+        text(surface,"抱着小狗去旅行",160,34,x=520)
+        text(surface,"沿着湖岸，收集旅途中的小惊喜",217,18,SOFT,x=520)
+        if self.show_help:
+            lines=["← → 移动   Shift / S 奔跑","空格 / A 跳跃：轻按低跳，长按高跳","Esc / P 暂停   R 快速重试","Enter 开始   H 收起提示"]
+        else:
+            lines=["Enter   开始旅程","H   操作说明","Esc   退出游戏","← → 移动   空格跳跃   Shift 奔跑"]
+        for index,line in enumerate(lines):
+            text(surface,line,280+index*45,18 if index==3 or self.show_help else 24,x=520)
