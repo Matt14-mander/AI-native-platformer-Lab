@@ -60,7 +60,14 @@ class Level:
         metadata = self.state.metadata
         return {"score": metadata.get("score", 0),
                 "coins": metadata.get("coins_collected", 0) + metadata.get("box_coins", 0),
-                "ticks": self.state.tick, "enemies": metadata.get("enemies_defeated", 0)}
+                "ticks": self.state.tick, "enemies": metadata.get("enemies_defeated", 0),
+                "outcome": self.outcome}
+
+    def leave(self):
+        """Stop this run's feedback before entering another screen."""
+        self.renderer.feedback.reset()
+        if pygame.mixer.get_init():
+            pygame.mixer.unpause()
 
     def is_finished(self):
         return self.finished
@@ -68,6 +75,12 @@ class Level:
     def update(self, surface, keys):
         current_time = pygame.time.get_ticks()
         was_pressed = getattr(keys, "was_pressed", lambda _key: False)
+        if getattr(keys, "focus_lost", False) and self.outcome is None:
+            self.paused = True
+            if pygame.mixer.get_init():
+                pygame.mixer.pause()
+            self.draw(surface)
+            return
         if self.outcome == "success" and was_pressed(pygame.K_RETURN):
             self.next, self.finished = "level_complete", True
             return
@@ -124,7 +137,8 @@ class Level:
             pause_screen(surface)
         elif self.outcome is not None:
             panel(surface, pygame.Rect(160, 205, 480, 140))
-            text(surface, "抵达终点！" if self.outcome == "success" else "再试一次就好", 225, 30)
+            title = {"success": "抵达终点！", "time_limit": "本次旅程时间已到"}.get(self.outcome, "再试一次就好")
+            text(surface, title, 225, 30)
             text(surface, "Enter 查看结算    R 再玩一次" if self.outcome == "success" else "Enter / R 立即重试    Esc 返回菜单", 286, 20)
         elif self.state.tick < 360:
             panel(surface, pygame.Rect(145, 95, 510, 45), 195)

@@ -70,7 +70,7 @@ class ChineseFlowTests(unittest.TestCase):
         game = Game({"level": level, "level_complete": result}, "level")
         game.advance(1/60)
         self.assertIs(game.state, result)
-        self.assertEqual(result.summary, {"score": 750, "coins": 4, "ticks": 3720, "enemies": 1})
+        self.assertEqual(result.summary, {"score": 750, "coins": 4, "ticks": 3720, "enemies": 1, "outcome": "success"})
         game.advance(1)
         self.assertIs(game.state, result)
         game.input.handle_event(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RETURN))
@@ -94,6 +94,47 @@ class ChineseFlowTests(unittest.TestCase):
         level.update(self.surface, self.keys(pygame.K_RETURN))
         self.assertEqual(level.next, "level_complete")
         self.assertEqual(level.result_summary()["score"], 500)
+
+    def test_focus_loss_pauses_and_focus_gain_requires_explicit_resume(self):
+        level = Level()
+        keys = self.keys(pygame.K_RIGHT)
+        keys.handle_event(pygame.event.Event(pygame.WINDOWFOCUSLOST))
+        keys.sync({})  # Unfocused polling must not restore any held keys.
+        level.update(self.surface, keys)
+        self.assertTrue(level.paused)
+        self.assertEqual(level.state.tick, 0)
+        self.assertFalse(keys[pygame.K_RIGHT])
+        keys.end_frame()
+        keys.handle_event(pygame.event.Event(pygame.WINDOWFOCUSGAINED))
+        level.update(self.surface, keys)
+        self.assertTrue(level.paused)
+        self.assertEqual(level.state.tick, 0)
+        level.update(self.surface, self.keys(pygame.K_RETURN))
+        self.assertFalse(level.paused)
+
+    def test_transition_draws_new_screen_without_reusing_enter(self):
+        from unittest.mock import patch
+        level, menu = Level(), MainMenu()
+        game = Game({"main_menu": menu, "level": level}, "main_menu")
+        game.input.handle_event(pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RETURN))
+        with patch.object(level, "draw", wraps=level.draw) as draw:
+            game.advance(1/60)
+            draw.assert_called_once()
+        self.assertIs(game.state, level)
+        self.assertEqual(level.state.tick, 0)
+        game.advance(1/60)
+        self.assertFalse(level.paused)
+        self.assertEqual(level.state.tick, 1)
+
+    def test_time_limit_is_preserved_and_results_clear_on_reentry(self):
+        level, result = Level(), GameOver()
+        level.outcome = "time_limit"
+        level.terminal_timer = pygame.time.get_ticks() - 1000
+        game = Game({"level": level, "game_over": result}, "level")
+        game.advance(1/60)
+        self.assertEqual(result.summary["outcome"], "time_limit")
+        result.enter()
+        self.assertEqual(result.summary, {})
 
 
 if __name__ == "__main__":
