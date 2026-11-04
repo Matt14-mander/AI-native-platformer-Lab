@@ -99,7 +99,7 @@ python -m source.main --no-save
 
 ## 规则难度建议
 
-规则 DDA 首版可基于真人画像离线输出 `hold / ease / challenge`，包含规则版本和证据引用，默认不应用到游戏。使用方式、固定阈值与验证边界见 [规则 DDA v1](docs/RULE_DDA_V1.md)。
+规则 DDA 可基于真人画像输出 `hold / ease / challenge`。主游戏结算页按 **D** 查看建议；候选按当前玩家物理完成静态检查与路线重放后，按 **A** 选择试玩，或 **R** 重试原关。证据不足或验证失败会保留原关卡，已选候选在重启后仍可从菜单进入。离线 CLI、固定阈值、记录索引与验证边界见 [规则 DDA v1](docs/RULE_DDA_V1.md)。
 
 ## 测试
 

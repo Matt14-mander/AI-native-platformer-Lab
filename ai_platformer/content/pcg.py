@@ -58,7 +58,7 @@ class GenerationResult:
     physics: PhysicsConfig
 
 
-def _segments_v1(request):
+def _segments_v1(request, *, physics=SEGMENTS_V1_PHYSICS, physics_profile=None):
     rng = _Random(request.seed)
     kinds = ["obstacle"] * request.obstacle_count + ["gap"] * request.gap_count
     rng.shuffle(kinds)
@@ -130,7 +130,7 @@ def _segments_v1(request):
             "seed": request.seed,
         },
     )
-    validation = validate_level_spec(spec, physics=SEGMENTS_V1_PHYSICS)
+    validation = validate_level_spec(spec, physics=physics)
     if not validation["static_valid"]:
         raise RuntimeError(f"generator produced invalid geometry: {validation['issues']}")
     return GenerationResult(
@@ -142,15 +142,15 @@ def _segments_v1(request):
             "generator_version": request.generator_version,
             "rng_version": "sha256-counter-rejection-v1",
             "request_sha256": request_hash(request),
-            "physics_profile": request.physics_profile,
-            "physics": asdict(SEGMENTS_V1_PHYSICS),
+            "physics_profile": physics_profile or request.physics_profile,
+            "physics": asdict(physics),
             "segments": segments,
             "counts": {"obstacles": len(obstacles), "gaps": len(gaps), "coins": len(coins)},
             "objective": {"min_coin_ratio": request.min_coin_ratio},
             "validation": validation,
             "note": "Static-valid candidate. Physical reachability and collection target need route replay.",
         },
-        SEGMENTS_V1_PHYSICS,
+        physics,
     )
 
 
@@ -167,3 +167,15 @@ def generate_level(request: GenerationRequest | dict) -> GenerationResult:
         request.model_dump() if isinstance(request, GenerationRequest) else request
     )
     return _GENERATORS[request.generator_version](request)
+
+
+def generate_player_level(request, physics: PhysicsConfig) -> GenerationResult:
+    """Reuse frozen geometry/RNG, but validate with explicit player physics.
+
+    The request's legacy physics tag remains part of its design hash. This
+    separate entry point reports the actual validation physics and never
+    changes the existing training generator or its reproducibility contract.
+    """
+    request = GenerationRequest.model_validate(
+        request.model_dump() if isinstance(request, GenerationRequest) else request)
+    return _segments_v1(request, physics=physics, physics_profile="human-custom-v1")

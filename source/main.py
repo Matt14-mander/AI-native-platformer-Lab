@@ -32,6 +32,9 @@ def main():
     if not args.no_save:
         from ai_platformer.adaptive.human_play import HumanPlayRecords
         session.records = HumanPlayRecords(args.save_dir)
+        # Catalog restoration is lightweight; optional generation dependencies
+        # remain lazy until the player asks for a suggestion.
+        session.records.restore_candidates(session)
     reason = "error"
     try:
         pygame.init()

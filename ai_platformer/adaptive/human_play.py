@@ -3,10 +3,12 @@
 from dataclasses import asdict, dataclass, replace
 from types import SimpleNamespace
 from uuid import uuid4
+import json
+import re
 
 from ai_platformer.content.curriculum import content_hash
 from .metrics import digest
-from .progress import ProgressStore
+from .progress import ProgressStore, atomic_write
 from .telemetry import TelemetryRecorder
 
 
@@ -65,6 +67,21 @@ class HumanPlayRecords:
         self.closed = False
         self._lookup_prepared = None
         self._lookup_key = None
+        self.session_order = []
+        self.order_valid = True
+        try:
+            path = self.directory / "session_order.json"
+            if path.exists():
+                if path.stat().st_size > 100_000:
+                    raise ValueError("session order too large")
+                order = json.loads(path.read_text(encoding="utf-8"))
+                if (not isinstance(order, list) or len(order) > 128
+                        or any(not isinstance(x, str) or not re.fullmatch(r"[a-f0-9]{32}", x) for x in order)
+                        or len(set(order)) != len(order)):
+                    raise ValueError("invalid session order")
+                self.session_order = order
+        except (OSError, ValueError, RecursionError):
+            self.order_valid = False
 
     @property
     def notice(self):
@@ -92,6 +109,12 @@ class HumanPlayRecords:
                     headless=self.headless,
                     source={"entrypoint": "source.main", "input_edge_version": 1}, **options,
                 )
+                if self.order_valid and not self.store.disabled:
+                    self.session_order = [*self.session_order, self.recorder.writer.directory.name][-128:]
+                    try:
+                        atomic_write(self.directory / "session_order.json", self.session_order)
+                    except OSError:
+                        self.order_valid = False
             except (OSError, ValueError, TypeError):
                 self.warning = "游玩记录写入失败，游戏可继续。"
         if self.recorder:
@@ -145,6 +168,29 @@ class HumanPlayRecords:
             self._lookup_prepared = prepared
             self._lookup_key = progress_key(prepared)
         return self.store.data["levels"].get(self._lookup_key)
+
+    def profile_snapshot(self, prepared):
+        """Seal completed recording before analysis; the next run opens a new one."""
+        if self.active:
+            raise ValueError("finish the current attempt before requesting a suggestion")
+        if not self.order_valid or self.store.disabled:
+            raise ValueError("record history is unavailable")
+        if self.recorder:
+            self._call("close", "quit")
+            self.recorder = None
+        if not self.session_order:
+            return None
+        from .reporting import build_report
+        report = build_report([self.directory / "sessions" / name for name in self.session_order])
+        environment = digest({"environment": HumanPlayProtocol(prepared).environment(), "tick_hz": 60})
+        matches = [p for p in report["profiles"]
+                   if p["identity"] == {"scope": "player", "id": self.store.data["player_id"]}
+                   and p["environment_sha256"] == environment]
+        return matches[0] if matches else None
+
+    def restore_candidates(self, session):
+        from .candidate_catalog import restore_catalog
+        restore_catalog(session)
 
     def close(self, reason="quit"):
         if self.closed:

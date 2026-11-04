@@ -17,6 +17,7 @@ class PlayEntry:
     title: str
     level_id: str | None = None
     path: Path | None = None
+    design_request: dict | None = None
 
 
 @dataclass(frozen=True)
@@ -38,6 +39,7 @@ class PreparedPlayLevel:
     solids: dict
     admission: str
     route: dict | None = None
+    design_request: dict | None = None
 
 
 class PlaySession:
@@ -106,6 +108,7 @@ class PlaySession:
                 replace(self.settings, level_id=factory.level_id), PlayRepository(definition),
                 factory.repository.solids_by_kind(factory.level_id), "route_verified",
                 report["witness"],
+                entry.design_request,
             )
         except PlayAdmissionError:
             raise
