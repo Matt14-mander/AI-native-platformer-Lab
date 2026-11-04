@@ -109,8 +109,6 @@ class TelemetryRecorder:
             self.disable(error)
 
     def on_reset(self, env, state):
-        from ai_platformer.envs.factory import protocol_hash
-
         if self.attempt_id:
             reason = "level_switch" if self.state.level_id != state.level_id else (
                 "replay" if self.actor_type == "replay" else "restart"
@@ -121,7 +119,9 @@ class TelemetryRecorder:
         self.context = {
             "level_id": state.level_id, "seed": state.seed,
             "level_sha256": content_hash(env.level),
-            "protocol_sha256": protocol_hash(self.factory.protocol([state.level_id])),
+            "protocol_sha256": hashlib.sha256(json.dumps(
+                self.factory.protocol([state.level_id]), sort_keys=True
+            ).encode()).hexdigest(),
         }
         self.decision = 0
         self.jump_held = False
@@ -144,15 +144,18 @@ class TelemetryRecorder:
         if self.trace_actions:
             self._emit("action", {"action": int(action)})
 
-    def on_tick(self, before, action, result):
+    def on_tick(self, before, action, result, *, jump_pressed=None, jump_started=None):
         self.motion.observe(before, result.state)
         self.state = result.state
         self.max_progress = max(self.max_progress, self.state.progress)
         control = control_for(action)
+        requested = (control.jump and not self.jump_held) if jump_pressed is None else jump_pressed
+        accepted = (control.jump and not self.jump_held and before.player.grounded
+                    if jump_started is None else jump_started)
         collected = result.info.get("collected", ())
         interactions = result.info.get("events", ())
         has_event = (
-            control.jump != self.jump_held
+            control.jump != self.jump_held or requested or accepted
             or (not before.player.grounded and self.state.player.grounded)
             or collected or interactions
         )
@@ -162,15 +165,21 @@ class TelemetryRecorder:
             self.jump_held = control.jump
             return
         player = asdict(self.state.player)
-        if control.jump and not self.jump_held:
-            self.held_ticks = 0
-            self._emit("jump_requested", {"player": player, "grounded_before": before.player.grounded})
         if not control.jump and self.jump_held:
             self._emit("jump_released", {"player": player, "held_ticks": self.held_ticks})
+        if requested:
+            if not self.jump_held or not control.jump:
+                self.held_ticks = 0
+            self._emit("jump_requested", {
+                "player": player, "grounded_before": before.player.grounded,
+                **({"released_before_tick": True} if jump_pressed and not control.jump else {}),
+            })
+        # A between-tick tap has no measured hold interval. Do not invent one tick
+        # or emit a zero-duration release forbidden by the v1 hold contract.
         if control.jump:
             self.held_ticks += 1
         # This is exactly the core's jump acceptance condition, even on an immediate head hit.
-        if control.jump and not self.jump_held and before.player.grounded:
+        if accepted:
             self._emit("jump_started", {"player": player, "takeoff": asdict(before.player)})
         if not before.player.grounded and self.state.player.grounded:
             self._emit("landed", {"player": player})
@@ -231,6 +240,9 @@ class TelemetryRecorder:
             "player": asdict(self.state.player),
             "coins_collected": self.state.metadata["coins_collected"],
             "coins_total": self.state.metadata["coins_total"],
+            "score": self.state.metadata.get("score", 0),
+            "box_coins": self.state.metadata.get("box_coins", 0),
+            "enemies_defeated": self.state.metadata.get("enemies_defeated", 0),
             "jump_held_ticks_at_end": self.held_ticks if self.jump_held else 0,
             "motion": self.motion.snapshot(),
         }

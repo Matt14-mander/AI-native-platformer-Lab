@@ -14,6 +14,7 @@ from source.ui import pause_screen, text, panel
 class Level:
     def __init__(self, settings: GameplaySettings | None = None, *, session=None):
         self.session = session
+        self.records = session.records if session else None
         self._prepared = None
         self.settings = settings or load_gameplay_settings()
         self.finished = False
@@ -34,7 +35,7 @@ class Level:
         self.outcome = None
         self.terminal_timer = None
         self.paused = False
-        self.enter()
+        self.enter(record=False)
 
     def _create_renderer(self):
         return PygameLevelRenderer(
@@ -47,7 +48,7 @@ class Level:
             player_height=self.settings.physics.player_height,
         )
 
-    def enter(self):
+    def enter(self, *, record=True):
         """Start a fresh episode every time the state becomes active."""
         if self.session and self._prepared is not self.session.prepared:
             self.renderer.feedback.reset()
@@ -69,6 +70,8 @@ class Level:
         self.renderer.reset()
         if pygame.mixer.get_init():
             pygame.mixer.unpause()
+        if record and self.records:
+            self.records.begin(self._prepared, self.session.entries[self.session.index], self.state)
 
     def result_summary(self):
         metadata = self.state.metadata
@@ -80,6 +83,8 @@ class Level:
     def leave(self):
         """Stop this run's feedback before entering another screen."""
         self.renderer.feedback.reset()
+        if self.records:
+            self.records.finish("quit")
         if pygame.mixer.get_init():
             pygame.mixer.unpause()
 
@@ -91,6 +96,8 @@ class Level:
         was_pressed = getattr(keys, "was_pressed", lambda _key: False)
         if getattr(keys, "focus_lost", False) and self.outcome is None:
             self.paused = True
+            if self.records:
+                self.records.pause(True)
             if pygame.mixer.get_init():
                 pygame.mixer.pause()
             self.draw(surface)
@@ -114,6 +121,8 @@ class Level:
         if self.outcome is None and (was_pressed(pygame.K_p) or was_pressed(pygame.K_ESCAPE)
                                      or (self.paused and was_pressed(pygame.K_RETURN))):
             self.paused = not self.paused
+            if self.records:
+                self.records.pause(self.paused)
             if pygame.mixer.get_init():
                 if self.paused:
                     pygame.mixer.pause()
@@ -125,7 +134,11 @@ class Level:
 
         if self.outcome is None and not self.paused:
             action = self.controller.action(keys)
-            result = self.core.step(action, jump_pressed=self.controller.jump_pressed(keys))
+            jump_pressed = self.controller.jump_pressed(keys)
+            result = self.core.step(action, jump_pressed=jump_pressed)
+            if self.records:
+                self.records.tick(self.state, action, result, jump_pressed=jump_pressed,
+                                  jump_started=self.core.jump_started_this_tick)
             self.renderer._update_camera(result.state)
             self.renderer.feedback.consume(self.state, result, self.renderer.camera_x,
                                            (self.settings.physics.player_width, self.settings.physics.player_height))
@@ -148,6 +161,9 @@ class Level:
         self.info.draw(surface, self.state,
                        title=self.session.title if self.session else "湖岸旅程")
         self.renderer.feedback.draw_overlay(surface, self.renderer.acorn)
+        if self.records and self.records.notice:
+            panel(surface, pygame.Rect(40, 560, 720, 32))
+            text(surface, self.records.notice, 565, 16)
         if self.paused:
             pause_screen(surface)
         elif self.outcome is not None:

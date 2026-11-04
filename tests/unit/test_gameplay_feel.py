@@ -67,9 +67,12 @@ class GameplayFeelTests(unittest.TestCase):
             core.step(Action.NOOP)
         core.step(Action.JUMP)
         self.assertLess(core.state.player.velocity_y, -9)
+        self.assertTrue(core.jump_started_this_tick)
         core.step(Action.NOOP)
+        self.assertFalse(core.jump_started_this_tick)
         core.step(Action.JUMP)
         self.assertGreater(core.state.player.velocity_y, -9)
+        self.assertFalse(core.jump_started_this_tick)
         core = self.leave_ledge()
         for _ in range(7):
             core.step(Action.NOOP)
@@ -81,12 +84,14 @@ class GameplayFeelTests(unittest.TestCase):
         core.step(Action.JUMP)
         core.step(Action.JUMP)
         landed = core.step(Action.JUMP).state
+        self.assertTrue(core.jump_started_this_tick)
         self.assertLess(landed.player.velocity_y, 0)
         self.assertFalse(landed.player.grounded)
         for _ in range(100):
             core.step(Action.JUMP)
         self.assertTrue(core.state.player.grounded)
         self.assertEqual(core.state.player.velocity_y, 0)
+        self.assertFalse(core.jump_started_this_tick)
 
     def test_early_press_expires(self):
         core = make_core(spawn_bottom=100)
