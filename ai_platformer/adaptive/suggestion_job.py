@@ -40,6 +40,9 @@ def start_suggestion(session):
         raise PlayAdmissionError("游玩记录暂不可用，仍可重试原关。") from error
     # This snapshot holds no live session, recorder, store or Pygame object.
     snapshot = SimpleNamespace(prepared=session.prepared, records=source)
-    job = SuggestionJob(snapshot)
+    try:
+        job = SuggestionJob(snapshot)
+    except RuntimeError as error:
+        raise PlayAdmissionError("后台检查无法启动，仍可重试原关。") from error
     session.suggestion_job = job
     return job

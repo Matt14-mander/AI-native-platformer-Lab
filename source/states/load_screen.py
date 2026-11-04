@@ -116,6 +116,11 @@ class LevelComplete(GameOver):
     subtitle="这一段湖岸旅程，和小狗一起完成了。"
     def update(self, surface, keys):
         if self.session and self.session.has_next and pressed(keys, pygame.K_n):
+            # Cancel before synchronous admission of the next catalog entry,
+            # rather than letting two route searches compete until transition.
+            self.leave()
+            if self.offer is None:
+                self.suggestion_message = "D   查看新练习关建议（可选）"
             try:
                 self.error = "正在检查下一关，请稍候…"
                 self.draw(surface)

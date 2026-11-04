@@ -145,3 +145,65 @@ def test_window_exit_cancels_without_waiting_for_worker_or_leaking_save_lock(scr
         release.set()
         if captured:
             captured[0].thread.join(5)
+
+
+@pytest.mark.parametrize("valid", [True, False])
+def test_next_level_cancels_before_admission_and_discards_late_result(screen, tmp_path, monkeypatch, valid):
+    from ai_platformer.content.play_session import PlayAdmissionError
+    release = Event()
+    def slow(snapshot, *, cancelled):
+        assert release.wait(10)
+        return CandidateOffer(snapshot.prepared, "late", prepared=snapshot.prepared)
+    monkeypatch.setattr(candidates, "prepare_offer", slow)
+    session, records, game = app(tmp_path)
+    try:
+        original = session.prepared
+        game.state = game.state_dict["level_complete"]
+        game.state.enter()
+        result = game.state
+        tap(game, pygame.K_d)
+        job = result.suggestion_job
+        next_level = session.next_level
+        def admission():
+            assert job.cancelled.is_set()
+            if not valid:
+                raise PlayAdmissionError("test admission failure")
+            next_level()
+        monkeypatch.setattr(session, "next_level", admission)
+        tap(game, pygame.K_n)
+        if valid:
+            assert game.state is game.state_dict["level"]
+            assert session.index == 1 and session.prepared is not original
+            assert game.state.state.tick == 0
+        else:
+            assert game.state is result and session.prepared is original
+            assert result.error == "test admission failure" and not records.active
+            assert "正在后台" not in result.suggestion_message
+        release.set()
+        with pytest.raises(CancelledError):
+            job.future.result(timeout=5)
+        game.advance(1 / 60)
+        assert result.offer is None
+        assert session.index == (1 if valid else 0)
+    finally:
+        release.set()
+        if getattr(session, "suggestion_job", None):
+            session.suggestion_job.thread.join(5)
+        records.close()
+
+
+def test_worker_start_failure_does_not_break_retry(screen, tmp_path, monkeypatch):
+    from ai_platformer.adaptive import suggestion_job
+    def fail_start(thread):
+        raise RuntimeError("cannot start thread")
+    monkeypatch.setattr(suggestion_job.Thread, "start", fail_start)
+    session, records, game = app(tmp_path)
+    try:
+        result_screen(game)
+        tap(game, pygame.K_d)
+        assert game.state.suggestion_job is None
+        assert "暂不可用" in game.state.suggestion_message
+        tap(game, pygame.K_r)
+        assert records.active and game.state is game.state_dict["level"]
+    finally:
+        records.close()
