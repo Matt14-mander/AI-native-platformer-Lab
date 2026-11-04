@@ -3,6 +3,7 @@
 from dataclasses import asdict, dataclass, replace
 from types import SimpleNamespace
 from uuid import uuid4
+from pathlib import Path
 import json
 import re
 
@@ -38,6 +39,25 @@ class HumanPlayProtocol:
     def protocol(self, ids):
         return {**self.environment(), "tick_hz": 60, "input_edge_version": 1,
                 "levels": {key: content_hash(self.repository.load(key)) for key in ids}}
+
+
+@dataclass(frozen=True)
+class ProfileSource:
+    """Closed input files and identity pins; safe to analyze off the game thread."""
+    directory: Path
+    session_order: tuple[str, ...]
+    player_id: str
+    environment_sha256: str
+
+    def profile_snapshot(self, _prepared=None):
+        if not self.session_order:
+            return None
+        from .reporting import build_report
+        report = build_report([self.directory / "sessions" / name for name in self.session_order])
+        matches = [p for p in report["profiles"]
+                   if p["identity"] == {"scope": "player", "id": self.player_id}
+                   and p["environment_sha256"] == self.environment_sha256]
+        return matches[0] if matches else None
 
 
 def entry_key(entry):
@@ -169,8 +189,8 @@ class HumanPlayRecords:
             self._lookup_key = progress_key(prepared)
         return self.store.data["levels"].get(self._lookup_key)
 
-    def profile_snapshot(self, prepared):
-        """Seal completed recording before analysis; the next run opens a new one."""
+    def freeze_profile_source(self, prepared):
+        """Seal on the owner thread; workers never touch the live recorder/store."""
         if self.active:
             raise ValueError("finish the current attempt before requesting a suggestion")
         if not self.order_valid or self.store.disabled:
@@ -178,15 +198,12 @@ class HumanPlayRecords:
         if self.recorder:
             self._call("close", "quit")
             self.recorder = None
-        if not self.session_order:
-            return None
-        from .reporting import build_report
-        report = build_report([self.directory / "sessions" / name for name in self.session_order])
         environment = digest({"environment": HumanPlayProtocol(prepared).environment(), "tick_hz": 60})
-        matches = [p for p in report["profiles"]
-                   if p["identity"] == {"scope": "player", "id": self.store.data["player_id"]}
-                   and p["environment_sha256"] == environment]
-        return matches[0] if matches else None
+        return ProfileSource(self.directory, tuple(self.session_order),
+                             self.store.data["player_id"], environment)
+
+    def profile_snapshot(self, prepared):
+        return self.freeze_profile_source(prepared).profile_snapshot()
 
     def restore_candidates(self, session):
         from .candidate_catalog import restore_catalog

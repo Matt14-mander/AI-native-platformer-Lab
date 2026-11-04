@@ -53,6 +53,9 @@ def main():
         game.run()
         reason = "quit"
     finally:
+        job = getattr(session, "suggestion_job", None)
+        if job:
+            job.cancel()
         if session.records:
             session.records.close(reason)
         pygame.quit()

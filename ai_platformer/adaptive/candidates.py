@@ -3,6 +3,7 @@
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from uuid import uuid4
+from concurrent.futures import CancelledError
 
 from ai_platformer.content.play_session import PlayAdmissionError, PlayEntry, PreparedPlayLevel, PlayRepository
 from ai_platformer.content.generation_request import GenerationRequest, request_hash
@@ -28,15 +29,20 @@ class CandidateOffer:
     document_sha256: str | None = None
 
 
-def prepare_offer(session):
+def prepare_offer(session, *, cancelled=lambda: False):
     """No selection changes until accept_offer; failures leave current play intact."""
     origin = session.prepared
     records = session.records
     if not records:
         return CandidateOffer(origin, "请开启游玩记录后查看建议。")
     directory, report = None, None
+    def check_cancelled():
+        if cancelled():
+            raise CancelledError()
     try:
+        check_cancelled()
         profile = records.profile_snapshot(origin)
+        check_cancelled()
         if profile is None:
             return CandidateOffer(origin, "有效记录不足，先在不同关卡完成几次游玩。")
         seed = int(digest({"profile": profile, "seed": origin.settings.seed})[:8], 16)
@@ -69,6 +75,8 @@ def prepare_offer(session):
             messages = {"insufficient_data": "先完成至少 5 次尝试，覆盖 2 张不同地图。",
                         "missing_dimension_evidence": "每张地图还需要更多完整游玩记录。"}
             return CandidateOffer(origin, messages.get(proposal.reason.code, "建议保持当前难度，可继续原关卡。"))
+        check_cancelled()
+        atomic_write(directory / "report.json", {**report, "status": "validating"})
         result = generate_player_level(proposal.candidate_request, origin.settings.physics)
         path = directory / "level.json"
         atomic_write(path, result.level.model_dump())
@@ -79,7 +87,9 @@ def prepare_offer(session):
             "episode_step_limit": min(2400, origin.settings.physics.max_episode_steps),
         })
         route = search_route(factory, seed=origin.settings.seed, min_coin_ratio=request.min_coin_ratio,
-                             max_steps=2400, max_expansions=6000, beam_width=12, max_seconds=2.0)
+                             max_steps=2400, max_expansions=6000, beam_width=12, max_seconds=2.0,
+                             cancelled=cancelled)
+        check_cancelled()
         report.update(generation=result.report, route=route,
                       document_sha256=document_hash(result.level), status=route["status"])
         atomic_write(directory / "report.json", report)
@@ -96,6 +106,13 @@ def prepare_offer(session):
         return CandidateOffer(origin, message, prepared, PlayEntry(
                               "建议练习关", path=path, design_request=proposal.candidate_request.model_dump()),
                               directory, document_hash(result.level))
+    except CancelledError:
+        if directory is not None and report is not None:
+            try:
+                atomic_write(directory / "report.json", {**report, "status": "cancelled"})
+            except (OSError, ValueError):
+                pass
+        raise
     except (OSError, ValueError, TypeError, KeyError, RuntimeError, ImportError, RecursionError) as error:
         if directory is not None and report is not None:
             try:

@@ -2,6 +2,7 @@
 import json
 from dataclasses import asdict, replace
 from pathlib import Path
+from types import SimpleNamespace
 
 import pygame
 import pytest
@@ -32,6 +33,22 @@ def result_screen(game):
     game.state.enter()
 
 
+def mock_profile_source(monkeypatch, records, profile):
+    source = SimpleNamespace(directory=records.directory, profile_snapshot=lambda prepared: profile)
+    monkeypatch.setattr(records, "freeze_profile_source", lambda prepared: source)
+
+
+def request_offer(game):
+    tap(game, pygame.K_d)
+    job = game.state.suggestion_job
+    if job:
+        try:
+            job.future.result(timeout=20)
+        except PlayAdmissionError:
+            pass
+        game.advance(1 / 60)
+
+
 def test_player_generator_preserves_legacy_contract_and_uses_player_physics():
     settings = load_gameplay_settings(Path("config/gameplay_player.json"))
     request = GenerationRequest(schema_version=1, level_id="player-generation", seed=17)
@@ -50,9 +67,9 @@ def test_real_candidate_replay_then_explicit_accept_and_restart_catalog(screen, 
         original = session.prepared
         records.store.data["player_id"] = "candidate-test-player"
         profile = ready_profile(session)
-        monkeypatch.setattr(records, "profile_snapshot", lambda prepared: profile)
+        mock_profile_source(monkeypatch, records, profile)
         result_screen(game)
-        tap(game, pygame.K_d)
+        request_offer(game)
         offer = game.state.offer
         assert offer is not None and offer.prepared is not None, game.state.suggestion_message
         assert session.prepared is original and not records.active
@@ -112,7 +129,7 @@ def test_failed_validation_preserves_current_run(screen, tmp_path, monkeypatch, 
     session, records, game = app(tmp_path)
     try:
         original = session.prepared
-        monkeypatch.setattr(records, "profile_snapshot", lambda prepared: ready_profile(session))
+        mock_profile_source(monkeypatch, records, ready_profile(session))
         if failure == "budget":
             monkeypatch.setattr(candidates, "search_route", lambda *a, **kw: {"status": "unverified"})
         else:
@@ -120,7 +137,7 @@ def test_failed_validation_preserves_current_run(screen, tmp_path, monkeypatch, 
                 raise OSError("disk unavailable") if failure == "storage" else RuntimeError("route failed")
             monkeypatch.setattr(candidates, "atomic_write" if failure == "storage" else "search_route", fail)
         result_screen(game)
-        tap(game, pygame.K_d)
+        request_offer(game)
         tap(game, pygame.K_a)
         assert session.prepared is original and len(session.entries) == 2
         assert not records.active and game.state is game.state_dict["game_over"]
@@ -170,11 +187,11 @@ def test_headless_and_no_save_never_create_candidate(screen, tmp_path):
         for _ in range(4):
             game.advance(1 / 60)
         result_screen(game)
-        tap(game, pygame.K_d)
+        request_offer(game)
         assert game.state.offer.prepared is None
         session.records = None
         game.state.enter()
-        tap(game, pygame.K_d)
+        request_offer(game)
         assert game.state.offer.prepared is None
         assert not (tmp_path / "candidates").exists()
     finally:

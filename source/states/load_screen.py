@@ -13,12 +13,18 @@ class LoadScreen:
         self.error = ""
         self.enter()
     def enter(self):
+        self.leave()
         self.finished=False
         self.next="level"
         self.summary={}
         self.error = ""
         self.offer = None
         self.suggestion_message = "D   查看新练习关建议（可选）"
+    def leave(self):
+        job = getattr(self, "suggestion_job", None)
+        if job:
+            job.cancel()
+        self.suggestion_job = None
     def receive_result(self,summary):
         self.summary=dict(summary)
     def is_finished(self):
@@ -59,19 +65,29 @@ class LoadScreen:
     def suggestion_input(self, surface, keys):
         if not self.session:
             return False
+        if self.suggestion_job and self.suggestion_job.future.done():
+            job, self.suggestion_job = self.suggestion_job, None
+            try:
+                offer = job.future.result()
+                if job.cancelled.is_set() or self.session.prepared is not offer.origin:
+                    raise PlayAdmissionError("建议已失效，请重新查看。")
+                self.offer = offer
+                self.suggestion_message = offer.message
+            except Exception:
+                self.suggestion_message = "建议暂不可用，仍可重试原关或返回菜单。"
+            # A key pressed during checking cannot accept a newly arriving offer.
+            self.draw(surface)
+            return True
         if pressed(keys, pygame.K_d):
             # One immutable offer per result screen; repeated keys do not rerun
             # expensive analysis or create duplicate candidate artifacts.
-            if self.offer is None:
-                self.suggestion_message = "正在读取记录并验证建议，请稍候…"
-                self.draw(surface)
-                pygame.display.flip()
+            if self.offer is None and self.suggestion_job is None:
                 try:
-                    from ai_platformer.adaptive.candidates import prepare_offer
-                    self.offer = prepare_offer(self.session)
-                    self.suggestion_message = self.offer.message
+                    from ai_platformer.adaptive.suggestion_job import start_suggestion
+                    self.suggestion_job = start_suggestion(self.session)
+                    self.suggestion_message = "正在后台检查… 可按 R 重试原关，M 返回菜单。"
                 except (PlayAdmissionError, ImportError):
-                    self.suggestion_message = "建议暂不可用，仍可重试原关或返回菜单。"
+                    self.suggestion_message = "建议暂不可用或上次检查尚未结束，请稍后再试。"
             self.draw(surface)
             return True
         if pressed(keys, pygame.K_a) and self.offer and self.offer.prepared:
@@ -88,12 +104,12 @@ class GameOver(LoadScreen):
     title="没关系，再试一次"
     subtitle="调整起跳时机，小狗还在陪着你。"
     def update(self,surface,keys):
-        if self.suggestion_input(surface, keys):
-            return
         if pressed(keys,pygame.K_RETURN) or pressed(keys,pygame.K_r):
             self.next,self.finished="level",True
         elif pressed(keys,pygame.K_ESCAPE) or pressed(keys,pygame.K_m):
             self.next,self.finished="main_menu",True
+        elif self.suggestion_input(surface, keys):
+            return
         self.draw(surface)
 class LevelComplete(GameOver):
     title="抵达终点！"

@@ -8,6 +8,7 @@ import json
 from dataclasses import asdict
 from math import isfinite
 from time import monotonic
+from concurrent.futures import CancelledError
 
 from ai_platformer.core import Action
 from ai_platformer.envs.factory import EnvironmentFactory, protocol_hash
@@ -40,13 +41,15 @@ def resolved_config(factory):
     }
 
 
-def collect_route(factory, actions, *, seed, min_coin_ratio, deadline=None):
+def collect_route(factory, actions, *, seed, min_coin_ratio, deadline=None, cancelled=None):
     env = factory.make()
     hashes = []
     try:
         obs, info = env.reset(seed=seed)
         initial = transition_digest(env, obs, info)
         for index, action in enumerate(actions):
+            if cancelled is not None and cancelled():
+                raise CancelledError()
             if deadline is not None and monotonic() >= deadline:
                 raise ValueError("replay time budget exhausted")
             obs, reward, term, trunc, info = env.step(action)
@@ -82,7 +85,7 @@ def collect_route(factory, actions, *, seed, min_coin_ratio, deadline=None):
         env.close()
 
 
-def replay_route(path, route, *, max_seconds=30.0):
+def replay_route(path, route, *, max_seconds=30.0, cancelled=None):
     """Reconstruct the recorded environment, rejecting changed maps/protocols/traces."""
     if (
         not isinstance(route, dict)
@@ -145,7 +148,8 @@ def replay_route(path, route, *, max_seconds=30.0):
     ):
         raise ValueError("route trace integrity mismatch")
     actual = collect_route(
-        factory, actions, seed=seed, min_coin_ratio=target, deadline=monotonic() + max_seconds
+        factory, actions, seed=seed, min_coin_ratio=target, deadline=monotonic() + max_seconds,
+        cancelled=cancelled,
     )
     fields = (
         "initial_sha256",
@@ -187,6 +191,7 @@ def search_route(
     max_seconds=15.0,
     min_coin_ratio=0.0,
     try_scripted=True,
+    cancelled=None,
 ):
     """Scripted candidate probes followed by a quantized beam search.
 
@@ -246,13 +251,16 @@ def search_route(
     start = monotonic()
 
     def budget():
+        if cancelled is not None and cancelled():
+            raise CancelledError()
         return report["expansions"] >= max_expansions or monotonic() - start >= max_seconds
 
     def finish(actions, method):
         witness = collect_route(
-            factory, actions, seed=seed, min_coin_ratio=min_coin_ratio, deadline=monotonic() + 30
+            factory, actions, seed=seed, min_coin_ratio=min_coin_ratio, deadline=monotonic() + 30,
+            cancelled=cancelled,
         )
-        proof = replay_route(factory.repository.path, witness)
+        proof = replay_route(factory.repository.path, witness, cancelled=cancelled)
         if not proof["passed"]:
             raise RuntimeError("independent route replay failed")
         report.update(
