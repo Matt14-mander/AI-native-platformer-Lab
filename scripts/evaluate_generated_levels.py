@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import fcntl
 import json
 import os
 import re
@@ -11,6 +10,7 @@ from pathlib import Path
 
 from ai_platformer.agents.llm.evaluation import run_suite
 from ai_platformer.content.generation_suite import load_suite
+from ai_platformer.file_lock import lock_exclusive
 
 
 def main():
@@ -95,10 +95,10 @@ def main():
         }
         args.output_dir.parent.mkdir(parents=True, exist_ok=True)
         lock_path = args.output_dir.parent / f".{args.output_dir.name}.lock"
-        with lock_path.open("a") as lock:
+        with lock_path.open("a+b") as lock:
             try:
-                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            except BlockingIOError:
+                lock_exclusive(lock)
+            except OSError:
                 parser.error("another process is using this output directory")
             print(
                 f"provider={args.provider}; candidates={planned}; maximum API attempts={planned * args.max_attempts if args.provider == 'gemini' else 0}",

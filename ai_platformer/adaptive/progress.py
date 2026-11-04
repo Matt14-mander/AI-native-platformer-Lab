@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import tempfile
 from uuid import uuid4
+from ai_platformer.file_lock import lock_exclusive
 
 
 class UnsupportedProgressVersion(ValueError):
@@ -83,16 +84,7 @@ class ProgressStore:
         try:
             self.directory.mkdir(parents=True, exist_ok=True)
             self.lock = (self.directory / "progress.lock").open("a+b")
-            if self.lock.tell() == 0:
-                self.lock.write(b"0")
-                self.lock.flush()
-            self.lock.seek(0)
-            if os.name == "nt":
-                import msvcrt
-                msvcrt.locking(self.lock.fileno(), msvcrt.LK_NBLCK, 1)
-            else:
-                import fcntl
-                fcntl.flock(self.lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            lock_exclusive(self.lock)
             self._load()
         except OSError:
             self.disabled = True
