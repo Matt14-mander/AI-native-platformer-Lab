@@ -97,6 +97,10 @@ python -m source.main --no-save
 
 写入采用同目录临时文件、原子替换与上一份有效备份；损坏原文件会保留为 `progress.corrupt-*.json` 并尝试恢复 `progress.backup.json`。未知版本保留原样且停止写入，避免降级覆盖。写入失败或另一个窗口占用存档时，游戏继续并提示本次仅保留内存进度。游玩记录失败会标记为不完整，不能作为有效画像证据。历史记录默认保留，不自动清理。
 
+## 规则难度建议
+
+规则 DDA 首版可基于真人画像离线输出 `hold / ease / challenge`，包含规则版本和证据引用，默认不应用到游戏。使用方式、固定阈值与验证边界见 [规则 DDA v1](docs/RULE_DDA_V1.md)。
+
 ## 测试
 
 完整测试统一使用 **pytest**，同时收集 `unittest.TestCase` 和函数式/参数化用例。不要用 `unittest discover` 作为全量验收入口，它会遗漏函数式用例。
