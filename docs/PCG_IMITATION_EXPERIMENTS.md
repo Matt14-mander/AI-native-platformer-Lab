@@ -25,3 +25,15 @@ Run `python -m scripts.compare_pcg_ppo --bc-run runs/pcg_bc_v1 --output runs/pcg
 | 31 | 2/12 · 0/12 | 12/12 · 12/12 |
 
 BC initialization helps at this short budget, but one seed regressed from the original BC student's 12/12 collection target result. This is a paired feasibility comparison, not evidence that PPO consistently improves on BC. No holdout results were used to choose settings.
+
+## Stage 4: adaptive map sampling
+
+Run `python -m scripts.compare_pcg_sampling --bc-run runs/pcg_bc_v1 --output runs/pcg_sampling_v1`. This compares uniform sampling with a simple failure-prioritized replay rule under the same BC initialization, three seeds, training pool, PPO settings, and 16,384-transition budget. After each **training** episode, the rule updates that map's exponential moving average of failure (1) or coin deficit after success (0–1). Half the sampling probability stays uniform. Development and holdout episodes never update priorities. This is a pragmatic level-sampling prototype inspired by [Prioritized Level Replay](https://proceedings.mlr.press/v139/jiang21b.html), not the paper's full learning-potential scoring method.
+
+| Training seed | Uniform goal / target | Prioritized goal / target |
+| --- | ---: | ---: |
+| 17 | 12/12 · 12/12 | 12/12 · 11/12 |
+| 23 | 7/12 · 6/12 | 12/12 · 12/12 |
+| 31 | 12/12 · 12/12 | 12/12 · 12/12 |
+
+The total targets met across these three development runs increased from 30/36 to 35/36, but the effect varies by seed and there are only three training seeds. Episode counts differ because policies survive for different lengths even at equal transition budgets. The run report preserves per-map sampling counts. Holdout remains unopened at this stage.

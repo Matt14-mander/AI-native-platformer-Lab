@@ -85,3 +85,23 @@ def test_bc_initialization_copies_actor_but_not_critic():
     finally:
         target.get_env().close()
         source.get_env().close()
+
+
+def test_adaptive_sampling_updates_only_after_training_episode():
+    from ai_platformer.agents.ppo.pcg_training import GeneratedMapSampler
+
+    requests = training_requests(PLAN, [20261200], MANIFEST)
+    sampler = GeneratedMapSampler(requests, rng_seed=17, adaptive=True)
+    try:
+        sampler.reset()
+        index = sampler.current_index
+        before = sampler.difficulty.copy()
+        while True:
+            _, _, terminated, truncated, _ = sampler.step(int(Action.RIGHT_RUN))
+            if terminated or truncated:
+                break
+        assert sampler.sample_counts.sum() == 1
+        assert (sampler.difficulty != before).sum() == 1
+        assert sampler.difficulty[index] != before[index]
+    finally:
+        sampler.close()

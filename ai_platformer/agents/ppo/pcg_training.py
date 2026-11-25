@@ -17,7 +17,8 @@ from ai_platformer.envs.platformer_state_v2 import PlatformerStateEnvV2
 
 
 class GeneratedMapSampler(gym.Wrapper):
-    def __init__(self, requests, *, rng_seed: int, weights: dict[str, float] | None = None):
+    def __init__(self, requests, *, rng_seed: int, weights: dict[str, float] | None = None,
+                 adaptive: bool = False, uniform_fraction: float = 0.5):
         generated = [generate_level(request) for request in requests]
         self.levels = {item.level.level_id: to_level_definition(item.level) for item in generated}
         self.ids = [request.level_id for request in requests]
@@ -33,6 +34,13 @@ class GeneratedMapSampler(gym.Wrapper):
         )
         super().__init__(env)
         self.rng = np.random.default_rng(rng_seed)
+        self.adaptive = adaptive
+        if not 0 < uniform_fraction <= 1:
+            raise ValueError("uniform_fraction must be in (0, 1]")
+        self.uniform_fraction = uniform_fraction
+        self.difficulty = np.full(len(self.ids), 0.5, dtype=float)
+        self.sample_counts = np.zeros(len(self.ids), dtype=np.int64)
+        self.current_index = None
         self.weights = None
         if weights is not None:
             values = np.asarray([weights.get(item, 0.0) for item in self.ids], dtype=float)
@@ -43,15 +51,35 @@ class GeneratedMapSampler(gym.Wrapper):
     def reset(self, *, seed=None, options=None):
         if seed is not None:
             self.rng = np.random.default_rng(seed)
-        index = int(self.rng.choice(len(self.ids), p=self.weights))
+        probabilities = self.weights
+        if self.adaptive:
+            priorities = self.difficulty + 0.05
+            probabilities = (self.uniform_fraction / len(self.ids)
+                             + (1 - self.uniform_fraction) * priorities / priorities.sum())
+        index = int(self.rng.choice(len(self.ids), p=probabilities))
+        self.current_index = index
+        self.sample_counts[index] += 1
         episode_seed = int(self.rng.integers(2**31))
         return self.env.reset(seed=episode_seed, options={"level_id": self.ids[index]})
 
+    def step(self, action):
+        observation, reward, terminated, truncated, info = self.env.step(action)
+        if self.adaptive and (terminated or truncated):
+            total = info["coins_total"]
+            deficit = 1 - info["coins_collected"] / total if total else 0.0
+            score = 1.0 if info["outcome"] != "success" else deficit
+            index = self.current_index
+            self.difficulty[index] = 0.9 * self.difficulty[index] + 0.1 * score
+        return observation, reward, terminated, truncated, info
 
-def make_ppo(requests, *, seed: int, n_envs: int = 4, weights=None) -> PPO:
+
+def make_ppo(requests, *, seed: int, n_envs: int = 4, weights=None,
+             adaptive: bool = False) -> PPO:
     torch.set_num_threads(1)
     env = DummyVecEnv([
-        lambda rank=rank: GeneratedMapSampler(requests, rng_seed=seed + rank, weights=weights)
+        lambda rank=rank: GeneratedMapSampler(
+            requests, rng_seed=seed + rank, weights=weights, adaptive=adaptive
+        )
         for rank in range(n_envs)
     ])
     return PPO(
