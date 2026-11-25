@@ -82,6 +82,7 @@ def run_agent(factory: EnvironmentFactory, agent_type, *, seed: int) -> dict:
             "collected_ids": collected,
             "trace": trace,
             "episode_return": info["episode_return"],
+            "progress": info["progress"],
         }
     finally:
         env.close()
