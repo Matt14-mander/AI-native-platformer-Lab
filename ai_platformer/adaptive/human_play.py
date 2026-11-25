@@ -74,6 +74,9 @@ def progress_key(prepared):
 class HumanPlayRecords:
     def __init__(self, directory, *, clock=None, headless=False):
         self.store = ProgressStore(directory)
+        from .resume import CheckpointSave
+        self.checkpoint = CheckpointSave(self.store)
+        self.resumed = False
         self.directory = self.store.directory
         self.clock = clock
         self.headless = headless
@@ -107,15 +110,20 @@ class HumanPlayRecords:
     def notice(self):
         return self.store.warning or self.warning
 
-    def begin(self, prepared, entry, state):
+    def begin(self, prepared, entry, state, *, resumed=False):
         key = progress_key(prepared)
         source = entry_key(entry)
         same_level = (key == self.key and source == self.entry and self.state is not None
                       and self.state.level_id == state.level_id)
         self.finish("restart" if same_level else "level_switch")
-        if key != self.key and self.recorder:
+        if (key != self.key or resumed != self.resumed) and self.recorder:
             self._call("close", "level_switch")
             self.recorder = None
+        self.resumed = resumed
+        protocol = HumanPlayProtocol(prepared)
+        if resumed:
+            # Reconstructed prefix is not a fresh human performance sample.
+            protocol.environment_id += "-resumed"
         self.key, self.state, self.active = key, state, True
         self.entry = source
         self.total_reward = 0.0
@@ -124,10 +132,11 @@ class HumanPlayRecords:
             try:
                 options = {"clock": self.clock} if self.clock else {}
                 self.recorder = TelemetryRecorder(
-                    self.directory / "sessions" / uuid4().hex, HumanPlayProtocol(prepared),
+                    self.directory / "sessions" / uuid4().hex, protocol,
                     actor_type="human", player_id=self.store.data["player_id"],
                     headless=self.headless,
-                    source={"entrypoint": "source.main", "input_edge_version": 1}, **options,
+                    source={"entrypoint": "source.main", "input_edge_version": 1,
+                            "checkpoint_resume": resumed}, **options,
                 )
                 if self.order_valid and not self.store.disabled:
                     self.session_order = [*self.session_order, self.recorder.writer.directory.name][-128:]
@@ -140,7 +149,7 @@ class HumanPlayRecords:
         if self.recorder:
             # Same geometry can have a different LevelSpec ID; metadata stays
             # environment-bound but each attempt uses the current frozen map.
-            self.recorder.factory = HumanPlayProtocol(prepared)
+            self.recorder.factory = protocol
             self._call("set_paused", False)
             self._call("on_reset", SimpleNamespace(level=prepared.repository.load(state.level_id)), state)
 

@@ -29,13 +29,28 @@ class MainMenu:
             if direction:
                 self.selection = (self.selection + direction) % len(self.session.entries)
                 self.error = ""
-        if pressed(keys,pygame.K_RETURN):
+        continuing = pressed(keys, pygame.K_c)
+        if pressed(keys,pygame.K_RETURN) or continuing:
             try:
                 if self.session:
                     self.error = "正在检查关卡，请稍候…"
                     self.draw(surface)
                     pygame.display.flip()
-                    self.session.select(self.selection)
+                    if continuing:
+                        if not self.session.records or not self.session.records.checkpoint.data:
+                            raise PlayAdmissionError("暂无检查点存档，请按 Enter 开始。")
+                        # Validate both admission and replay before changing the active level.
+                        prepared = self.session._prepare(self.session.entries[self.selection])
+                        try:
+                            prefix = self.session.records.checkpoint.restore(
+                                prepared, self.session.entries[self.selection])
+                        except ValueError as error:
+                            raise PlayAdmissionError(str(error)) from error
+                        self.session.prepared, self.session.index = prepared, self.selection
+                        self.session.resume_actions = prefix
+                    else:
+                        self.session.select(self.selection)
+                        self.session.resume_actions = ()
                 self.error = ""
                 self.finished=True
             except PlayAdmissionError as error:
@@ -67,6 +82,10 @@ class MainMenu:
                          f"第 {self.selection + 1} / {len(self.session.entries)} 关 · Enter 开始",
                          "H 操作说明   Esc 退出", self.error or "选择关卡，和小狗一起出发"]
                 records = self.session.records
+                if records and records.checkpoint.data:
+                    from ai_platformer.adaptive.human_play import entry_key
+                    if records.checkpoint.data["entry"] == entry_key(entry):
+                        lines[1] = "C 继续检查点 · Enter 重新开始"
                 if records and not self.error:
                     best = records.best(self.session.prepared) if self.selection == self.session.index else None
                     if best:

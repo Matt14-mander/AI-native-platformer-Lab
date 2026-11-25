@@ -69,10 +69,23 @@ class Level:
             level_id=self.settings.level_id,
         )
         self.renderer.reset()
+        self.actions = []
         if pygame.mixer.get_init():
             pygame.mixer.unpause()
         if record and self.records:
-            self.records.begin(self._prepared, self.session.entries[self.session.index], self.state)
+            prefix = getattr(self.session, "resume_actions", ())
+            self.session.resume_actions = ()
+            self.records.begin(self._prepared, self.session.entries[self.session.index], self.state,
+                               resumed=bool(prefix))
+            if not prefix:
+                self.records.checkpoint.write(None)
+            for action, jump in prefix:
+                result = self.core.step(action, jump_pressed=jump)
+                self.records.tick(self.state, action, result, jump_pressed=jump,
+                                  jump_started=self.core.jump_started_this_tick)
+                self.state = result.state
+                self.actions.append((action, jump))
+            self.renderer._update_camera(self.state)
 
     def result_summary(self):
         metadata = self.state.metadata
@@ -138,6 +151,12 @@ class Level:
             jump_pressed = self.controller.jump_pressed(keys)
             result = self.core.step(action, jump_pressed=jump_pressed)
             if self.records:
+                self.actions.append((int(action), bool(jump_pressed)))
+                if result.terminated or result.truncated:
+                    self.records.checkpoint.write(None)
+                elif any(name == "checkpoint_activated" for name, _ in result.info.get("events", ())):
+                    self.records.checkpoint.capture(self._prepared, self.session.entries[self.session.index],
+                                                    self.actions, result.state)
                 self.records.tick(self.state, action, result, jump_pressed=jump_pressed,
                                   jump_started=self.core.jump_started_this_tick)
             self.renderer._update_camera(result.state)
