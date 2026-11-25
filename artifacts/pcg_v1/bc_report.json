@@ -1,0 +1,990 @@
+{
+  "schema_version": 1,
+  "method": "behavior_cloning",
+  "seed": 17,
+  "train_seeds": [
+    20261200,
+    20261201,
+    20261202,
+    20261203,
+    20261204,
+    20261205,
+    20261206,
+    20261207
+  ],
+  "plan_sha256": "ab54346c9ff58b5e7d8cba688799a2275cfc30c704ce43e753948fbebc3f8039",
+  "manifest_sha256": "ccb1bcfaa4e5b50ee554c9b28c3190ff8d1a0d4c95604840028d7b7312b41033",
+  "samples": 6880,
+  "teacher_maps": [
+    {
+      "level_id": "imitation_flat_collect_20261200",
+      "geometry_sha256": "4ca24c2a9a2da883a6ba40f215afb296caec95c8d78f401fca2af3f17ddd9ed7",
+      "outcome": "success",
+      "steps": 39,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.961
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261200",
+      "geometry_sha256": "48c5b3725738eac2af606239a8f6267a88f73ce58b91a558348053f6219a0266",
+      "outcome": "success",
+      "steps": 132,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.867999999999995
+    },
+    {
+      "level_id": "imitation_gap_wide_20261200",
+      "geometry_sha256": "f5334c4072d28f80790c13e0c7fe7de0df3bf3b16a7fffcc46b8e713d92c5d22",
+      "outcome": "success",
+      "steps": 118,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.881999999999993
+    },
+    {
+      "level_id": "imitation_mixed_low_20261200",
+      "geometry_sha256": "1c607d763c9b3f530ed18a54926b904baba53dd1df28a4bcf7e0b6301b985cd6",
+      "outcome": "success",
+      "steps": 177,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.822999999999986
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261200",
+      "geometry_sha256": "99c36264f851b3fb1b84a1c3bff681552ac4b459ef81875753559eba1c683180",
+      "outcome": "success",
+      "steps": 153,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.847
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261200",
+      "geometry_sha256": "11c3b3630d3c2fb93e69bdff2c18924b482cda454267bec642ec27eac3843322",
+      "outcome": "success",
+      "steps": 262,
+      "coins_collected": 22,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 25.73800000000005
+    },
+    {
+      "level_id": "imitation_flat_collect_20261201",
+      "geometry_sha256": "33177d173ecfd74e6751daea75cd59eaa5d1c249c33a928c4059f8f7f8585c74",
+      "outcome": "success",
+      "steps": 34,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.965999999999998
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261201",
+      "geometry_sha256": "b29d546ba17a17e2c7562ac3a452ab9641d396163d9e42c15362811e753b6197",
+      "outcome": "success",
+      "steps": 123,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.876999999999992
+    },
+    {
+      "level_id": "imitation_gap_wide_20261201",
+      "geometry_sha256": "ad1281b59da924a9381a2d5581e355f84b8fa5667bd135d64dfdec4f1f69c1ad",
+      "outcome": "success",
+      "steps": 109,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.890999999999993
+    },
+    {
+      "level_id": "imitation_mixed_low_20261201",
+      "geometry_sha256": "7c1491dca00f7e89abb02744c44c305423488ff12d43fd457f0d8936666dcbe2",
+      "outcome": "success",
+      "steps": 165,
+      "coins_collected": 15,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.33500000000001
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261201",
+      "geometry_sha256": "12824e5fcaae2dbb466518b2f4c5e940d50d58b6308beab6b5d24d7543c275af",
+      "outcome": "success",
+      "steps": 141,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.859000000000016
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261201",
+      "geometry_sha256": "9df5201584df995aede74b7cb1b581db2bf87b7d6f4c75ae41f953e5aad3c62d",
+      "outcome": "success",
+      "steps": 261,
+      "coins_collected": 24,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 26.739000000000004
+    },
+    {
+      "level_id": "imitation_flat_collect_20261202",
+      "geometry_sha256": "581cf947e622e6c794a6183f71dae181c2a9f1ae5ec54d64c3ea04f6afc39c56",
+      "outcome": "success",
+      "steps": 35,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.965000000000003
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261202",
+      "geometry_sha256": "cd775e441297ad6c9aeac0871c7d92680e27b6d64e5dd1e4aa0f606c063c6ea7",
+      "outcome": "success",
+      "steps": 136,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.863999999999997
+    },
+    {
+      "level_id": "imitation_gap_wide_20261202",
+      "geometry_sha256": "e770afa684284dcb487fe91f5ddda451fd92e8c0d260ea2dd98a0372e69d843a",
+      "outcome": "success",
+      "steps": 123,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.877000000000002
+    },
+    {
+      "level_id": "imitation_mixed_low_20261202",
+      "geometry_sha256": "8b12a1488df100ab2021ab22d6b86e9707580cbb52c6ba9b691ba707680a77a2",
+      "outcome": "success",
+      "steps": 173,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.826999999999988
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261202",
+      "geometry_sha256": "4011bddea0b1f5c9ab6a47d58475bef0779ebdf5c3113828efb782551421d8b3",
+      "outcome": "success",
+      "steps": 148,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.852000000000007
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261202",
+      "geometry_sha256": "8f9acfd41bdc4de193a158a199d90694167fe6c633f8517042dc999d30c1fc45",
+      "outcome": "success",
+      "steps": 276,
+      "coins_collected": 24,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 26.72399999999996
+    },
+    {
+      "level_id": "imitation_flat_collect_20261203",
+      "geometry_sha256": "7a2c2e96b612a20b25703ad68512a4dacb5a7cb470d9e18c04a73c561b36a5ab",
+      "outcome": "success",
+      "steps": 40,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.96
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261203",
+      "geometry_sha256": "8838018c99afa03eb6ad83eccaa0f52485c020bf771fd7886e457b630fcb768d",
+      "outcome": "success",
+      "steps": 127,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.872999999999998
+    },
+    {
+      "level_id": "imitation_gap_wide_20261203",
+      "geometry_sha256": "d09ebaf628907047d93b8239be456b021a752955923ef4372ebd65197aea7692",
+      "outcome": "success",
+      "steps": 112,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.888000000000007
+    },
+    {
+      "level_id": "imitation_mixed_low_20261203",
+      "geometry_sha256": "baa5190a6749d8f8652ad17642cc4b495caf86ac389e973fa73c5c2bc79bed4f",
+      "outcome": "success",
+      "steps": 167,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.833000000000016
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261203",
+      "geometry_sha256": "a0dd92e06f38a0dc4d2b22071abbec5aa9b55360a640168ce721d167eef33b40",
+      "outcome": "success",
+      "steps": 143,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.85699999999997
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261203",
+      "geometry_sha256": "c03197dbf1c0912bad0865f8c7e685a1ef0b97961e300ab1cfd41232757c17da",
+      "outcome": "success",
+      "steps": 252,
+      "coins_collected": 22,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 25.747999999999987
+    },
+    {
+      "level_id": "imitation_flat_collect_20261204",
+      "geometry_sha256": "171ebbfbc2042f9efd924a48bee1678c6426bcc6cdd6f075908a77a288c26ab6",
+      "outcome": "success",
+      "steps": 35,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.964999999999996
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261204",
+      "geometry_sha256": "4892e0db09b7e85da5ed1a692bd67a10296ac2f78c603c38da1137e962725fff",
+      "outcome": "success",
+      "steps": 129,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.871000000000016
+    },
+    {
+      "level_id": "imitation_gap_wide_20261204",
+      "geometry_sha256": "8731c8093fb6beb8bddc917509b47d553324e8319ed72fd67cf0e2decb98cf38",
+      "outcome": "success",
+      "steps": 116,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.884000000000006
+    },
+    {
+      "level_id": "imitation_mixed_low_20261204",
+      "geometry_sha256": "0b7d9367e309de71ab9b1fb7bbefc51c178cb4f8a59829e067d3588add339d95",
+      "outcome": "success",
+      "steps": 166,
+      "coins_collected": 15,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.334000000000017
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261204",
+      "geometry_sha256": "3b8778b50526813c098867f9e140ce6cec56aa138638a764ffd49dfba1faa9a1",
+      "outcome": "success",
+      "steps": 142,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.857999999999983
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261204",
+      "geometry_sha256": "c0795082797e2cfdabc11e98945c4801032b1cf799f17b44923a3da6edb57b43",
+      "outcome": "success",
+      "steps": 267,
+      "coins_collected": 24,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 26.732999999999922
+    },
+    {
+      "level_id": "imitation_flat_collect_20261205",
+      "geometry_sha256": "0ca4b1a2a972587f2d8a3cd1ca2c82173f348a1369a029ce1efb296864ee9f64",
+      "outcome": "success",
+      "steps": 36,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.964
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261205",
+      "geometry_sha256": "da477ce4faea67821d1100b568070f0c60f7a1f92a92af64ac9286a893c4f8d2",
+      "outcome": "success",
+      "steps": 121,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.879
+    },
+    {
+      "level_id": "imitation_gap_wide_20261205",
+      "geometry_sha256": "2819aaba03a35a86c9fe6d910fac8d0942c45783f4b7b16cea5dbf15ec6bd3e2",
+      "outcome": "success",
+      "steps": 108,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.892000000000007
+    },
+    {
+      "level_id": "imitation_mixed_low_20261205",
+      "geometry_sha256": "828b3b6aba2d7d4f044e148e342e373c9d4cf59b4a0222903183df1e11cbda77",
+      "outcome": "success",
+      "steps": 171,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.828999999999983
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261205",
+      "geometry_sha256": "4600ca474217fa08fc870ff1ce14a85d8654ccd9aa42783256840e38d6f5654e",
+      "outcome": "success",
+      "steps": 147,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.853000000000023
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261205",
+      "geometry_sha256": "c259f6fece2a38b9be00b59f243f267fa50d0236654dcb11f4744fae2a31fb96",
+      "outcome": "success",
+      "steps": 260,
+      "coins_collected": 24,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 26.740000000000006
+    },
+    {
+      "level_id": "imitation_flat_collect_20261206",
+      "geometry_sha256": "80471b0c2e5826d5f5097616765d64b0f2a6ae0fecfde71a5a26bf9b28bbd96d",
+      "outcome": "success",
+      "steps": 37,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.963
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261206",
+      "geometry_sha256": "38aeb4d2a5b3ced946f5e7015753dbee091a886369ed9746da5582e7057a35c9",
+      "outcome": "success",
+      "steps": 129,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.87100000000001
+    },
+    {
+      "level_id": "imitation_gap_wide_20261206",
+      "geometry_sha256": "2030cc73b56cf189a134ad888edb955bd0570bcf5fa418f57bd0697d5931c9d9",
+      "outcome": "success",
+      "steps": 116,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.883999999999999
+    },
+    {
+      "level_id": "imitation_mixed_low_20261206",
+      "geometry_sha256": "b6f279b3898e595007269635a2d689d1efecf1ecf8dd707b63bb391504db149a",
+      "outcome": "success",
+      "steps": 170,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.829999999999984
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261206",
+      "geometry_sha256": "c004770276628bec6210f47394781cef3e60f0a41cc7927e8d300fb8759e4f3f",
+      "outcome": "success",
+      "steps": 146,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.854000000000028
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261206",
+      "geometry_sha256": "bb7673cd4e00c0d3bb35c61daed37a2c15a8ab081f35e6a1c572fa01ad1f2a57",
+      "outcome": "success",
+      "steps": 258,
+      "coins_collected": 22,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 25.742000000000026
+    },
+    {
+      "level_id": "imitation_flat_collect_20261207",
+      "geometry_sha256": "e37fda739eb63fb929e2e4272d6894d273be02b0d4d4fd8a2d3a9a4450b874ac",
+      "outcome": "success",
+      "steps": 36,
+      "coins_collected": 4,
+      "coins_total": 4,
+      "progress": 1.0,
+      "return": 16.964
+    },
+    {
+      "level_id": "imitation_obstacle_low_20261207",
+      "geometry_sha256": "e75968030dc1e9123468703dd950ce2c2f6ce5ade42287d3e607cf147380728f",
+      "outcome": "success",
+      "steps": 132,
+      "coins_collected": 12,
+      "coins_total": 12,
+      "progress": 1.0,
+      "return": 20.867999999999984
+    },
+    {
+      "level_id": "imitation_gap_wide_20261207",
+      "geometry_sha256": "7f3ebc6167e6b9a0c9b6bf95545d5229b99851a28dd37b405f016c60455aed79",
+      "outcome": "success",
+      "steps": 120,
+      "coins_collected": 0,
+      "coins_total": 0,
+      "progress": 1.0,
+      "return": 14.87999999999999
+    },
+    {
+      "level_id": "imitation_mixed_low_20261207",
+      "geometry_sha256": "7874d3a3771c509d46863fbb004e27ff24229e39ccbdcaf437b7d5a3ad74e90e",
+      "outcome": "success",
+      "steps": 173,
+      "coins_collected": 14,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 21.827000000000012
+    },
+    {
+      "level_id": "imitation_mixed_ground_20261207",
+      "geometry_sha256": "2d8a25bf77bf92045cfc3a561b84f76bd066b71620fc17a18acd1643806469c0",
+      "outcome": "success",
+      "steps": 149,
+      "coins_collected": 16,
+      "coins_total": 16,
+      "progress": 1.0,
+      "return": 22.85100000000002
+    },
+    {
+      "level_id": "imitation_mixed_tall_20261207",
+      "geometry_sha256": "7b2511284bbc6fe4940435bbad10e58f37409aa55a7a310da6e08f7d184fbe90",
+      "outcome": "success",
+      "steps": 270,
+      "coins_collected": 23,
+      "coins_total": 24,
+      "progress": 1.0,
+      "return": 26.230000000000032
+    }
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "mean_loss": 1.8386816669393469
+    },
+    {
+      "epoch": 2,
+      "mean_loss": 0.8899199013356809
+    },
+    {
+      "epoch": 3,
+      "mean_loss": 0.6737432899298491
+    },
+    {
+      "epoch": 4,
+      "mean_loss": 0.5761079125934176
+    },
+    {
+      "epoch": 5,
+      "mean_loss": 0.4989564253224267
+    },
+    {
+      "epoch": 6,
+      "mean_loss": 0.4250556914894669
+    },
+    {
+      "epoch": 7,
+      "mean_loss": 0.3612793706081532
+    },
+    {
+      "epoch": 8,
+      "mean_loss": 0.3131198783715566
+    },
+    {
+      "epoch": 9,
+      "mean_loss": 0.27750972078906166
+    },
+    {
+      "epoch": 10,
+      "mean_loss": 0.24980468164991448
+    },
+    {
+      "epoch": 11,
+      "mean_loss": 0.2295686161076581
+    },
+    {
+      "epoch": 12,
+      "mean_loss": 0.21308759517139858
+    },
+    {
+      "epoch": 13,
+      "mean_loss": 0.20119161627910756
+    },
+    {
+      "epoch": 14,
+      "mean_loss": 0.18797819095629234
+    },
+    {
+      "epoch": 15,
+      "mean_loss": 0.17756332512255069
+    },
+    {
+      "epoch": 16,
+      "mean_loss": 0.16762740854863767
+    },
+    {
+      "epoch": 17,
+      "mean_loss": 0.15782212217648825
+    },
+    {
+      "epoch": 18,
+      "mean_loss": 0.1499775344574893
+    },
+    {
+      "epoch": 19,
+      "mean_loss": 0.14250618081401895
+    },
+    {
+      "epoch": 20,
+      "mean_loss": 0.13647434639709968
+    },
+    {
+      "epoch": 21,
+      "mean_loss": 0.13408525067347069
+    },
+    {
+      "epoch": 22,
+      "mean_loss": 0.1258126395168128
+    },
+    {
+      "epoch": 23,
+      "mean_loss": 0.12233233120706347
+    },
+    {
+      "epoch": 24,
+      "mean_loss": 0.11610701459425467
+    },
+    {
+      "epoch": 25,
+      "mean_loss": 0.1120118807863306
+    },
+    {
+      "epoch": 26,
+      "mean_loss": 0.10951255041140097
+    },
+    {
+      "epoch": 27,
+      "mean_loss": 0.10642975596366105
+    },
+    {
+      "epoch": 28,
+      "mean_loss": 0.10316845167566228
+    },
+    {
+      "epoch": 29,
+      "mean_loss": 0.10005898359749052
+    },
+    {
+      "epoch": 30,
+      "mean_loss": 0.0955008621569033
+    },
+    {
+      "epoch": 31,
+      "mean_loss": 0.09484537580498943
+    },
+    {
+      "epoch": 32,
+      "mean_loss": 0.09443150350341091
+    },
+    {
+      "epoch": 33,
+      "mean_loss": 0.09059967348972957
+    },
+    {
+      "epoch": 34,
+      "mean_loss": 0.08752855962073361
+    },
+    {
+      "epoch": 35,
+      "mean_loss": 0.08516977258302548
+    },
+    {
+      "epoch": 36,
+      "mean_loss": 0.08595677161658252
+    },
+    {
+      "epoch": 37,
+      "mean_loss": 0.08578028198745516
+    },
+    {
+      "epoch": 38,
+      "mean_loss": 0.0805170462915191
+    },
+    {
+      "epoch": 39,
+      "mean_loss": 0.08229443968998061
+    },
+    {
+      "epoch": 40,
+      "mean_loss": 0.08155444761117299
+    },
+    {
+      "epoch": 41,
+      "mean_loss": 0.07616474037920987
+    },
+    {
+      "epoch": 42,
+      "mean_loss": 0.0752570674651199
+    },
+    {
+      "epoch": 43,
+      "mean_loss": 0.07337172329425812
+    },
+    {
+      "epoch": 44,
+      "mean_loss": 0.07238943585091168
+    },
+    {
+      "epoch": 45,
+      "mean_loss": 0.07265237677428457
+    },
+    {
+      "epoch": 46,
+      "mean_loss": 0.07383851306857886
+    },
+    {
+      "epoch": 47,
+      "mean_loss": 0.06845948210468998
+    },
+    {
+      "epoch": 48,
+      "mean_loss": 0.06862253723321138
+    },
+    {
+      "epoch": 49,
+      "mean_loss": 0.0676073122907568
+    },
+    {
+      "epoch": 50,
+      "mean_loss": 0.06489370528746534
+    },
+    {
+      "epoch": 51,
+      "mean_loss": 0.06604026547736591
+    },
+    {
+      "epoch": 52,
+      "mean_loss": 0.06297142955440062
+    },
+    {
+      "epoch": 53,
+      "mean_loss": 0.06426122481072391
+    },
+    {
+      "epoch": 54,
+      "mean_loss": 0.061670784183122496
+    },
+    {
+      "epoch": 55,
+      "mean_loss": 0.061493556256647465
+    },
+    {
+      "epoch": 56,
+      "mean_loss": 0.06008358161758493
+    },
+    {
+      "epoch": 57,
+      "mean_loss": 0.05897436773887387
+    },
+    {
+      "epoch": 58,
+      "mean_loss": 0.05811178863600448
+    },
+    {
+      "epoch": 59,
+      "mean_loss": 0.05681800780196985
+    },
+    {
+      "epoch": 60,
+      "mean_loss": 0.05799943470844516
+    },
+    {
+      "epoch": 61,
+      "mean_loss": 0.05644785874971637
+    },
+    {
+      "epoch": 62,
+      "mean_loss": 0.056634094980027944
+    },
+    {
+      "epoch": 63,
+      "mean_loss": 0.054234108301224535
+    },
+    {
+      "epoch": 64,
+      "mean_loss": 0.053975425798583915
+    },
+    {
+      "epoch": 65,
+      "mean_loss": 0.0529282469716337
+    },
+    {
+      "epoch": 66,
+      "mean_loss": 0.05517775137667303
+    },
+    {
+      "epoch": 67,
+      "mean_loss": 0.05156445889561265
+    },
+    {
+      "epoch": 68,
+      "mean_loss": 0.053988593733972974
+    },
+    {
+      "epoch": 69,
+      "mean_loss": 0.050366196505449434
+    },
+    {
+      "epoch": 70,
+      "mean_loss": 0.04983226830760638
+    },
+    {
+      "epoch": 71,
+      "mean_loss": 0.05203333593629025
+    },
+    {
+      "epoch": 72,
+      "mean_loss": 0.04932629441221555
+    },
+    {
+      "epoch": 73,
+      "mean_loss": 0.0491384078093149
+    },
+    {
+      "epoch": 74,
+      "mean_loss": 0.047931055848797165
+    },
+    {
+      "epoch": 75,
+      "mean_loss": 0.04755058608673237
+    },
+    {
+      "epoch": 76,
+      "mean_loss": 0.05158170685172081
+    },
+    {
+      "epoch": 77,
+      "mean_loss": 0.049274131310758765
+    },
+    {
+      "epoch": 78,
+      "mean_loss": 0.04967568704375514
+    },
+    {
+      "epoch": 79,
+      "mean_loss": 0.053278670749730535
+    },
+    {
+      "epoch": 80,
+      "mean_loss": 0.04674591013678798
+    }
+  ],
+  "development": {
+    "split": "development",
+    "maps": 12,
+    "successes": 12,
+    "targets_met": 12,
+    "mean_coin_ratio": 0.9722222222222222,
+    "rows": [
+      {
+        "level_id": "generalization_v2_flat_collect_20261125",
+        "family": "flat_collect",
+        "geometry_sha256": "f8977c3f8c4df135d28c670ae745146b10031a644e2265fd0e621285f9df54da",
+        "coin_ratio": 1.0,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 41,
+        "coins_collected": 4,
+        "coins_total": 4,
+        "progress": 1.0,
+        "return": 16.959000000000003
+      },
+      {
+        "level_id": "generalization_v2_flat_collect_20261126",
+        "family": "flat_collect",
+        "geometry_sha256": "ebd95dc05df867774d8dc38d52c55804c09b3fdee0819635478091deed0b7c62",
+        "coin_ratio": 1.0,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 37,
+        "coins_collected": 4,
+        "coins_total": 4,
+        "progress": 1.0,
+        "return": 16.962999999999997
+      },
+      {
+        "level_id": "generalization_v2_obstacle_low_20261125",
+        "family": "obstacle_low",
+        "geometry_sha256": "17d2541ff5e1adfc03abc1fec87cbd5a6c323e4f4c67968b6216b30b23855cb9",
+        "coin_ratio": 0.9166666666666666,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 127,
+        "coins_collected": 11,
+        "coins_total": 12,
+        "progress": 1.0,
+        "return": 20.37300000000002
+      },
+      {
+        "level_id": "generalization_v2_obstacle_low_20261126",
+        "family": "obstacle_low",
+        "geometry_sha256": "a0073e667d88b0af313fe3c987e63d3263ebe832095b4515b0d9326a24ac7b50",
+        "coin_ratio": 0.9166666666666666,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 132,
+        "coins_collected": 11,
+        "coins_total": 12,
+        "progress": 1.0,
+        "return": 20.36800000000001
+      },
+      {
+        "level_id": "generalization_v2_gap_wide_20261125",
+        "family": "gap_wide",
+        "geometry_sha256": "0f6ded97d1df0d742aaf1dafc9ced38ab71663a3fc4e345e21c80b201f98e418",
+        "coin_ratio": 1.0,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 113,
+        "coins_collected": 0,
+        "coins_total": 0,
+        "progress": 1.0,
+        "return": 14.887000000000006
+      },
+      {
+        "level_id": "generalization_v2_gap_wide_20261126",
+        "family": "gap_wide",
+        "geometry_sha256": "c53bc38c7cb595d9f66f22d721406a1ed7bd4eb13657dbe74acfc3da07b6ff72",
+        "coin_ratio": 1.0,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 117,
+        "coins_collected": 0,
+        "coins_total": 0,
+        "progress": 1.0,
+        "return": 14.882999999999994
+      },
+      {
+        "level_id": "generalization_v2_mixed_low_20261125",
+        "family": "mixed_low",
+        "geometry_sha256": "92a0299fb3ffa9b800fb5584c584589ed982c5a752127a9184c8357555d568fc",
+        "coin_ratio": 0.9375,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 163,
+        "coins_collected": 15,
+        "coins_total": 16,
+        "progress": 1.0,
+        "return": 22.33699999999999
+      },
+      {
+        "level_id": "generalization_v2_mixed_low_20261126",
+        "family": "mixed_low",
+        "geometry_sha256": "71b87881e3bae2701bc0c27d020e0983c8eb1cdccfb7d23648a975ce36753b05",
+        "coin_ratio": 0.9375,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 172,
+        "coins_collected": 15,
+        "coins_total": 16,
+        "progress": 1.0,
+        "return": 22.328000000000003
+      },
+      {
+        "level_id": "generalization_v2_mixed_ground_20261125",
+        "family": "mixed_ground",
+        "geometry_sha256": "7aae67584f657a55b61f7f1f96a4550b4a6a6eec74c2dba339162c273186e02b",
+        "coin_ratio": 1.0,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 139,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "progress": 1.0,
+        "return": 22.86099999999999
+      },
+      {
+        "level_id": "generalization_v2_mixed_ground_20261126",
+        "family": "mixed_ground",
+        "geometry_sha256": "c3be2e550bbc80c268df5a4a5893c4662bd0581b80dab890beb79e4afcacb856",
+        "coin_ratio": 1.0,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 145,
+        "coins_collected": 16,
+        "coins_total": 16,
+        "progress": 1.0,
+        "return": 22.854999999999976
+      },
+      {
+        "level_id": "generalization_v2_mixed_tall_20261125",
+        "family": "mixed_tall",
+        "geometry_sha256": "1834ae8f3d101911c4f108d81291d56dfa8a02b593040a62fb1b14f324b1ff94",
+        "coin_ratio": 0.9583333333333334,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 265,
+        "coins_collected": 23,
+        "coins_total": 24,
+        "progress": 1.0,
+        "return": 26.23499999999997
+      },
+      {
+        "level_id": "generalization_v2_mixed_tall_20261126",
+        "family": "mixed_tall",
+        "geometry_sha256": "9ce83682b5ddcb85315b33db70847483a61487468711b0cce03dca6bc9036cb8",
+        "coin_ratio": 1.0,
+        "target_met": true,
+        "outcome": "success",
+        "steps": 264,
+        "coins_collected": 24,
+        "coins_total": 24,
+        "progress": 1.0,
+        "return": 26.736000000000047
+      }
+    ]
+  },
+  "model_sha256": "6f9bfd802e6074af5179c118563ead67a4077d80ad58daf099819e338a925713",
+  "demonstrations_sha256": "5a49ae0c0872a85f1279d635d0f5f837fee90122129efbe59f005e0d6f7b75c7",
+  "scope": "Training on generated train seeds only; frozen development evaluated; holdout unopened."
+}

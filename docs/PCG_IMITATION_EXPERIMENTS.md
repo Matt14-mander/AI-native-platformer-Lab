@@ -37,3 +37,15 @@ Run `python -m scripts.compare_pcg_sampling --bc-run runs/pcg_bc_v1 --output run
 | 31 | 12/12 · 12/12 | 12/12 · 12/12 |
 
 The total targets met across these three development runs increased from 30/36 to 35/36, but the effect varies by seed and there are only three training seeds. Episode counts differ because policies survive for different lengths even at equal transition budgets. The run report preserves per-map sampling counts. Holdout remains unopened at this stage.
+
+## Final frozen holdout evaluation
+
+After finishing development, run `python -m scripts.finalize_pcg_experiment --bc-run runs/pcg_bc_v1 --ppo-run runs/pcg_ppo_equal_v1 --sampling-run runs/pcg_sampling_v1 --output runs/pcg_final_holdout_v1.json --open-holdout`. The selection rule was fixed before opening holdout: maximize `(development targets met, goals reached, mean coin ratio)` across the 12 PPO candidates. It selected BC-initialized uniform PPO, training seed 17, checkpoint SHA-256 `2f875044416a539f32fa8193696a91f7e47f378fdeeddad4b3d462c2dfc4ebf1`.
+
+| Policy | Holdout goal reaches | Collection targets met | Mean coin ratio |
+| --- | ---: | ---: | ---: |
+| Original BC student | 12/12 | 11/12 | 0.9583 |
+| Selected BC-initialized PPO | 12/12 | 12/12 | 1.0000 |
+| Scripted teacher | 12/12 | 12/12 | 0.9965 |
+
+BC missed the collection target on one `mixed_ground` map (15/16 coins). The selected PPO collected all coins on these 12 holdout maps. This is a one-time result for the selected checkpoint and six defined generator families; it does not establish improvement across all training seeds, new generator families, or human-designed levels. The holdout is now exposed and must not be reused for tuning this experiment. Create a new frozen split for later iterations.

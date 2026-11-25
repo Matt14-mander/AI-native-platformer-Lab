@@ -105,3 +105,17 @@ def test_adaptive_sampling_updates_only_after_training_episode():
         assert sampler.difficulty[index] != before[index]
     finally:
         sampler.close()
+
+
+def test_archived_selected_checkpoint_matches_final_report():
+    from stable_baselines3 import PPO
+
+    from ai_platformer.agents.ppo.pcg_experiment import file_hash
+
+    folder = Path("artifacts/pcg_v1")
+    report = json.loads((folder / "holdout_report.json").read_text(encoding="utf-8"))
+    assert file_hash(folder / "selected_ppo.zip") == report["selected"]["model_sha256"]
+    assert file_hash(folder / "bc_model.zip") == report["bc_model_sha256"]
+    bc_report = json.loads((folder / "bc_report.json").read_text(encoding="utf-8"))
+    assert file_hash(folder / "bc_demonstrations.npz") == bc_report["demonstrations_sha256"]
+    assert PPO.load(folder / "selected_ppo.zip", device="cpu").observation_space.shape == (15,)
