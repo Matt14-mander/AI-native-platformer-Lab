@@ -1,0 +1,635 @@
+{
+  "schema_version": 1,
+  "suite_id": "generalization_v2",
+  "purpose": "frozen_geometry_generalization; holdout excluded from development",
+  "generator_version": "segments-v1",
+  "plan_sha256": "4cbb0101df0f1974f600a397207edee2b430a059a3c600e918af3a3c2f051437",
+  "reference_suite_sha256": "cd4bad372380f995fa026e38550dfee03df9b53c1bea7cfbd5ac808a015cb79f",
+  "reference_unique_geometries": 18,
+  "entries": [
+    {
+      "split": "development",
+      "family": "flat_collect",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_flat_collect_20261125",
+        "seed": 20261125,
+        "obstacle_count": 0,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "d46c41da7090ed9113130dd415b11e480a4841b551d24b8d6ebcf67fbee882a6",
+      "geometry_sha256": "f8977c3f8c4df135d28c670ae745146b10031a644e2265fd0e621285f9df54da"
+    },
+    {
+      "split": "development",
+      "family": "flat_collect",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_flat_collect_20261126",
+        "seed": 20261126,
+        "obstacle_count": 0,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "ba03360c74ee88baf778ce0ccd7464aa9fac0769a13cb12d984f50411d0c7749",
+      "geometry_sha256": "ebd95dc05df867774d8dc38d52c55804c09b3fdee0819635478091deed0b7c62"
+    },
+    {
+      "split": "development",
+      "family": "obstacle_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_obstacle_low_20261125",
+        "seed": 20261125,
+        "obstacle_count": 3,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 40,
+          "maximum": 72
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "d5a915a36f3b3e7c948106fa277473b7c9277c774102a627f09d56da09f6706c",
+      "geometry_sha256": "17d2541ff5e1adfc03abc1fec87cbd5a6c323e4f4c67968b6216b30b23855cb9"
+    },
+    {
+      "split": "development",
+      "family": "obstacle_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_obstacle_low_20261126",
+        "seed": 20261126,
+        "obstacle_count": 3,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 40,
+          "maximum": 72
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "dd7f35141e1925422e69c551621ddda1f1f45563a738f74211e18507b841fbf7",
+      "geometry_sha256": "a0073e667d88b0af313fe3c987e63d3263ebe832095b4515b0d9326a24ac7b50"
+    },
+    {
+      "split": "development",
+      "family": "gap_wide",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_gap_wide_20261125",
+        "seed": 20261125,
+        "obstacle_count": 0,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 120,
+          "maximum": 168
+        },
+        "coin_layout": "none",
+        "min_coin_ratio": 0.0,
+        "theme": "lake"
+      },
+      "request_sha256": "cde3494561e2e09d4baa12931c5b4070bd114763fc8d9b81d5711f9a7663d272",
+      "geometry_sha256": "0f6ded97d1df0d742aaf1dafc9ced38ab71663a3fc4e345e21c80b201f98e418"
+    },
+    {
+      "split": "development",
+      "family": "gap_wide",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_gap_wide_20261126",
+        "seed": 20261126,
+        "obstacle_count": 0,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 120,
+          "maximum": 168
+        },
+        "coin_layout": "none",
+        "min_coin_ratio": 0.0,
+        "theme": "lake"
+      },
+      "request_sha256": "d9ac854542f5a9427b8a0d8ec86d5a3221b77730197071955b3f2660cf1877d9",
+      "geometry_sha256": "c53bc38c7cb595d9f66f22d721406a1ed7bd4eb13657dbe74acfc3da07b6ff72"
+    },
+    {
+      "split": "development",
+      "family": "mixed_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_low_20261125",
+        "seed": 20261125,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 32,
+          "maximum": 80
+        },
+        "gap_width": {
+          "minimum": 80,
+          "maximum": 128
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "fb6833eab09648ae116dfef2e9fa1f80f68e5c675e82ac151f279ae7e207c986",
+      "geometry_sha256": "92a0299fb3ffa9b800fb5584c584589ed982c5a752127a9184c8357555d568fc"
+    },
+    {
+      "split": "development",
+      "family": "mixed_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_low_20261126",
+        "seed": 20261126,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 32,
+          "maximum": 80
+        },
+        "gap_width": {
+          "minimum": 80,
+          "maximum": 128
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "476863c4ba3e3e155a55c40f6782500af3893eb1c792a101e5c3e3eac1d14f0d",
+      "geometry_sha256": "71b87881e3bae2701bc0c27d020e0983c8eb1cdccfb7d23648a975ce36753b05"
+    },
+    {
+      "split": "development",
+      "family": "mixed_ground",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_ground_20261125",
+        "seed": 20261125,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "5ee845fbc0674e7b64dc9f92bea3648bcb57e12fa52efddfb4a45b5bc63274d0",
+      "geometry_sha256": "7aae67584f657a55b61f7f1f96a4550b4a6a6eec74c2dba339162c273186e02b"
+    },
+    {
+      "split": "development",
+      "family": "mixed_ground",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_ground_20261126",
+        "seed": 20261126,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "49b45ee5d8a1cccad8eefa471532c11d93c40ba44daa857613fc3d993f776cdb",
+      "geometry_sha256": "c3be2e550bbc80c268df5a4a5893c4662bd0581b80dab890beb79e4afcacb856"
+    },
+    {
+      "split": "development",
+      "family": "mixed_tall",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_tall_20261125",
+        "seed": 20261125,
+        "obstacle_count": 3,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 104,
+          "maximum": 144
+        },
+        "gap_width": {
+          "minimum": 144,
+          "maximum": 176
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "c1a8bb2b80db7398610377af1bcabaca54a864a2f405cc6dcd4c8f7e06be6f25",
+      "geometry_sha256": "1834ae8f3d101911c4f108d81291d56dfa8a02b593040a62fb1b14f324b1ff94"
+    },
+    {
+      "split": "development",
+      "family": "mixed_tall",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_tall_20261126",
+        "seed": 20261126,
+        "obstacle_count": 3,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 104,
+          "maximum": 144
+        },
+        "gap_width": {
+          "minimum": 144,
+          "maximum": 176
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "22bf3d05a99d40c0e915edfb115a8d8bf5b63802ee3cbc5dd0053a963c642309",
+      "geometry_sha256": "9ce83682b5ddcb85315b33db70847483a61487468711b0cce03dca6bc9036cb8"
+    },
+    {
+      "split": "holdout",
+      "family": "flat_collect",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_flat_collect_20261127",
+        "seed": 20261127,
+        "obstacle_count": 0,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "ade2513aa6d1d69eeecf7ff40172d0d4075a4ed4253ad0daf0c39680c9c6fa84",
+      "geometry_sha256": "dd5d2ff671d3f299287ad08244908356db54c05e09b4156f2ce945a26b72592e"
+    },
+    {
+      "split": "holdout",
+      "family": "flat_collect",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_flat_collect_20261128",
+        "seed": 20261128,
+        "obstacle_count": 0,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "9482fa28969854ed9169ffff08ea7f0f4f2e45cb6c11b04dfa41e2cf94fa730c",
+      "geometry_sha256": "708e2fab1b6b33cd850af470d39640b68649d7eaa5eb47aa5247648c7e5f11d4"
+    },
+    {
+      "split": "holdout",
+      "family": "obstacle_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_obstacle_low_20261127",
+        "seed": 20261127,
+        "obstacle_count": 3,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 40,
+          "maximum": 72
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "6a23e8be86f1c2fffde3cfd43253212c893ea6756a08a5c702c4ed44e3f3dd73",
+      "geometry_sha256": "25f5704b17037f47ae7212e963c971d7d8deb19235af177cbf051f03731a63fa"
+    },
+    {
+      "split": "holdout",
+      "family": "obstacle_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_obstacle_low_20261128",
+        "seed": 20261128,
+        "obstacle_count": 3,
+        "gap_count": 0,
+        "obstacle_height": {
+          "minimum": 40,
+          "maximum": 72
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "b05b18e63bddb19ca29bad00b8c90c959e37a877b7357924fe4b3f19e0ba896d",
+      "geometry_sha256": "33f5b365d39029c469adbbf58ca179e7bf92aa58ff12234c1c57e5a54a4238ce"
+    },
+    {
+      "split": "holdout",
+      "family": "gap_wide",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_gap_wide_20261127",
+        "seed": 20261127,
+        "obstacle_count": 0,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 120,
+          "maximum": 168
+        },
+        "coin_layout": "none",
+        "min_coin_ratio": 0.0,
+        "theme": "lake"
+      },
+      "request_sha256": "9b4e8f83541ea647ae6dcdf971fbe6316000f659064654d60c4d99da42ba87bc",
+      "geometry_sha256": "e22f4d563bcaf06b963fc48ab4572cf4f379e47c5e5867c361c7093132efa83f"
+    },
+    {
+      "split": "holdout",
+      "family": "gap_wide",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_gap_wide_20261128",
+        "seed": 20261128,
+        "obstacle_count": 0,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 120,
+          "maximum": 168
+        },
+        "coin_layout": "none",
+        "min_coin_ratio": 0.0,
+        "theme": "lake"
+      },
+      "request_sha256": "255b8538e4e172c4d9ba6a44851492dd5c8966073786b2a81ffd2a120de04d1c",
+      "geometry_sha256": "22aaafd75e3e2d232b78c44046690a4a7a47435b5e9669b3a83e15c243cf7759"
+    },
+    {
+      "split": "holdout",
+      "family": "mixed_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_low_20261127",
+        "seed": 20261127,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 32,
+          "maximum": 80
+        },
+        "gap_width": {
+          "minimum": 80,
+          "maximum": 128
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "0796df73d4622debe8545552c9835c97175c7e3fa636ec057a6b126440b608b4",
+      "geometry_sha256": "3540e7d0f6a0a811c05a361cf0627a070c73eb82cd902f36d6581d6f3c2ff46a"
+    },
+    {
+      "split": "holdout",
+      "family": "mixed_low",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_low_20261128",
+        "seed": 20261128,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 32,
+          "maximum": 80
+        },
+        "gap_width": {
+          "minimum": 80,
+          "maximum": 128
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "5b2c10b08737377ac4846a6f3938b8ad5dda298fecd1134d3b26503ac1a49f14",
+      "geometry_sha256": "16f51bff8005f8b2812bd747bce09d2611ddfb7f7b0780678dd65e5c35de870f"
+    },
+    {
+      "split": "holdout",
+      "family": "mixed_ground",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_ground_20261127",
+        "seed": 20261127,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "7440b976aa0d269f5a05b436593344e1893db065f7a396f72f41137d77cf9f99",
+      "geometry_sha256": "d9028a7893a1a2542f0beb3e2c1490cd3bfcc6ae66146ae33ba07eb80f7419d2"
+    },
+    {
+      "split": "holdout",
+      "family": "mixed_ground",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_ground_20261128",
+        "seed": 20261128,
+        "obstacle_count": 2,
+        "gap_count": 2,
+        "obstacle_height": {
+          "minimum": 48,
+          "maximum": 96
+        },
+        "gap_width": {
+          "minimum": 96,
+          "maximum": 152
+        },
+        "coin_layout": "ground",
+        "min_coin_ratio": 1.0,
+        "theme": "lake"
+      },
+      "request_sha256": "8063ed5d99cf5388c5f5d784c5a8b9573f0eab5be99378bdb6fbdc8c16522fb5",
+      "geometry_sha256": "b030026d2c0f1610c06a9c40bc6c42e165b46e85711947516b7ef23babfebb76"
+    },
+    {
+      "split": "holdout",
+      "family": "mixed_tall",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_tall_20261127",
+        "seed": 20261127,
+        "obstacle_count": 3,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 104,
+          "maximum": 144
+        },
+        "gap_width": {
+          "minimum": 144,
+          "maximum": 176
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "d6a120f1c457f4e157f239ae7d5aa8aec37565d6a30b851904518b4dc9581b8d",
+      "geometry_sha256": "53c26c9280b22fa666b64d9f2578a31dd934adf5d4e01117ce62fc803e0b3f47"
+    },
+    {
+      "split": "holdout",
+      "family": "mixed_tall",
+      "request": {
+        "schema_version": 1,
+        "generator_version": "segments-v1",
+        "physics_profile": "gameplay-ai-v2",
+        "level_id": "generalization_v2_mixed_tall_20261128",
+        "seed": 20261128,
+        "obstacle_count": 3,
+        "gap_count": 3,
+        "obstacle_height": {
+          "minimum": 104,
+          "maximum": 144
+        },
+        "gap_width": {
+          "minimum": 144,
+          "maximum": 176
+        },
+        "coin_layout": "low_jump",
+        "min_coin_ratio": 0.75,
+        "theme": "lake"
+      },
+      "request_sha256": "80d4dac23ba0821298fc1117c39e27780596b762eeacb09e3d1dd5241f4f4a8c",
+      "geometry_sha256": "7e87714abe832322d68d8357d4299f40ff628daaa680e76787cad6986541bd30"
+    }
+  ]
+}

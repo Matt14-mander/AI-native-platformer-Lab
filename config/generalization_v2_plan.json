@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "suite_id": "generalization_v2",
+  "generator_version": "segments-v1",
+  "reference_suite": "game_content/generation_suites/small_v1.json",
+  "splits": {
+    "development": [20261125, 20261126],
+    "holdout": [20261127, 20261128]
+  },
+  "families": [
+    {"id": "flat_collect", "obstacle_count": 0, "gap_count": 0, "coin_layout": "ground", "min_coin_ratio": 1.0},
+    {"id": "obstacle_low", "obstacle_count": 3, "gap_count": 0, "obstacle_height": {"minimum": 40, "maximum": 72}, "coin_layout": "low_jump", "min_coin_ratio": 0.75},
+    {"id": "gap_wide", "obstacle_count": 0, "gap_count": 3, "gap_width": {"minimum": 120, "maximum": 168}, "coin_layout": "none", "min_coin_ratio": 0.0},
+    {"id": "mixed_low", "obstacle_count": 2, "gap_count": 2, "obstacle_height": {"minimum": 32, "maximum": 80}, "gap_width": {"minimum": 80, "maximum": 128}, "coin_layout": "low_jump", "min_coin_ratio": 0.75},
+    {"id": "mixed_ground", "obstacle_count": 2, "gap_count": 2, "obstacle_height": {"minimum": 48, "maximum": 96}, "gap_width": {"minimum": 96, "maximum": 152}, "coin_layout": "ground", "min_coin_ratio": 1.0},
+    {"id": "mixed_tall", "obstacle_count": 3, "gap_count": 3, "obstacle_height": {"minimum": 104, "maximum": 144}, "gap_width": {"minimum": 144, "maximum": 176}, "coin_layout": "low_jump", "min_coin_ratio": 0.75}
+  ]
+}
