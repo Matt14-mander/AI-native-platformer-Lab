@@ -254,4 +254,6 @@ LLM/PCG、DDA 和 Jev 会在 LevelSpec、telemetry 与 benchmark 稳定后接入
 
 新增 [小规模生成评测集 v1](docs/GENERATED_LEVEL_EVALUATION_V1.md)：固定6类提示×3个生成seed，分开统计需求匹配、路线验证与v9 PPO表现；提供离线覆盖基线、真实API批量入口和断点恢复。另有 [统一批量报告](docs/UNIFIED_GENERATION_REPORT_V1.md)，分别汇总离线批次、真实批次与单图证据。
 
+新一轮泛化开发已冻结 [24 张独立几何地图](game_content/benchmark_suites/generalization_v2.json)，其中开发集 12 张、留出集 12 张。运行 `python -m scripts.evaluate_generalization --output runs/generalization_v2_development.json` 可查看按关卡类型分层的脚本基线；开发集 `CoinJumpAgent` 达到收集目标 10/12，新版 [地面金币短跳教师](docs/GROUND_COIN_TEACHER_V1.md) 达到 12/12。旧版 `mixed_ground` 漏币原因和重放证据见 [诊断记录](docs/MIXED_GROUND_DIAGNOSIS_V1.md)。目前缺少 v9 checkpoint，尚未进行新地图 PPO 对照或开启留出集。
+
 历史课程设施与早期模型结果见 [强化学习训练 v1](docs/RL_TRAINING_V1.md) 和 [正式 mixed 多 seed](docs/FORMAL_MULTISEED_AND_FULL.md)。

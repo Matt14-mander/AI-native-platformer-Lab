@@ -10,6 +10,7 @@ from pathlib import Path
 
 from ai_platformer.agents.scripted import MoveRightAgent, RuleJumpAgent
 from ai_platformer.agents.scripted.coin_jump import CoinJumpAgent
+from ai_platformer.agents.scripted.ground_coin_jump import GroundCoinJumpAgent
 from ai_platformer.benchmark.coin_diagnostics import run_agent
 from ai_platformer.benchmark.generalization import load_manifest
 from ai_platformer.content.generation_request import GenerationRequest
@@ -22,6 +23,7 @@ BASELINES = {
     "move_right": MoveRightAgent,
     "rule_jump": RuleJumpAgent,
     "coin_jump": CoinJumpAgent,
+    "ground_coin_jump": GroundCoinJumpAgent,
 }
 
 
