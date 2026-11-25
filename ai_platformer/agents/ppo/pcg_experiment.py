@@ -144,6 +144,40 @@ def collect_teacher_data(requests: list[GenerationRequest], *, policy_seed: int)
     return np.concatenate(all_obs), np.concatenate(all_actions), maps
 
 
+def collect_dagger_data(model, requests: list[GenerationRequest], *, policy_seed: int
+                        ) -> tuple[np.ndarray, np.ndarray, list[dict]]:
+    """Label states visited by the learner, not another teacher rollout."""
+    all_obs, all_labels, maps = [], [], []
+    with tempfile.TemporaryDirectory(prefix="platformer-dagger-") as directory:
+        path = Path(directory) / "level.json"
+        for request in requests:
+            factory, digest = factory_for_request(request, path)
+            env = factory.make()
+            teacher = GroundCoinJumpAgent()
+            teacher.reset(seed=policy_seed)
+            observations, labels, disagreements = [], [], 0
+            try:
+                observation, _ = env.reset(seed=policy_seed)
+                while True:
+                    label = teacher.act(observation)
+                    action = int(model.predict(observation, deterministic=True)[0])
+                    observations.append(observation.copy())
+                    labels.append(label)
+                    disagreements += action != label
+                    teacher.observe_executed_action(label, action)
+                    observation, _, terminated, truncated, info = env.step(action)
+                    if terminated or truncated:
+                        break
+            finally:
+                env.close()
+            all_obs.append(np.asarray(observations, dtype=np.float32))
+            all_labels.append(np.asarray(labels, dtype=np.int64))
+            maps.append({"level_id": request.level_id, "geometry_sha256": digest,
+                         "learner_outcome": info["outcome"], "steps": len(labels),
+                         "teacher_disagreements": disagreements})
+    return np.concatenate(all_obs), np.concatenate(all_labels), maps
+
+
 def evaluate_model(model, manifest_path: Path, *, split: str = "development", seed: int = 100,
                    open_holdout: bool = False) -> dict:
     if split not in {"development", "holdout"} or (split == "holdout" and not open_holdout):

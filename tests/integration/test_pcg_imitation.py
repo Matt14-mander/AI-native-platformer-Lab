@@ -4,8 +4,9 @@ from pathlib import Path
 import pytest
 
 from ai_platformer.agents.ppo.pcg_experiment import (
-    collect_teacher_data, evaluate_model, training_requests,
+    collect_dagger_data, collect_teacher_data, evaluate_model, training_requests,
 )
+from ai_platformer.core import Action
 
 
 PLAN = Path("config/generalization_v2_plan.json")
@@ -30,3 +31,16 @@ def test_reject_frozen_training_seed_and_holdout_without_open():
         training_requests(PLAN, [20261125], MANIFEST)
     with pytest.raises(ValueError, match="open_holdout"):
         evaluate_model(None, MANIFEST, split="holdout")
+
+
+def test_dagger_labels_learner_visited_states():
+    class RunOnlyModel:
+        def predict(self, observation, deterministic=True):
+            return int(Action.RIGHT_RUN), None
+
+    request = training_requests(PLAN, [20261200], MANIFEST)[1]
+    observations, labels, maps = collect_dagger_data(RunOnlyModel(), [request], policy_seed=17)
+    assert observations.shape == (len(labels), 15)
+    assert int(Action.RIGHT_RUN_JUMP) in labels
+    assert maps[0]["teacher_disagreements"] > 0
+    assert maps[0]["learner_outcome"] != "success"

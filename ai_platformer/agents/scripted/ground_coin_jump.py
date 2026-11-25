@@ -46,3 +46,10 @@ class GroundCoinJumpAgent(CoinJumpAgent):
             self.short_remaining = self.short_hold_steps - 1
             return int(Action.RIGHT_RUN_JUMP)
         return super().act(observation)
+
+    def observe_executed_action(self, label: int, executed: int) -> None:
+        """Discard a planned jump when a DAgger learner chose another action."""
+        if label != executed:
+            self.short_remaining = 0
+            self.short_airborne = False
+            self.coin_jump = False
