@@ -145,7 +145,16 @@ class TelemetryRecorder:
             self._emit("action", {"action": int(action)})
 
     def on_tick(self, before, action, result, *, jump_pressed=None, jump_started=None):
-        self.motion.observe(before, result.state)
+        respawned = any(name == "checkpoint_respawn" for name, _ in result.info.get("events", ()))
+        if respawned:
+            # Teleportation is not player backtracking or a stationary interval.
+            self.motion.ticks += 1
+            if self.motion.run >= self.motion.minimum_run:
+                self.motion.stagnation_runs += 1
+                self.motion.stagnation_ticks += self.motion.run
+            self.motion.run = 0
+        else:
+            self.motion.observe(before, result.state)
         self.state = result.state
         self.max_progress = max(self.max_progress, self.state.progress)
         control = control_for(action)
@@ -181,7 +190,7 @@ class TelemetryRecorder:
         # This is exactly the core's jump acceptance condition, even on an immediate head hit.
         if accepted:
             self._emit("jump_started", {"player": player, "takeoff": asdict(before.player)})
-        if not before.player.grounded and self.state.player.grounded:
+        if not respawned and not before.player.grounded and self.state.player.grounded:
             self._emit("landed", {"player": player})
         self.jump_held = control.jump
         entities = {item.entity_id: item for item in self.state.entities} if collected else {}

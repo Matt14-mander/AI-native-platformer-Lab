@@ -7,7 +7,7 @@ from .dda import (DDAContext, DDAProposal, DecisionReason, context_hash,
 from .metrics import digest
 from ai_platformer.content.generation_request import GenerationRequest, request_hash
 
-POLICY_VERSION = "rules-v1"
+POLICY_VERSION = "rules-v2"
 MIN_GROUP_ATTEMPTS = 2
 EASE_SUCCESS_RATE = 0.4
 CHALLENGE_SUCCESS_RATE = 0.8
@@ -67,8 +67,10 @@ def suggest(context, profile, *, decision_id=None):
         if all(rate <= EASE_SUCCESS_RATE for _, rate, _ in observations):
             action, code = "ease", "performance_decline"
             summary = "各地图分组通关率均不超过 40%，建议小幅降低几何范围上限；不推断具体失败原因。"
-        elif all(rate >= CHALLENGE_SUCCESS_RATE and progress >= CHALLENGE_PROGRESS
-                 for _, rate, progress in observations):
+        elif (all(rate >= CHALLENGE_SUCCESS_RATE and progress >= CHALLENGE_PROGRESS
+                  for _, rate, progress in observations)
+              and not any(group["observed"].get("interactions", {}).get("checkpoint_respawn", 0)
+                          for group in profile["by_map"])):
             action, code = "challenge", "performance_stable"
             summary = "各地图分组通关率均至少 80%，平均最大进度至少 90%，建议小幅提高几何范围下限。"
         if action != "hold":

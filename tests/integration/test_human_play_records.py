@@ -85,7 +85,7 @@ def test_pause_retry_timeout_and_short_tap_are_recorded_once(screen, tmp_path):
         assert not any(e["type"] == "jump_released" for e in events)
         assert len([e for e in events if e["type"] == "jump_started"]) == 1
         assert parsed["manifest"]["tick_hz"] == 60
-        assert parsed["manifest"]["environment"]["environment_id"] == "HumanPlatformer-v1"
+        assert parsed["manifest"]["environment"]["environment_id"] == "HumanPlatformer-checkpoints-v1"
         assert records.best(session.prepared)["attempts"] == 2
     finally:
         records.close()

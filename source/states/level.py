@@ -28,6 +28,7 @@ class Level:
         self.core = BasicPlatformerCore(
             self.repository.load,
             config=self.settings.physics,
+            checkpoints=session is not None,
         )
         self.controller = PygameKeyboardController()
         self.renderer = self._create_renderer()
@@ -56,7 +57,7 @@ class Level:
             self.settings = self._prepared.settings
             self.repository = self._prepared.repository
             self.level_definition = self.repository.load(self.settings.level_id)
-            self.core = BasicPlatformerCore(self.repository.load, config=self.settings.physics)
+            self.core = BasicPlatformerCore(self.repository.load, config=self.settings.physics, checkpoints=True)
             self.renderer = self._create_renderer()
         self.finished = False
         self.next = "game_over"
@@ -158,6 +159,13 @@ class Level:
 
     def draw(self, surface):
         self.renderer.draw(surface, self.state)
+        checkpoint = self.state.metadata.get("checkpoint_position")
+        if checkpoint:
+            x = int(checkpoint[0] - self.renderer.camera_x)
+            y = int(checkpoint[1] + self.settings.physics.player_height)
+            pygame.draw.line(surface, (245, 218, 113), (x, y), (x, y - 55), 3)
+            pygame.draw.polygon(surface, (245, 218, 113), [(x, y - 55), (x + 24, y - 44), (x, y - 33)])
+            text(surface, f"检查点 {self.state.metadata['checkpoint_stage']} 已激活 · 复活 {self.state.metadata['respawns']} 次 · R 整关重开", 75, 16)
         self.info.draw(surface, self.state,
                        title=self.session.title if self.session else "湖岸旅程")
         self.renderer.feedback.draw_overlay(surface, self.renderer.acorn)

@@ -20,7 +20,7 @@ class CoreRewardDescription:
 
 
 class HumanPlayProtocol:
-    environment_id = "HumanPlatformer-v1"
+    environment_id = "HumanPlatformer-checkpoints-v1"
     action_repeat = 1
     sensor_range = 0.0
     reward = CoreRewardDescription()

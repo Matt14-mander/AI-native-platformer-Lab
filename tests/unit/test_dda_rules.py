@@ -75,6 +75,12 @@ def test_permissions_and_single_parameter_limit():
     assert proposal.candidate_request.obstacle_height == context.base_request.obstacle_height
 
 
+def test_checkpoint_assisted_success_does_not_recommend_challenge():
+    context, profile = fixture()
+    profile["by_map"][0]["observed"]["interactions"]["checkpoint_respawn"] = 1
+    assert suggest(rebind(context, profile), profile).action == "hold"
+
+
 @pytest.mark.parametrize("wins,progress,expected", [
     (2, 0.5, "ease"), (3, 0.8, "hold"), (4, 0.9, "challenge"), (4, 0.899, "hold"),
 ])

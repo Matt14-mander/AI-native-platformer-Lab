@@ -48,9 +48,14 @@ class BasicPlatformerCore:
         level_loader: Callable[[str], LevelDefinition],
         *,
         config: PhysicsConfig | None = None,
+        checkpoints: bool = False,
     ) -> None:
         self._level_loader = level_loader
         self.config = config or PhysicsConfig()
+        self.checkpoints = checkpoints
+        self._checkpoint = None
+        self._checkpoint_stage = 0
+        self._respawns = 0
         self._level: LevelDefinition | None = None
         self._state: WorldSnapshot | None = None
         self._x = 0.0
@@ -88,6 +93,9 @@ class BasicPlatformerCore:
         return self._state
 
     def reset(self, *, seed: int, level_id: str) -> WorldSnapshot:
+        self._checkpoint = None
+        self._checkpoint_stage = 0
+        self._respawns = 0
         self.jump_started_this_tick = False
         self._level = self._level_loader(level_id)
         self._seed = seed
@@ -155,6 +163,21 @@ class BasicPlatformerCore:
         if self._alive and self._progress() >= 1.0:
             outcome = "success"
 
+        if self.checkpoints:
+            if outcome == "death" and self._checkpoint is not None:
+                self._x, self._y = self._checkpoint
+                self._velocity_x = self._velocity_y = 0.0
+                self._alive = True
+                self._grounded = self._has_support()
+                self._coyote_remaining = self._jump_buffer_remaining = 0
+                self._jump_cut = False
+                self._invulnerable_ticks = 60
+                self._respawns += 1
+                self._events.append(("checkpoint_respawn", f"checkpoint-{self._checkpoint_stage}"))
+                outcome = None
+            elif outcome is None:
+                self._activate_checkpoint()
+
         truncated = self._tick >= self.config.max_episode_steps and outcome is None
         if truncated:
             outcome = "time_limit"
@@ -187,6 +210,23 @@ class BasicPlatformerCore:
             truncated=truncated,
             info=info,
         )
+
+    def _activate_checkpoint(self):
+        if not self._grounded or self._checkpoint_stage >= 2:
+            return
+        if self._progress() < (self._checkpoint_stage + 1) / 3:
+            return
+        level = self._require_level()
+        bottom = self._y + self.config.player_height
+        margin = self.config.player_width
+        supported = any(abs(s.y - bottom) < 0.01 and s.x <= self._x - margin
+                        and s.right >= self._x + 2 * margin for s in level.solids)
+        unsafe = any(e.patrol_left - 96 <= self._x <= e.patrol_right + e.width + 96
+                     for e in level.enemies if e.entity_id not in self._defeated_enemies)
+        if supported and not unsafe:
+            self._checkpoint = (self._x, self._y)
+            self._checkpoint_stage += 1
+            self._events.append(("checkpoint_activated", f"checkpoint-{self._checkpoint_stage}"))
 
     def _require_level(self) -> LevelDefinition:
         if self._level is None:
@@ -512,5 +552,8 @@ class BasicPlatformerCore:
                 "invulnerable_ticks": self._invulnerable_ticks,
                 "enemies_defeated": len(self._defeated_enemies),
                 "blocks_broken": len(self._broken_blocks),
+                **({"checkpoint_stage": self._checkpoint_stage,
+                    "checkpoint_position": self._checkpoint,
+                    "respawns": self._respawns} if self.checkpoints else {}),
             },
         )
