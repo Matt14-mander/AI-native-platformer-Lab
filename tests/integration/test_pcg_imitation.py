@@ -44,3 +44,44 @@ def test_dagger_labels_learner_visited_states():
     assert int(Action.RIGHT_RUN_JUMP) in labels
     assert maps[0]["teacher_disagreements"] > 0
     assert maps[0]["learner_outcome"] != "success"
+
+
+def test_generated_sampler_changes_levels_only_at_reset():
+    from ai_platformer.agents.ppo.pcg_training import GeneratedMapSampler
+
+    requests = training_requests(PLAN, [20261200], MANIFEST)
+    left = GeneratedMapSampler(requests, rng_seed=17)
+    right = GeneratedMapSampler(requests, rng_seed=17)
+    try:
+        for _ in range(8):
+            _, left_info = left.reset()
+            _, right_info = right.reset()
+            assert left_info["level_id"] == right_info["level_id"]
+            assert left_info["seed"] == right_info["seed"]
+            level_before = left_info["level_id"]
+            _, _, _, _, step_info = left.step(int(Action.RIGHT_RUN))
+            assert step_info["level_id"] == level_before
+    finally:
+        left.close()
+        right.close()
+
+
+def test_bc_initialization_copies_actor_but_not_critic():
+    import torch
+
+    from ai_platformer.agents.ppo.pcg_training import initialize_actor, make_ppo
+
+    requests = training_requests(PLAN, [20261200], MANIFEST)
+    target = make_ppo(requests, seed=17, n_envs=2)
+    source = make_ppo(requests, seed=23, n_envs=2)
+    try:
+        original_value = {key: value.clone() for key, value in
+                          target.policy.value_net.state_dict().items()}
+        initialize_actor(target, source)
+        for key, value in target.policy.action_net.state_dict().items():
+            assert torch.equal(value, source.policy.action_net.state_dict()[key])
+        for key, value in target.policy.value_net.state_dict().items():
+            assert torch.equal(value, original_value[key])
+    finally:
+        target.get_env().close()
+        source.get_env().close()
